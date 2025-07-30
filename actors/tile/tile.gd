@@ -11,8 +11,9 @@ enum Rotation {
 
 @export var tile_rotation : Rotation = Rotation.UP : 
 	set(x):
-		tile_rotation = x % 4
-		sprite.rotate(PI / 2 * x)
+		var new_rotation = x % 4
+		sprite.rotation = PI / 2 * new_rotation
+		tile_rotation = new_rotation
 
 var is_hover : bool = false
 
