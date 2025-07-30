@@ -14,15 +14,18 @@ size = Vector2(41.2903, 41.2903)
 script = ExtResource("1_4t6fi")
 
 [node name="Sprite" type="Sprite2D" parent="."]
+unique_name_in_owner = true
+position = Vector2(16, 16)
 texture = SubResource("AtlasTexture_1qs4h")
 
-[node name="Area2D" type="Area2D" parent="."]
+[node name="Area" type="Area2D" parent="."]
+position = Vector2(16, 16)
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+[node name="Shape" type="CollisionShape2D" parent="Area"]
 position = Vector2(-4.76837e-07, 4.76837e-07)
 scale = Vector2(0.775, 0.775)
 shape = SubResource("RectangleShape2D_4t6fi")
 
-[connection signal="input_event" from="Area2D" to="." method="_on_area_2d_input_event"]
-[connection signal="mouse_entered" from="Area2D" to="." method="_on_area_2d_mouse_entered"]
-[connection signal="mouse_exited" from="Area2D" to="." method="_on_area_2d_mouse_exited"]
+[connection signal="input_event" from="Area" to="." method="_on_area_2d_input_event"]
+[connection signal="mouse_entered" from="Area" to="." method="_on_area_2d_mouse_entered"]
+[connection signal="mouse_exited" from="Area" to="." method="_on_area_2d_mouse_exited"]

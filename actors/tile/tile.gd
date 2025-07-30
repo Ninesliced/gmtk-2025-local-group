@@ -1,5 +1,7 @@
 extends Node2D
 
+class_name Tile
+
 enum Rotation {
 	UP = 0,
 	RIGHT = 1,
@@ -7,12 +9,10 @@ enum Rotation {
 	LEFT = 3
 }
 
-@onready var sprite : Sprite2D = $Sprite
-
 @export var tile_rotation : Rotation = Rotation.UP : 
 	set(x):
 		var new_rotation = x % 4
-		sprite.rotation = PI / 2 * new_rotation
+		%Sprite.rotation = PI / 2 * new_rotation
 		tile_rotation = new_rotation
 
 var is_hover : bool = false

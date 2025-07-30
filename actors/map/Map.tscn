@@ -1,0 +1,10 @@
+[gd_scene load_steps=3 format=3 uid="uid://b7fgpkbuim0vj"]
+
+[ext_resource type="Script" uid="uid://btngkayrce3q0" path="res://actors/map/map.gd" id="1_fvbrk"]
+[ext_resource type="PackedScene" uid="uid://bkuf38ni4q62k" path="res://actors/tile/Tile.tscn" id="2_hhh0s"]
+
+[node name="Map" type="Node2D"]
+scale = Vector2(0.5, 0.5)
+script = ExtResource("1_fvbrk")
+tiles = Array[Resource]([ExtResource("2_hhh0s")])
+grid_size = Vector2i(20, 10)
