@@ -1,0 +1,27 @@
+[gd_scene load_steps=5 format=3 uid="uid://bkuf38ni4q62k"]
+
+[ext_resource type="Script" uid="uid://ckoaogse5dba6" path="res://actors/tile/tile.gd" id="1_4t6fi"]
+[ext_resource type="Texture2D" uid="uid://dabe5dmwfsby2" path="res://assets/spritesheet.png" id="2_iawyn"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_1qs4h"]
+atlas = ExtResource("2_iawyn")
+region = Rect2(0, 0, 16, 16)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_4t6fi"]
+size = Vector2(20.6533, 20.6787)
+
+[node name="Tile" type="Node2D"]
+script = ExtResource("1_4t6fi")
+
+[node name="Sprite" type="Sprite2D" parent="."]
+texture = SubResource("AtlasTexture_1qs4h")
+
+[node name="Area2D" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+scale = Vector2(0.775, 0.775)
+shape = SubResource("RectangleShape2D_4t6fi")
+
+[connection signal="input_event" from="Area2D" to="." method="_on_area_2d_input_event"]
+[connection signal="mouse_entered" from="Area2D" to="." method="_on_area_2d_mouse_entered"]
+[connection signal="mouse_exited" from="Area2D" to="." method="_on_area_2d_mouse_exited"]
