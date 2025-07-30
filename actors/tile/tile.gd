@@ -38,6 +38,7 @@ func _on_area_2d_input_event(viewport: Node, event: InputEvent, shape_idx: int) 
 
 func tile_clicked(way: int) -> void:
 	tile_rotation = tile_rotation + way
+	print("eot")
 
 func tile_hovered() -> void:	
 	pass
