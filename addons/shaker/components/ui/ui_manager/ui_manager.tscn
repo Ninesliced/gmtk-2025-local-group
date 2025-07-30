@@ -1,0 +1,6 @@
+[gd_scene load_steps=2 format=3 uid="uid://m0b01qtvqyv0"]
+
+[ext_resource type="Script" uid="uid://c3hcm40qcm1ph" path="res://addons/shaker/components/ui/ui_manager/ui_manager.gd" id="1_nrluv"]
+
+[node name="UIManager" type="Node"]
+script = ExtResource("1_nrluv")

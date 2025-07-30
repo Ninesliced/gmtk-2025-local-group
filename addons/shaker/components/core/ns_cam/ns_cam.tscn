@@ -1,0 +1,6 @@
+[gd_scene load_steps=2 format=3 uid="uid://ce8pv6i4vreo2"]
+
+[ext_resource type="Script" uid="uid://cto31nwefigsm" path="res://addons/shaker/components/core/ns_cam/ns_cam.gd" id="1_snvbo"]
+
+[node name="NsCam" type="Camera2D"]
+script = ExtResource("1_snvbo")

@@ -1,0 +1,6 @@
+[gd_scene load_steps=2 format=3 uid="uid://b62c81khntjjv"]
+
+[ext_resource type="Script" uid="uid://bsj330pgn2fuf" path="res://addons/shaker/components/gameplay/state_machine/state_machine.gd" id="1_jlgfv"]
+
+[node name="StateMachine" type="Node"]
+script = ExtResource("1_jlgfv")

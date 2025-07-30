@@ -1,0 +1,130 @@
+[gd_scene load_steps=14 format=3 uid="uid://bqhqpdwq6n82"]
+
+[ext_resource type="Shader" uid="uid://b02bw466pwk5a" path="res://addons/shaker/components/vfx/shaders/outline.gdshader" id="1_3a7qo"]
+[ext_resource type="Texture2D" uid="uid://chd3180joggfl" path="res://shaker_example/assets/globs_no_outline.png" id="1_hge2o"]
+[ext_resource type="Shader" uid="uid://birv8v71nvo3v" path="res://addons/shaker/components/vfx/shaders/fill_color.gdshader" id="3_hppum"]
+[ext_resource type="Shader" uid="uid://c20777cq41qi6" path="res://addons/shaker/components/ui/transition_manager/diamond_transition.gdshader" id="4_xckxh"]
+[ext_resource type="Shader" uid="uid://cp22pnkfbw2yh" path="res://addons/shaker/components/ui/transition_manager/circle.gdshader" id="5_vtbeg"]
+[ext_resource type="Shader" uid="uid://dbmbun1t7tan3" path="res://addons/shaker/components/ui/transition_manager/shaders_example.gdshader" id="6_wckwq"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_hppum"]
+shader = ExtResource("1_3a7qo")
+shader_parameter/color = Color(0, 0, 0, 1)
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_3a7qo"]
+shader = ExtResource("3_hppum")
+shader_parameter/color = Color(1, 1, 1, 1)
+shader_parameter/force = 1.0
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_vtbeg"]
+shader = ExtResource("4_xckxh")
+shader_parameter/progress = 0.864
+shader_parameter/number = 32.0
+shader_parameter/gradient = true
+shader_parameter/screen_size = Vector2(1152, 648)
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_xckxh"]
+shader = ExtResource("5_vtbeg")
+shader_parameter/progress = 0.218
+shader_parameter/number = 16.0
+shader_parameter/gradient = true
+shader_parameter/screen_size = Vector2(1152, 648)
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_vkhjw"]
+shader = ExtResource("6_wckwq")
+shader_parameter/use_sprite_alpha = true
+shader_parameter/use_transition_texture = false
+shader_parameter/transition_type = 2
+shader_parameter/invert = true
+shader_parameter/from_center = true
+shader_parameter/grid_size = Vector2(11.5, 6.5)
+shader_parameter/rotation_angle = 0.0
+shader_parameter/stagger = Vector2(0, 0)
+shader_parameter/stagger_frequency = Vector2i(2, 2)
+shader_parameter/flip_frequency = Vector2i(1, 1)
+shader_parameter/basic_feather = 0.0
+shader_parameter/use_mask_size = false
+shader_parameter/mask_size = Vector2(100, 100)
+shader_parameter/edges = 4
+shader_parameter/shape_feather = 0.0
+shader_parameter/sectors = 1
+shader_parameter/clock_feather = 0.0
+shader_parameter/progress = 3.227
+shader_parameter/progress_bias = Vector2(2, 2)
+
+[sub_resource type="Shader" id="Shader_vtbeg"]
+code = "shader_type canvas_item;
+
+uniform vec4 color: source_color;
+uniform sampler2D screen_text: hint_screen_texture;
+void fragment() {
+	float alpha = texture(screen_text, vec2(SCREEN_UV.x + TEXTURE_PIXEL_SIZE.x, SCREEN_UV.y)).a +
+					texture(screen_text, vec2(SCREEN_UV.x - TEXTURE_PIXEL_SIZE.x, SCREEN_UV.y)).a +
+					texture(screen_text, vec2(SCREEN_UV.x, SCREEN_UV.y + TEXTURE_PIXEL_SIZE.x)).a +
+					texture(screen_text, vec2(SCREEN_UV.x, SCREEN_UV.y - TEXTURE_PIXEL_SIZE.x )).a +
+					- 4.0 * texture(screen_text, SCREEN_UV).a;
+	COLOR =  texture(screen_text, SCREEN_UV);
+	COLOR =  mix(COLOR, color, float(alpha > 0.0));
+
+}
+"
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_wckwq"]
+shader = SubResource("Shader_vtbeg")
+shader_parameter/color = Color(0, 0, 0, 1)
+
+[node name="ShadersExample" type="Node2D"]
+
+[node name="GlobsNoOutline" type="Sprite2D" parent="."]
+material = SubResource("ShaderMaterial_hppum")
+position = Vector2(400, 96)
+scale = Vector2(9, 9)
+texture = ExtResource("1_hge2o")
+
+[node name="GlobsNoOutline3" type="Sprite2D" parent="."]
+position = Vector2(208, 96)
+scale = Vector2(9, 9)
+texture = ExtResource("1_hge2o")
+
+[node name="GlobsNoOutline2" type="Sprite2D" parent="."]
+material = SubResource("ShaderMaterial_3a7qo")
+position = Vector2(600, 96)
+scale = Vector2(9, 9)
+texture = ExtResource("1_hge2o")
+
+[node name="ColorRect" type="ColorRect" parent="."]
+material = SubResource("ShaderMaterial_vtbeg")
+offset_left = 1152.0
+offset_right = 2304.0
+offset_bottom = 648.0
+color = Color(0.619608, 0.156863, 0.207843, 1)
+
+[node name="ColorRect2" type="ColorRect" parent="."]
+material = SubResource("ShaderMaterial_xckxh")
+offset_left = 1080.0
+offset_top = 696.0
+offset_right = 2232.0
+offset_bottom = 1344.0
+color = Color(0.619608, 0.156863, 0.207843, 1)
+
+[node name="ColorRect6" type="ColorRect" parent="."]
+material = SubResource("ShaderMaterial_vkhjw")
+offset_left = -184.0
+offset_top = 688.0
+offset_right = 968.0
+offset_bottom = 1336.0
+color = Color(0, 0, 0, 1)
+
+[node name="CanvasGroup" type="CanvasGroup" parent="."]
+material = SubResource("ShaderMaterial_wckwq")
+position = Vector2(136, 248)
+
+[node name="GlobsNoOutline4" type="Sprite2D" parent="CanvasGroup"]
+position = Vector2(96, 96)
+scale = Vector2(9, 9)
+texture = ExtResource("1_hge2o")
+
+[node name="GlobsNoOutline5" type="Sprite2D" parent="CanvasGroup"]
+position = Vector2(344, 96)
+scale = Vector2(9, 9)
+texture = ExtResource("1_hge2o")

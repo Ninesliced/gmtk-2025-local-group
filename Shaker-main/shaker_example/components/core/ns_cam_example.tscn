@@ -1,0 +1,24 @@
+[gd_scene load_steps=3 format=3 uid="uid://bkn36xbf72g2e"]
+
+[ext_resource type="Texture2D" uid="uid://chd3180joggfl" path="res://shaker_example/assets/globs_no_outline.png" id="1_lxahy"]
+[ext_resource type="Script" uid="uid://cto31nwefigsm" path="res://addons/shaker/components/core/ns_cam/ns_cam.gd" id="2_ubjt2"]
+
+[node name="NsCamExample" type="Node2D"]
+
+[node name="GlobsNoOutline" type="Sprite2D" parent="."]
+position = Vector2(232, 288)
+scale = Vector2(8.5, 8.5)
+texture = ExtResource("1_lxahy")
+
+[node name="Button" type="Button" parent="."]
+offset_left = 568.0
+offset_top = 176.0
+offset_right = 816.0
+offset_bottom = 424.0
+
+[node name="NSCam" type="Camera2D" parent="."]
+position = Vector2(576, 320)
+script = ExtResource("2_ubjt2")
+metadata/_custom_type_script = "uid://cto31nwefigsm"
+
+[connection signal="pressed" from="Button" to="NSCam" method="shake"]

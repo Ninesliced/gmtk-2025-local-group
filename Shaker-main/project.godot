@@ -1,0 +1,48 @@
+; Engine configuration file.
+; It's best edited using the editor UI and not directly,
+; since the parameters that go here are not all obvious.
+;
+; Format:
+;   [section] ; section goes between []
+;   param=value ; assign values to parameters
+
+config_version=5
+
+[application]
+
+config/name="Shaker plugin"
+run/main_scene="uid://cjofe1kwsfy28"
+config/features=PackedStringArray("4.4", "GL Compatibility")
+config/icon="res://src/icon.svg"
+
+[autoload]
+
+TransitionManager="*res://addons/shaker/components/ui/transition_manager/transition_manager.tscn"
+UIManager="*res://addons/shaker/components/ui/ui_manager/ui_manager.tscn"
+PauseManager="*res://addons/shaker/components/core/pause_manager/pause_manager.tscn"
+
+[editor_plugins]
+
+enabled=PackedStringArray("res://addons/shaker/plugin.cfg")
+
+[file_customization]
+
+folder_colors={
+"res://addons/shaker/": "green",
+"res://addons/shaker/components/": "gray",
+"res://addons/shaker/components/core/": "purple",
+"res://addons/shaker/components/gameplay/": "orange",
+"res://addons/shaker/components/ui/": "teal",
+"res://addons/shaker/components/vfx/": "pink",
+"res://shaker_example/components/": "gray",
+"res://shaker_example/components/core/": "purple",
+"res://shaker_example/components/gameplay/": "orange",
+"res://shaker_example/components/ui/": "green",
+"res://shaker_example/components/vfx/": "pink"
+}
+
+[rendering]
+
+textures/canvas_textures/default_texture_filter=0
+renderer/rendering_method="gl_compatibility"
+renderer/rendering_method.mobile="gl_compatibility"

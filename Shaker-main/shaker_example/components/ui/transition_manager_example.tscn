@@ -1,0 +1,32 @@
+[gd_scene load_steps=2 format=3 uid="uid://cqy04k8cs1wwl"]
+
+[sub_resource type="GDScript" id="GDScript_4p4l0"]
+script/source = "extends Button
+
+
+# Called when the node enters the scene tree for the first time.
+func _ready() -> void:
+	pass # Replace with function body.
+
+
+# Called every frame. 'delta' is the elapsed time since the previous frame.
+func _process(delta: float) -> void:
+	pass
+
+
+func _on_pressed() -> void:
+	TransitionManager.change_scene(null)
+	pass # Replace with function body.
+"
+
+[node name="TransitionManagerExample" type="Node2D"]
+
+[node name="Button" type="Button" parent="."]
+offset_left = 416.0
+offset_top = 192.0
+offset_right = 680.0
+offset_bottom = 376.0
+text = "start transition"
+script = SubResource("GDScript_4p4l0")
+
+[connection signal="pressed" from="Button" to="Button" method="_on_pressed"]

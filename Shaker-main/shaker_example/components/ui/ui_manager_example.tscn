@@ -1,0 +1,108 @@
+[gd_scene load_steps=5 format=3 uid="uid://cjofe1kwsfy28"]
+
+[sub_resource type="GDScript" id="GDScript_6r5vo"]
+script/source = "extends Button
+@export var button2: Button
+
+func _ready() -> void:
+	UIManager.first_unclosable = true
+	UIManager.set_ui(self)
+	pass # Replace with function body.
+
+func _on_pressed() -> void:
+	UIManager.set_ui(button2)
+	pass # Replace with function body.
+"
+
+[sub_resource type="GDScript" id="GDScript_f7tay"]
+script/source = "extends Button
+@export var box: VBoxContainer
+@export var button3: Button
+
+func _ready() -> void:
+	hide()
+	pass # Replace with function body.
+
+func _on_pressed() -> void:
+	UIManager.set_ui(box, button3, false)
+	pass # Replace with function body.
+"
+
+[sub_resource type="GDScript" id="GDScript_hemsc"]
+script/source = "extends VBoxContainer
+
+
+# Called when the node enters the scene tree for the first time.
+func _ready() -> void:
+	hide();
+	pass # Replace with function body.
+
+
+# Called every frame. 'delta' is the elapsed time since the previous frame.
+func _process(delta: float) -> void:
+	pass
+"
+
+[sub_resource type="GDScript" id="GDScript_tprk4"]
+script/source = "extends Button
+
+
+# Called when the node enters the scene tree for the first time.
+func _ready() -> void:
+	pass # Replace with function body.
+
+
+# Called every frame. 'delta' is the elapsed time since the previous frame.
+func _process(delta: float) -> void:
+	pass
+"
+
+[node name="UiManagerExample" type="Node2D"]
+
+[node name="Button" type="Button" parent="." node_paths=PackedStringArray("button2")]
+offset_left = 52.0
+offset_top = 54.0
+offset_right = 304.0
+offset_bottom = 306.0
+scale = Vector2(0.608908, 0.608908)
+text = "First UI"
+script = SubResource("GDScript_6r5vo")
+button2 = NodePath("../Button2")
+
+[node name="Button2" type="Button" parent="." node_paths=PackedStringArray("box", "button3")]
+offset_left = 232.0
+offset_top = 54.0
+offset_right = 484.0
+offset_bottom = 306.0
+scale = Vector2(0.608908, 0.608908)
+text = "Second UI"
+script = SubResource("GDScript_f7tay")
+box = NodePath("../VBoxContainer")
+button3 = NodePath("../VBoxContainer/Button3")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="."]
+offset_left = 400.0
+offset_top = 64.0
+offset_right = 560.0
+offset_bottom = 200.0
+script = SubResource("GDScript_hemsc")
+
+[node name="Button3" type="Button" parent="VBoxContainer"]
+layout_mode = 2
+text = "Third UI"
+script = SubResource("GDScript_tprk4")
+
+[node name="Button4" type="Button" parent="VBoxContainer"]
+layout_mode = 2
+text = "Third UI"
+
+[node name="Button5" type="Button" parent="VBoxContainer"]
+layout_mode = 2
+text = "Third UI"
+
+[node name="Button6" type="Button" parent="VBoxContainer"]
+layout_mode = 2
+text = "Third UI"
+
+[connection signal="pressed" from="Button" to="Button" method="_on_pressed"]
+[connection signal="pressed" from="Button2" to="Button2" method="_on_pressed"]
