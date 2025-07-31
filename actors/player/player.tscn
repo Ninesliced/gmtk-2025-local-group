@@ -6,7 +6,7 @@
 [ext_resource type="Texture2D" uid="uid://b0c7jblsx5wh1" path="res://assets/images/player/player_vertical.png" id="4_6p1w3"]
 [ext_resource type="Texture2D" uid="uid://vt3n3ocyntys" path="res://assets/images/player/player_idle.png" id="4_bop6h"]
 [ext_resource type="Script" uid="uid://chq08evtmxyos" path="res://actors/player/hitbox_component.gd" id="4_lsqbn"]
-[ext_resource type="Script" uid="uid://26l6scy4ngx6" path="res://actors/player/player_animation.gd" id="5_15y17"]
+[ext_resource type="Script" path="res://actors/player/player_animation.gd" id="5_15y17"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_lsqbn"]
 radius = 6.5192
@@ -95,7 +95,6 @@ script = ExtResource("5_15y17")
 
 [node name="MovementComponent" type="Node" parent="."]
 script = ExtResource("3_ax26v")
-speed = 70.0
 
 [connection signal="area_entered" from="HitboxComponent" to="." method="_on_hitbox_component_area_entered"]
 [connection signal="child_exiting_tree" from="MovementComponent" to="PlayerAnimation" method="_on_movement_component_child_exiting_tree"]
