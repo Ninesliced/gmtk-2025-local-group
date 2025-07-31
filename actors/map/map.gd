@@ -44,6 +44,7 @@ func generate_grid() -> void:
 				var tile = tile_scene.instantiate()
 				tile.tile_rotation = randi() % 4
 				tile.position = Vector2i(x, y) * tile_size
+				tile.grid_position = Vector2i(x, y)
 				add_child(tile)
 				grid[x][y] = tile
 

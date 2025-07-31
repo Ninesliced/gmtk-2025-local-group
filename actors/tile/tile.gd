@@ -21,9 +21,8 @@ enum Rotation {
 
 		tile_rotation = new_rotation % 4
 
-
 var is_hover : bool = false
-
+var grid_position : Vector2i = Vector2i.ZERO
 
 ### PUBLIC
 
@@ -38,10 +37,12 @@ func horizontal_swap() -> void:
 	translation_animated(Vector2(100,0))
 
 func _on_area_2d_mouse_entered() -> void:
+	tile_hovered()
 	is_hover = true
 
 
 func _on_area_2d_mouse_exited() -> void:
+	tile_unhovered()
 	is_hover = false
 
 
@@ -51,11 +52,6 @@ func _on_area_2d_input_event(viewport: Node, event: InputEvent, shape_idx: int) 
 			GameGlobal.act_tile(self)
 		# elif event.button_index == MOUSE_BUTTON_RIGHT and event.pressed:
 		# 	tile_clicked(1)
-	elif event is InputEventMouseMotion:
-		if is_hover:
-			tile_hovered()
-		else:
-			tile_unhovered()
 
 func tile_clicked(way: int) -> void:
 	tile_rotation = tile_rotation + way
@@ -68,10 +64,10 @@ func tile_unhovered() -> void:
 
 
 func _on_area_body_exited(body: Node2D) -> void:
-	if body is not Player:
+	if not body is Player:
 		return
 	
-	var full_tile_instance = load("res://actors/tile/full.tscn").instantiate()
+	var full_tile_instance: Node = load("res://actors/tile/full.tscn").instantiate()
 	full_tile_instance.position = position
 	full_tile_instance.tile_rotation = tile_rotation
 	get_parent().add_child(full_tile_instance)
