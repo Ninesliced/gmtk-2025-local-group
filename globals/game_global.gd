@@ -34,6 +34,7 @@ var dict: Dictionary[ActionType, Dictionary] = {
 	ActionType.HORIZONTAL_SWAP: {
 		"name": "SWAP HORIZONTAL TILES",
 		"function": horizontal_swap,
+		"temporary": true
 	}
 }
 
@@ -48,8 +49,12 @@ func act_tile(tile: Tile) -> void:
 		dict[action]["function"].call(tile)
 	else:
 		print("Action not found: ", action)
-	action_stacks.append(action)
-	action_ui_stacks.append(action_ui)
+	if !("temporary" in dict[action] && dict[action]["temporary"]):
+		action_stacks.append(action)
+		action_ui_stacks.append(action_ui)
+	else:
+		action_ui.queue_free()
+
 	on_action_stack_changed.emit()
 	GameGlobal.is_game_have_start = true
 
