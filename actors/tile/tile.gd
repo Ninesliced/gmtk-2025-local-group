@@ -34,6 +34,9 @@ func rotate_clock() -> void:
 func rotate_counter_clock() -> void:
 	tile_clicked(-1)
 
+func horizontal_swap() -> void:
+	translation_animated(Vector2(100,0))
+
 func _on_area_2d_mouse_entered() -> void:
 	is_hover = true
 
@@ -74,7 +77,6 @@ func _on_area_body_exited(body: Node2D) -> void:
 	get_parent().add_child(full_tile_instance)
 	queue_free()
 
-
 func rotate_animated(new_rotation: int) -> void:
 	print("Rotating tile to: ", new_rotation)
 	var tween = get_tree().create_tween()
@@ -89,3 +91,13 @@ func rotate_animated(new_rotation: int) -> void:
 
 	await tween.finished
 	%StaticBody2D.rotation = PI / 2 * new_rotation
+	
+func translation_animated(new_translation: Vector2) -> void:
+	print("Translation tile to: ", new_translation)
+	var tween = get_tree().create_tween()
+	tween.tween_property(self, "position", new_translation, 0.2)
+	tween.set_ease(Tween.EASE_IN_OUT)
+	tween.set_trans(Tween.TRANS_LINEAR)
+
+	await tween.finished
+	position += new_translation
