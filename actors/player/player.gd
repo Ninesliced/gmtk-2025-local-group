@@ -1,6 +1,10 @@
 extends CharacterBody2D
 class_name Player
 
+
+var randomTileCount: int = 0
+@export var randomTileMax: int = 2
+
 func _ready() -> void:
 	GameGlobal.player = $"."
 
