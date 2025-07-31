@@ -1,23 +1,58 @@
-[gd_scene load_steps=5 format=3 uid="uid://okrs43t8rojr"]
+[gd_scene load_steps=14 format=3 uid="uid://okrs43t8rojr"]
 
 [ext_resource type="PackedScene" uid="uid://bkuf38ni4q62k" path="res://actors/tile/Tile.tscn" id="1_4duv0"]
 [ext_resource type="Texture2D" uid="uid://dabe5dmwfsby2" path="res://assets/spritesheet.png" id="2_e7k0h"]
+[ext_resource type="Shader" uid="uid://dvnb0sb4vvhty" path="res://actors/tile/fire/fire.gdshader" id="2_ta8ea"]
+
+[sub_resource type="Gradient" id="Gradient_ta8ea"]
+interpolation_mode = 1
+offsets = PackedFloat32Array(0.50099, 0.519796, 1)
+colors = PackedColorArray(0, 0, 0, 0, 0.85098, 0.188235, 0.223529, 1, 1, 0.835294, 0.254902, 1)
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_6eao6"]
+gradient = SubResource("Gradient_ta8ea")
+
+[sub_resource type="Gradient" id="Gradient_e7k0h"]
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_ta8ea"]
+gradient = SubResource("Gradient_e7k0h")
+fill_from = Vector2(0, 0.297009)
+fill_to = Vector2(0, 1)
+
+[sub_resource type="Gradient" id="Gradient_6eao6"]
+
+[sub_resource type="FastNoiseLite" id="FastNoiseLite_bq2mk"]
+noise_type = 2
+frequency = 0.0017
+
+[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_6eao6"]
+seamless = true
+seamless_blend_skirt = 1.0
+color_ramp = SubResource("Gradient_6eao6")
+noise = SubResource("FastNoiseLite_bq2mk")
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_4duv0"]
+shader = ExtResource("2_ta8ea")
+shader_parameter/noise_texture = SubResource("NoiseTexture2D_6eao6")
+shader_parameter/gradiant_texture = SubResource("GradientTexture2D_ta8ea")
+shader_parameter/color_texture = SubResource("GradientTexture1D_6eao6")
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_wv4m7"]
 resource_local_to_scene = true
 atlas = ExtResource("2_e7k0h")
-region = Rect2(32, 0, 32, 32)
+region = Rect2(96, 96, 32, 32)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_76t4f"]
 size = Vector2(6.25, 6.25)
 
 [node name="Tile" instance=ExtResource("1_4duv0")]
-rotation_speed = 0.2
 
 [node name="Shape" parent="Area" index="0"]
 visible = true
 
 [node name="Sprite" parent="3DShader" index="0"]
+material = SubResource("ShaderMaterial_4duv0")
+position = Vector2(-2.44379e-06, -9.53674e-07)
 texture = SubResource("AtlasTexture_wv4m7")
 
 [node name="TopLeftShape" type="CollisionShape2D" parent="StaticBody2D" index="0"]
