@@ -18,7 +18,7 @@ size = Vector2(8, 25)
 size = Vector2(8.5, 6)
 
 [node name="Tile" instance=ExtResource("1_7uncb")]
-rotation_speed = null
+rotation_speed = 0.2
 
 [node name="Sprite" parent="3DShader" index="0"]
 texture = SubResource("AtlasTexture_skhvx")

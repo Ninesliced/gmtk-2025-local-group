@@ -1,4 +1,4 @@
-[gd_scene load_steps=8 format=3 uid="uid://5x8ludb4a3gs"]
+[gd_scene load_steps=9 format=3 uid="uid://5x8ludb4a3gs"]
 
 [ext_resource type="PackedScene" uid="uid://bkuf38ni4q62k" path="res://actors/tile/Tile.tscn" id="1_fm2mu"]
 [ext_resource type="Texture2D" uid="uid://dabe5dmwfsby2" path="res://assets/spritesheet.png" id="2_ssas8"]
@@ -20,6 +20,11 @@ region = Rect2(96, 0, 32, 32)
 [sub_resource type="AtlasTexture" id="AtlasTexture_1oojr"]
 resource_local_to_scene = true
 atlas = ExtResource("2_ssas8")
+region = Rect2(96, 64, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ltboa"]
+resource_local_to_scene = true
+atlas = ExtResource("2_ssas8")
 region = Rect2(96, 32, 32, 32)
 
 [node name="Tile" instance=ExtResource("1_fm2mu")]
@@ -35,10 +40,15 @@ texture = SubResource("AtlasTexture_fm2mu")
 position = Vector2(0, -0.5)
 shape = SubResource("RectangleShape2D_fm2mu")
 
-[node name="RandomizeSprite" type="Node" parent="." index="4" node_paths=PackedStringArray("selectedSprite")]
-script = ExtResource("3_ssas8")
-textures = Array[Texture2D]([SubResource("AtlasTexture_ssas8"), SubResource("AtlasTexture_1oojr")])
-selectedSprite = NodePath("../3DShader/Sprite")
 [node name="Label" type="Label" parent="." index="4"]
 offset_right = 40.0
 offset_bottom = 23.0
+
+[node name="RandomizeSprite" type="Node" parent="." index="5" node_paths=PackedStringArray("selectedSprite")]
+script = ExtResource("3_ssas8")
+textures = Dictionary[Texture2D, float]({
+SubResource("AtlasTexture_ssas8"): 0.2,
+SubResource("AtlasTexture_1oojr"): 0.1,
+SubResource("AtlasTexture_ltboa"): 0.3
+})
+selectedSprite = NodePath("../3DShader/Sprite")

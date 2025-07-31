@@ -119,6 +119,7 @@ func transform_to_another_type(new_tile: PackedScene) -> void:
 	tile_instance.grid_position = grid_position
 	tile_instance.tile_rotation = tile_rotation
 	get_parent().add_child(tile_instance)
-	tile_instance.tile_bigger.play_full()
+	if tile_instance.tile_bigger:
+		tile_instance.tile_bigger.play_full()
 	GameGlobal.map.grid[grid_position.x][grid_position.y] = tile_instance
 	queue_free()
