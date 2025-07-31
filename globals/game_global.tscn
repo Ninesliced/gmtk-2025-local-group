@@ -33,3 +33,14 @@ action_textures = Dictionary[int, Texture2D]({
 3: SubResource("AtlasTexture_0tpbp"),
 4: SubResource("AtlasTexture_6cuha")
 })
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+
+[node name="ActionsContainer" type="Control" parent="CanvasLayer"]
+unique_name_in_owner = true
+layout_mode = 3
+anchors_preset = 0
+offset_left = 16.0
+offset_top = 16.0
+offset_right = 16.0
+offset_bottom = 16.0
