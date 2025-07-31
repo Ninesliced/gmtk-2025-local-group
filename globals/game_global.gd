@@ -1,6 +1,8 @@
 extends Node
 
 signal on_action_stack_changed
+signal on_action
+
 
 @export var action_stacks : Array[ActionType] = [
 	ActionType.ROTATE_CLOCK,
@@ -65,11 +67,12 @@ func _ready():
 	GameGlobal.action_ui_stacks = actions_ui
 	GameGlobal.on_action_stack_changed.connect(_update_size)
 
-func act_tile(tile: Tile) -> void:
+func act_tile(tile: Tile, event: InputEvent) -> void:
 	var action = action_stacks.pop_front()
 	var action_ui = action_ui_stacks.pop_front()
 	if action in dict:
-		dict[action]["function"].call(tile)
+		dict[action]["function"].call(tile, event)
+		on_action.emit()
 	else:
 		print("Action not found: ", action)
 	if !("temporary" in dict[action] && dict[action]["temporary"]):
@@ -81,21 +84,24 @@ func act_tile(tile: Tile) -> void:
 	on_action_stack_changed.emit()
 	GameGlobal.is_game_have_start = true
 
-func rotate_clock(tile: Tile) -> void:
-	tile.rotate_clock()
+func rotate_clock(tile: Tile, event: InputEvent) -> void:
+	if event.button_index == MOUSE_BUTTON_RIGHT:
+		tile.rotate_counter_clock()
+	else:
+		tile.rotate_clock()
 	pass
 
-func rotate_counter_clock(tile: Tile) -> void:
+func rotate_counter_clock(tile: Tile, event: InputEvent) -> void:
 	tile.rotate_counter_clock()
 	pass
 
-func transform_empty(tile: Tile) -> void:
+func transform_empty(tile: Tile, event: InputEvent) -> void:
 	tile.transform_to_another_type(load("res://actors/tile/four.tscn"))
-	
-func horizontal_swap(tile: Tile) -> void:
+
+func horizontal_swap(tile: Tile, event: InputEvent) -> void:
 	tile.horizontal_swap(map)
 
-func vertical_swap(tile: Tile) -> void:
+func vertical_swap(tile: Tile, event: InputEvent) -> void:
 	tile.vertical_swap(map)
 
 # func delete_current_action(tile: Tile) -> void:
