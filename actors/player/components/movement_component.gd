@@ -38,8 +38,12 @@ func _process(delta):
 		GameGlobal.is_game_have_start = true
 	else:
 		return
+		
+	if is_moving:
+		return
 	
 	var move_direction: Vector2i = Vector2i.ZERO
+	var map : Map = GameGlobal.map
 	
 	if x_direction > 0.4:
 		move_direction = Vector2i(1, 0)
@@ -50,6 +54,31 @@ func _process(delta):
 		move_direction = Vector2i(0, 1)
 	elif y_direction < -0.4:
 		move_direction = Vector2i(0, -1)
+	
+	var next_pos = Vector2i(grid_position + move_direction) % map.grid_size
+	
+	var current_tile : Tile = GameGlobal.map.grid[grid_position.x][grid_position.y]
+	var next_tile : Tile = GameGlobal.map.grid[next_pos.x][next_pos.y]
+	
+	var inside_direction : Tile.Rotation
+	var outside_direction : Tile.Rotation
+	if move_direction == Vector2i(1, 0):
+		inside_direction = Tile.Rotation.RIGHT
+		outside_direction = Tile.Rotation.LEFT
+	elif move_direction == Vector2i(-1, 0):
+		inside_direction = Tile.Rotation.LEFT
+		outside_direction = Tile.Rotation.RIGHT
+	elif move_direction == Vector2i(0, 1):
+		inside_direction = Tile.Rotation.DOWN
+		outside_direction = Tile.Rotation.UP
+	elif move_direction == Vector2i(0, -1):
+		inside_direction = Tile.Rotation.UP
+		outside_direction = Tile.Rotation.DOWN
+	else:
+		return
+	
+	if current_tile == null or next_tile == null or not current_tile.can_pass(inside_direction) or not next_tile.can_pass(outside_direction):
+		return
 
 	on_move.emit(move_direction)
 	grid_position += move_direction

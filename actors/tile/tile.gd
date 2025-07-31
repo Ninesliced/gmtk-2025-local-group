@@ -121,3 +121,6 @@ func transform_to_another_type(new_tile: PackedScene) -> void:
 		tile_instance.tile_bigger.play_full()
 	GameGlobal.map.grid[grid_position.x][grid_position.y] = tile_instance
 	queue_free()
+
+func can_pass(direction: Rotation) -> bool:
+	return true
