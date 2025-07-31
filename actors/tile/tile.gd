@@ -10,6 +10,7 @@ enum Rotation {
 }
 
 signal on_tile_full
+@onready var label: Label = $Label
 
 @onready var tile_bigger: AnimationPlayer = %TileBigger
 @export var tile_rotation : Rotation = Rotation.UP : 
@@ -36,8 +37,20 @@ func rotate_clock() -> void:
 func rotate_counter_clock() -> void:
 	tile_clicked(-1)
 
-func horizontal_swap(til_size) -> void:
-	translation_animated(Vector2(til_size.x,0))
+func swap(map: Map,vector : Vector2i) -> void:
+	var til_size = map.tile_size
+	translation_animated(vector * til_size)
+	
+	var neighbor = map.grid[grid_position.x+vector.x][grid_position.y+vector.y]
+	neighbor.translation_animated(-vector * til_size)
+	
+	map.swap_tiles(grid_position,grid_position+vector)
+
+func horizontal_swap(map: Map) -> void:
+	swap(map,Vector2i(1,0))
+
+func vertical_swap(map: Map) -> void:
+	swap(map,Vector2i(0,1))
 
 func _on_area_2d_mouse_entered() -> void:
 	tile_hovered()
@@ -65,6 +78,8 @@ func tile_hovered() -> void:
 func tile_unhovered() -> void:
 	pass
 
+func _process(delta: float) -> void:
+	label.text = str(grid_position)
 
 func _on_area_body_exited(body: Node2D) -> void:
 	if not body is Player:

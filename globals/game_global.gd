@@ -6,7 +6,8 @@ signal on_action_stack_changed
 	ActionType.ROTATE_CLOCK,
 	ActionType.ROTATE_COUNTER_CLOCK,
 	ActionType.ROTATE_COUNTER_CLOCK,
-	ActionType.HORIZONTAL_SWAP
+	ActionType.HORIZONTAL_SWAP,
+	ActionType.VERTICAL_SWAP
 ]
 var action_ui_stacks : Array[ActionUI] = []
 
@@ -15,7 +16,8 @@ enum ActionType {
 	ROTATE_CLOCK,
 	ROTATE_COUNTER_CLOCK,
 	TRANSFORM_EMPTY,
-	HORIZONTAL_SWAP
+	HORIZONTAL_SWAP,
+	VERTICAL_SWAP
 }
 
 var dict: Dictionary[ActionType, Dictionary] = {
@@ -34,6 +36,10 @@ var dict: Dictionary[ActionType, Dictionary] = {
 	ActionType.HORIZONTAL_SWAP: {
 		"name": "SWAP HORIZONTAL TILES",
 		"function": horizontal_swap,
+	},
+	ActionType.VERTICAL_SWAP: {
+		"name": "SWAP VERTICAL TILES",
+		"function": vertical_swap,
 	}
 }
 
@@ -65,7 +71,10 @@ func transform_empty(tile: Tile) -> void:
 	pass
 	
 func horizontal_swap(tile: Tile) -> void:
-	tile.horizontal_swap(map.tile_size)
+	tile.horizontal_swap(map)
+
+func vertical_swap(tile: Tile) -> void:
+	tile.vertical_swap(map)
 
 @export var player: Player = null
 @export var map: Map = null
