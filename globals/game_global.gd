@@ -7,7 +7,7 @@ signal on_action_stack_changed
 	ActionType.ROTATE_COUNTER_CLOCK,
 	ActionType.ROTATE_COUNTER_CLOCK,
 ]
-@export var action_ui_stacks : Array[ActionUI] = []
+var action_ui_stacks : Array[ActionUI] = []
 
 @export var action_textures : Dictionary[ActionType, Texture2D] = {}
 enum ActionType {
@@ -61,3 +61,7 @@ func rotate_counter_clock(tile: Tile) -> void:
 
 func transform_empty(tile: Tile) -> void:
 	pass
+
+@export var player: Player = null
+@export var map: Map = null
+@export var camera: Camera2D = null

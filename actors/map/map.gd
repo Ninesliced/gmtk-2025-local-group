@@ -5,7 +5,7 @@ class_name Map
 
 @export var tiles : Array[PackedScene] = []
 
-@export var grid_size : Vector2i = Vector2i(10, 10):
+@export var grid_size : Vector2i = Vector2i(5, 25):
 	set(value):
 		grid_size = value
 		_update_grid()
@@ -19,6 +19,7 @@ var grid : Array[Array] = []
 func _ready() -> void:
 	_update_grid()
 	generate_grid()
+	GameGlobal.map = $"."
 
 func _update_grid() -> void:
 	for child in grid:

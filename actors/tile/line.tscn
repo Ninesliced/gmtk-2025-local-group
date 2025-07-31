@@ -1,0 +1,24 @@
+[gd_scene load_steps=5 format=3 uid="uid://d2wqej3jpir1g"]
+
+[ext_resource type="PackedScene" uid="uid://bkuf38ni4q62k" path="res://actors/tile/Tile.tscn" id="1_4nd4i"]
+[ext_resource type="Texture2D" uid="uid://dabe5dmwfsby2" path="res://assets/spritesheet.png" id="2_tlcxu"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_6xt0b"]
+atlas = ExtResource("2_tlcxu")
+region = Rect2(64, 0, 32, 32)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_tlcxu"]
+size = Vector2(31, 5.51172)
+
+[node name="Tile" instance=ExtResource("1_4nd4i")]
+
+[node name="Sprite" parent="CanvasGroup" index="0"]
+texture = SubResource("AtlasTexture_6xt0b")
+
+[node name="TOP" type="CollisionShape2D" parent="StaticBody2D" index="0"]
+position = Vector2(0, -13)
+shape = SubResource("RectangleShape2D_tlcxu")
+
+[node name="BOTTOM" type="CollisionShape2D" parent="StaticBody2D" index="1"]
+position = Vector2(0, 12)
+shape = SubResource("RectangleShape2D_tlcxu")

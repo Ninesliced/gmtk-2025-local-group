@@ -6,7 +6,7 @@
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_1qs4h"]
 atlas = ExtResource("2_4t6fi")
-region = Rect2(33.061, 0.975593, 29.9771, 30.1332)
+region = Rect2(0, 0, 32, 32)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_4t6fi"]
 size = Vector2(41.2903, 41.2903)
@@ -24,6 +24,7 @@ texture = SubResource("AtlasTexture_1qs4h")
 
 [node name="Area" type="Area2D" parent="."]
 position = Vector2(16, 16)
+collision_layer = 9
 
 [node name="Shape" type="CollisionShape2D" parent="Area"]
 visible = false

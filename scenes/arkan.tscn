@@ -1,9 +1,24 @@
-[gd_scene load_steps=2 format=3 uid="uid://173mm7iqpkab"]
+[gd_scene load_steps=8 format=3 uid="uid://173mm7iqpkab"]
 
-[ext_resource type="PackedScene" uid="uid://bkuf38ni4q62k" path="res://actors/tile/Tile.tscn" id="1_jhgvx"]
+[ext_resource type="PackedScene" uid="uid://v6wht25gui7" path="res://scenes/border/border.tscn" id="1_25nd2"]
+[ext_resource type="PackedScene" uid="uid://b7fgpkbuim0vj" path="res://actors/map/Map.tscn" id="2_8o45r"]
+[ext_resource type="PackedScene" uid="uid://bqtjiyvuyby2g" path="res://actors/tile/t.tscn" id="2_b6kx4"]
+[ext_resource type="Script" uid="uid://cpvd8mjlsp6tj" path="res://scenes/camera_2d.gd" id="2_d307w"]
+[ext_resource type="PackedScene" uid="uid://s2om5ju6lrn" path="res://actors/tile/four.tscn" id="3_a4kwy"]
+[ext_resource type="PackedScene" uid="uid://c5lqig57oxpyb" path="res://actors/player/player.tscn" id="3_d307w"]
+[ext_resource type="PackedScene" uid="uid://5x8ludb4a3gs" path="res://actors/tile/full.tscn" id="4_aij3c"]
 
 [node name="Arkan" type="Node2D"]
 
-[node name="Tile" parent="." instance=ExtResource("1_jhgvx")]
-position = Vector2(392, 244)
-scale = Vector2(13.4894, 11.8703)
+[node name="Map" parent="." instance=ExtResource("2_8o45r")]
+tiles = Array[PackedScene]([ExtResource("2_b6kx4"), ExtResource("3_a4kwy"), ExtResource("4_aij3c")])
+grid_size = Vector2i(25, 5)
+
+[node name="Camera2D" type="Camera2D" parent="."]
+position = Vector2(114, 90)
+script = ExtResource("2_d307w")
+
+[node name="Border" parent="." instance=ExtResource("1_25nd2")]
+
+[node name="Player" parent="." instance=ExtResource("3_d307w")]
+position = Vector2(113, 79)
