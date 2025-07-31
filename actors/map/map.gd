@@ -19,6 +19,7 @@ var grid : Array[Array] = []
 func _ready() -> void:
 	_update_grid()
 	generate_grid()
+	# print(GameGlobal)
 	GameGlobal.map = $"."
 
 func _update_grid() -> void:
@@ -54,6 +55,15 @@ func clear_grid() -> void:
 			if grid[x][y] != null:
 				grid[x][y].queue_free()
 				grid[x][y] = null
+
+func swap_tiles(tile1_co : Vector2i,tile2_co : Vector2i,) -> void:
+	var tile1 : Tile = grid[tile1_co.x][tile1_co.y]
+	var tile2 : Tile = grid[tile2_co.x][tile2_co.y]
+	grid[tile1_co.x][tile1_co.y] = tile2
+	grid[tile2_co.x][tile2_co.y] = tile1
+	
+	tile1.grid_position = tile2_co
+	tile2.grid_position = tile1_co
 
 func regenerate_grid() -> void:
 	clear_grid()

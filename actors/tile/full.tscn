@@ -25,8 +25,8 @@ region = Rect2(96, 32, 32, 32)
 [node name="Tile" instance=ExtResource("1_fm2mu")]
 rotation_speed = 0.2
 
-[node name="Area" parent="." index="0"]
-visible = false
+[node name="Shape" parent="Area" index="0"]
+visible = true
 
 [node name="Sprite" parent="3DShader" index="0"]
 texture = SubResource("AtlasTexture_fm2mu")
@@ -39,3 +39,6 @@ shape = SubResource("RectangleShape2D_fm2mu")
 script = ExtResource("3_ssas8")
 textures = Array[Texture2D]([SubResource("AtlasTexture_ssas8"), SubResource("AtlasTexture_1oojr")])
 selectedSprite = NodePath("../3DShader/Sprite")
+[node name="Label" type="Label" parent="." index="4"]
+offset_right = 40.0
+offset_bottom = 23.0

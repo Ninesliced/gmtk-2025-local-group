@@ -41,8 +41,20 @@ func rotate_clock() -> void:
 func rotate_counter_clock() -> void:
 	tile_clicked(-1)
 
-func horizontal_swap(til_size) -> void:
-	translation_animated(Vector2(til_size.x,0))
+func swap(map: Map,vector : Vector2i) -> void:
+	var til_size = map.tile_size
+	translation_animated(vector * til_size)
+	
+	var neighbor = map.grid[(grid_position.x+vector.x)%map.grid_size.x][(grid_position.y+vector.y)%map.grid_size.y]
+	neighbor.translation_animated(-vector * til_size)
+	
+	map.swap_tiles(grid_position,(grid_position+vector)%map.grid_size)
+
+func horizontal_swap(map: Map) -> void:
+	swap(map,Vector2i(1,0))
+	
+func vertical_swap(map: Map) -> void:
+	swap(map,Vector2i(0,1))
 
 func _on_area_2d_mouse_entered() -> void:
 	tile_hovered()
@@ -70,17 +82,15 @@ func tile_hovered() -> void:
 func tile_unhovered() -> void:
 	pass
 
+func _process(delta: float) -> void:
+	# label.text = str(grid_position)
+	pass
 
 func _on_area_body_exited(body: Node2D) -> void:
 	if not body is Player:
 		return
 	
-	var full_tile_instance: Tile = load("res://actors/tile/full.tscn").instantiate()
-	full_tile_instance.position = position
-	full_tile_instance.tile_rotation = tile_rotation
-	get_parent().add_child(full_tile_instance)
-	full_tile_instance.tile_bigger.play_full()
-	queue_free()
+	transform_to_another_type(load("res://actors/tile/full.tscn"))
 
 func rotate_animated(new_rotation: int) -> void:
 	%StaticBody2D.rotation = PI / 2 * new_rotation
@@ -102,3 +112,13 @@ func translation_animated(new_translation: Vector2) -> void:
 	tween.set_trans(Tween.TRANS_LINEAR)
 
 	await tween.finished
+
+func transform_to_another_type(new_tile: PackedScene) -> void:
+	var tile_instance: Tile = new_tile.instantiate()
+	tile_instance.position = position
+	tile_instance.grid_position = grid_position
+	tile_instance.tile_rotation = tile_rotation
+	get_parent().add_child(tile_instance)
+	tile_instance.tile_bigger.play_full()
+	GameGlobal.map.grid[grid_position.x][grid_position.y] = tile_instance
+	queue_free()
