@@ -10,7 +10,8 @@ signal on_action
 	ActionType.TRANSFORM_EMPTY,
 	ActionType.HORIZONTAL_SWAP,
 	ActionType.HORIZONTAL_SWAP,
-	ActionType.VERTICAL_SWAP
+	ActionType.VERTICAL_SWAP,
+	ActionType.TRANSFORM_CROSS
 ]
 var action_ui_stacks : Array[ActionUI] = []
 
@@ -21,7 +22,7 @@ enum ActionType {
 	TRANSFORM_EMPTY,
 	HORIZONTAL_SWAP,
 	VERTICAL_SWAP,
-	# DELETE_CURRENT_ACTION
+	TRANSFORM_CROSS
 }
 
 var dict: Dictionary[ActionType, Dictionary] = {
@@ -44,7 +45,10 @@ var dict: Dictionary[ActionType, Dictionary] = {
 	ActionType.VERTICAL_SWAP: {
 		"name": "SWAP VERTICAL TILES",
 		"function": vertical_swap,
-		"temporary": true
+	},
+	ActionType.TRANSFORM_CROSS: {
+		"name": "Transform Empty",
+		"function": transform_cross,
 	},
 	# ActionType.DELETE_CURRENT_ACTION: {
 	# 	"name": "DELETE CURRENT ACTION",
@@ -96,6 +100,17 @@ func rotate_counter_clock(tile: Tile, event: InputEvent) -> void:
 
 func transform_empty(tile: Tile, event: InputEvent) -> void:
 	tile.transform_to_another_type(load("res://actors/tile/four.tscn"))
+	
+func transform_cross(tile: Tile, event: InputEvent) -> void:
+	for i in range(-1,2):
+		for j in range(-1,2):
+			var current_tile = map.grid[tile.grid_position.x+i][tile.grid_position.y+j]
+			var rnd = randi_range(0,1)
+			match rnd:
+				0:
+					current_tile.transform_to_another_type(load("res://actors/tile/four.tscn"))
+				1:
+					current_tile.transform_to_another_type(load("res://actors/tile/full.tscn"))
 
 func horizontal_swap(tile: Tile, event: InputEvent) -> void:
 	tile.horizontal_swap(map)
