@@ -3,7 +3,6 @@ extends Node
 signal on_action_stack_changed
 signal on_action
 
-
 @export var action_stacks : Array[ActionType] = [
 	ActionType.ROTATE_CLOCK,
 	ActionType.ROTATE_COUNTER_CLOCK,

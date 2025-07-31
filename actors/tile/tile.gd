@@ -56,6 +56,11 @@ func horizontal_swap(map: Map) -> void:
 func vertical_swap(map: Map) -> void:
 	swap(map,Vector2i(0,1))
 
+
+
+func _ready():
+	pass
+
 func _on_area_2d_mouse_entered() -> void:
 	tile_hovered()
 	is_hover = true
