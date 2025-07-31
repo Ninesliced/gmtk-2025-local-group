@@ -22,3 +22,7 @@ texture = SubResource("AtlasTexture_fm2mu")
 [node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D" index="0"]
 position = Vector2(0, -0.5)
 shape = SubResource("RectangleShape2D_fm2mu")
+
+[node name="Label" type="Label" parent="." index="4"]
+offset_right = 40.0
+offset_bottom = 23.0
