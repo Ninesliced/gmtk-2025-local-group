@@ -1,0 +1,34 @@
+[gd_scene load_steps=7 format=3 uid="uid://b8ylngr75sxvp"]
+
+[ext_resource type="PackedScene" uid="uid://bkuf38ni4q62k" path="res://actors/tile/Tile.tscn" id="1_7uncb"]
+[ext_resource type="Texture2D" uid="uid://dabe5dmwfsby2" path="res://assets/spritesheet.png" id="2_skhvx"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_r882n"]
+atlas = ExtResource("2_skhvx")
+region = Rect2(128, 0, 32, 32)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_skhvx"]
+size = Vector2(32, 7)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_r882n"]
+size = Vector2(8, 25)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_73myc"]
+size = Vector2(8.5, 6)
+
+[node name="Tile" instance=ExtResource("1_7uncb")]
+
+[node name="Sprite" parent="CanvasGroup" index="0"]
+texture = SubResource("AtlasTexture_r882n")
+
+[node name="TOP" type="CollisionShape2D" parent="StaticBody2D" index="0"]
+position = Vector2(0, -12.5)
+shape = SubResource("RectangleShape2D_skhvx")
+
+[node name="RIGHT" type="CollisionShape2D" parent="StaticBody2D" index="1"]
+position = Vector2(12, 2.5)
+shape = SubResource("RectangleShape2D_r882n")
+
+[node name="BOTTOM_LEFT" type="CollisionShape2D" parent="StaticBody2D" index="2"]
+position = Vector2(-11.75, 12)
+shape = SubResource("RectangleShape2D_73myc")
