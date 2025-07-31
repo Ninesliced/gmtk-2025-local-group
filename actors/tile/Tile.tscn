@@ -24,6 +24,7 @@ texture = SubResource("AtlasTexture_1qs4h")
 
 [node name="Area" type="Area2D" parent="."]
 position = Vector2(16, 16)
+collision_layer = 9
 
 [node name="Shape" type="CollisionShape2D" parent="Area"]
 visible = false

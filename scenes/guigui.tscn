@@ -1,4 +1,4 @@
-[gd_scene load_steps=12 format=4 uid="uid://b72bu5lvtm2bv"]
+[gd_scene load_steps=12 format=4 uid="uid://djkqxtualwbwj"]
 
 [ext_resource type="PackedScene" uid="uid://c5lqig57oxpyb" path="res://actors/player/player.tscn" id="1_fk7tf"]
 [ext_resource type="Texture2D" uid="uid://dabe5dmwfsby2" path="res://assets/spritesheet.png" id="2_gfv14"]
@@ -85,6 +85,7 @@ size = Vector2(34, 648)
 [node name="Guigui" type="Node2D"]
 
 [node name="Map" parent="." instance=ExtResource("4_bff3v")]
+grid_size = Vector2i(20, 20)
 
 [node name="Player" parent="." instance=ExtResource("1_fk7tf")]
 position = Vector2(16, 80)

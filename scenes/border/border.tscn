@@ -106,3 +106,14 @@ collision_mask = 0
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
 position = Vector2(9, 76)
 shape = SubResource("RectangleShape2D_p1tfl")
+
+[node name="TileMoverArea" type="Area2D" parent="."]
+position = Vector2(-149, 1)
+collision_layer = 0
+collision_mask = 8
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="TileMoverArea"]
+position = Vector2(9, 76)
+shape = SubResource("RectangleShape2D_p1tfl")
+
+[connection signal="area_entered" from="TileMoverArea" to="." method="_on_tile_mover_area_area_entered"]
