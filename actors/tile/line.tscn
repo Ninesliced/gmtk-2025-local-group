@@ -1,6 +1,7 @@
-[gd_scene load_steps=5 format=3 uid="uid://d2wqej3jpir1g"]
+[gd_scene load_steps=6 format=3 uid="uid://d2wqej3jpir1g"]
 
 [ext_resource type="PackedScene" uid="uid://bkuf38ni4q62k" path="res://actors/tile/Tile.tscn" id="1_4nd4i"]
+[ext_resource type="Script" uid="uid://c31srwg1ffr8u" path="res://actors/tile/line.gd" id="2_6xt0b"]
 [ext_resource type="Texture2D" uid="uid://dabe5dmwfsby2" path="res://assets/spritesheet.png" id="2_tlcxu"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_tlcxu"]
@@ -12,6 +13,7 @@ region = Rect2(64, 0, 32, 32)
 size = Vector2(31, 5.51172)
 
 [node name="Tile" instance=ExtResource("1_4nd4i")]
+script = ExtResource("2_6xt0b")
 
 [node name="Sprite" parent="3DShader" index="0"]
 texture = SubResource("AtlasTexture_tlcxu")

@@ -56,6 +56,11 @@ func horizontal_swap(map: Map) -> void:
 func vertical_swap(map: Map) -> void:
 	swap(map,Vector2i(0,1))
 
+
+
+func _ready():
+	pass
+
 func _on_area_2d_mouse_entered() -> void:
 	tile_hovered()
 	is_hover = true
@@ -123,3 +128,6 @@ func transform_to_another_type(new_tile: PackedScene) -> void:
 		tile_instance.tile_bigger.play_full()
 	GameGlobal.map.grid[grid_position.x][grid_position.y] = tile_instance
 	queue_free()
+
+func can_pass(direction: Rotation) -> bool:
+	return true
