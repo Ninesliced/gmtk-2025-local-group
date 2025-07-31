@@ -107,9 +107,9 @@ func _on_area_body_exited(body: Node2D) -> void:
 		return
 	if !_transform_to_full:
 		return
-	transform_to_another_type(load("res://actors/tile/full.tscn"))
-	_transform_to_full = false
 	is_player_inside = false
+	_transform_to_full = false
+	transform_to_another_type(load("res://actors/tile/full.tscn"))
 
 func rotate_animated(new_rotation: int) -> void:
 	%StaticBody2D.rotation = PI / 2 * new_rotation
