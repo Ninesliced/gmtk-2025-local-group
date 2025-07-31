@@ -15,10 +15,10 @@ size = Vector2(41.2903, 41.2903)
 script = ExtResource("1_4t6fi")
 
 [node name="CanvasGroup" type="CanvasGroup" parent="."]
+material = ExtResource("2_iawyn")
 
 [node name="Sprite" type="Sprite2D" parent="CanvasGroup"]
 unique_name_in_owner = true
-material = ExtResource("2_iawyn")
 position = Vector2(16, 16)
 texture = SubResource("AtlasTexture_1qs4h")
 
