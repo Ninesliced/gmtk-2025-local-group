@@ -22,3 +22,4 @@ position = Vector2(328, 40)
 
 [node name="Player" parent="." instance=ExtResource("3_d307w")]
 position = Vector2(113, 79)
+collision_layer = 1
