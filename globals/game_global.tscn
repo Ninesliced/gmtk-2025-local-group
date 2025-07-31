@@ -29,7 +29,7 @@ region = Rect2(48, 0, 16, 16)
 
 [node name="GameGlobal" type="Node"]
 script = ExtResource("1_gu6ii")
-action_stacks = Array[int]([5, 3, 4, 1, 1])
+action_stacks = Array[int]([3, 4])
 action_textures = Dictionary[int, Texture2D]({
 0: SubResource("AtlasTexture_gc13h"),
 1: SubResource("AtlasTexture_woeo0"),
