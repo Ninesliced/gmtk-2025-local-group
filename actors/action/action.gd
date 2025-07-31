@@ -29,3 +29,7 @@ func _on_area_2d_body_entered(player: Node2D) -> void:
 	# TODO: action_ui.animation_player: A
 	GameGlobal.add_action(action, action_ui)
 	queue_free()
+
+
+func choose_an_random_action() -> void:
+	action = GameGlobal.pick_weighted_random_action()

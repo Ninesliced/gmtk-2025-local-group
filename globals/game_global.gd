@@ -29,6 +29,7 @@ var dict: Dictionary[ActionType, Dictionary] = {
 	ActionType.ROTATE_CLOCK: {
 		"name": "Rotate Clockwise",
 		"function": rotate_clock,
+		"probability": 0.1,
 	},
 	ActionType.ROTATE_COUNTER_CLOCK: {
 		"name": "Rotate Counter Clockwise",
@@ -49,6 +50,7 @@ var dict: Dictionary[ActionType, Dictionary] = {
 	ActionType.TRANSFORM_CROSS: {
 		"name": "Transform Empty",
 		"function": transform_cross,
+		"probability": 0.3,
 	},
 	# ActionType.DELETE_CURRENT_ACTION: {
 	# 	"name": "DELETE CURRENT ACTION",
@@ -156,6 +158,38 @@ func new_action_ui(action: ActionType) -> ActionUI:
 	var action_ui: ActionUI = load("res://scenes/ui/action_ui.tscn").instantiate()
 	%ActionsContainer.add_child(action_ui)
 	action_ui.texture_rect.texture = GameGlobal.action_textures[action]
-	_update_size()
+	# _update_size()
 	
 	return action_ui
+	
+func pick_weighted_random_action() -> ActionType:
+	var all_actions = dict.keys()
+	var defined_weight := 0.0
+	var undefined_actions := []
+
+	# 1. Calcul du poids défini et collecte des actions sans proba
+	for action in all_actions:
+		if dict[action].has("probability"):
+			defined_weight += dict[action]["probability"]
+		else:
+			undefined_actions.append(action)
+
+	# 2. Répartition uniforme pour les actions restantes
+	var remaining_weight = 1.0 - defined_weight
+	var default_weight =  remaining_weight / undefined_actions.size() if undefined_actions.size() > 0  else 0.0
+
+	# 3. Liste cumulative
+	var cumulative := []
+	var acc := 0.0
+	for action in all_actions:
+		var weight = dict[action].get("probability", default_weight)
+		acc += weight
+		cumulative.append({ "action": action, "threshold": acc })
+
+	# 4. Tirage
+	var r = randf()
+	for entry in cumulative:
+		if r <= entry.threshold:
+			return entry.action
+
+	return all_actions[0]  # Fallback

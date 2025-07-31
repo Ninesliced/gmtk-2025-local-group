@@ -88,6 +88,8 @@ _data = {
 
 [node name="Tile" type="Node2D"]
 script = ExtResource("1_4t6fi")
+is_action_spawnable = null
+chance_action_spawn = null
 
 [node name="Area" type="Area2D" parent="."]
 position = Vector2(16, 16)
@@ -118,6 +120,9 @@ libraries = {
 &"": SubResource("AnimationLibrary_1qs4h")
 }
 script = ExtResource("4_1qs4h")
+
+[node name="ActionHolder" type="Node2D" parent="."]
+unique_name_in_owner = true
 
 [connection signal="body_entered" from="Area" to="." method="_on_area_body_entered"]
 [connection signal="body_exited" from="Area" to="." method="_on_area_body_exited"]
