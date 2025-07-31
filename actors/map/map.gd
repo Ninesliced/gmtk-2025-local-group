@@ -19,6 +19,7 @@ var grid : Array[Array] = []
 func _ready() -> void:
 	_update_grid()
 	generate_grid()
+	# print(GameGlobal)
 	GameGlobal.map = $"."
 
 func _update_grid() -> void:
@@ -44,7 +45,7 @@ func generate_grid() -> void:
 				var tile = tile_scene.instantiate()
 				tile.tile_rotation = randi() % 4
 				tile.position = Vector2i(x, y) * tile_size
-				tile.grid_position = Vector2i(x, y)
+				tile.set_grid_position(Vector2i(x, y))
 				add_child(tile)
 				grid[x][y] = tile
 
