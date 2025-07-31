@@ -29,7 +29,7 @@ var _transform_to_full: bool = false
 
 var is_hover : bool = false
 var grid_position : Vector2i = Vector2i.ZERO
-
+var is_player_inside: bool = false
 ### PUBLIC
 
 func set_grid_position(new_grid_position: Vector2i) -> void:
@@ -97,6 +97,7 @@ func _on_area_body_exited(body: Node2D) -> void:
 		return
 	transform_to_another_type(load("res://actors/tile/full.tscn"))
 	_transform_to_full = false
+	is_player_inside = false
 
 func rotate_animated(new_rotation: int) -> void:
 	%StaticBody2D.rotation = PI / 2 * new_rotation
@@ -122,6 +123,8 @@ func translation_animated(new_translation: Vector2) -> void:
 	position = target
 
 func transform_to_another_type(new_tile: PackedScene) -> void:
+	if is_player_inside:
+		return
 	var tile_instance: Tile = new_tile.instantiate()
 	tile_instance.position = position
 	tile_instance.grid_position = grid_position
@@ -143,10 +146,12 @@ func _on_area_body_entered(body):
 	if not body is Player:
 		return
 	var player: Player = body
+	is_player_inside = true
 	if player.randomTileCount < player.randomTileMax:
 		player.randomTileCount += 1
 		if player.randomTileCount >= player.randomTileMax:
 			_transform_to_full = true
 			player.randomTileCount = 0
+	
 
 	pass # Replace with function body.
