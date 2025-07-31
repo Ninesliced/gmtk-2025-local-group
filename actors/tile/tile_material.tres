@@ -3,7 +3,10 @@
 [ext_resource type="Shader" uid="uid://jkmh5ksc1ejd" path="res://actors/tile/tile3D.gdshader" id="1_ii3kf"]
 
 [resource]
+resource_local_to_scene = true
 shader = ExtResource("1_ii3kf")
 shader_parameter/ground_col = Color(0.411765, 0.415686, 0.415686, 1)
 shader_parameter/wall_col = Color(0.607843, 0.678431, 0.717647, 1)
-shader_parameter/wall_col2 = Color(0.2135, 0.302225, 0.35, 1)
+shader_parameter/wall_col2 = Color(0.215686, 0.290196, 0.129412, 1)
+shader_parameter/color_fill = Color(1, 1, 1, 1)
+shader_parameter/force = 0.0
