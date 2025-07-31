@@ -3,9 +3,14 @@ extends Node2D
 
 class_name Map
 
-@export var tiles : Array[Resource] = []
+@export var tiles : Array[PackedScene] = []
 
-@export var grid_size : Vector2i = Vector2i(10, 10)
+@export var grid_size : Vector2i = Vector2i(10, 10):
+	set(value):
+		grid_size = value
+		_update_grid()
+		generate_grid()
+	
 
 @export var tile_size : Vector2i = Vector2i(32, 32)
 
@@ -16,6 +21,11 @@ func _ready() -> void:
 	generate_grid()
 
 func _update_grid() -> void:
+	for child in grid:
+		for tile in child:
+			if tile != null:
+				print("Removing tile: ", tile)
+				tile.queue_free()
 	grid.clear()
 	
 	for x in range(grid_size.x):
