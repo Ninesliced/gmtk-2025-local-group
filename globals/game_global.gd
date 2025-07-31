@@ -105,7 +105,7 @@ func transform_empty(tile: Tile, event: InputEvent) -> void:
 func transform_cross(tile: Tile, event: InputEvent) -> void:
 	for i in range(-1,2):
 		for j in range(-1,2):
-			var current_tile = map.grid[tile.grid_position.x+i][tile.grid_position.y+j]
+			var current_tile = map.grid[(tile.grid_position.x+i)%map.grid_size.x][(tile.grid_position.y+j)%map.grid_size.y]
 			var rnd = randi_range(0,1)
 			match rnd:
 				0:

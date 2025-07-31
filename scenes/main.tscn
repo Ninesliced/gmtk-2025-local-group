@@ -4,7 +4,7 @@
 [ext_resource type="Script" uid="uid://cpvd8mjlsp6tj" path="res://scenes/camera_2d.gd" id="2_tefeu"]
 [ext_resource type="PackedScene" uid="uid://v6wht25gui7" path="res://scenes/border/border.tscn" id="3_o6xl0"]
 [ext_resource type="PackedScene" uid="uid://c5lqig57oxpyb" path="res://actors/player/player.tscn" id="4_tipki"]
-[ext_resource type="Script" uid="uid://djk5sh3bmbsji" path="res://scenes/ui/actions_container.gd" id="5_85g3d"]
+[ext_resource type="Script" path="res://scenes/ui/actions_container.gd" id="5_85g3d"]
 
 [node name="Arkan" type="Node2D"]
 

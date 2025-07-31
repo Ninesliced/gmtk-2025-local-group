@@ -88,7 +88,7 @@ func _on_area_body_exited(body: Node2D) -> void:
 	if not body is Player:
 		return
 	
-	# transform_to_another_type(load("res://actors/tile/full.tscn"))
+	#transform_to_another_type(load("res://actors/tile/full.tscn"))
 
 func rotate_animated(new_rotation: int) -> void:
 	%StaticBody2D.rotation = PI / 2 * new_rotation
@@ -105,11 +105,13 @@ func rotate_animated(new_rotation: int) -> void:
 func translation_animated(new_translation: Vector2) -> void:
 	print("Translation tile to: ", new_translation)
 	var tween = get_tree().create_tween()
-	tween.tween_property(self, "position", position + new_translation, 0.2)
+	var target = position + new_translation
+	tween.tween_property(self, "position", target, 0.2)
 	tween.set_ease(Tween.EASE_IN_OUT)
 	tween.set_trans(Tween.TRANS_LINEAR)
 
 	await tween.finished
+	position = target
 
 func transform_to_another_type(new_tile: PackedScene) -> void:
 	var tile_instance: Tile = new_tile.instantiate()
