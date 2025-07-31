@@ -11,13 +11,20 @@ enum Rotation {
 
 @export var tile_rotation : Rotation = Rotation.UP : 
 	set(x):
+		var clockwise = x > tile_rotation
 		var new_rotation = x
 		print(x)
 		if get_tree():
 			var tween = get_tree().create_tween()
 
+			print("actual rotation: ", %Sprite.rotation)
+			print("rotation: ", new_rotation * PI / 2)
 			if abs(%Sprite.rotation) - abs(PI / 2 * new_rotation) > 0.01:
-				%Sprite.rotation = 0
+				if %Sprite.rotation > 2*PI:
+					%Sprite.rotation -= 2 * PI
+				elif %Sprite.rotation < -2*PI:
+					%Sprite.rotation += 2 * PI
+			print("correciton rotation: ", %Sprite.rotation)
 
 			tween.tween_property(%Sprite, "rotation", PI / 2 * new_rotation, 0.2)
 			tween.set_ease(Tween.EASE_IN_OUT)
