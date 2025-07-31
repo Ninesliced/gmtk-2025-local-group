@@ -119,10 +119,6 @@ libraries = {
 }
 script = ExtResource("4_1qs4h")
 
-[node name="Label" type="Label" parent="."]
-offset_right = 40.0
-offset_bottom = 23.0
-
 [connection signal="body_exited" from="Area" to="." method="_on_area_body_exited"]
 [connection signal="input_event" from="Area" to="." method="_on_area_2d_input_event"]
 [connection signal="mouse_entered" from="Area" to="." method="_on_area_2d_mouse_entered"]

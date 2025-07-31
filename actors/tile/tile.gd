@@ -10,7 +10,6 @@ enum Rotation {
 }
 
 signal on_tile_full
-@onready var label: Label = $Label
 
 @onready var tile_bigger: AnimationPlayer = %TileBigger
 @export var tile_rotation : Rotation = Rotation.UP : 
@@ -41,14 +40,14 @@ func swap(map: Map,vector : Vector2i) -> void:
 	var til_size = map.tile_size
 	translation_animated(vector * til_size)
 	
-	var neighbor = map.grid[grid_position.x+vector.x][grid_position.y+vector.y]
+	var neighbor = map.grid[(grid_position.x+vector.x)%map.grid_size.x][(grid_position.y+vector.y)%map.grid_size.y]
 	neighbor.translation_animated(-vector * til_size)
 	
-	map.swap_tiles(grid_position,grid_position+vector)
+	map.swap_tiles(grid_position,(grid_position+vector)%map.grid_size)
 
 func horizontal_swap(map: Map) -> void:
 	swap(map,Vector2i(1,0))
-
+	
 func vertical_swap(map: Map) -> void:
 	swap(map,Vector2i(0,1))
 
@@ -78,18 +77,17 @@ func tile_hovered() -> void:
 func tile_unhovered() -> void:
 	pass
 
-func _process(delta: float) -> void:
-	label.text = str(grid_position)
-
 func _on_area_body_exited(body: Node2D) -> void:
 	if not body is Player:
 		return
 	
 	var full_tile_instance: Tile = load("res://actors/tile/full.tscn").instantiate()
 	full_tile_instance.position = position
+	full_tile_instance.grid_position = grid_position
 	full_tile_instance.tile_rotation = tile_rotation
 	get_parent().add_child(full_tile_instance)
 	full_tile_instance.tile_bigger.play_full()
+	GameGlobal.map.grid[grid_position.x][grid_position.y] = full_tile_instance
 	queue_free()
 
 func rotate_animated(new_rotation: int) -> void:
