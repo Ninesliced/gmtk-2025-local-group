@@ -5,6 +5,8 @@ extends Node
 @export var deceleration : float = 3000
 var parent : CharacterBody2D
 
+signal on_move(direction: Vector2)
+
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	if parent == null:
@@ -19,6 +21,7 @@ func _ready():
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
 	var direction = Input.get_vector("left", "right", "up", "down")
+	on_move.emit(direction)
 	direction = direction.normalized()
 	if direction.x **2 + direction.y **2 > 0.4:
 		GameGlobal.is_game_have_start = true

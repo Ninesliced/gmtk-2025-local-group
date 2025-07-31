@@ -1,3 +1,4 @@
+@tool
 extends Node2D
 
 class_name Tile
@@ -12,6 +13,7 @@ enum Rotation {
 signal on_tile_full
 
 @onready var tile_bigger: AnimationPlayer = %TileBigger
+@export var rotation_speed: float = 0.2
 @export var tile_rotation : Rotation = Rotation.UP : 
 	set(x):
 		var clockwise = x > tile_rotation
@@ -28,6 +30,9 @@ var is_hover : bool = false
 var grid_position : Vector2i = Vector2i.ZERO
 
 ### PUBLIC
+
+func set_grid_position(new_grid_position: Vector2i) -> void:
+	grid_position = new_grid_position
 
 func rotate_clock() -> void:
 	print("rotating clockwise")
@@ -78,18 +83,16 @@ func _on_area_body_exited(body: Node2D) -> void:
 	queue_free()
 
 func rotate_animated(new_rotation: int) -> void:
+	%StaticBody2D.rotation = PI / 2 * new_rotation
 	var tween = get_tree().create_tween()
 	if abs(%Sprite.rotation) - abs(PI / 2 * new_rotation) > 0.01:
 		if %Sprite.rotation > 2*PI:
 			%Sprite.rotation -= 2 * PI
 		elif %Sprite.rotation < -2*PI:
 			%Sprite.rotation += 2 * PI
-	tween.tween_property(%Sprite, "rotation", PI / 2 * new_rotation, 0.2)
-	tween.set_ease(Tween.EASE_IN_OUT)
-	tween.set_trans(Tween.TRANS_LINEAR)
-
-	await tween.finished
-	%StaticBody2D.rotation = PI / 2 * new_rotation
+	tween.tween_property(%Sprite, "rotation", PI / 2 * new_rotation, rotation_speed)
+	tween.set_ease(Tween.EASE_OUT)
+	tween.set_trans(Tween.TRANS_ELASTIC)
 	
 func translation_animated(new_translation: Vector2) -> void:
 	print("Translation tile to: ", new_translation)
