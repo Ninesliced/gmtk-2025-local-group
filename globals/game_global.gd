@@ -65,7 +65,7 @@ func transform_empty(tile: Tile) -> void:
 	pass
 	
 func horizontal_swap(tile: Tile) -> void:
-	tile.horizontal_swap()
+	tile.horizontal_swap(map.tile_size)
 
 @export var player: Player = null
 @export var map: Map = null
