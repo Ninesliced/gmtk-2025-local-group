@@ -5,7 +5,7 @@ class_name Map
 
 @export var tiles : Array[PackedScene] = []
 
-@export var grid_size : Vector2i = Vector2i(10, 10):
+@export var grid_size : Vector2i = Vector2i(20,20):
 	set(value):
 		grid_size = value
 		_update_grid()
