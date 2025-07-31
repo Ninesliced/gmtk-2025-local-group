@@ -6,6 +6,7 @@ signal on_action_stack_changed
 	ActionType.ROTATE_CLOCK,
 	ActionType.ROTATE_COUNTER_CLOCK,
 	ActionType.ROTATE_COUNTER_CLOCK,
+	ActionType.HORIZONTAL_SWAP
 ]
 var action_ui_stacks : Array[ActionUI] = []
 
@@ -13,7 +14,8 @@ var action_ui_stacks : Array[ActionUI] = []
 enum ActionType {
 	ROTATE_CLOCK,
 	ROTATE_COUNTER_CLOCK,
-	TRANSFORM_EMPTY
+	TRANSFORM_EMPTY,
+	HORIZONTAL_SWAP
 }
 
 var dict: Dictionary[ActionType, Dictionary] = {
@@ -24,12 +26,14 @@ var dict: Dictionary[ActionType, Dictionary] = {
 	ActionType.ROTATE_COUNTER_CLOCK: {
 		"name": "Rotate Counter Clockwise",
 		"function": rotate_counter_clock,
-
 	},
 	ActionType.TRANSFORM_EMPTY: {
 		"name": "Transform Empty",
 		"function": transform_empty,
-
+	},
+	ActionType.HORIZONTAL_SWAP: {
+		"name": "SWAP HORIZONTAL TILES",
+		"function": horizontal_swap,
 	}
 }
 
@@ -47,6 +51,7 @@ func act_tile(tile: Tile) -> void:
 	action_stacks.append(action)
 	action_ui_stacks.append(action_ui)
 	on_action_stack_changed.emit()
+	GameGlobal.is_game_have_start = true
 
 func rotate_clock(tile: Tile) -> void:
 	tile.rotate_clock()
@@ -58,7 +63,11 @@ func rotate_counter_clock(tile: Tile) -> void:
 
 func transform_empty(tile: Tile) -> void:
 	pass
+	
+func horizontal_swap(tile: Tile) -> void:
+	tile.horizontal_swap(map.tile_size)
 
 @export var player: Player = null
 @export var map: Map = null
 @export var camera: Camera2D = null
+var is_game_have_start: bool = false

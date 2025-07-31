@@ -24,9 +24,8 @@ signal on_tile_full
 
 		tile_rotation = new_rotation % 4
 
-
 var is_hover : bool = false
-
+var grid_position : Vector2i = Vector2i.ZERO
 
 ### PUBLIC
 
@@ -37,11 +36,16 @@ func rotate_clock() -> void:
 func rotate_counter_clock() -> void:
 	tile_clicked(-1)
 
+func horizontal_swap(til_size) -> void:
+	translation_animated(Vector2(til_size.x,0))
+
 func _on_area_2d_mouse_entered() -> void:
+	tile_hovered()
 	is_hover = true
 
 
 func _on_area_2d_mouse_exited() -> void:
+	tile_unhovered()
 	is_hover = false
 
 
@@ -51,11 +55,6 @@ func _on_area_2d_input_event(viewport: Node, event: InputEvent, shape_idx: int) 
 			GameGlobal.act_tile(self)
 		# elif event.button_index == MOUSE_BUTTON_RIGHT and event.pressed:
 		# 	tile_clicked(1)
-	elif event is InputEventMouseMotion:
-		if is_hover:
-			tile_hovered()
-		else:
-			tile_unhovered()
 
 func tile_clicked(way: int) -> void:
 	tile_rotation = tile_rotation + way
@@ -68,7 +67,7 @@ func tile_unhovered() -> void:
 
 
 func _on_area_body_exited(body: Node2D) -> void:
-	if body is not Player:
+	if not body is Player:
 		return
 	
 	var full_tile_instance: Tile = load("res://actors/tile/full.tscn").instantiate()
@@ -77,7 +76,6 @@ func _on_area_body_exited(body: Node2D) -> void:
 	get_parent().add_child(full_tile_instance)
 	full_tile_instance.tile_bigger.play_full()
 	queue_free()
-
 
 func rotate_animated(new_rotation: int) -> void:
 	var tween = get_tree().create_tween()
@@ -92,3 +90,12 @@ func rotate_animated(new_rotation: int) -> void:
 
 	await tween.finished
 	%StaticBody2D.rotation = PI / 2 * new_rotation
+	
+func translation_animated(new_translation: Vector2) -> void:
+	print("Translation tile to: ", new_translation)
+	var tween = get_tree().create_tween()
+	tween.tween_property(self, "position", position + new_translation, 0.2)
+	tween.set_ease(Tween.EASE_IN_OUT)
+	tween.set_trans(Tween.TRANS_LINEAR)
+
+	await tween.finished
