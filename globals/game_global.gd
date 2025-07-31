@@ -41,10 +41,7 @@ func act_tile(tile: Tile) -> void:
 	var action = action_stacks.pop_front()
 	var action_ui = action_ui_stacks.pop_front()
 	if action in dict:
-		print(tile)
-		# print("Executing action: ", dict[action]["name"])
-		rotate_clock(tile)
-		# call(dict[action]["function"], tile)
+		dict[action]["function"].call(tile)
 	else:
 		print("Action not found: ", action)
 	action_stacks.append(action)

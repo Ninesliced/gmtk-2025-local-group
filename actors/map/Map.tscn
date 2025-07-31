@@ -3,8 +3,8 @@
 [ext_resource type="Script" uid="uid://btngkayrce3q0" path="res://actors/map/map.gd" id="1_fvbrk"]
 [ext_resource type="PackedScene" uid="uid://bqtjiyvuyby2g" path="res://actors/tile/t.tscn" id="3_hhh0s"]
 [ext_resource type="PackedScene" uid="uid://s2om5ju6lrn" path="res://actors/tile/four.tscn" id="3_wofu4"]
-[ext_resource type="PackedScene" path="res://actors/tile/line.tscn" id="4_e10xn"]
-[ext_resource type="PackedScene" path="res://actors/tile/corner.tscn" id="5_efm3v"]
+[ext_resource type="PackedScene" uid="uid://d2wqej3jpir1g" path="res://actors/tile/line.tscn" id="4_e10xn"]
+[ext_resource type="PackedScene" uid="uid://b8ylngr75sxvp" path="res://actors/tile/corner.tscn" id="5_efm3v"]
 
 [node name="Map" type="Node2D"]
 script = ExtResource("1_fvbrk")

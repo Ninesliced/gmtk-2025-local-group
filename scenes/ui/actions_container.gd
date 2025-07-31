@@ -30,4 +30,3 @@ func _update_size() -> void:
 		var action_ui = actions_ui[i]
 		var tween = get_tree().create_tween()
 		tween.tween_property(action_ui, "position:x", i * (16 + gap), 0.2)
-		# action_ui.global_position.x = i * (16 + gap)
