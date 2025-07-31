@@ -64,6 +64,17 @@ func tile_unhovered() -> void:
 	pass
 
 
+func _on_area_body_exited(body: Node2D) -> void:
+	if body is not Player:
+		return
+	
+	var full_tile_instance = load("res://actors/tile/full.tscn").instantiate()
+	full_tile_instance.position = position
+	full_tile_instance.tile_rotation = tile_rotation
+	get_parent().add_child(full_tile_instance)
+	queue_free()
+
+
 func rotate_animated(new_rotation: int) -> void:
 	print("Rotating tile to: ", new_rotation)
 	var tween = get_tree().create_tween()
