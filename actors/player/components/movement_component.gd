@@ -5,6 +5,7 @@ var parent : Player
 var is_moving : bool = false
 
 signal on_move(direction: Vector2)
+signal on_idle()
 
 var grid_position : Vector2i = Vector2i(3, 2) :
 	set(value):
@@ -34,6 +35,9 @@ func _ready():
 func _process(delta):
 	var x_direction: float = Input.get_axis("left", "right")
 	var y_direction: float = Input.get_axis("up", "down")
+	if x_direction == 0 and y_direction == 0:
+		if !is_moving:
+			on_idle.emit()
 	if x_direction **2 + y_direction **2 > 0.4:
 		GameGlobal.is_game_have_start = true
 	else:
@@ -104,4 +108,3 @@ func translation_animation(target_position: Vector2) -> void:
 
 func stop_movement() -> void:
 	is_moving = false
-	

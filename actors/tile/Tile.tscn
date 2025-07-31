@@ -86,7 +86,7 @@ _data = {
 &"full": SubResource("Animation_ewfg4")
 }
 
-[node name="Tile" type="Node2D"]
+[node name="Tile2" type="Node2D"]
 script = ExtResource("1_4t6fi")
 is_action_spawnable = null
 chance_action_spawn = null
