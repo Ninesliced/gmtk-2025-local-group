@@ -1,8 +1,8 @@
-[gd_scene load_steps=6 format=3 uid="uid://cqwxuni5qjhvu"]
+[gd_scene load_steps=6 format=3 uid="uid://cofc6iqu648du"]
 
 [ext_resource type="PackedScene" uid="uid://b7fgpkbuim0vj" path="res://actors/map/Map.tscn" id="1_tbgi4"]
-[ext_resource type="Script" uid="uid://cpvd8mjlsp6tj" path="res://scenes/camera_2d.gd" id="2_tefeu"]
-[ext_resource type="PackedScene" uid="uid://v6wht25gui7" path="res://scenes/border/border.tscn" id="3_o6xl0"]
+[ext_resource type="Script" path="res://scenes/camera_2d.gd" id="2_tefeu"]
+[ext_resource type="PackedScene" path="res://scenes/border/border.tscn" id="3_o6xl0"]
 [ext_resource type="PackedScene" uid="uid://c5lqig57oxpyb" path="res://actors/player/player.tscn" id="4_tipki"]
 [ext_resource type="Script" uid="uid://djk5sh3bmbsji" path="res://scenes/ui/actions_container.gd" id="5_85g3d"]
 
