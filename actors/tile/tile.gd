@@ -138,7 +138,10 @@ func transform_to_another_type(new_tile: PackedScene) -> void:
 	tile_instance.position = position
 	tile_instance.grid_position = grid_position
 	tile_instance.tile_rotation = tile_rotation
-	get_parent().add_child(tile_instance)
+	if get_parent():
+		get_parent().add_child(tile_instance)
+	else:
+		push_error("why does this tile have no parent?")
 	if tile_instance.tile_bigger:
 		tile_instance.tile_bigger.play_full()
 	GameGlobal.map.grid[grid_position.x][grid_position.y] = tile_instance
