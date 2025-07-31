@@ -68,10 +68,8 @@ func _on_area_2d_mouse_exited() -> void:
 
 func _on_area_2d_input_event(viewport: Node, event: InputEvent, shape_idx: int) -> void:
 	if event is InputEventMouseButton:
-		if event.button_index == MOUSE_BUTTON_LEFT and event.pressed:
-			GameGlobal.act_tile(self)
-		# elif event.button_index == MOUSE_BUTTON_RIGHT and event.pressed:
-		# 	tile_clicked(1)
+		if event.pressed:
+			GameGlobal.act_tile(self, event)
 
 func tile_clicked(way: int) -> void:
 	tile_rotation = tile_rotation + way
@@ -90,7 +88,7 @@ func _on_area_body_exited(body: Node2D) -> void:
 	if not body is Player:
 		return
 	
-	transform_to_another_type(load("res://actors/tile/full.tscn"))
+	# transform_to_another_type(load("res://actors/tile/full.tscn"))
 
 func rotate_animated(new_rotation: int) -> void:
 	%StaticBody2D.rotation = PI / 2 * new_rotation
