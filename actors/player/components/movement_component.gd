@@ -20,9 +20,10 @@ func _ready():
 func _process(delta):
 	var direction = Input.get_vector("left", "right", "up", "down")
 	direction = direction.normalized()
-
+	if direction.x **2 + direction.y **2 > 0.4:
+		GameGlobal.is_game_have_start = true
+	
 	parent.velocity.x = move_toward(parent.velocity.x, direction.x * speed, acceleration * delta)
 	parent.velocity.y = move_toward(parent.velocity.y, direction.y * speed, acceleration * delta)
 	parent.move_and_slide()
 	pass
-

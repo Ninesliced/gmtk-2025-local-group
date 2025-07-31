@@ -3,6 +3,8 @@ extends Node2D
 @export var speed : float = 10
 
 func _physics_process(delta):
+	if !GameGlobal.is_game_have_start:
+		return
 	if !GameGlobal.camera:
 		return
 	var camera_size = GameGlobal.camera.get_viewport().get_visible_rect().size

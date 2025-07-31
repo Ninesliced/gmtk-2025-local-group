@@ -47,6 +47,7 @@ func act_tile(tile: Tile) -> void:
 	action_stacks.append(action)
 	action_ui_stacks.append(action_ui)
 	on_action_stack_changed.emit()
+	GameGlobal.is_game_have_start = true
 
 func rotate_clock(tile: Tile) -> void:
 	tile.rotate_clock()
@@ -62,3 +63,4 @@ func transform_empty(tile: Tile) -> void:
 @export var player: Player = null
 @export var map: Map = null
 @export var camera: Camera2D = null
+var is_game_have_start: bool = false
