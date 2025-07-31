@@ -1,6 +1,8 @@
 extends Node
 
 signal on_action_stack_changed
+signal on_action
+
 
 @export var action_stacks : Array[ActionType] = [
 	ActionType.ROTATE_CLOCK,
@@ -53,6 +55,7 @@ func act_tile(tile: Tile) -> void:
 	var action_ui = action_ui_stacks.pop_front()
 	if action in dict:
 		dict[action]["function"].call(tile)
+		on_action.emit()
 	else:
 		print("Action not found: ", action)
 	if !("temporary" in dict[action] && dict[action]["temporary"]):
