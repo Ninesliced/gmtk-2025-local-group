@@ -1,8 +1,7 @@
-[gd_scene load_steps=5 format=3 uid="uid://bkr0o2f3o21an"]
+[gd_scene load_steps=4 format=3 uid="uid://bkr0o2f3o21an"]
 
 [ext_resource type="PackedScene" uid="uid://b7fgpkbuim0vj" path="res://actors/map/Map.tscn" id="1_7i5u7"]
 [ext_resource type="PackedScene" uid="uid://c5lqig57oxpyb" path="res://actors/player/player.tscn" id="2_e8te2"]
-[ext_resource type="PackedScene" uid="uid://v6wht25gui7" path="res://scenes/border/border.tscn" id="3_7i0yp"]
 [ext_resource type="Script" uid="uid://cpvd8mjlsp6tj" path="res://scenes/camera_2d.gd" id="4_8c0u5"]
 
 [node name="Theo" type="Node2D"]
@@ -13,9 +12,6 @@ grid_size = Vector2i(25, 5)
 
 [node name="Player" parent="." instance=ExtResource("2_e8te2")]
 position = Vector2(15, 89)
-
-[node name="Border" parent="." instance=ExtResource("3_7i0yp")]
-position = Vector2(-27, -16)
 
 [node name="Camera2D" type="Camera2D" parent="."]
 position = Vector2(114, 90)
