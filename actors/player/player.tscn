@@ -5,8 +5,8 @@
 [ext_resource type="Script" uid="uid://c15y8hf0f3s2h" path="res://actors/player/components/movement_component.gd" id="3_ax26v"]
 [ext_resource type="Script" uid="uid://chq08evtmxyos" path="res://actors/player/hitbox_component.gd" id="4_lsqbn"]
 
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_ax26v"]
-size = Vector2(15, 13)
+[sub_resource type="CircleShape2D" id="CircleShape2D_lsqbn"]
+radius = 6.5192
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_ax26v"]
 atlas = ExtResource("2_ilk7j")
@@ -28,7 +28,7 @@ script = ExtResource("1_nvxhs")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2(-0.5, 0.5)
-shape = SubResource("RectangleShape2D_ax26v")
+shape = SubResource("CircleShape2D_lsqbn")
 
 [node name="HitboxComponent" type="Area2D" parent="."]
 collision_layer = 0
@@ -37,7 +37,7 @@ script = ExtResource("4_lsqbn")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="HitboxComponent"]
 position = Vector2(-0.5, 0.5)
-shape = SubResource("RectangleShape2D_ax26v")
+shape = SubResource("CircleShape2D_lsqbn")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 sprite_frames = SubResource("SpriteFrames_nvxhs")

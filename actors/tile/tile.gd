@@ -11,9 +11,23 @@ enum Rotation {
 
 @export var tile_rotation : Rotation = Rotation.UP : 
 	set(x):
-		var new_rotation = x % 4
-		%Sprite.rotation = PI / 2 * new_rotation
-		tile_rotation = new_rotation
+		var new_rotation = x
+		print(x)
+		if get_tree():
+			var tween = get_tree().create_tween()
+
+			tween.tween_property(%Sprite, "rotation", PI / 2 * new_rotation, 0.2)
+			tween.set_ease(Tween.EASE_IN_OUT)
+			tween.set_trans(Tween.TRANS_LINEAR)
+
+			await tween.finished
+			%StaticBody2D.rotation = PI / 2 * new_rotation
+		else:
+			%Sprite.rotation = PI / 2 * new_rotation
+			%StaticBody2D.rotation = PI / 2 * new_rotation
+
+		tile_rotation = new_rotation % 4
+
 
 var is_hover : bool = false
 
