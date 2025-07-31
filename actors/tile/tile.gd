@@ -85,15 +85,7 @@ func _on_area_body_exited(body: Node2D) -> void:
 	if not body is Player:
 		return
 	
-	var full_tile_instance: Tile = load("res://actors/tile/full.tscn").instantiate()
-	full_tile_instance.position = position
-	full_tile_instance.grid_position = grid_position
-	full_tile_instance.tile_rotation = tile_rotation
-	get_parent().add_child(full_tile_instance)
-	full_tile_instance.tile_bigger.play_full()
-	GameGlobal.map.grid[grid_position.x][grid_position.y] = full_tile_instance
-	queue_free()
-	# TODO ajouter a la map de node genre l'array d'array
+	transform_to_another_type(load("res://actors/tile/full.tscn"))
 
 func rotate_animated(new_rotation: int) -> void:
 	var tween = get_tree().create_tween()
@@ -121,7 +113,9 @@ func translation_animated(new_translation: Vector2) -> void:
 func transform_to_another_type(new_tile: PackedScene) -> void:
 	var tile_instance: Tile = new_tile.instantiate()
 	tile_instance.position = position
+	tile_instance.grid_position = grid_position
 	tile_instance.tile_rotation = tile_rotation
 	get_parent().add_child(tile_instance)
 	tile_instance.tile_bigger.play_full()
+	GameGlobal.map.grid[grid_position.x][grid_position.y] = tile_instance
 	queue_free()
