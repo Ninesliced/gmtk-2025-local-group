@@ -12,23 +12,22 @@ void vertex() {
 
 void fragment() {
 	COLOR = texture(screen_texture, SCREEN_UV);
-	bool is_black = all(equal(COLOR.rgb, vec3(0.0)));
-	bool is_white = all(equal(COLOR.rgb, vec3(1.0)));
-
+	bool is_white = distance(COLOR.rgb, wall_col) < 0.01;
+//
 	//COLOR.rgb = mix(COLOR.rgb, ground_col, float(is_black));
 	//COLOR.rgb = mix(COLOR.rgb, wall_col,   float(is_white));
 
-	//vec4 downPixel = texture(screen_texture,vec2(SCREEN_UV.x, SCREEN_UV.y + SCREEN_PIXEL_SIZE.y * 2.0));
-//
-	//bool is_down_black = all(equal(downPixel.rgb, vec3(0.0)));
-//
-	//if (is_white && (is_down_black)) {
-		//COLOR.rgb = mix(COLOR.rgb, wall_col2, 1.0);
-	//}
-
 	vec4 downPixel = texture(screen_texture,vec2(SCREEN_UV.x, SCREEN_UV.y + SCREEN_PIXEL_SIZE.y * 2.0));
 
-	COLOR.rgb = mix(COLOR.rgb, wall_col2, 1.0 - downPixel.a);
+	bool is_down_black =  distance(downPixel.rgb, ground_col) < 0.01;
+
+	if (is_white && (is_down_black)) {
+		COLOR.rgb = mix(COLOR.rgb, wall_col2, 1.0);
+	}
+
+	vec4 downPixel2 = texture(screen_texture,vec2(SCREEN_UV.x, SCREEN_UV.y + SCREEN_PIXEL_SIZE.y * 2.0));
+
+	COLOR.rgb = mix(COLOR.rgb, wall_col2, 1.0 - downPixel2.a);
 
 	vec4 s_color = texture(screen_texture, SCREEN_UV);
 	COLOR.rgb = mix(COLOR.rgb, color_fill, force);
