@@ -11,7 +11,15 @@ var grid_position : Vector2i = Vector2i(0, 2) :
 		if is_moving:
 			return
 		
-		grid_position = value
+		var map = GameGlobal.map
+		grid_position.x = value.x % map.grid_size.x
+		grid_position.y = value.y % map.grid_size.y
+		
+		if grid_position.x < 0:
+			grid_position.x = map.grid_size.x - 1
+		if grid_position.y < 0:
+			grid_position.y = map.grid_size.y - 1
+		
 		update_position()
 
 func _ready():
@@ -50,8 +58,10 @@ func _process(delta):
 func update_position():
 	var map = GameGlobal.map
 
-	var target_position = grid_position * map.tile_size + (map.tile_size / 2) + Vector2i(0, map.tile_size.y / 4)
-	if get_tree():
+	var target_position = map.grid[grid_position.x][grid_position.y].global_position + Vector2(map.tile_size) / 2
+	
+	var distance = (parent.position - target_position).length()
+	if get_tree() and distance < 64:
 		translation_animation(target_position)
 	else:
 		parent.position = target_position
