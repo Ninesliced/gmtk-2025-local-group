@@ -25,6 +25,7 @@ signal on_tile_full
 			%StaticBody2D.rotation = PI / 2 * new_rotation
 
 		tile_rotation = new_rotation % 4
+var _transform_to_full: bool = false
 
 var is_hover : bool = false
 var grid_position : Vector2i = Vector2i.ZERO
@@ -92,8 +93,10 @@ func _process(delta: float) -> void:
 func _on_area_body_exited(body: Node2D) -> void:
 	if not body is Player:
 		return
-	
-	#transform_to_another_type(load("res://actors/tile/full.tscn"))
+	if !_transform_to_full:
+		return
+	transform_to_another_type(load("res://actors/tile/full.tscn"))
+	_transform_to_full = false
 
 func rotate_animated(new_rotation: int) -> void:
 	%StaticBody2D.rotation = PI / 2 * new_rotation
@@ -131,3 +134,16 @@ func transform_to_another_type(new_tile: PackedScene) -> void:
 
 func can_pass(direction: Rotation) -> bool:
 	return true
+
+
+func _on_area_body_entered(body):
+	if not body is Player:
+		return
+	var player: Player = body
+	if player.randomTileCount < player.randomTileMax:
+		player.randomTileCount += 1
+		if player.randomTileCount >= player.randomTileMax:
+			_transform_to_full = true
+			player.randomTileCount = 0
+
+	pass # Replace with function body.

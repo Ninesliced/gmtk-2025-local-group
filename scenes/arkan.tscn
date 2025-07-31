@@ -18,6 +18,7 @@ script = ExtResource("2_d307w")
 [node name="Border" parent="." instance=ExtResource("1_25nd2")]
 
 [node name="Actions" parent="." instance=ExtResource("4_wby1m")]
+position = Vector2(328, 40)
 
 [node name="Player" parent="." instance=ExtResource("3_d307w")]
 position = Vector2(113, 79)

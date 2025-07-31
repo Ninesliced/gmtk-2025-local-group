@@ -5,4 +5,3 @@
 [node name="Actions" type="Node2D"]
 
 [node name="Action" parent="." instance=ExtResource("1_x7qpv")]
-position = Vector2(211, 72)
