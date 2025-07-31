@@ -12,6 +12,7 @@ enum Rotation {
 
 signal on_tile_full
 
+
 @onready var tile_bigger: AnimationPlayer = %TileBigger
 @export var rotation_speed: float = 0.2
 @export var tile_rotation : Rotation = Rotation.UP : 
@@ -25,6 +26,9 @@ signal on_tile_full
 			%StaticBody2D.rotation = PI / 2 * new_rotation
 
 		tile_rotation = new_rotation % 4
+@export var is_action_spawnable: bool = true
+@export_range(0,1,0.01) var chance_action_spawn: float = 0.1
+
 var _transform_to_full: bool = false
 
 var is_hover : bool = false
@@ -60,6 +64,14 @@ func vertical_swap(map: Map) -> void:
 
 
 func _ready():
+	# Generation de l'action
+	if is_action_spawnable:
+		if randf() < chance_action_spawn:
+			var action_load: PackedScene = load("res://actors/action/action.tscn")
+			var action = action_load.instantiate()
+			action.choose_an_random_action()
+			action.position = Vector2i(8,8)
+			%ActionHolder.add_child(action)
 	pass
 
 func _on_area_2d_mouse_entered() -> void:

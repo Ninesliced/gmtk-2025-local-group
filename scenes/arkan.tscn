@@ -6,7 +6,7 @@
 [ext_resource type="PackedScene" uid="uid://c5lqig57oxpyb" path="res://actors/player/player.tscn" id="3_d307w"]
 [ext_resource type="PackedScene" uid="uid://c7yy27v3jsd76" path="res://actors/action/actions.tscn" id="4_wby1m"]
 
-[node name="Arkan" type="Node2D"]
+[node name="Arkan2" type="Node2D"]
 
 [node name="Map" parent="." instance=ExtResource("2_8o45r")]
 grid_size = Vector2i(25, 5)
