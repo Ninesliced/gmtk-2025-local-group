@@ -156,7 +156,6 @@ func new_action_ui(action: ActionType) -> ActionUI:
 	var action_ui: ActionUI = load("res://scenes/ui/action_ui.tscn").instantiate()
 	%ActionsContainer.add_child(action_ui)
 	action_ui.texture_rect.texture = GameGlobal.action_textures[action]
-	actions_ui.append(action_ui)
 	_update_size()
 	
 	return action_ui

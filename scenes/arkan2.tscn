@@ -1,0 +1,25 @@
+[gd_scene load_steps=6 format=3 uid="uid://cr65lasl6pn2l"]
+
+[ext_resource type="PackedScene" uid="uid://b7fgpkbuim0vj" path="res://actors/map/Map.tscn" id="1_vwjwa"]
+[ext_resource type="Script" uid="uid://cpvd8mjlsp6tj" path="res://scenes/camera_2d.gd" id="2_ui5ad"]
+[ext_resource type="PackedScene" uid="uid://v6wht25gui7" path="res://scenes/border/border.tscn" id="3_lkj06"]
+[ext_resource type="PackedScene" uid="uid://c7yy27v3jsd76" path="res://actors/action/actions.tscn" id="4_ryr8l"]
+[ext_resource type="PackedScene" uid="uid://c5lqig57oxpyb" path="res://actors/player/player.tscn" id="5_683xw"]
+
+[node name="Arkan" type="Node2D"]
+
+[node name="Map" parent="." instance=ExtResource("1_vwjwa")]
+position = Vector2(0, 10)
+grid_size = Vector2i(25, 5)
+
+[node name="Player" parent="." instance=ExtResource("5_683xw")]
+position = Vector2(15, 89)
+
+[node name="Border" parent="." instance=ExtResource("3_lkj06")]
+position = Vector2(-27, -16)
+
+[node name="Camera2D" type="Camera2D" parent="."]
+position = Vector2(114, 90)
+script = ExtResource("2_ui5ad")
+
+[node name="Actions" parent="." instance=ExtResource("4_ryr8l")]
