@@ -11,13 +11,13 @@ region = Rect2(0, 0, 16, 16)
 atlas = ExtResource("3_gc13h")
 region = Rect2(16, 0, 16, 16)
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_0tpbp"]
-atlas = ExtResource("3_gc13h")
-region = Rect2(32, 0, 16, 16)
-
 [sub_resource type="AtlasTexture" id="AtlasTexture_iovrn"]
 atlas = ExtResource("3_gc13h")
 region = Rect2(48, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_0tpbp"]
+atlas = ExtResource("3_gc13h")
+region = Rect2(32, 0, 16, 16)
 
 [node name="GameGlobal" type="Node"]
 script = ExtResource("1_gu6ii")
