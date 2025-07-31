@@ -1,10 +1,16 @@
-[gd_scene load_steps=13 format=4 uid="uid://b72bu5lvtm2bv"]
+[gd_scene load_steps=15 format=4 uid="uid://b72bu5lvtm2bv"]
 
 [ext_resource type="PackedScene" uid="uid://c5lqig57oxpyb" path="res://actors/player/player.tscn" id="1_fk7tf"]
+[ext_resource type="PackedScene" uid="uid://bkuf38ni4q62k" path="res://actors/tile/Tile.tscn" id="2_fwjos"]
 [ext_resource type="Texture2D" uid="uid://dabe5dmwfsby2" path="res://assets/spritesheet.png" id="2_gfv14"]
 [ext_resource type="Script" uid="uid://cgg1n3iyruhqf" path="res://scenes/border/border.gd" id="2_p1tfl"]
 [ext_resource type="PackedScene" uid="uid://b7fgpkbuim0vj" path="res://actors/map/Map.tscn" id="4_bff3v"]
 [ext_resource type="Script" uid="uid://djk5sh3bmbsji" path="res://scenes/ui/actions_container.gd" id="5_t7646"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_fwjos"]
+resource_local_to_scene = true
+atlas = ExtResource("2_gfv14")
+region = Rect2(0, 0, 32, 32)
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_p1tfl"]
 texture = ExtResource("2_gfv14")
@@ -88,6 +94,18 @@ size = Vector2(34, 648)
 [node name="Map" parent="." instance=ExtResource("4_bff3v")]
 grid_size = Vector2i(20, 20)
 
+[node name="Tile2" parent="Map" instance=ExtResource("2_fwjos")]
+position = Vector2(127, -107)
+
+[node name="Sprite" parent="Map/Tile2/3DShader" index="0"]
+texture = SubResource("AtlasTexture_fwjos")
+
+[node name="TileBigger" parent="Map/Tile2" index="3"]
+root_node = NodePath("../../Tile2")
+
+[node name="Tile3" parent="Map" instance=ExtResource("2_fwjos")]
+position = Vector2(87, -107)
+
 [node name="Player" parent="." instance=ExtResource("1_fk7tf")]
 position = Vector2(16, 80)
 
@@ -129,3 +147,5 @@ offset_top = 16.0
 offset_right = 16.0
 offset_bottom = 16.0
 script = ExtResource("5_t7646")
+
+[editable path="Map/Tile2"]

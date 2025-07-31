@@ -3,7 +3,8 @@
 [ext_resource type="PackedScene" uid="uid://bkuf38ni4q62k" path="res://actors/tile/Tile.tscn" id="1_7uncb"]
 [ext_resource type="Texture2D" uid="uid://dabe5dmwfsby2" path="res://assets/spritesheet.png" id="2_skhvx"]
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_r882n"]
+[sub_resource type="AtlasTexture" id="AtlasTexture_skhvx"]
+resource_local_to_scene = true
 atlas = ExtResource("2_skhvx")
 region = Rect2(128, 0, 32, 32)
 
@@ -18,8 +19,8 @@ size = Vector2(8.5, 6)
 
 [node name="Tile" instance=ExtResource("1_7uncb")]
 
-[node name="Sprite" parent="CanvasGroup" index="0"]
-texture = SubResource("AtlasTexture_r882n")
+[node name="Sprite" parent="3DShader" index="0"]
+texture = SubResource("AtlasTexture_skhvx")
 
 [node name="TOP" type="CollisionShape2D" parent="StaticBody2D" index="0"]
 position = Vector2(0, -12.5)

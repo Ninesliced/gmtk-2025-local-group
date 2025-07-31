@@ -9,6 +9,9 @@ enum Rotation {
 	LEFT = 3
 }
 
+signal on_tile_full
+
+@onready var tile_bigger: AnimationPlayer = %TileBigger
 @export var tile_rotation : Rotation = Rotation.UP : 
 	set(x):
 		var clockwise = x > tile_rotation
@@ -67,14 +70,14 @@ func _on_area_body_exited(body: Node2D) -> void:
 	if not body is Player:
 		return
 	
-	var full_tile_instance: Node = load("res://actors/tile/full.tscn").instantiate()
+	var full_tile_instance: Tile = load("res://actors/tile/full.tscn").instantiate()
 	full_tile_instance.position = position
 	full_tile_instance.tile_rotation = tile_rotation
 	get_parent().add_child(full_tile_instance)
+	full_tile_instance.tile_bigger.play_full()
 	queue_free()
 
 func rotate_animated(new_rotation: int) -> void:
-	print("Rotating tile to: ", new_rotation)
 	var tween = get_tree().create_tween()
 	if abs(%Sprite.rotation) - abs(PI / 2 * new_rotation) > 0.01:
 		if %Sprite.rotation > 2*PI:

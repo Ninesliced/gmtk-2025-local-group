@@ -4,6 +4,7 @@
 [ext_resource type="Texture2D" uid="uid://dabe5dmwfsby2" path="res://assets/spritesheet.png" id="2_a8f14"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_wv4m7"]
+resource_local_to_scene = true
 atlas = ExtResource("2_a8f14")
 region = Rect2(32, 0, 32, 32)
 
@@ -12,11 +13,11 @@ size = Vector2(6.25, 6.25)
 
 [node name="Tile" instance=ExtResource("1_wv4m7")]
 
-[node name="Sprite" parent="CanvasGroup" index="0"]
-texture = SubResource("AtlasTexture_wv4m7")
-
 [node name="Shape" parent="Area" index="0"]
 visible = true
+
+[node name="Sprite" parent="3DShader" index="0"]
+texture = SubResource("AtlasTexture_wv4m7")
 
 [node name="TopLeftShape" type="CollisionShape2D" parent="StaticBody2D" index="0"]
 position = Vector2(-12, -12)
