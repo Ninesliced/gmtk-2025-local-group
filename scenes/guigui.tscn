@@ -1,9 +1,10 @@
-[gd_scene load_steps=12 format=4 uid="uid://b72bu5lvtm2bv"]
+[gd_scene load_steps=13 format=4 uid="uid://b72bu5lvtm2bv"]
 
 [ext_resource type="PackedScene" uid="uid://c5lqig57oxpyb" path="res://actors/player/player.tscn" id="1_fk7tf"]
 [ext_resource type="Texture2D" uid="uid://dabe5dmwfsby2" path="res://assets/spritesheet.png" id="2_gfv14"]
 [ext_resource type="Script" uid="uid://cgg1n3iyruhqf" path="res://scenes/border/border.gd" id="2_p1tfl"]
 [ext_resource type="PackedScene" uid="uid://b7fgpkbuim0vj" path="res://actors/map/Map.tscn" id="4_bff3v"]
+[ext_resource type="Script" uid="uid://djk5sh3bmbsji" path="res://scenes/ui/actions_container.gd" id="5_t7646"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_p1tfl"]
 texture = ExtResource("2_gfv14")
@@ -116,3 +117,14 @@ collision_mask = 0
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Border/Area2D"]
 position = Vector2(9, 76)
 shape = SubResource("RectangleShape2D_p1tfl")
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+
+[node name="ActionsContainer" type="Control" parent="CanvasLayer"]
+layout_mode = 3
+anchors_preset = 0
+offset_left = 16.0
+offset_top = 16.0
+offset_right = 16.0
+offset_bottom = 16.0
+script = ExtResource("5_t7646")

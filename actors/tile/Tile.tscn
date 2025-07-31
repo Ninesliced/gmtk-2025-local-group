@@ -36,6 +36,8 @@ debug_color = Color(0, 0.6, 0.701961, 0.0745098)
 unique_name_in_owner = true
 position = Vector2(16, 16)
 
+[node name="RotateComponent" type="Node" parent="."]
+
 [connection signal="input_event" from="Area" to="." method="_on_area_2d_input_event"]
 [connection signal="mouse_entered" from="Area" to="." method="_on_area_2d_mouse_entered"]
 [connection signal="mouse_exited" from="Area" to="." method="_on_area_2d_mouse_exited"]

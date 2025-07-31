@@ -13,25 +13,8 @@ enum Rotation {
 	set(x):
 		var clockwise = x > tile_rotation
 		var new_rotation = x
-		print(x)
 		if get_tree():
-			var tween = get_tree().create_tween()
-
-			print("actual rotation: ", %Sprite.rotation)
-			print("rotation: ", new_rotation * PI / 2)
-			if abs(%Sprite.rotation) - abs(PI / 2 * new_rotation) > 0.01:
-				if %Sprite.rotation > 2*PI:
-					%Sprite.rotation -= 2 * PI
-				elif %Sprite.rotation < -2*PI:
-					%Sprite.rotation += 2 * PI
-			print("correciton rotation: ", %Sprite.rotation)
-
-			tween.tween_property(%Sprite, "rotation", PI / 2 * new_rotation, 0.2)
-			tween.set_ease(Tween.EASE_IN_OUT)
-			tween.set_trans(Tween.TRANS_LINEAR)
-
-			await tween.finished
-			%StaticBody2D.rotation = PI / 2 * new_rotation
+			rotate_animated(new_rotation)
 		else:
 			%Sprite.rotation = PI / 2 * new_rotation
 			%StaticBody2D.rotation = PI / 2 * new_rotation
@@ -40,6 +23,16 @@ enum Rotation {
 
 
 var is_hover : bool = false
+
+
+### PUBLIC
+
+func rotate_clock() -> void:
+	print("rotating clockwise")
+	tile_clicked(1)
+
+func rotate_counter_clock() -> void:
+	tile_clicked(-1)
 
 func _on_area_2d_mouse_entered() -> void:
 	is_hover = true
@@ -52,9 +45,9 @@ func _on_area_2d_mouse_exited() -> void:
 func _on_area_2d_input_event(viewport: Node, event: InputEvent, shape_idx: int) -> void:
 	if event is InputEventMouseButton:
 		if event.button_index == MOUSE_BUTTON_LEFT and event.pressed:
-			tile_clicked(-1)
-		elif event.button_index == MOUSE_BUTTON_RIGHT and event.pressed:
-			tile_clicked(1)
+			GameGlobal.act_tile(self)
+		# elif event.button_index == MOUSE_BUTTON_RIGHT and event.pressed:
+		# 	tile_clicked(1)
 	elif event is InputEventMouseMotion:
 		if is_hover:
 			tile_hovered()
@@ -63,10 +56,25 @@ func _on_area_2d_input_event(viewport: Node, event: InputEvent, shape_idx: int) 
 
 func tile_clicked(way: int) -> void:
 	tile_rotation = tile_rotation + way
-	print("eot")
 
 func tile_hovered() -> void:	
 	pass
 
 func tile_unhovered() -> void:
 	pass
+
+
+func rotate_animated(new_rotation: int) -> void:
+	print("Rotating tile to: ", new_rotation)
+	var tween = get_tree().create_tween()
+	if abs(%Sprite.rotation) - abs(PI / 2 * new_rotation) > 0.01:
+		if %Sprite.rotation > 2*PI:
+			%Sprite.rotation -= 2 * PI
+		elif %Sprite.rotation < -2*PI:
+			%Sprite.rotation += 2 * PI
+	tween.tween_property(%Sprite, "rotation", PI / 2 * new_rotation, 0.2)
+	tween.set_ease(Tween.EASE_IN_OUT)
+	tween.set_trans(Tween.TRANS_LINEAR)
+
+	await tween.finished
+	%StaticBody2D.rotation = PI / 2 * new_rotation
