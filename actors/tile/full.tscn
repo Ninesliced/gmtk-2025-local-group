@@ -30,6 +30,7 @@ region = Rect2(96, 32, 32, 32)
 
 [node name="Tile" instance=ExtResource("1_fm2mu")]
 script = ExtResource("2_1oojr")
+is_action_spawnable = false
 
 [node name="Shape" parent="Area" index="0"]
 visible = true

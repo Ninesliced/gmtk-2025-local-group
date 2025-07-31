@@ -30,27 +30,55 @@ var dict: Dictionary[ActionType, Dictionary] = {
 		"name": "Rotate Clockwise",
 		"function": rotate_clock,
 		"probability": 0.1,
+		"action_zone": [
+			Vector2i(0, 0)
+		]
 	},
 	ActionType.ROTATE_COUNTER_CLOCK: {
 		"name": "Rotate Counter Clockwise",
 		"function": rotate_counter_clock,
+		"action_zone": [
+			Vector2i(0, 0)
+		]
 	},
 	ActionType.TRANSFORM_EMPTY: {
 		"name": "Transform Empty",
 		"function": transform_empty,
+		"action_zone": [
+			Vector2i(0, 0)
+		]
 	},
 	ActionType.HORIZONTAL_SWAP: {
 		"name": "SWAP HORIZONTAL TILES",
 		"function": horizontal_swap,
+		"action_zone": [
+			Vector2i(0, 0),
+			Vector2i(1, 0)
+		]
 	},
 	ActionType.VERTICAL_SWAP: {
 		"name": "SWAP VERTICAL TILES",
 		"function": vertical_swap,
+		"action_zone": [
+			Vector2i(0, 0),
+			Vector2i(0, 1)
+		]
 	},
 	ActionType.TRANSFORM_CROSS: {
 		"name": "Transform Empty",
 		"function": transform_cross,
 		"probability": 0.3,
+		"action_zone": [
+			Vector2i(0, 0),
+			Vector2i(-1, 0),
+			Vector2i(1, 0),
+			Vector2i(0, -1),
+			Vector2i(0, 1),
+			Vector2i(1, 1),
+			Vector2i(-1, 1),
+			Vector2i(1, -1),
+			Vector2i(-1, -1),
+		]
 	},
 	# ActionType.DELETE_CURRENT_ACTION: {
 	# 	"name": "DELETE CURRENT ACTION",
@@ -73,6 +101,20 @@ func _ready():
 	GameGlobal.on_action_stack_changed.connect(_update_size)
 
 func act_tile(tile: Tile, event: InputEvent) -> void:
+	var next_action: ActionType = action_stacks[0]
+	var action_property = dict[next_action]
+	var action_zone = action_property["action_zone"]
+	
+	for pos in action_zone:
+		var target_pos = (tile.grid_position + pos) % map.grid_size
+		if target_pos.x < 0:
+			target_pos.x += map.grid_size.x
+		if target_pos.y < 0:
+			target_pos.y += map.grid_size.y
+		
+		if target_pos == player.movementComponent.grid_position:
+			return
+	
 	var action = action_stacks.pop_front()
 	var action_ui = action_ui_stacks.pop_front()
 	if action in dict:

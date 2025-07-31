@@ -95,6 +95,7 @@ frame_progress = 0.108386
 script = ExtResource("5_15y17")
 
 [node name="MovementComponent" type="Node" parent="."]
+unique_name_in_owner = true
 script = ExtResource("3_ax26v")
 
 [connection signal="area_entered" from="HitboxComponent" to="." method="_on_hitbox_component_area_entered"]
