@@ -1,7 +1,8 @@
-[gd_scene load_steps=5 format=3 uid="uid://bkuf38ni4q62k"]
+[gd_scene load_steps=6 format=3 uid="uid://bkuf38ni4q62k"]
 
 [ext_resource type="Script" uid="uid://ckoaogse5dba6" path="res://actors/tile/tile.gd" id="1_4t6fi"]
-[ext_resource type="Texture2D" uid="uid://ddld5vrmui5w6" path="res://assets/spritesheet copy.png" id="2_4t6fi"]
+[ext_resource type="Texture2D" uid="uid://dabe5dmwfsby2" path="res://assets/spritesheet.png" id="2_4t6fi"]
+[ext_resource type="Material" uid="uid://cnscovgg6x1ch" path="res://actors/tile/tile_material.tres" id="2_iawyn"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_1qs4h"]
 atlas = ExtResource("2_4t6fi")
@@ -13,8 +14,11 @@ size = Vector2(41.2903, 41.2903)
 [node name="Tile" type="Node2D"]
 script = ExtResource("1_4t6fi")
 
-[node name="Sprite" type="Sprite2D" parent="."]
+[node name="CanvasGroup" type="CanvasGroup" parent="."]
+
+[node name="Sprite" type="Sprite2D" parent="CanvasGroup"]
 unique_name_in_owner = true
+material = ExtResource("2_iawyn")
 position = Vector2(16, 16)
 texture = SubResource("AtlasTexture_1qs4h")
 
@@ -22,6 +26,7 @@ texture = SubResource("AtlasTexture_1qs4h")
 position = Vector2(16, 16)
 
 [node name="Shape" type="CollisionShape2D" parent="Area"]
+visible = false
 position = Vector2(-4.76837e-07, 4.76837e-07)
 scale = Vector2(0.775, 0.775)
 shape = SubResource("RectangleShape2D_4t6fi")

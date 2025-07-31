@@ -1,0 +1,9 @@
+[gd_resource type="ShaderMaterial" load_steps=2 format=3 uid="uid://cnscovgg6x1ch"]
+
+[ext_resource type="Shader" uid="uid://jkmh5ksc1ejd" path="res://actors/tile/tile3D.gdshader" id="1_ii3kf"]
+
+[resource]
+shader = ExtResource("1_ii3kf")
+shader_parameter/ground_col = Color(0.411765, 0.415686, 0.415686, 1)
+shader_parameter/wall_col = Color(0.607843, 0.678431, 0.717647, 1)
+shader_parameter/wall_col2 = Color(0.2135, 0.302225, 0.35, 1)

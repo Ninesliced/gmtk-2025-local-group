@@ -16,6 +16,9 @@ enum Rotation {
 		if get_tree():
 			var tween = get_tree().create_tween()
 
+			if abs(%Sprite.rotation) - abs(PI / 2 * new_rotation) > 0.01:
+				%Sprite.rotation = 0
+
 			tween.tween_property(%Sprite, "rotation", PI / 2 * new_rotation, 0.2)
 			tween.set_ease(Tween.EASE_IN_OUT)
 			tween.set_trans(Tween.TRANS_LINEAR)
