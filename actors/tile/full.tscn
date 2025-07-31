@@ -13,8 +13,8 @@ size = Vector2(32, 31)
 
 [node name="Tile" instance=ExtResource("1_fm2mu")]
 
-[node name="Area" parent="." index="0"]
-visible = false
+[node name="Shape" parent="Area" index="0"]
+visible = true
 
 [node name="Sprite" parent="3DShader" index="0"]
 texture = SubResource("AtlasTexture_fm2mu")

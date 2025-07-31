@@ -76,6 +76,7 @@ func _on_area_body_exited(body: Node2D) -> void:
 	get_parent().add_child(full_tile_instance)
 	full_tile_instance.tile_bigger.play_full()
 	queue_free()
+	# TODO ajouter a la map de node genre l'array d'array
 
 func rotate_animated(new_rotation: int) -> void:
 	var tween = get_tree().create_tween()
@@ -99,3 +100,11 @@ func translation_animated(new_translation: Vector2) -> void:
 	tween.set_trans(Tween.TRANS_LINEAR)
 
 	await tween.finished
+
+func transform_to_another_type(new_tile: PackedScene) -> void:
+	var tile_instance: Tile = new_tile.instantiate()
+	tile_instance.position = position
+	tile_instance.tile_rotation = tile_rotation
+	get_parent().add_child(tile_instance)
+	tile_instance.tile_bigger.play_full()
+	queue_free()

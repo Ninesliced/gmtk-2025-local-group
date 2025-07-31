@@ -6,6 +6,7 @@ signal on_action_stack_changed
 	ActionType.ROTATE_CLOCK,
 	ActionType.ROTATE_COUNTER_CLOCK,
 	ActionType.ROTATE_COUNTER_CLOCK,
+	ActionType.TRANSFORM_EMPTY,
 	ActionType.HORIZONTAL_SWAP
 ]
 var action_ui_stacks : Array[ActionUI] = []
@@ -67,10 +68,12 @@ func rotate_counter_clock(tile: Tile) -> void:
 	pass
 
 func transform_empty(tile: Tile) -> void:
-	pass
+	tile.transform_to_another_type(load("res://actors/tile/four.tscn"))
 	
 func horizontal_swap(tile: Tile) -> void:
 	tile.horizontal_swap(map.tile_size)
+	
+
 
 @export var player: Player = null
 @export var map: Map = null
