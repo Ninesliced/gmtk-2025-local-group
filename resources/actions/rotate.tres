@@ -1,0 +1,9 @@
+[gd_resource type="Resource" script_class="Action" load_steps=2 format=3 uid="uid://8p82k10hwhhv"]
+
+[ext_resource type="Script" uid="uid://dbowixpvaxygh" path="res://resources/actions/action.gd" id="1_1jqxi"]
+
+[resource]
+script = ExtResource("1_1jqxi")
+action_name = "Action"
+function = Callable()
+metadata/_custom_type_script = "uid://dbowixpvaxygh"
