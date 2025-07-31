@@ -4,7 +4,7 @@
 [ext_resource type="PackedScene" uid="uid://b7fgpkbuim0vj" path="res://actors/map/Map.tscn" id="2_8o45r"]
 [ext_resource type="Script" uid="uid://cpvd8mjlsp6tj" path="res://scenes/camera_2d.gd" id="2_d307w"]
 [ext_resource type="PackedScene" uid="uid://c5lqig57oxpyb" path="res://actors/player/player.tscn" id="3_d307w"]
-[ext_resource type="Script" uid="uid://djk5sh3bmbsji" path="res://scenes/ui/actions_container.gd" id="5_d307w"]
+[ext_resource type="PackedScene" uid="uid://c7yy27v3jsd76" path="res://actors/action/actions.tscn" id="4_wby1m"]
 
 [node name="Arkan" type="Node2D"]
 
@@ -17,16 +17,7 @@ script = ExtResource("2_d307w")
 
 [node name="Border" parent="." instance=ExtResource("1_25nd2")]
 
+[node name="Actions" parent="." instance=ExtResource("4_wby1m")]
+
 [node name="Player" parent="." instance=ExtResource("3_d307w")]
 position = Vector2(113, 79)
-
-[node name="CanvasLayer" type="CanvasLayer" parent="."]
-
-[node name="ActionsContainer" type="Control" parent="CanvasLayer"]
-layout_mode = 3
-anchors_preset = 0
-offset_left = 16.0
-offset_top = 16.0
-offset_right = 16.0
-offset_bottom = 16.0
-script = ExtResource("5_d307w")
