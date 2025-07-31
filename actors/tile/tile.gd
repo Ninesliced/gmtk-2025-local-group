@@ -12,6 +12,7 @@ enum Rotation {
 
 signal on_tile_full
 
+
 @onready var tile_bigger: AnimationPlayer = %TileBigger
 @export var rotation_speed: float = 0.2
 @export var tile_rotation : Rotation = Rotation.UP : 
@@ -25,10 +26,14 @@ signal on_tile_full
 			%StaticBody2D.rotation = PI / 2 * new_rotation
 
 		tile_rotation = new_rotation % 4
+@export var is_action_spawnable: bool = true
+@export_range(0,1,0.01) var chance_action_spawn: float = 0.1
+
+var _transform_to_full: bool = false
 
 var is_hover : bool = false
 var grid_position : Vector2i = Vector2i.ZERO
-
+var is_player_inside: bool = false
 ### PUBLIC
 
 func set_grid_position(new_grid_position: Vector2i) -> void:
@@ -61,6 +66,14 @@ func vertical_swap(map: Map) -> void:
 
 
 func _ready():
+	# Generation de l'action
+	if is_action_spawnable:
+		if randf() < chance_action_spawn:
+			var action_load: PackedScene = load("res://actors/action/action.tscn")
+			var action = action_load.instantiate()
+			action.choose_an_random_action()
+			action.position = Vector2i(8,8)
+			%ActionHolder.add_child(action)
 	pass
 
 func _on_area_2d_mouse_entered() -> void:
@@ -94,8 +107,11 @@ func _process(delta: float) -> void:
 func _on_area_body_exited(body: Node2D) -> void:
 	if not body is Player:
 		return
-	
-	#transform_to_another_type(load("res://actors/tile/full.tscn"))
+	if !_transform_to_full:
+		return
+	transform_to_another_type(load("res://actors/tile/full.tscn"))
+	_transform_to_full = false
+	is_player_inside = false
 
 func rotate_animated(new_rotation: int) -> void:
 	%StaticBody2D.rotation = PI / 2 * new_rotation
@@ -122,11 +138,16 @@ func translation_animated(new_translation: Vector2) -> void:
 	await tween.finished
 
 func transform_to_another_type(new_tile: PackedScene) -> void:
+	if is_player_inside:
+		return
 	var tile_instance: Tile = new_tile.instantiate()
 	tile_instance.position = position
 	tile_instance.grid_position = grid_position
 	tile_instance.tile_rotation = tile_rotation
-	get_parent().add_child(tile_instance)
+	if get_parent():
+		get_parent().add_child(tile_instance)
+	else:
+		push_error("why does this tile have no parent?")
 	if tile_instance.tile_bigger:
 		tile_instance.tile_bigger.play_full()
 	GameGlobal.map.grid[grid_position.x][grid_position.y] = tile_instance
@@ -134,3 +155,18 @@ func transform_to_another_type(new_tile: PackedScene) -> void:
 
 func can_pass(direction: Rotation) -> bool:
 	return true
+
+
+func _on_area_body_entered(body):
+	if not body is Player:
+		return
+	var player: Player = body
+	is_player_inside = true
+	if player.randomTileCount < player.randomTileMax:
+		player.randomTileCount += 1
+		if player.randomTileCount >= player.randomTileMax:
+			_transform_to_full = true
+			player.randomTileCount = 0
+	
+
+	pass # Replace with function body.

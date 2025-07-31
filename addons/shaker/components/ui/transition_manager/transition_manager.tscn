@@ -211,3 +211,4 @@ color = Color(0.084, 0.0877333, 0.14, 1)
 libraries = {
 &"": SubResource("AnimationLibrary_j74jm")
 }
+speed_scale = 2.5
