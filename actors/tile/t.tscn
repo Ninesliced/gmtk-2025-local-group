@@ -38,6 +38,7 @@ animations = [{
 
 [node name="Tile" instance=ExtResource("1_hwkvx")]
 script = ExtResource("2_p7gss")
+outline_min = 0.1
 tile_rotation = 2
 
 [node name="Shape" parent="Area" index="0"]
@@ -51,7 +52,7 @@ material = SubResource("ShaderMaterial_v2c08")
 rotation = 3.14159
 sprite_frames = SubResource("SpriteFrames_m00eq")
 
-[node name="StaticBody2D" parent="." index="2"]
+[node name="StaticBody2D" parent="." index="3"]
 rotation = 3.14159
 collision_mask = 0
 

@@ -38,10 +38,9 @@ animations = [{
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_76t4f"]
 size = Vector2(6.25, 6.25)
 
-[node name="Tile" instance=ExtResource("1_wv4m7")]
-
-[node name="Shape" parent="Area" index="0"]
-visible = true
+[node name="Tile2" instance=ExtResource("1_wv4m7")]
+outline_min = null
+outline_max = null
 
 [node name="3DShader" parent="." index="1"]
 material = SubResource("ShaderMaterial_rjnl6")
