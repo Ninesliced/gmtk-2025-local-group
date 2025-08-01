@@ -1,6 +1,9 @@
-[gd_scene format=3 uid="uid://4laqtk44qchp"]
+[gd_scene load_steps=2 format=3 uid="uid://4laqtk44qchp"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_5frcr"]
 
 [node name="ActionsContainer" type="Control"]
+material = SubResource("ShaderMaterial_5frcr")
 layout_mode = 3
 anchors_preset = 0
 offset_left = 16.0

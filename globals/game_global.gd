@@ -93,15 +93,7 @@ var dict: Dictionary[ActionType, Dictionary] = {
         "temporary": true,
         "probability": 0.1,
         "action_zone": [
-            Vector2i(0, 0),
-            Vector2i(-1, 0),
-            Vector2i(1, 0),
-            Vector2i(0, -1),
-            Vector2i(0, 1),
-            Vector2i(1, 1),
-            Vector2i(-1, 1),
-            Vector2i(1, -1),
-            Vector2i(-1, -1),
+            Vector2i(0, 0)
         ]
     },
     # ActionType.DELETE_CURRENT_ACTION: {
@@ -185,7 +177,7 @@ func transform_empty_bomb(tile: Tile, event: InputEvent) -> void:
         for j in range(-1,2):
             var current_tile = map.grid[(tile.grid_position.x+i)%map.grid_size.x][(tile.grid_position.y+j)%map.grid_size.y]
             var new_tile: Tile = current_tile.transform_to_another_type(load("res://actors/tile/four.tscn"), false)
-            if new_tile.tile.bigger:
+            if new_tile && new_tile.tile_bigger:
                 new_tile.tile_bigger.play_full((i+1) * 0.1 + (j+1) * 0.1)
 
 func horizontal_swap(tile: Tile, event: InputEvent) -> void:
