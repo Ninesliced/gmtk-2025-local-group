@@ -32,5 +32,3 @@ shader = SubResource("Shader_e10xn")
 material = SubResource("ShaderMaterial_efm3v")
 script = ExtResource("1_fvbrk")
 tiles = Array[PackedScene]([ExtResource("3_hhh0s"), ExtResource("3_wofu4"), ExtResource("4_e10xn"), ExtResource("5_efm3v")])
-
-[node name="CanvasGroup" type="CanvasGroup" parent="."]

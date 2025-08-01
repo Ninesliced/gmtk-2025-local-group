@@ -32,7 +32,8 @@ signal on_tile_full
 var _transform_to_full: bool = false
 
 var is_hover : bool = false
-var grid_position : Vector2i = Vector2i.ZERO
+# DO NOT USE THIS VARIABLE AS EXPORT, Its a hack to solve tools issues
+@export var grid_position : Vector2i = Vector2i.ZERO
 var is_player_inside: bool = false
 ### PUBLIC
 
@@ -137,9 +138,9 @@ func translation_animated(new_translation: Vector2) -> void:
 
 	await tween.finished
 
-func transform_to_another_type(new_tile: PackedScene) -> void:
+func transform_to_another_type(new_tile: PackedScene, play_animation: bool = true) -> Tile:
 	if is_player_inside:
-		return
+		return null
 	var tile_instance: Tile = new_tile.instantiate()
 	tile_instance.position = position
 	tile_instance.grid_position = grid_position
@@ -148,10 +149,11 @@ func transform_to_another_type(new_tile: PackedScene) -> void:
 		get_parent().add_child(tile_instance)
 	else:
 		push_error("why does this tile have no parent?")
-	if tile_instance.tile_bigger:
+	if tile_instance.tile_bigger and play_animation:
 		tile_instance.tile_bigger.play_full()
 	GameGlobal.map.grid[grid_position.x][grid_position.y] = tile_instance
 	queue_free()
+	return tile_instance
 
 func can_pass(direction: Rotation) -> bool:
 	return true
@@ -162,7 +164,7 @@ func _on_area_body_entered(body):
 		return
 	var player: Player = body
 	is_player_inside = true
-	if player.randomTileCount < player.randomTileMax:
+	if player.randomTileCount < player.randomTileMax and player.randomTileMax > 0:
 		player.randomTileCount += 1
 		if player.randomTileCount >= player.randomTileMax:
 			_transform_to_full = true

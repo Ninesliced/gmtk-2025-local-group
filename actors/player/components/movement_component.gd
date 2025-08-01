@@ -9,7 +9,7 @@ var is_moving : bool = false
 signal on_move(direction: Vector2)
 signal on_idle()
 
-var grid_position : Vector2i = Vector2i(3, 2) :
+var grid_position : Vector2i = Vector2i(0, 2) :
 	set(value):
 		if is_moving:
 			return
