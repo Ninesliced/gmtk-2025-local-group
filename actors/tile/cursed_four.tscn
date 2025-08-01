@@ -1,4 +1,4 @@
-[gd_scene load_steps=10 format=3 uid="uid://b5yy05msh4uyu"]
+[gd_scene load_steps=11 format=3 uid="uid://b3pjr7rfln6g1"]
 
 [ext_resource type="PackedScene" uid="uid://bkuf38ni4q62k" path="res://actors/tile/Tile.tscn" id="1_rwwjv"]
 [ext_resource type="Texture2D" uid="uid://dabe5dmwfsby2" path="res://assets/spritesheet.png" id="2_qklxe"]
@@ -21,10 +21,20 @@ shader = ExtResource("3_qklxe")
 shader_parameter/color = Color(1, 1, 1, 1)
 shader_parameter/force = 0.0
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_amehe"]
-resource_local_to_scene = true
+[sub_resource type="AtlasTexture" id="AtlasTexture_fb66d"]
 atlas = ExtResource("2_qklxe")
 region = Rect2(64, 32, 32, 32)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_amehe"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_fb66d")
+}],
+"loop": true,
+"name": &"new_animation",
+"speed": 5.0
+}]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_76t4f"]
 size = Vector2(6.25, 6.25)
@@ -42,7 +52,8 @@ material = SubResource("ShaderMaterial_pd3d8")
 
 [node name="Sprite" parent="3DShader" index="0"]
 material = SubResource("ShaderMaterial_fb66d")
-texture = SubResource("AtlasTexture_amehe")
+sprite_frames = SubResource("SpriteFrames_amehe")
+animation = &"new_animation"
 
 [node name="StaticBody2D" parent="." index="2"]
 visible = false

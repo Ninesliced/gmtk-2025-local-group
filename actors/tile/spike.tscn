@@ -1,0 +1,72 @@
+[gd_scene load_steps=12 format=3 uid="uid://lch1hj6crvy8"]
+
+[ext_resource type="PackedScene" uid="uid://bkuf38ni4q62k" path="res://actors/tile/Tile.tscn" id="1_ijg11"]
+[ext_resource type="Script" uid="uid://cggqxlt3s6p1d" path="res://actors/tile/spike.gd" id="2_snc5v"]
+[ext_resource type="Texture2D" uid="uid://dabe5dmwfsby2" path="res://assets/spritesheet.png" id="2_xtk13"]
+[ext_resource type="Shader" uid="uid://jkmh5ksc1ejd" path="res://actors/tile/tile3D.gdshader" id="3_ufbh8"]
+[ext_resource type="Shader" uid="uid://birv8v71nvo3v" path="res://addons/shaker/components/vfx/shaders/fill_color.gdshader" id="4_bhu5p"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_0vltg"]
+resource_local_to_scene = true
+shader = ExtResource("3_ufbh8")
+shader_parameter/ground_col = Color(0.396078, 0.466667, 0.270588, 1)
+shader_parameter/wall_col = Color(0.666667, 0.772549, 0.290196, 1)
+shader_parameter/wall_col2 = Color(0.223529, 0.27451, 0.207843, 1)
+shader_parameter/color_fill = Color(1, 1, 1, 1)
+shader_parameter/force = 0.0
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_iq723"]
+resource_local_to_scene = true
+shader = ExtResource("4_bhu5p")
+shader_parameter/color = Color(1, 1, 1, 1)
+shader_parameter/force = 0.0
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_xtk13"]
+atlas = ExtResource("2_xtk13")
+region = Rect2(64, 32, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_snc5v"]
+atlas = ExtResource("2_xtk13")
+region = Rect2(32, 32, 32, 32)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_ufbh8"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_xtk13")
+}],
+"loop": true,
+"name": &"spike_in",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_snc5v")
+}],
+"loop": true,
+"name": &"spike_out",
+"speed": 5.0
+}]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_ufbh8"]
+radius = 12.0
+
+[node name="Spike" instance=ExtResource("1_ijg11")]
+script = ExtResource("2_snc5v")
+
+[node name="3DShader" parent="." index="1"]
+material = SubResource("ShaderMaterial_0vltg")
+
+[node name="Sprite" parent="3DShader" index="0"]
+material = SubResource("ShaderMaterial_iq723")
+sprite_frames = SubResource("SpriteFrames_ufbh8")
+animation = &"spike_in"
+autoplay = "spike_in"
+
+[node name="AreaSpike" type="Area2D" parent="." index="5"]
+collision_layer = 132
+collision_mask = 0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="AreaSpike" index="0"]
+position = Vector2(16, 16)
+shape = SubResource("CircleShape2D_ufbh8")
