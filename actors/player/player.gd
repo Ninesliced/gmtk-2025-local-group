@@ -3,7 +3,7 @@ class_name Player
 
 
 var randomTileCount: int = 0
-@export var randomTileMax: int = 2
+@export var randomTileMax: int = -1
 
 func _ready() -> void:
 	GameGlobal.player = $"."

@@ -162,7 +162,7 @@ func _on_area_body_entered(body):
 		return
 	var player: Player = body
 	is_player_inside = true
-	if player.randomTileCount < player.randomTileMax:
+	if player.randomTileCount < player.randomTileMax and player.randomTileMax > 0:
 		player.randomTileCount += 1
 		if player.randomTileCount >= player.randomTileMax:
 			_transform_to_full = true
