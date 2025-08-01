@@ -1,7 +1,7 @@
 extends Node2D
 var target_move : Vector2i
 var is_moving : bool = false
-@onready var grid := GameGlobal.map.grid
+@onready var grid = GameGlobal.map.grid
 @export var target : Player 
 var grid_position : Vector2i = Vector2i(3, 2) :
 	set(value):
@@ -21,7 +21,6 @@ var grid_position : Vector2i = Vector2i(3, 2) :
 
 func _ready() -> void:
 	GameGlobal.on_action.connect(on_action_performed)
-	grid_position = Vector2(0,0)
 	
 func get_new_target_tile():
 	var next_pos = target.movementComponent.grid_position - grid_position

@@ -4,7 +4,7 @@ class_name Player
 
 var randomTileCount: int = 0
 @export var randomTileMax: int = -1
-@export var grid_position: Vector2 = Vector2(10,2)
+@export var grid_position: Vector2 = Vector2(2,2)
 @onready var movementComponent: MovementComponent = %MovementComponent
 
 func _ready() -> void:
