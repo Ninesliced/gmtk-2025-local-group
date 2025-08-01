@@ -3,6 +3,8 @@ var target_move : Vector2i
 var is_moving : bool = false
 @onready var grid = GameGlobal.map.grid
 @export var target : Player 
+@onready var animated_sprite_2d: AnimatedSprite2D = $AnimatedSprite2D
+
 var grid_position : Vector2i = Vector2i(3, 2) :
 	set(value):
 		if is_moving:
@@ -38,26 +40,31 @@ func get_new_target_tile():
 		match GameGlobal.rng.randi_range(0,1):
 			0:
 				move_direction = Vector2(move_direction.x,0)
-				grid_position += move_direction
 			1:
 				move_direction = Vector2(0,move_direction.y)
-				grid_position += move_direction
+		grid_position += move_direction
+		animated_sprite_2d.play("jump")
 	elif can_move.x:
 		move_direction = Vector2(move_direction.x,0)
 		grid_position += move_direction
+		animated_sprite_2d.play("jump")
 	elif can_move.y:
 		move_direction = Vector2(0,move_direction.y)
 		grid_position += move_direction
+		animated_sprite_2d.play("jump")
 	elif abs(move_direction.y) >= 1 and abs(move_direction.x) >= 1:
 		match GameGlobal.rng.randi_range(0,1):
 			0:
 				target_move = Vector2(move_direction.x,0)
 			1:
 				target_move = Vector2(0,move_direction.y)
+		animated_sprite_2d.play("anticipation")
 	elif abs(move_direction.x) >= 1:
 		target_move = Vector2(move_direction.x,0)
+		animated_sprite_2d.play("anticipation")
 	elif abs(move_direction.y) >= 1:
 		target_move = Vector2(0,move_direction.y)
+		animated_sprite_2d.play("anticipation")
 	else:
 		return
 	
@@ -72,9 +79,11 @@ func is_move_possible(move_direction: Vector2i) -> bool:
 		Vector2i(1, 0):
 			inside_direction = Tile.Rotation.RIGHT
 			outside_direction = Tile.Rotation.LEFT
+			animated_sprite_2d.flip_h = false
 		Vector2i(-1, 0):
 			inside_direction = Tile.Rotation.LEFT
 			outside_direction = Tile.Rotation.RIGHT
+			animated_sprite_2d.flip_h = true
 		Vector2i(0, 1):
 			inside_direction = Tile.Rotation.DOWN
 			outside_direction = Tile.Rotation.UP
@@ -108,6 +117,7 @@ func on_action_performed():
 	if target_move:
 		grid_position += target_move
 		target_move = Vector2i.ZERO
+		animated_sprite_2d.play("jump")
 	else:
 		get_new_target_tile()
 
@@ -118,3 +128,11 @@ func stop_movement() -> void:
 func _on_area_2d_area_entered(area: Area2D) -> void:
 	print(area.get_class())
 	queue_free()
+	
+
+
+
+func _on_animated_sprite_2d_animation_finished() -> void:
+	if animated_sprite_2d.animation == "jump":
+		animated_sprite_2d.play("idel")
+		

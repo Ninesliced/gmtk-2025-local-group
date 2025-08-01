@@ -82,6 +82,7 @@ _data = {
 
 [node name="Tile3" type="Node2D"]
 script = ExtResource("1_4t6fi")
+outline_min = 0.2
 chance_action_spawn = 0.05
 
 [node name="Area" type="Area2D" parent="."]
@@ -102,9 +103,10 @@ position = Vector2(16, 16)
 unique_name_in_owner = true
 material = SubResource("ShaderMaterial_1qs4h")
 
-[node name="Outline" type="Sprite2D" parent="3DShader"]
+[node name="Outline" type="Sprite2D" parent="."]
 unique_name_in_owner = true
 visible = false
+position = Vector2(16, 16)
 texture = SubResource("AtlasTexture_ewfg4")
 
 [node name="StaticBody2D" type="StaticBody2D" parent="."]

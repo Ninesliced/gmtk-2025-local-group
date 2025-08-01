@@ -15,7 +15,9 @@ const ENEMY = preload("res://actors/enemy/enemy.tscn")
 	ActionType.VERTICAL_SWAP,
 	ActionType.TRANSFORM_CROSS,
 	ActionType.ENEMY,
-	ActionType.DELETE_CURRENT_ACTION
+	ActionType.DELETE_CURRENT_ACTION,
+	ActionType.DELETE_CURRENT_ACTION,
+	ActionType.VERTICAL_SPIKE
 ] : 
 	set(value):
 		action_stacks = value
@@ -35,7 +37,8 @@ enum ActionType {
 	TRANSFORM_CROSS,
 	BOMB_SQUARE,
 	ENEMY,
-	DELETE_CURRENT_ACTION
+	DELETE_CURRENT_ACTION,
+	VERTICAL_SPIKE
 }
 
 var dict: Dictionary[ActionType, Dictionary] = {
@@ -114,8 +117,19 @@ var dict: Dictionary[ActionType, Dictionary] = {
 		"on_get_function": delete_current_action,
 		"temporary": true,
 		"action_zone": [],
-		# "probability": 0.1
-	}
+		"probability": 0.1
+	},
+	ActionType.VERTICAL_SPIKE: {
+		"name": "VERTICAL SPIKE",
+		"function": spawn_vertical_spikes,
+		"action_zone": [
+			Vector2i(0, 1),
+			Vector2i(0, 0),
+			Vector2i(0, -1),
+			Vector2i(1, 0),
+			Vector2i(-1, 0),
+		]
+	},
 }
 
 
@@ -215,6 +229,28 @@ func spawn_enemy(tile: Tile, event: InputEvent) -> void:
 	enemy.target = player
 	player.get_parent().add_child(enemy)
 	enemy.grid_position = tile.grid_position
+
+func spawn_vertical_spikes(tile: Tile, event: InputEvent) -> void:
+	
+	for i in range(-1,2,2):
+		var current_tile = map.grid[(tile.grid_position.x + i)%map.grid_size.x][(tile.grid_position.y)%map.grid_size.y]
+		var new_tile = null
+		new_tile = current_tile.transform_to_another_type(load("res://actors/tile/spike.tscn"), false)
+		if new_tile && new_tile.tile_bigger:
+			new_tile.tile_bigger.play_full(0.1*(i+1))
+	
+	for j in range(-1,2,2):
+		var current_tile = map.grid[(tile.grid_position.x)%map.grid_size.x][(tile.grid_position.y + j)%map.grid_size.y]
+		var new_tile = null
+		new_tile = current_tile.transform_to_another_type(load("res://actors/tile/spike.tscn"), false)
+		if new_tile && new_tile.tile_bigger:
+			new_tile.tile_bigger.play_full(0.1*(j+1))
+
+	var current_tile = map.grid[(tile.grid_position.x)%map.grid_size.x][(tile.grid_position.y)%map.grid_size.y]
+	var new_tile = null
+	new_tile = current_tile.transform_to_another_type(load("res://actors/tile/full.tscn"), false)
+	if new_tile && new_tile.tile_bigger:
+		new_tile.tile_bigger.play_full(0.1)
 
 func delete_current_action() -> void:
 	print("Delete current Action")

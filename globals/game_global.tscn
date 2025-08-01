@@ -1,8 +1,8 @@
-[gd_scene load_steps=13 format=3 uid="uid://byxp1bvr3gl84"]
+[gd_scene load_steps=14 format=3 uid="uid://byxp1bvr3gl84"]
 
 [ext_resource type="Script" uid="uid://q581v4j3vmv4" path="res://globals/game_global.gd" id="1_gu6ii"]
 [ext_resource type="Texture2D" uid="uid://dgdfmi7kbpgg6" path="res://assets/images/actions/rotate.png" id="3_gc13h"]
-[ext_resource type="PackedScene" uid="uid://4laqtk44qchp" path="res://scenes/ui/actions_container.tscn" id="3_woeo0"]
+[ext_resource type="PackedScene" path="res://scenes/ui/actions_container.tscn" id="3_woeo0"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_gc13h"]
 atlas = ExtResource("3_gc13h")
@@ -38,11 +38,15 @@ region = Rect2(112, 0, 16, 16)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_xofr3"]
 atlas = ExtResource("3_gc13h")
-region = Rect2(128, 0, 16, 16)
+region = Rect2(55, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_lcri1"]
+atlas = ExtResource("3_gc13h")
+region = Rect2(71, 0, 18, 16)
 
 [node name="GameGlobal" type="Node"]
 script = ExtResource("1_gu6ii")
-action_stacks = Array[int]([0, 1, 2, 3, 4, 5, 6, 7, 8])
+action_stacks = Array[int]([9, 1, 2, 3, 4, 5, 6, 7, 8, 9])
 action_textures = Dictionary[int, Texture2D]({
 0: SubResource("AtlasTexture_gc13h"),
 1: SubResource("AtlasTexture_woeo0"),
@@ -52,7 +56,8 @@ action_textures = Dictionary[int, Texture2D]({
 5: SubResource("AtlasTexture_opdgg"),
 6: SubResource("AtlasTexture_l7e3u"),
 7: SubResource("AtlasTexture_672fk"),
-8: SubResource("AtlasTexture_xofr3")
+8: SubResource("AtlasTexture_xofr3"),
+9: SubResource("AtlasTexture_lcri1")
 })
 
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
