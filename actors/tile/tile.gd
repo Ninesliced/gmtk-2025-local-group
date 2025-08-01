@@ -24,8 +24,8 @@ var outline_tween: Tween = null
 	set(x):
 		# var clockwise = x > tile_rotation
 		var new_rotation = x
-		if not is_inside_tree():
-			return
+		# if not is_inside_tree():
+		# 	return
 		if get_tree():
 			rotate_animated(new_rotation)
 		else:
