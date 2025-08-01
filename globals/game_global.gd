@@ -152,6 +152,7 @@ func act_tile(tile: Tile, event: InputEvent) -> void:
 	var action = action_stacks.pop_front()
 	var action_ui = action_ui_stacks.pop_front()
 	if action in dict:
+		tile.on_action(next_action)
 		on_action.emit()
 		dict[action]["function"].call(tile, event)
 	else:
