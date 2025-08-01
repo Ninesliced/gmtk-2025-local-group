@@ -102,6 +102,7 @@ position = Vector2(16, 16)
 [node name="Sprite" type="AnimatedSprite2D" parent="3DShader"]
 unique_name_in_owner = true
 material = SubResource("ShaderMaterial_1qs4h")
+speed_scale = 0.0
 
 [node name="Outline" type="Sprite2D" parent="."]
 unique_name_in_owner = true
