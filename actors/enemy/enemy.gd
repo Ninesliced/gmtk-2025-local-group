@@ -113,3 +113,8 @@ func on_action_performed():
 
 func stop_movement() -> void:
 	is_moving = false
+
+
+func _on_area_2d_area_entered(area: Area2D) -> void:
+	print(area.get_class())
+	queue_free()
