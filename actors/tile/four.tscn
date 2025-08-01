@@ -1,11 +1,11 @@
-[gd_scene load_steps=9 format=3 uid="uid://s2om5ju6lrn"]
+[gd_scene load_steps=10 format=3 uid="uid://s2om5ju6lrn"]
 
 [ext_resource type="PackedScene" uid="uid://bkuf38ni4q62k" path="res://actors/tile/Tile.tscn" id="1_wv4m7"]
 [ext_resource type="Texture2D" uid="uid://dabe5dmwfsby2" path="res://assets/spritesheet.png" id="2_a8f14"]
 [ext_resource type="Shader" uid="uid://jkmh5ksc1ejd" path="res://actors/tile/tile3D.gdshader" id="3_a8f14"]
 [ext_resource type="Shader" uid="uid://birv8v71nvo3v" path="res://addons/shaker/components/vfx/shaders/fill_color.gdshader" id="3_rjnl6"]
 
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_pd3d8"]
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_rjnl6"]
 resource_local_to_scene = true
 shader = ExtResource("3_a8f14")
 shader_parameter/ground_col = Color(0.396078, 0.466667, 0.270588, 1)
@@ -14,16 +14,26 @@ shader_parameter/wall_col2 = Color(0.223529, 0.27451, 0.207843, 1)
 shader_parameter/color_fill = Color(1, 1, 1, 1)
 shader_parameter/force = 0.0
 
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_pgiy5"]
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_pd3d8"]
 resource_local_to_scene = true
 shader = ExtResource("3_rjnl6")
 shader_parameter/color = Color(1, 1, 1, 1)
 shader_parameter/force = 0.0
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_8ioip"]
-resource_local_to_scene = true
+[sub_resource type="AtlasTexture" id="AtlasTexture_wv4m7"]
 atlas = ExtResource("2_a8f14")
 region = Rect2(32, 0, 32, 32)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_a8f14"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_wv4m7")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_76t4f"]
 size = Vector2(6.25, 6.25)
@@ -34,11 +44,11 @@ size = Vector2(6.25, 6.25)
 visible = true
 
 [node name="3DShader" parent="." index="1"]
-material = SubResource("ShaderMaterial_pd3d8")
+material = SubResource("ShaderMaterial_rjnl6")
 
 [node name="Sprite" parent="3DShader" index="0"]
-material = SubResource("ShaderMaterial_pgiy5")
-texture = SubResource("AtlasTexture_8ioip")
+material = SubResource("ShaderMaterial_pd3d8")
+sprite_frames = SubResource("SpriteFrames_a8f14")
 
 [node name="TopLeftShape" type="CollisionShape2D" parent="StaticBody2D" index="0"]
 position = Vector2(-12, -12)
