@@ -1,5 +1,5 @@
 extends Node2D
-
+var target_move : Vector2i
 var is_moving : bool = false
 @onready var grid := GameGlobal.map.grid
 @export var target : Player 
@@ -21,26 +21,51 @@ var grid_position : Vector2i = Vector2i(3, 2) :
 
 func _ready() -> void:
 	GameGlobal.on_action.connect(on_action_performed)
+	grid_position = Vector2(0,0)
 	
-func update():
-	var next_pos = grid_position - target.grid_position
+func get_new_target_tile():
+	var next_pos = target.movementComponent.grid_position - grid_position
+	var move_direction := Vector2i.ZERO
 	
 	if abs(next_pos.x) >= 1:
-		next_pos.x = next_pos.x/abs(next_pos.x)
+		move_direction.x = next_pos.x/abs(next_pos.x)
 		
 	if abs(next_pos.y) >= 1:
-		next_pos.y = next_pos.y/abs(next_pos.y)
-		
-	if abs(next_pos.y) >= 1 and abs(next_pos.x) >= 1:
+		move_direction.y = next_pos.y/abs(next_pos.y)
+
+	var can_move := Vector2i((int)(is_move_possible(Vector2(move_direction.x,0))),(int)(is_move_possible(Vector2(0,move_direction.y))))
+
+	if can_move.x and can_move.y:
 		match randi_range(0,1):
 			0:
-				next_pos = Vector2(next_pos.x,0)
+				move_direction = Vector2(move_direction.x,0)
+				grid_position += move_direction
 			1:
-				next_pos = Vector2(0,next_pos.y)
+				move_direction = Vector2(0,move_direction.y)
+				grid_position += move_direction
+	elif can_move.x:
+		move_direction = Vector2(move_direction.x,0)
+		grid_position += move_direction
+	elif can_move.y:
+		move_direction = Vector2(0,move_direction.y)
+		grid_position += move_direction
+	elif abs(move_direction.y) >= 1 and abs(move_direction.x) >= 1:
+		match randi_range(0,1):
+			0:
+				target_move = Vector2(move_direction.x,0)
+			1:
+				target_move = Vector2(0,move_direction.y)
+	elif abs(move_direction.x) >= 1:
+		target_move = Vector2(move_direction.x,0)
+	elif abs(move_direction.y) >= 1:
+		target_move = Vector2(0,move_direction.y)
+	else:
+		return
 	
+func is_move_possible(move_direction: Vector2i) -> bool:
 	var current_tile : Tile = GameGlobal.map.grid[grid_position.x][grid_position.y]
+	var next_pos = Vector2i(grid_position + move_direction) % GameGlobal.map.grid_size
 	var next_tile : Tile = GameGlobal.map.grid[next_pos.x][next_pos.y]
-	var move_direction: Vector2i = Vector2i.ZERO
 	var inside_direction : Tile.Rotation
 	var outside_direction : Tile.Rotation
 	
@@ -58,13 +83,10 @@ func update():
 			inside_direction = Tile.Rotation.UP
 			outside_direction = Tile.Rotation.DOWN
 		_:
-			return
+			return false
 	
-	if current_tile == null or next_tile == null or not current_tile.can_pass(inside_direction) or not next_tile.can_pass(outside_direction):
-		pass
-
-	grid_position += move_direction
-	
+	return !(current_tile == null or next_tile == null or not current_tile.can_pass(inside_direction) or not next_tile.can_pass(outside_direction))
+		
 func update_position():
 	var map = GameGlobal.map
 
@@ -84,7 +106,11 @@ func translation_animation(target_position: Vector2) -> void:
 	is_moving = true
 	
 func on_action_performed():
-	update()
+	if target_move:
+		grid_position += target_move
+		target_move = Vector2i.ZERO
+	else:
+		get_new_target_tile()
 
 func stop_movement() -> void:
 	is_moving = false
