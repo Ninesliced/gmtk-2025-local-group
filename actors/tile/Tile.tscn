@@ -1,7 +1,6 @@
-[gd_scene load_steps=11 format=3 uid="uid://bkuf38ni4q62k"]
+[gd_scene load_steps=10 format=3 uid="uid://bkuf38ni4q62k"]
 
 [ext_resource type="Script" uid="uid://ckoaogse5dba6" path="res://actors/tile/tile.gd" id="1_4t6fi"]
-[ext_resource type="Texture2D" uid="uid://dabe5dmwfsby2" path="res://assets/spritesheet.png" id="2_4t6fi"]
 [ext_resource type="Material" uid="uid://di7gr2544ckj1" path="res://actors/tile/tile_material.tres" id="2_iawyn"]
 [ext_resource type="Shader" uid="uid://birv8v71nvo3v" path="res://addons/shaker/components/vfx/shaders/fill_color.gdshader" id="3_ewfg4"]
 [ext_resource type="Script" uid="uid://dq0rbo0c6kl8c" path="res://actors/tile/tile_bigger.gd" id="4_1qs4h"]
@@ -14,21 +13,6 @@ resource_local_to_scene = true
 shader = ExtResource("3_ewfg4")
 shader_parameter/color = Color(1, 1, 1, 1)
 shader_parameter/force = 0.0
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_1qs4h"]
-atlas = ExtResource("2_4t6fi")
-region = Rect2(0, 0, 32, 32)
-
-[sub_resource type="SpriteFrames" id="SpriteFrames_ewfg4"]
-animations = [{
-"frames": [{
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_1qs4h")
-}],
-"loop": true,
-"name": &"default",
-"speed": 5.0
-}]
 
 [sub_resource type="Animation" id="Animation_1qs4h"]
 length = 0.001
@@ -112,7 +96,6 @@ position = Vector2(16, 16)
 [node name="Sprite" type="AnimatedSprite2D" parent="3DShader"]
 unique_name_in_owner = true
 material = SubResource("ShaderMaterial_1qs4h")
-texture = SubResource("AtlasTexture_1qs4h")
 
 [node name="StaticBody2D" type="StaticBody2D" parent="."]
 unique_name_in_owner = true

@@ -1,8 +1,25 @@
-[gd_scene load_steps=9 format=3 uid="uid://b8ylngr75sxvp"]
+[gd_scene load_steps=13 format=3 uid="uid://b8ylngr75sxvp"]
 
 [ext_resource type="PackedScene" uid="uid://bkuf38ni4q62k" path="res://actors/tile/Tile.tscn" id="1_7uncb"]
 [ext_resource type="Script" path="res://actors/tile/corner.gd" id="2_r882n"]
 [ext_resource type="Texture2D" uid="uid://dabe5dmwfsby2" path="res://assets/spritesheet.png" id="2_skhvx"]
+[ext_resource type="Shader" uid="uid://jkmh5ksc1ejd" path="res://actors/tile/tile3D.gdshader" id="3_73myc"]
+[ext_resource type="Shader" uid="uid://birv8v71nvo3v" path="res://addons/shaker/components/vfx/shaders/fill_color.gdshader" id="4_mbmep"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_mbmep"]
+resource_local_to_scene = true
+shader = ExtResource("3_73myc")
+shader_parameter/ground_col = Color(0.396078, 0.466667, 0.270588, 1)
+shader_parameter/wall_col = Color(0.666667, 0.772549, 0.290196, 1)
+shader_parameter/wall_col2 = Color(0.223529, 0.27451, 0.207843, 1)
+shader_parameter/color_fill = Color(1, 1, 1, 1)
+shader_parameter/force = 0.0
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_7864f"]
+resource_local_to_scene = true
+shader = ExtResource("4_mbmep")
+shader_parameter/color = Color(1, 1, 1, 1)
+shader_parameter/force = 0.0
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_r882n"]
 atlas = ExtResource("2_skhvx")
@@ -31,7 +48,11 @@ size = Vector2(8.5, 6)
 [node name="Tile" instance=ExtResource("1_7uncb")]
 script = ExtResource("2_r882n")
 
+[node name="3DShader" parent="." index="1"]
+material = SubResource("ShaderMaterial_mbmep")
+
 [node name="Sprite" parent="3DShader" index="0"]
+material = SubResource("ShaderMaterial_7864f")
 sprite_frames = SubResource("SpriteFrames_73myc")
 
 [node name="TOP" type="CollisionShape2D" parent="StaticBody2D" index="0"]
