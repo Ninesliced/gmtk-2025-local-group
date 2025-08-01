@@ -11,7 +11,6 @@ config_version=5
 [application]
 
 config/name="New Game Project"
-run/main_scene="uid://cqwxuni5qjhvu"
 config/features=PackedStringArray("4.4", "Forward Plus")
 config/icon="res://icon.svg"
 
@@ -35,10 +34,6 @@ window/snap/snap_2d_vertices_to_pixel=false
 [editor_plugins]
 
 enabled=PackedStringArray("res://addons/shaker/plugin.cfg")
-
-[gui]
-
-theme/custom_font="uid://c8js40sec6li4"
 
 [input]
 
