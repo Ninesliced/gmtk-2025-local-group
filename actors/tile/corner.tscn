@@ -47,6 +47,7 @@ size = Vector2(8.5, 6)
 
 [node name="Tile" instance=ExtResource("1_7uncb")]
 script = ExtResource("2_r882n")
+outline_min = 0.1
 
 [node name="3DShader" parent="." index="1"]
 material = SubResource("ShaderMaterial_mbmep")

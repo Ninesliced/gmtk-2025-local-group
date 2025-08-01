@@ -9,8 +9,8 @@
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_pd3d8"]
 resource_local_to_scene = true
 shader = ExtResource("3_fb66d")
-shader_parameter/ground_col = Color(0.25098, 0.196078, 0.32549, 1)
-shader_parameter/wall_col = Color(0.737255, 0.290196, 0.611765, 1)
+shader_parameter/ground_col = Color(0.278431, 0.227451, 0.258824, 1)
+shader_parameter/wall_col = Color(0.396078, 0.466667, 0.270588, 1)
 shader_parameter/wall_col2 = Color(0.1323, 0.1323, 0.21, 1)
 shader_parameter/color_fill = Color(1, 1, 1, 1)
 shader_parameter/force = 0.0
@@ -40,12 +40,11 @@ animations = [{
 size = Vector2(6.25, 6.25)
 
 [node name="Tile4" instance=ExtResource("1_rwwjv")]
+outline_min = null
+outline_max = null
 
 [node name="Area" parent="." index="0"]
 collision_mask = 17
-
-[node name="Shape" parent="Area" index="0"]
-visible = true
 
 [node name="3DShader" parent="." index="1"]
 material = SubResource("ShaderMaterial_pd3d8")
@@ -55,7 +54,7 @@ material = SubResource("ShaderMaterial_fb66d")
 sprite_frames = SubResource("SpriteFrames_amehe")
 animation = &"new_animation"
 
-[node name="StaticBody2D" parent="." index="2"]
+[node name="StaticBody2D" parent="." index="3"]
 visible = false
 
 [node name="TopLeftShape" type="CollisionShape2D" parent="StaticBody2D" index="0"]
@@ -74,5 +73,6 @@ shape = SubResource("RectangleShape2D_76t4f")
 position = Vector2(12, 12)
 shape = SubResource("RectangleShape2D_76t4f")
 
-[node name="CursedComponent" type="Node" parent="." index="5"]
+[node name="CursedComponent" type="Node" parent="." index="5" node_paths=PackedStringArray("area")]
 script = ExtResource("5_fb66d")
+area = NodePath("../Area")

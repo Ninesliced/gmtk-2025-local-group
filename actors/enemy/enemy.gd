@@ -37,7 +37,7 @@ func get_new_target_tile():
 	var can_move := Vector2i((int)(is_move_possible(Vector2(move_direction.x,0))),(int)(is_move_possible(Vector2(0,move_direction.y))))
 
 	if can_move.x and can_move.y:
-		match GameGlobal.rng.randi_range(0,1):
+		match randi_range(0,1):
 			0:
 				move_direction = Vector2(move_direction.x,0)
 			1:
@@ -53,7 +53,7 @@ func get_new_target_tile():
 		grid_position += move_direction
 		animated_sprite_2d.play("jump")
 	elif abs(move_direction.y) >= 1 and abs(move_direction.x) >= 1:
-		match GameGlobal.rng.randi_range(0,1):
+		match randi_range(0,1):
 			0:
 				target_move = Vector2(move_direction.x,0)
 			1:
@@ -107,8 +107,10 @@ func update_position():
 		position = target_position
 
 func translation_animation(target_position: Vector2) -> void:
+	animated_sprite_2d.position = -(target_position-position)
+	position = target_position
 	var tween: Tween = create_tween()
-	tween.tween_property(self, "position", target_position, 0.3)
+	tween.tween_property(animated_sprite_2d, "position", Vector2.ZERO, 0.3)
 	tween.tween_callback(stop_movement)
 	tween.set_ease(Tween.EASE_IN_OUT)
 	is_moving = true

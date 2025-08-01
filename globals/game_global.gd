@@ -10,6 +10,7 @@ const ENEMY = preload("res://actors/enemy/enemy.tscn")
 	ActionType.ROTATE_COUNTER_CLOCK,
 	ActionType.ROTATE_COUNTER_CLOCK,
 	ActionType.TRANSFORM_EMPTY,
+	ActionType.TRANSFORM_EMPTY_CURSED,
 	ActionType.HORIZONTAL_SWAP,
 	ActionType.HORIZONTAL_SWAP,
 	ActionType.VERTICAL_SWAP,
@@ -38,7 +39,8 @@ enum ActionType {
 	BOMB_SQUARE,
 	ENEMY,
 	DELETE_CURRENT_ACTION,
-	VERTICAL_SPIKE
+	VERTICAL_SPIKE,
+	TRANSFORM_EMPTY_CURSED,
 }
 
 var dict: Dictionary[ActionType, Dictionary] = {
@@ -63,6 +65,17 @@ var dict: Dictionary[ActionType, Dictionary] = {
 		"action_zone": [
 			Vector2i(0, 0)
 		]
+	},
+	ActionType.TRANSFORM_EMPTY_CURSED: {
+		"name": "Transform  in a row",
+		"function": transform_empty_cursed,
+		"action_zone": [
+			Vector2i(0, 0),
+			Vector2i(1, 0),
+			Vector2i(2, 0),
+			Vector2i(3, 0)
+		],
+		"temporary": true,
 	},
 	ActionType.HORIZONTAL_SWAP: {
 		"name": "SWAP HORIZONTAL TILES",
@@ -108,7 +121,11 @@ var dict: Dictionary[ActionType, Dictionary] = {
 		"name": "ENEMY SPAWNER",
 		"function": spawn_enemy,
 		"action_zone": [
-			Vector2i(0, 0)
+			Vector2i(0, 1),
+			Vector2i(0, 0),
+			Vector2i(0, -1),
+			Vector2i(1, 0),
+			Vector2i(-1, 0),
 		]
 	},
 	ActionType.DELETE_CURRENT_ACTION: {
@@ -193,7 +210,13 @@ func rotate_counter_clock(tile: Tile, event: InputEvent) -> void:
 
 func transform_empty(tile: Tile, event: InputEvent) -> void:
 	tile.transform_to_another_type(load("res://actors/tile/four.tscn"))
-	
+
+func transform_empty_cursed(tile: Tile, event: InputEvent) -> void:
+	var grid_pos = tile.grid_position
+	for i in range(0, 4):
+		var current_tile = map.grid[(grid_pos.x + i) % map.grid_size.x][grid_pos.y]
+		current_tile.transform_to_another_type(load("res://actors/tile/cursed_four.tscn"),true)
+		await get_tree().create_timer(0.1).timeout
 func transform_cross(tile: Tile, event: InputEvent) -> void:
 	for i in range(-1,2):
 		for j in range(-1,2):
@@ -224,7 +247,21 @@ func vertical_swap(tile: Tile, event: InputEvent) -> void:
 	tile.vertical_swap(map)
 	
 func spawn_enemy(tile: Tile, event: InputEvent) -> void:
-	transform_empty_bomb(tile, event)
+	
+	for i in range(-1,2):
+		var current_tile = map.grid[(tile.grid_position.x + i)%map.grid_size.x][(tile.grid_position.y)%map.grid_size.y]
+		var new_tile = null
+		new_tile = current_tile.transform_to_another_type(load("res://actors/tile/four.tscn"), false)
+		if new_tile && new_tile.tile_bigger:
+			new_tile.tile_bigger.play_full(0.1*(i+1))
+			
+	for i in range(-1,3,2):
+		var current_tile = map.grid[(tile.grid_position.x)%map.grid_size.x][(tile.grid_position.y+i)%map.grid_size.y]
+		var new_tile = null
+		new_tile = current_tile.transform_to_another_type(load("res://actors/tile/four.tscn"), false)
+		if new_tile && new_tile.tile_bigger:
+			new_tile.tile_bigger.play_full(0.1*(i+1))
+	
 	var enemy := ENEMY.instantiate()
 	enemy.target = player
 	player.get_parent().add_child(enemy)

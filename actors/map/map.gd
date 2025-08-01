@@ -27,7 +27,6 @@ func _update_grid() -> void:
 	for child in grid:
 		for tile in child:
 			if tile != null:
-				print("Removing tile: ", tile)
 				tile.queue_free()
 	grid.clear()
 	
