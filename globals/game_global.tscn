@@ -38,11 +38,11 @@ region = Rect2(112, 0, 16, 16)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_xofr3"]
 atlas = ExtResource("3_gc13h")
-region = Rect2(55, 0, 16, 16)
+region = Rect2(128, 0, 16, 16)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_lcri1"]
 atlas = ExtResource("3_gc13h")
-region = Rect2(71, 0, 18, 16)
+region = Rect2(144, 0, 16, 16)
 
 [node name="GameGlobal" type="Node"]
 script = ExtResource("1_gu6ii")

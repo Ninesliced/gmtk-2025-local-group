@@ -348,4 +348,3 @@ func reset_game() -> void:
 		actions_ui.append(action_ui)
 		_update_size()
 	GameGlobal.action_ui_stacks = actions_ui
-	# GameGlobal.on_action_stack_changed.connect(_update_size)
