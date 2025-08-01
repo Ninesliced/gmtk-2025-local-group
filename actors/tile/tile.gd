@@ -32,7 +32,8 @@ signal on_tile_full
 var _transform_to_full: bool = false
 
 var is_hover : bool = false
-var grid_position : Vector2i = Vector2i.ZERO
+# DO NOT USE THIS VARIABLE AS EXPORT, Its a hack to solve tools issues
+@export var grid_position : Vector2i = Vector2i.ZERO
 var is_player_inside: bool = false
 ### PUBLIC
 
