@@ -1,5 +1,5 @@
 @tool
-extends Node2D
+extends CanvasGroup
 
 class_name Map
 
