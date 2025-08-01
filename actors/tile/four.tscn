@@ -12,7 +12,6 @@ region = Rect2(32, 0, 32, 32)
 size = Vector2(6.25, 6.25)
 
 [node name="Tile" instance=ExtResource("1_wv4m7")]
-rotation_speed = 0.2
 
 [node name="Shape" parent="Area" index="0"]
 visible = true
