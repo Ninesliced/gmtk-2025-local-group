@@ -90,6 +90,7 @@ func _process(delta):
 
 	on_move.emit(move_direction)
 	grid_position += move_direction
+	GameGlobal.number_of_actions += 1
 
 
 func update_position():

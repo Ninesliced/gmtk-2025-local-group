@@ -1,13 +1,24 @@
-[gd_scene load_steps=5 format=3 uid="uid://b72bu5lvtm2bv"]
+[gd_scene load_steps=7 format=3 uid="uid://b72bu5lvtm2bv"]
 
 [ext_resource type="PackedScene" uid="uid://c5lqig57oxpyb" path="res://actors/player/player.tscn" id="1_fk7tf"]
+[ext_resource type="Shader" uid="uid://jkmh5ksc1ejd" path="res://actors/tile/tile3D.gdshader" id="2_fwjos"]
 [ext_resource type="Script" uid="uid://cpvd8mjlsp6tj" path="res://scenes/camera_2d.gd" id="2_t7646"]
 [ext_resource type="PackedScene" uid="uid://v6wht25gui7" path="res://scenes/border/border.tscn" id="3_fwjos"]
 [ext_resource type="PackedScene" uid="uid://b7fgpkbuim0vj" path="res://actors/map/Map.tscn" id="4_bff3v"]
 
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_yj3ko"]
+resource_local_to_scene = true
+shader = ExtResource("2_fwjos")
+shader_parameter/ground_col = Color(0.396078, 0.466667, 0.270588, 1)
+shader_parameter/wall_col = Color(0.666667, 0.772549, 0.290196, 1)
+shader_parameter/wall_col2 = Color(0.223529, 0.27451, 0.207843, 1)
+shader_parameter/color_fill = Color(1, 1, 1, 1)
+shader_parameter/force = 0.0
+
 [node name="Guigui" type="Node2D"]
 
 [node name="Map" parent="." instance=ExtResource("4_bff3v")]
+material = SubResource("ShaderMaterial_yj3ko")
 position = Vector2(0, 32)
 grid_size = Vector2i(20, 5)
 
