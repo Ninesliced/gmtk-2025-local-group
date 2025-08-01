@@ -1,21 +1,14 @@
 extends Node
 
-@export var textures: Dictionary[Texture2D, float] = {}
-
-@export var selectedSprite: Sprite2D
+@onready var sprite: AnimatedSprite2D = %Sprite
 
 func _ready() -> void:
-	var sum = 0.0
-	for texture in textures.keys():
-		sum += textures[texture]
+	play_random_animation()
 
-	
-	var random_value = randf() * sum
-	var cumulative_sum = 0.0
-	var random_index = 0
-	for i in range(textures.size()):
-		cumulative_sum += textures.values()[i]
-		if random_value < cumulative_sum:
-			random_index = i
-			break
-	selectedSprite.texture = textures.keys()[random_index]
+func play_random_animation():
+	var animation_names := sprite.sprite_frames.get_animation_names()
+
+	if(!len(animation_names)):
+		return
+	var random_ani_name = animation_names[randi() % animation_names.size()]
+	sprite.play(random_ani_name)
