@@ -18,6 +18,8 @@ enum Rotation {
 @onready var outline : Node2D = %Outline
 var outline_color: Color = Color(1, 1, 1, 1)
 var outline_tween: Tween = null
+@export var outline_min = 0.1
+@export var outline_max = 0.5
 
 @export var rotation_speed: float = 0.2
 @export var tile_rotation : Rotation = Rotation.UP : 
@@ -154,7 +156,7 @@ func spawn_outline(action) -> void:
 	
 	for tile in tiles:
 		if is_action_valid:
-			tile.outline.modulate = Color(1, 1, 1, 1)
+			tile.outline.modulate = Color(1, 1, 1, outline_max)
 		else:
 			tile.outline.modulate = Color(1, 50./255., 50./255., 1)
 		tile.show_outline()
@@ -174,7 +176,7 @@ func low_visibility_outline() -> void:
 	
 	var color := outline.modulate
 	outline_tween = create_tween()
-	outline_tween.tween_property(outline, "modulate", Color(color.r, color.g, color.b, 128.0 / 255.0), 0.6)
+	outline_tween.tween_property(outline, "modulate", Color(color.r, color.g, color.b, outline_min), 0.6)
 	outline_tween.set_ease(Tween.EASE_IN_OUT)
 	outline_tween.tween_callback(high_visibility_outline)
 
@@ -184,7 +186,7 @@ func high_visibility_outline() -> void:
 	
 	var color := outline.modulate
 	outline_tween = create_tween()
-	outline_tween.tween_property(outline, "modulate", Color(color.r, color.g, color.b, 1.0), 0.6)
+	outline_tween.tween_property(outline, "modulate", Color(color.r, color.g, color.b, outline_max), 0.6)
 	outline_tween.set_ease(Tween.EASE_IN_OUT)
 	outline_tween.tween_callback(low_visibility_outline)
 
