@@ -1,10 +1,11 @@
-[gd_scene load_steps=13 format=3 uid="uid://b8ylngr75sxvp"]
+[gd_scene load_steps=17 format=3 uid="uid://b8ylngr75sxvp"]
 
 [ext_resource type="PackedScene" uid="uid://bkuf38ni4q62k" path="res://actors/tile/Tile.tscn" id="1_7uncb"]
 [ext_resource type="Script" uid="uid://cgwtcimnaeyov" path="res://actors/tile/corner.gd" id="2_r882n"]
 [ext_resource type="Texture2D" uid="uid://dabe5dmwfsby2" path="res://assets/spritesheet.png" id="2_skhvx"]
 [ext_resource type="Shader" uid="uid://jkmh5ksc1ejd" path="res://actors/tile/tile3D.gdshader" id="3_73myc"]
 [ext_resource type="Shader" uid="uid://birv8v71nvo3v" path="res://addons/shaker/components/vfx/shaders/fill_color.gdshader" id="4_mbmep"]
+[ext_resource type="Texture2D" uid="uid://pl8capar1rck" path="res://assets/tilesheet_seasons.png" id="5_7864f"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_mbmep"]
 resource_local_to_scene = true
@@ -21,18 +22,54 @@ shader = ExtResource("4_mbmep")
 shader_parameter/color = Color(1, 1, 1, 1)
 shader_parameter/force = 0.0
 
+[sub_resource type="AtlasTexture" id="AtlasTexture_8255t"]
+atlas = ExtResource("5_7864f")
+region = Rect2(192, 32, 32, 32)
+
 [sub_resource type="AtlasTexture" id="AtlasTexture_r882n"]
 atlas = ExtResource("2_skhvx")
 region = Rect2(128, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_fjhww"]
+atlas = ExtResource("5_7864f")
+region = Rect2(192, 96, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_latfw"]
+atlas = ExtResource("5_7864f")
+region = Rect2(192, 64, 32, 32)
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_73myc"]
 animations = [{
 "frames": [{
 "duration": 1.0,
+"texture": SubResource("AtlasTexture_8255t")
+}],
+"loop": true,
+"name": &"fall",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
 "texture": SubResource("AtlasTexture_r882n")
 }],
 "loop": true,
-"name": &"default",
+"name": &"spring",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_fjhww")
+}],
+"loop": true,
+"name": &"summer",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_latfw")
+}],
+"loop": true,
+"name": &"winter",
 "speed": 5.0
 }]
 
@@ -55,6 +92,7 @@ material = SubResource("ShaderMaterial_mbmep")
 [node name="Sprite" parent="3DShader" index="0"]
 material = SubResource("ShaderMaterial_7864f")
 sprite_frames = SubResource("SpriteFrames_73myc")
+animation = &"winter"
 
 [node name="TOP" type="CollisionShape2D" parent="StaticBody2D" index="0"]
 position = Vector2(0, -12.5)

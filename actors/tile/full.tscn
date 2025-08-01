@@ -1,11 +1,11 @@
-[gd_scene load_steps=14 format=3 uid="uid://5x8ludb4a3gs"]
+[gd_scene load_steps=23 format=3 uid="uid://5x8ludb4a3gs"]
 
 [ext_resource type="PackedScene" uid="uid://bkuf38ni4q62k" path="res://actors/tile/Tile.tscn" id="1_fm2mu"]
 [ext_resource type="Script" path="res://actors/tile/full.gd" id="2_1oojr"]
-[ext_resource type="Texture2D" uid="uid://dabe5dmwfsby2" path="res://assets/spritesheet.png" id="2_ssas8"]
 [ext_resource type="Shader" uid="uid://jkmh5ksc1ejd" path="res://actors/tile/tile3D.gdshader" id="3_ltboa"]
 [ext_resource type="Script" uid="uid://dbj80gdqmhu1w" path="res://actors/tile/randomize_sprite.gd" id="3_ssas8"]
 [ext_resource type="Shader" uid="uid://birv8v71nvo3v" path="res://addons/shaker/components/vfx/shaders/fill_color.gdshader" id="4_irehs"]
+[ext_resource type="Texture2D" uid="uid://pl8capar1rck" path="res://assets/tilesheet_seasons.png" id="5_irehs"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_irehs"]
 resource_local_to_scene = true
@@ -22,42 +22,110 @@ shader = ExtResource("4_irehs")
 shader_parameter/color = Color(1, 1, 1, 1)
 shader_parameter/force = 0.0
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_irehs"]
-atlas = ExtResource("2_ssas8")
-region = Rect2(96, 0, 32, 32)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_1oojr"]
-atlas = ExtResource("2_ssas8")
+[sub_resource type="AtlasTexture" id="AtlasTexture_smgc2"]
+atlas = ExtResource("5_irehs")
 region = Rect2(96, 32, 32, 32)
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_ltboa"]
-atlas = ExtResource("2_ssas8")
+[sub_resource type="AtlasTexture" id="AtlasTexture_3ycui"]
+atlas = ExtResource("5_irehs")
+region = Rect2(128, 32, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_qsy0i"]
+atlas = ExtResource("5_irehs")
+region = Rect2(160, 32, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_bctan"]
+atlas = ExtResource("5_irehs")
+region = Rect2(96, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_xbl4c"]
+atlas = ExtResource("5_irehs")
+region = Rect2(128, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_5goud"]
+atlas = ExtResource("5_irehs")
+region = Rect2(160, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ekc14"]
+atlas = ExtResource("5_irehs")
+region = Rect2(96, 96, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_2ixy5"]
+atlas = ExtResource("5_irehs")
+region = Rect2(128, 96, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_8k0ew"]
+atlas = ExtResource("5_irehs")
+region = Rect2(160, 96, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_l2stk"]
+atlas = ExtResource("5_irehs")
 region = Rect2(96, 64, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_qadur"]
+atlas = ExtResource("5_irehs")
+region = Rect2(128, 64, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_16tic"]
+atlas = ExtResource("5_irehs")
+region = Rect2(160, 64, 32, 32)
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_smgc2"]
 animations = [{
 "frames": [{
 "duration": 1.0,
-"texture": SubResource("AtlasTexture_irehs")
+"texture": SubResource("AtlasTexture_smgc2")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_3ycui")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_qsy0i")
 }],
 "loop": true,
-"name": &"default",
+"name": &"fall",
 "speed": 5.0
 }, {
 "frames": [{
 "duration": 1.0,
-"texture": SubResource("AtlasTexture_1oojr")
+"texture": SubResource("AtlasTexture_bctan")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_xbl4c")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_5goud")
 }],
 "loop": true,
-"name": &"new_animation",
+"name": &"spring",
 "speed": 5.0
 }, {
 "frames": [{
 "duration": 1.0,
-"texture": SubResource("AtlasTexture_ltboa")
+"texture": SubResource("AtlasTexture_ekc14")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_2ixy5")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_8k0ew")
 }],
 "loop": true,
-"name": &"new_animation_1",
+"name": &"summer",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_l2stk")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_qadur")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_16tic")
+}],
+"loop": true,
+"name": &"winter",
 "speed": 5.0
 }]
 
@@ -68,15 +136,13 @@ size = Vector2(32, 31)
 script = ExtResource("2_1oojr")
 is_action_spawnable = false
 
-[node name="Shape" parent="Area" index="0"]
-visible = true
-
 [node name="3DShader" parent="." index="1"]
 material = SubResource("ShaderMaterial_irehs")
 
 [node name="Sprite" parent="3DShader" index="0"]
 material = SubResource("ShaderMaterial_smgc2")
 sprite_frames = SubResource("SpriteFrames_smgc2")
+animation = &"winter"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D" index="0"]
 position = Vector2(0, -0.5)

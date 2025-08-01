@@ -1,7 +1,6 @@
 extends Tile
 
 @onready var collision_shape_2d: CollisionShape2D = $AreaSpike/CollisionShape2D
-@onready var sprite: AnimatedSprite2D = %Sprite
 
 func _ready() -> void:
 	GameGlobal.on_action.connect(on_action_performed)
