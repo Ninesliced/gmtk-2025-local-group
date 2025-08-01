@@ -57,14 +57,15 @@ router.get('/rank/:pseudo', async (req, res) => {
     const pseudo = req.params.pseudo;
 
     const allScores = await db.query(
-        'SELECT pseudo, score FROM scores WHERE seed = $1 ORDER BY score DESC',
-        [seed]
+        'SELECT pseudo, score FROM scores WHERE seed = $1 AND pseudo = $2 ORDER BY score DESC LIMIT 1',
+        [seed, pseudo]
     );
 
-    const rank = allScores.rows.findIndex(r => r.pseudo === pseudo);
-    if (rank === -1) return res.status(404).json({ error: 'Pseudo not found' });
+    if (allScores.rows.length === 0) {
+        return res.status(404).json({ error: 'Pseudo not found' });
+    }
 
-    res.json({ rank: rank + 1, score: allScores.rows[rank].score });
+    res.json({ score: allScores.rows });
 });
 
 module.exports = router;

@@ -37,7 +37,7 @@ func _update_grid() -> void:
 		grid.append(column)
 
 func generate_grid() -> void:
-	GameGlobal.rng.seed = randi()
+	GameGlobal.rng.seed = hash(GameGlobal.rng_seed)
 	for x in range(grid_size.x):
 		for y in range(grid_size.y):
 			if grid[x][y] == null:
