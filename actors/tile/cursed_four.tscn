@@ -1,4 +1,4 @@
-[gd_scene load_steps=11 format=3 uid="uid://b5yy05msh4uyu"]
+[gd_scene load_steps=11 format=3 uid="uid://b3pjr7rfln6g1"]
 
 [ext_resource type="PackedScene" uid="uid://bkuf38ni4q62k" path="res://actors/tile/Tile.tscn" id="1_rwwjv"]
 [ext_resource type="Texture2D" uid="uid://dabe5dmwfsby2" path="res://assets/spritesheet.png" id="2_qklxe"]
@@ -39,7 +39,7 @@ animations = [{
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_76t4f"]
 size = Vector2(6.25, 6.25)
 
-[node name="Tile2" instance=ExtResource("1_rwwjv")]
+[node name="Tile4" instance=ExtResource("1_rwwjv")]
 
 [node name="Area" parent="." index="0"]
 collision_mask = 17

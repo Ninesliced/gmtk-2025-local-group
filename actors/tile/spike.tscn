@@ -60,8 +60,7 @@ material = SubResource("ShaderMaterial_0vltg")
 [node name="Sprite" parent="3DShader" index="0"]
 material = SubResource("ShaderMaterial_iq723")
 sprite_frames = SubResource("SpriteFrames_ufbh8")
-animation = &"spike_out"
-autoplay = "spike_in"
+animation = &"spike_in"
 
 [node name="AreaSpike" type="Area2D" parent="." index="5"]
 collision_layer = 132
