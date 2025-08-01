@@ -3,7 +3,7 @@
 [ext_resource type="PackedScene" uid="uid://b7fgpkbuim0vj" path="res://actors/map/Map.tscn" id="1_1uohx"]
 [ext_resource type="PackedScene" uid="uid://c5lqig57oxpyb" path="res://actors/player/player.tscn" id="2_rq4rr"]
 [ext_resource type="Script" uid="uid://cpvd8mjlsp6tj" path="res://scenes/camera_2d.gd" id="3_tsois"]
-[ext_resource type="PackedScene" uid="uid://qgas0f5a707u" path="res://actors/enemy/enemy.tscn" id="4_on80f"]
+[ext_resource type="PackedScene" uid="uid://v6wht25gui7" path="res://scenes/border/border.tscn" id="5_rq4rr"]
 
 [node name="Theo" type="Node2D"]
 
@@ -12,6 +12,7 @@ position = Vector2(0, 10)
 grid_size = Vector2i(25, 5)
 
 [node name="Player" parent="." instance=ExtResource("2_rq4rr")]
+unique_name_in_owner = true
 position = Vector2(15, 89)
 collision_layer = 1
 
@@ -19,5 +20,5 @@ collision_layer = 1
 position = Vector2(114, 90)
 script = ExtResource("3_tsois")
 
-[node name="Enemy" parent="." node_paths=PackedStringArray("target") instance=ExtResource("4_on80f")]
-target = NodePath("../Player")
+[node name="Border" parent="." instance=ExtResource("5_rq4rr")]
+position = Vector2(-28, 48)

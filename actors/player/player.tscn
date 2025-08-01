@@ -8,7 +8,7 @@
 [ext_resource type="Script" uid="uid://chq08evtmxyos" path="res://actors/player/hitbox_component.gd" id="4_lsqbn"]
 [ext_resource type="Script" uid="uid://26l6scy4ngx6" path="res://actors/player/player_animation.gd" id="5_15y17"]
 [ext_resource type="PackedScene" uid="uid://c38wfn8kedxlp" path="res://scenes/ui/action_ui.tscn" id="8_a744p"]
-[ext_resource type="Script" uid="uid://bdcm77c68c11f" path="res://actors/player/action_current_component.gd" id="9_388e2"]
+[ext_resource type="Script" path="res://actors/player/action_current_component.gd" id="9_388e2"]
 [ext_resource type="PackedScene" uid="uid://b3oy1hgm6m7u8" path="res://actors/player/debug/player_debug.tscn" id="10_lsln6"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_lsqbn"]

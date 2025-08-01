@@ -3,6 +3,8 @@ extends Node
 signal on_action_stack_changed
 signal on_action
 
+const ENEMY = preload("res://actors/enemy/enemy.tscn")
+
 @export var action_stacks : Array[ActionType] = [
 	ActionType.ROTATE_CLOCK,
 	ActionType.ROTATE_COUNTER_CLOCK,
@@ -12,6 +14,7 @@ signal on_action
 	ActionType.HORIZONTAL_SWAP,
 	ActionType.VERTICAL_SWAP,
 	ActionType.TRANSFORM_CROSS,
+	ActionType.ENEMY,
 ] : 
 	set(value):
 		action_stacks = value
@@ -29,7 +32,8 @@ enum ActionType {
 	HORIZONTAL_SWAP,
 	VERTICAL_SWAP,
 	TRANSFORM_CROSS,
-	BOMB_SQUARE
+	BOMB_SQUARE,
+	ENEMY
 }
 
 var dict: Dictionary[ActionType, Dictionary] = {
@@ -95,6 +99,13 @@ var dict: Dictionary[ActionType, Dictionary] = {
 		"action_zone": [
 		]
 	},
+	ActionType.ENEMY: {
+		"name": "ENEMY SPAWNER",
+		"function": spawn_enemy,
+		"action_zone": [
+			Vector2i(0, 0)
+		]
+	},
 	# ActionType.DELETE_CURRENT_ACTION: {
 	# 	"name": "DELETE CURRENT ACTION",
 	# 	"function": delete_current_action,
@@ -133,8 +144,8 @@ func act_tile(tile: Tile, event: InputEvent) -> void:
 	var action = action_stacks.pop_front()
 	var action_ui = action_ui_stacks.pop_front()
 	if action in dict:
-		dict[action]["function"].call(tile, event)
 		on_action.emit()
+		dict[action]["function"].call(tile, event)
 	else:
 		print("Action not found: ", action)
 	if !("temporary" in dict[action] && dict[action]["temporary"]):
@@ -184,12 +195,15 @@ func horizontal_swap(tile: Tile, event: InputEvent) -> void:
 
 func vertical_swap(tile: Tile, event: InputEvent) -> void:
 	tile.vertical_swap(map)
+	
+func spawn_enemy(tile: Tile, event: InputEvent) -> void:
+	var enemy := ENEMY.instantiate()
+	enemy.target = player
+	player.get_parent().add_child(enemy)
+	enemy.grid_position = tile.grid_position
 
 # func delete_current_action(tile: Tile) -> void:
-	
-	
 
-	
 @export var player: Player = null
 @export var map: Map = null
 @export var camera: Camera2D = null
