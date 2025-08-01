@@ -93,7 +93,9 @@ func _on_area_2d_input_event(viewport: Node, event: InputEvent, shape_idx: int) 
 			GameGlobal.act_tile(self, event)
 
 func tile_clicked(way: int) -> void:
-	tile_rotation = tile_rotation + way
+	tile_rotation = (tile_rotation + way) % 4
+	if tile_rotation < 0:
+		tile_rotation += 4
 
 func tile_hovered() -> void:	
 	pass
