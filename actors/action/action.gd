@@ -24,10 +24,13 @@ func _on_area_2d_body_entered(player: Node2D) -> void:
 	if !(player is Player):
 		return
 	
-	var action_ui = GameGlobal.new_action_ui(action)
-	
-	# TODO: action_ui.animation_player: A
-	GameGlobal.add_action(action, action_ui)
+	if "on_get_function" in GameGlobal.dict[action].keys():
+		GameGlobal.dict[action]["on_get_function"].call()
+	else:
+		var action_ui = GameGlobal.new_action_ui(action)
+		
+		# TODO: action_ui.animation_player: A
+		GameGlobal.add_action(action, action_ui)
 	queue_free()
 
 

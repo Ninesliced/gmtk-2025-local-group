@@ -93,7 +93,9 @@ func _on_area_2d_input_event(viewport: Node, event: InputEvent, shape_idx: int) 
 			GameGlobal.act_tile(self, event)
 
 func tile_clicked(way: int) -> void:
-	tile_rotation = tile_rotation + way
+	tile_rotation = (tile_rotation + way) % 4
+	if tile_rotation < 0:
+		tile_rotation += 4
 
 func tile_hovered() -> void:	
 	pass
@@ -116,12 +118,15 @@ func _on_area_body_exited(body: Node2D) -> void:
 
 func rotate_animated(new_rotation: int) -> void:
 	%StaticBody2D.rotation = PI / 2 * new_rotation
+	print(new_rotation)
+	print(%Sprite.rotation, " vs ", PI / 2 * new_rotation)
+	if abs(%Sprite.rotation - PI / 2 * new_rotation) > PI:
+		if %Sprite.rotation < PI / 2 * new_rotation:
+			%Sprite.rotation += PI * 2
+		else:
+			%Sprite.rotation -= PI * 2
+
 	var tween = get_tree().create_tween()
-	if abs(%Sprite.rotation) - abs(PI / 2 * new_rotation) > 0.01:
-		if %Sprite.rotation > 2*PI:
-			%Sprite.rotation -= 2 * PI
-		elif %Sprite.rotation < -2*PI:
-			%Sprite.rotation += 2 * PI
 	tween.tween_property(%Sprite, "rotation", PI / 2 * new_rotation, rotation_speed)
 	tween.set_ease(Tween.EASE_OUT)
 	tween.set_trans(Tween.TRANS_ELASTIC)
