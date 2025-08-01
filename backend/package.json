@@ -1,0 +1,13 @@
+{
+  "name": "express-leaderboard",
+  "version": "1.0.0",
+  "main": "app.js",
+  "scripts": {
+    "start": "node app.js"
+  },
+  "dependencies": {
+    "dotenv": "^16.0.3",
+    "express": "^4.18.2",
+    "pg": "^8.11.1"
+  }
+}
