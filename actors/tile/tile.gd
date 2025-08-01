@@ -73,7 +73,7 @@ func vertical_swap(map: Map) -> void:
 func _ready():
 	# Generation de l'action
 	if is_action_spawnable:
-		if randf() < chance_action_spawn:
+		if GameGlobal.rng.randf() < chance_action_spawn:
 			var action_load: PackedScene = load("res://actors/action/action.tscn")
 			var action = action_load.instantiate()
 			action.choose_an_random_action()
