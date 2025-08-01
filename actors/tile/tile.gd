@@ -159,7 +159,7 @@ func spawn_outline(action) -> void:
 	
 	for tile in tiles:
 		if is_action_valid:
-			tile.outline.modulate = Color(1, 1, 1, outline_max)
+			tile.outline.modulate = Color(1, 1, 1, 0.5)
 		else:
 			tile.outline.modulate = Color(1, 50./255., 50./255., 1)
 		tile.show_outline()
@@ -179,7 +179,7 @@ func low_visibility_outline() -> void:
 	
 	var color := outline.modulate
 	outline_tween = create_tween()
-	outline_tween.tween_property(outline, "modulate", Color(color.r, color.g, color.b, outline_min), 0.6)
+	outline_tween.tween_property(outline, "modulate", Color(color.r, color.g, color.b, 0.2), 0.6)
 	outline_tween.set_ease(Tween.EASE_IN_OUT)
 	outline_tween.tween_callback(high_visibility_outline)
 
@@ -189,7 +189,7 @@ func high_visibility_outline() -> void:
 	
 	var color := outline.modulate
 	outline_tween = create_tween()
-	outline_tween.tween_property(outline, "modulate", Color(color.r, color.g, color.b, outline_max), 0.6)
+	outline_tween.tween_property(outline, "modulate", Color(color.r, color.g, color.b, 0.5), 0.6)
 	outline_tween.set_ease(Tween.EASE_IN_OUT)
 	outline_tween.tween_callback(low_visibility_outline)
 
