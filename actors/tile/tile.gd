@@ -28,7 +28,7 @@ var outline_tween: Tween = null
 		var new_rotation = x
 		# if not is_inside_tree():
 		# 	return
-		if get_tree():
+		if is_inside_tree() && get_tree():
 			rotate_animated(new_rotation)
 		else:
 			%Sprite.rotation = PI / 2 * new_rotation
