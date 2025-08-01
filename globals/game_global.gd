@@ -176,11 +176,15 @@ func transform_cross(tile: Tile, event: InputEvent) -> void:
 		for j in range(-1,2):
 			var current_tile = map.grid[(tile.grid_position.x+i)%map.grid_size.x][(tile.grid_position.y+j)%map.grid_size.y]
 			var rnd = randi_range(0,1)
+			var new_tile: Tile = null
 			match rnd:
 				0:
-					current_tile.transform_to_another_type(load("res://actors/tile/four.tscn"))
+					new_tile = current_tile.transform_to_another_type(load("res://actors/tile/four.tscn"), false)
 				1:
-					current_tile.transform_to_another_type(load("res://actors/tile/full.tscn"))
+					new_tile = current_tile.transform_to_another_type(load("res://actors/tile/full.tscn"), false)
+
+			if new_tile && new_tile.tile_bigger:
+				new_tile.tile_bigger.play_full(abs((-i) * 0.1 + (-j) * 0.1))
 
 func transform_empty_bomb(tile: Tile, event: InputEvent) -> void:
 	for i in range(-1,2):
@@ -197,6 +201,7 @@ func vertical_swap(tile: Tile, event: InputEvent) -> void:
 	tile.vertical_swap(map)
 	
 func spawn_enemy(tile: Tile, event: InputEvent) -> void:
+	transform_empty_bomb(tile, event)
 	var enemy := ENEMY.instantiate()
 	enemy.target = player
 	player.get_parent().add_child(enemy)
