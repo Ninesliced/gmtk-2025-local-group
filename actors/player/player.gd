@@ -13,5 +13,8 @@ func _ready() -> void:
 	movementComponent.grid_position = Vector2i(grid_position)
 
 func _on_hitbox_component_area_entered(area:Area2D):
+	kill_player()
+
+func kill_player() -> void:
 	GameGlobal.is_game_have_start = false
 	TransitionManager.reload_scene("square_gradient")

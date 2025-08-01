@@ -1,34 +1,13 @@
-[gd_scene load_steps=8 format=3 uid="uid://b7fgpkbuim0vj"]
+[gd_scene load_steps=7 format=3 uid="uid://b7fgpkbuim0vj"]
 
 [ext_resource type="Script" uid="uid://btngkayrce3q0" path="res://actors/map/map.gd" id="1_fvbrk"]
 [ext_resource type="PackedScene" uid="uid://bqtjiyvuyby2g" path="res://actors/tile/t.tscn" id="3_hhh0s"]
 [ext_resource type="PackedScene" uid="uid://s2om5ju6lrn" path="res://actors/tile/four.tscn" id="3_wofu4"]
 [ext_resource type="PackedScene" uid="uid://d2wqej3jpir1g" path="res://actors/tile/line.tscn" id="4_e10xn"]
 [ext_resource type="PackedScene" uid="uid://b8ylngr75sxvp" path="res://actors/tile/corner.tscn" id="5_efm3v"]
+[ext_resource type="Material" uid="uid://di7gr2544ckj1" path="res://actors/tile/tile_material.tres" id="6_efm3v"]
 
-[sub_resource type="Shader" id="Shader_e10xn"]
-code = "shader_type canvas_item;
-uniform sampler2D screen_texture: hint_screen_texture, repeat_disable;
-
-void vertex() {
-	// Called for every vertex the material is visible on.
-}
-
-void fragment() {
-	COLOR = texture(screen_texture, SCREEN_UV);
-	// Called for every pixel the material is visible on.
-}
-
-//void light() {
-//	// Called for every pixel for every light affecting the CanvasItem.
-//	// Uncomment to replace the default light processing function with this one.
-//}
-"
-
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_efm3v"]
-shader = SubResource("Shader_e10xn")
-
-[node name="Map" type="Node2D"]
-material = SubResource("ShaderMaterial_efm3v")
+[node name="Map" type="CanvasGroup"]
+material = ExtResource("6_efm3v")
 script = ExtResource("1_fvbrk")
 tiles = Array[PackedScene]([ExtResource("3_hhh0s"), ExtResource("3_wofu4"), ExtResource("4_e10xn"), ExtResource("5_efm3v")])

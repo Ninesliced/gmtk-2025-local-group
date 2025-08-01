@@ -28,6 +28,13 @@ const ENEMY = preload("res://actors/enemy/enemy.tscn")
 var action_stack_backup = action_stacks.duplicate()
 var action_ui_stacks : Array[ActionUI] = []
 
+## include movement of player
+signal on_player_action
+var number_of_actions: int = 0:
+	set(value):
+		number_of_actions = value
+		on_player_action.emit()
+
 @export var action_textures : Dictionary[ActionType, Texture2D] = {}
 enum ActionType {
 	ROTATE_CLOCK,
@@ -196,6 +203,7 @@ func act_tile(tile: Tile, event: InputEvent) -> void:
 
 	on_action_stack_changed.emit()
 	GameGlobal.is_game_have_start = true
+	number_of_actions += 1
 
 func rotate_clock(tile: Tile, event: InputEvent) -> void:
 	if event.button_index == MOUSE_BUTTON_RIGHT:
@@ -306,7 +314,8 @@ func nop(_tile: Tile, _event: InputEvent):
 @export var camera: Camera2D = null
 var is_game_have_start: bool = false
 var rng = RandomNumberGenerator.new()
-
+var rng_seed = str(randi())
+var leaderboard = null
 
 @export var action_ui_scene: PackedScene = preload("res://scenes/ui/action_ui.tscn")
 @export var gap: int = 2

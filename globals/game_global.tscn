@@ -1,8 +1,12 @@
-[gd_scene load_steps=15 format=3 uid="uid://byxp1bvr3gl84"]
+[gd_scene load_steps=20 format=3 uid="uid://byxp1bvr3gl84"]
 
 [ext_resource type="Script" uid="uid://q581v4j3vmv4" path="res://globals/game_global.gd" id="1_gu6ii"]
 [ext_resource type="Texture2D" uid="uid://dgdfmi7kbpgg6" path="res://assets/images/actions/rotate.png" id="3_gc13h"]
-[ext_resource type="PackedScene" path="res://scenes/ui/actions_container.tscn" id="3_woeo0"]
+[ext_resource type="PackedScene" uid="uid://bi3akamp77mgs" path="res://globals/request/request.tscn" id="3_iovrn"]
+[ext_resource type="PackedScene" uid="uid://4laqtk44qchp" path="res://scenes/ui/actions_container.tscn" id="3_woeo0"]
+[ext_resource type="Script" uid="uid://cb33l6hekcc2j" path="res://globals/debug.gd" id="5_iovrn"]
+[ext_resource type="Theme" uid="uid://c06a0wpkb3qyr" path="res://resources/theme.tres" id="6_6cuha"]
+[ext_resource type="PackedScene" uid="uid://yyv5brw5hlqn" path="res://scenes/ui/death_scene.tscn" id="7_opdgg"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_gc13h"]
 atlas = ExtResource("3_gc13h")
@@ -48,6 +52,15 @@ region = Rect2(144, 0, 16, 16)
 atlas = ExtResource("3_gc13h")
 region = Rect2(160, 0, 16, 16)
 
+[sub_resource type="GDScript" id="GDScript_iovrn"]
+script/source = "extends Button
+
+
+func _on_pressed():
+	GameGlobal.player.kill_player()
+	pass # Replace with function body.
+"
+
 [node name="GameGlobal" type="Node"]
 script = ExtResource("1_gu6ii")
 action_stacks = Array[int]([9, 4, 0, 7])
@@ -65,6 +78,8 @@ action_textures = Dictionary[int, Texture2D]({
 10: SubResource("AtlasTexture_kyo4h")
 })
 
+[node name="Request" parent="." instance=ExtResource("3_iovrn")]
+
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
 
 [node name="ActionsContainer" parent="CanvasLayer" instance=ExtResource("3_woeo0")]
@@ -73,3 +88,22 @@ offset_left = 3.0
 offset_top = 4.0
 offset_right = 3.0
 offset_bottom = 4.0
+
+[node name="debug" type="Control" parent="CanvasLayer"]
+layout_mode = 3
+anchors_preset = 0
+offset_right = 320.0
+offset_bottom = 192.0
+script = ExtResource("5_iovrn")
+
+[node name="Button" type="Button" parent="CanvasLayer/debug"]
+layout_mode = 0
+offset_right = 32.0
+offset_bottom = 31.0
+theme = ExtResource("6_6cuha")
+text = "kill player"
+script = SubResource("GDScript_iovrn")
+
+[node name="DeathScene" parent="CanvasLayer" instance=ExtResource("7_opdgg")]
+
+[connection signal="pressed" from="CanvasLayer/debug/Button" to="CanvasLayer/debug/Button" method="_on_pressed"]

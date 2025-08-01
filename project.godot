@@ -36,6 +36,10 @@ window/snap/snap_2d_vertices_to_pixel=false
 
 enabled=PackedStringArray("res://addons/shaker/plugin.cfg")
 
+[gui]
+
+theme/custom_font="uid://c8js40sec6li4"
+
 [input]
 
 left={
@@ -78,6 +82,7 @@ debug={
 [rendering]
 
 textures/canvas_textures/default_texture_filter=0
+textures/vram_compression/import_etc2_astc=true
 environment/defaults/default_clear_color=Color(0.164706, 0.180392, 0.329412, 1)
 2d/snap/snap_2d_transforms_to_pixel=true
 2d/snap/snap_2d_vertices_to_pixel=true
