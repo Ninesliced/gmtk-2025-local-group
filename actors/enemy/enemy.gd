@@ -3,6 +3,8 @@ var target_move : Vector2i
 var is_moving : bool = false
 @onready var grid = GameGlobal.map.grid
 @export var target : Player 
+@onready var animated_sprite_2d: AnimatedSprite2D = $AnimatedSprite2D
+
 var grid_position : Vector2i = Vector2i(3, 2) :
 	set(value):
 		if is_moving:
@@ -72,9 +74,11 @@ func is_move_possible(move_direction: Vector2i) -> bool:
 		Vector2i(1, 0):
 			inside_direction = Tile.Rotation.RIGHT
 			outside_direction = Tile.Rotation.LEFT
+			animated_sprite_2d.flip_h = false
 		Vector2i(-1, 0):
 			inside_direction = Tile.Rotation.LEFT
 			outside_direction = Tile.Rotation.RIGHT
+			animated_sprite_2d.flip_h = true
 		Vector2i(0, 1):
 			inside_direction = Tile.Rotation.DOWN
 			outside_direction = Tile.Rotation.UP
