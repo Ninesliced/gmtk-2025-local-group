@@ -35,6 +35,12 @@ var number_of_actions: int = 0:
 		number_of_actions = value
 		on_player_action.emit()
 
+var score : int = 0:
+	set(value):
+		score = max(score, value)
+		%Score.text = "Score: " + str(score)
+
+
 @export var action_textures : Dictionary[ActionType, Texture2D] = {}
 enum ActionType {
 	ROTATE_CLOCK,

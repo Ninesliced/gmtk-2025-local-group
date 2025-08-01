@@ -3,9 +3,9 @@
 [ext_resource type="Script" uid="uid://q581v4j3vmv4" path="res://globals/game_global.gd" id="1_gu6ii"]
 [ext_resource type="Texture2D" uid="uid://dgdfmi7kbpgg6" path="res://assets/images/actions/rotate.png" id="3_gc13h"]
 [ext_resource type="PackedScene" uid="uid://bi3akamp77mgs" path="res://globals/request/request.tscn" id="3_iovrn"]
-[ext_resource type="PackedScene" path="res://scenes/ui/actions_container.tscn" id="3_woeo0"]
+[ext_resource type="PackedScene" uid="uid://4laqtk44qchp" path="res://scenes/ui/actions_container.tscn" id="3_woeo0"]
 [ext_resource type="Script" path="res://globals/debug.gd" id="5_iovrn"]
-[ext_resource type="Theme" path="res://resources/theme.tres" id="6_6cuha"]
+[ext_resource type="Theme" uid="uid://c06a0wpkb3qyr" path="res://resources/theme.tres" id="6_6cuha"]
 [ext_resource type="PackedScene" path="res://scenes/ui/death_scene.tscn" id="7_opdgg"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_gc13h"]
@@ -63,7 +63,7 @@ func _on_pressed():
 
 [node name="GameGlobal" type="Node"]
 script = ExtResource("1_gu6ii")
-action_stacks = Array[int]([9, 4, 0, 7])
+action_stacks = Array[int]([4, 0, 7])
 action_textures = Dictionary[int, Texture2D]({
 0: SubResource("AtlasTexture_gc13h"),
 1: SubResource("AtlasTexture_woeo0"),
@@ -105,5 +105,11 @@ text = "kill player"
 script = SubResource("GDScript_iovrn")
 
 [node name="DeathScene" parent="CanvasLayer" instance=ExtResource("7_opdgg")]
+
+[node name="Score" type="Label" parent="CanvasLayer"]
+unique_name_in_owner = true
+offset_right = 40.0
+offset_bottom = 23.0
+text = "Score: 0"
 
 [connection signal="pressed" from="CanvasLayer/debug/Button" to="CanvasLayer/debug/Button" method="_on_pressed"]

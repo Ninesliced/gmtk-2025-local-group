@@ -1,4 +1,4 @@
-[gd_scene load_steps=8 format=3 uid="uid://cqwxuni5qjhvu"]
+[gd_scene load_steps=7 format=3 uid="uid://cqwxuni5qjhvu"]
 
 [ext_resource type="PackedScene" uid="uid://b7fgpkbuim0vj" path="res://actors/map/Map.tscn" id="1_tbgi4"]
 [ext_resource type="Shader" uid="uid://jkmh5ksc1ejd" path="res://actors/tile/tile3D.gdshader" id="2_o6xl0"]
