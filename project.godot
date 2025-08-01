@@ -11,7 +11,7 @@ config_version=5
 [application]
 
 config/name="New Game Project"
-run/main_scene="uid://bkr0o2f3o21an"
+run/main_scene="uid://cqwxuni5qjhvu"
 config/features=PackedStringArray("4.4", "Forward Plus")
 config/icon="res://icon.svg"
 
@@ -73,6 +73,7 @@ debug={
 
 2d_physics/layer_2="player"
 2d_physics/layer_3="border"
+2d_physics/layer_5="Player"
 
 [rendering]
 

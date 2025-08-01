@@ -1,7 +1,27 @@
-[gd_scene load_steps=5 format=3 uid="uid://css33ay61epvg"]
+[gd_scene load_steps=15 format=3 uid="uid://css33ay61epvg"]
 
 [ext_resource type="Script" uid="uid://cqs1u51r42gli" path="res://actors/action/action.gd" id="1_thx0n"]
 [ext_resource type="Texture2D" uid="uid://dgdfmi7kbpgg6" path="res://assets/images/actions/rotate.png" id="2_0i1e8"]
+[ext_resource type="Shader" uid="uid://cby6kgsyom03b" path="res://actors/action/action.gdshader" id="2_iwvlb"]
+[ext_resource type="Script" uid="uid://cy11r33aig10l" path="res://actors/action/sinus.gd" id="3_c8ouv"]
+
+[sub_resource type="Gradient" id="Gradient_iwvlb"]
+
+[sub_resource type="FastNoiseLite" id="FastNoiseLite_ixysk"]
+noise_type = 2
+frequency = 0.0032
+
+[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_iwvlb"]
+seamless = true
+color_ramp = SubResource("Gradient_iwvlb")
+noise = SubResource("FastNoiseLite_ixysk")
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_ixysk"]
+shader = ExtResource("2_iwvlb")
+shader_parameter/dissolve_texture = SubResource("NoiseTexture2D_iwvlb")
+shader_parameter/v = 1.0
+shader_parameter/burn_size = 0.1
+shader_parameter/burn_color = Color(0.976471, 0.639216, 0.105882, 1)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_c8ouv"]
 atlas = ExtResource("2_0i1e8")
@@ -10,20 +30,73 @@ region = Rect2(0, 0, 16, 16)
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_0i1e8"]
 size = Vector2(14.625, 14.625)
 
+[sub_resource type="Animation" id="Animation_c8ouv"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:rotation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [0.0]
+}
+
+[sub_resource type="Animation" id="Animation_iwvlb"]
+resource_name = "consume"
+
+[sub_resource type="Animation" id="Animation_0i1e8"]
+resource_name = "idle"
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:rotation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.15, 0.65, 1),
+"transitions": PackedFloat32Array(0.659753, 1.41421, 1.6245, 1),
+"update": 0,
+"values": [0.0, 0.453786, -0.453786, 0.0]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_c8ouv"]
+_data = {
+&"RESET": SubResource("Animation_c8ouv"),
+&"consume": SubResource("Animation_iwvlb"),
+&"idle": SubResource("Animation_0i1e8")
+}
+
 [node name="Action" type="Node2D"]
 script = ExtResource("1_thx0n")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 unique_name_in_owner = true
+material = SubResource("ShaderMaterial_ixysk")
 position = Vector2(8, 8)
 texture = SubResource("AtlasTexture_c8ouv")
 
 [node name="Area2D" type="Area2D" parent="."]
+visible = false
 collision_layer = 16
 collision_mask = 16
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
 position = Vector2(8, 8)
 shape = SubResource("RectangleShape2D_0i1e8")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+&"": SubResource("AnimationLibrary_c8ouv")
+}
+speed_scale = 0.5
+
+[node name="Sinus" type="Node" parent="." node_paths=PackedStringArray("target")]
+script = ExtResource("3_c8ouv")
+target = NodePath("../Sprite2D")
 
 [connection signal="body_entered" from="Area2D" to="." method="_on_area_2d_body_entered"]
