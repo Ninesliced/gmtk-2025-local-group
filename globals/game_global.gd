@@ -15,6 +15,7 @@ const ENEMY = preload("res://actors/enemy/enemy.tscn")
 	ActionType.VERTICAL_SWAP,
 	ActionType.TRANSFORM_CROSS,
 	ActionType.ENEMY,
+	ActionType.DELETE_CURRENT_ACTION
 ] : 
 	set(value):
 		action_stacks = value
@@ -33,7 +34,8 @@ enum ActionType {
 	VERTICAL_SWAP,
 	TRANSFORM_CROSS,
 	BOMB_SQUARE,
-	ENEMY
+	ENEMY,
+	DELETE_CURRENT_ACTION
 }
 
 var dict: Dictionary[ActionType, Dictionary] = {
@@ -106,12 +108,16 @@ var dict: Dictionary[ActionType, Dictionary] = {
 			Vector2i(0, 0)
 		]
 	},
-	# ActionType.DELETE_CURRENT_ACTION: {
-	# 	"name": "DELETE CURRENT ACTION",
-	# 	"function": delete_current_action,
-	# },
-
+	ActionType.DELETE_CURRENT_ACTION: {
+		"name": "DELETE CURRENT ACTION",
+		"function": nop,
+		"on_get_function": delete_current_action,
+		"temporary": true,
+		"action_zone": [],
+		"probability": 0.6
+	}
 }
+
 
 func _ready():
 	print("test: ", action_stacks)
@@ -127,6 +133,8 @@ func _ready():
 	GameGlobal.on_action_stack_changed.connect(_update_size)
 
 func act_tile(tile: Tile, event: InputEvent) -> void:
+	if action_stacks.size() == 0:
+		_update_size()
 	var next_action: ActionType = action_stacks[0]
 	var action_property = dict[next_action]
 	var action_zone = action_property["action_zone"]
@@ -202,7 +210,17 @@ func spawn_enemy(tile: Tile, event: InputEvent) -> void:
 	player.get_parent().add_child(enemy)
 	enemy.grid_position = tile.grid_position
 
-# func delete_current_action(tile: Tile) -> void:
+func delete_current_action() -> void:
+	print("Delete current Action")
+	GameGlobal.action_stacks.pop_front()
+	var action_ui = GameGlobal.action_ui_stacks.pop_front()
+	action_ui.queue_free()
+	# if action_stacks.size() == 0:
+	_update_size()
+
+# No operation
+func nop(tile: Tile, event: InputEvent):
+	return
 
 @export var player: Player = null
 @export var map: Map = null
@@ -219,6 +237,8 @@ var actions_ui: Array[ActionUI] = []
 
 
 func _update_size() -> void:
+	if actions_ui.size() == 0:
+		add_action(ActionType.ROTATE_CLOCK, new_action_ui(ActionType.ROTATE_CLOCK))
 	var last_ui: ActionUI = actions_ui[actions_ui.size() - 1]
 	last_ui.animation_player.play("pop")
 	last_ui.position.x = (actions_ui.size() + 1) * (16 + gap)
