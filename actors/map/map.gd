@@ -21,7 +21,7 @@ func _ready() -> void:
 	_update_grid()
 	print("Generate grid")
 	generate_grid()
-	# print(GameGlobal)
+	# print(GameGlobal)	
 
 func _update_grid() -> void:
 	for child in grid:

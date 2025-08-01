@@ -1,0 +1,18 @@
+[gd_scene load_steps=2 format=3 uid="uid://bi3akamp77mgs"]
+
+[ext_resource type="Script" uid="uid://ifhmq7ln8yfv" path="res://globals/request/request.gd" id="1_gph0n"]
+
+[node name="Request" type="Node2D"]
+script = ExtResource("1_gph0n")
+
+[node name="HTTPRequestGetLeaderboard" type="HTTPRequest" parent="."]
+unique_name_in_owner = true
+
+[node name="HTTPRequestGetRank" type="HTTPRequest" parent="."]
+unique_name_in_owner = true
+
+[node name="HTTPRequestSubmit" type="HTTPRequest" parent="."]
+unique_name_in_owner = true
+
+[node name="HTTPRequestGetSeed" type="HTTPRequest" parent="."]
+unique_name_in_owner = true
