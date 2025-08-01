@@ -110,9 +110,9 @@ func _process(delta: float) -> void:
 func _on_area_body_exited(body: Node2D) -> void:
 	if not body is Player:
 		return
+	is_player_inside = false
 	if !_transform_to_full:
 		return
-	is_player_inside = false
 	_transform_to_full = false
 	transform_to_another_type(load("res://actors/tile/full.tscn"))
 
@@ -145,6 +145,7 @@ func translation_animated(new_translation: Vector2) -> void:
 
 func transform_to_another_type(new_tile: PackedScene, play_animation: bool = true) -> Tile:
 	if is_player_inside:
+		print("Player is still inside the tile, cannot transform")
 		return null
 	var tile_instance: Tile = new_tile.instantiate()
 	tile_instance.position = position
