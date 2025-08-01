@@ -27,9 +27,6 @@ size = Vector2(31.125, 31.125)
 script = ExtResource("2_xy1wa")
 timer_before_unblock = 1.0
 
-[node name="Shape" parent="Area" index="0"]
-visible = true
-
 [node name="3DShader" parent="." index="1"]
 material = SubResource("ShaderMaterial_npfhd")
 

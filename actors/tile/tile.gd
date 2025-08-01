@@ -16,10 +16,12 @@ enum Rotation {
 
 @onready var tile_bigger: AnimationPlayer = %TileBigger
 @onready var outline : Node2D = %Outline
+@onready var seasons = ["spring","summer","fall","winter"]
 var outline_color: Color = Color(1, 1, 1, 1)
 var outline_tween: Tween = null
 @export var outline_min = 0.1
 @export var outline_max = 0.5
+@onready var sprite: AnimatedSprite2D = %Sprite
 
 @export var rotation_speed: float = 0.2
 @export var tile_rotation : Rotation = Rotation.UP : 
@@ -79,6 +81,8 @@ func vertical_swap(map: Map) -> void:
 
 func _ready():
 	# Generation de l'action
+	sprite.speed_scale = 0
+	
 	if is_action_spawnable:
 		if GameGlobal.rng.randf() < chance_action_spawn:
 			var action_load: PackedScene = load("res://actors/action/action.tscn")
@@ -87,6 +91,11 @@ func _ready():
 			action.position = Vector2i(8,8)
 			%ActionHolder.add_child(action)
 	pass
+	
+	var season_len : int = 25 / 4 #horrible valeur 25 = GameGlobal.map.grid_size.x hardcode
+	var i : int = grid_position.x / season_len % 4
+	var season = seasons[i]
+	sprite.play(season)
 
 func _on_area_2d_mouse_entered() -> void:
 	tile_hovered()
