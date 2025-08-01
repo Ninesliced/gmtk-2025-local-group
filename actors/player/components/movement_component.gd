@@ -1,5 +1,7 @@
 extends Node
 
+class_name MovementComponent
+
 var parent : Player
 
 var is_moving : bool = false
