@@ -80,7 +80,7 @@ var dict: Dictionary[ActionType, Dictionary] = {
 	ActionType.TRANSFORM_CROSS: {
 		"name": "Transform Empty",
 		"function": transform_cross,
-		"probability": 0.3,
+		"probability": 0.05,
 		"action_zone": [
 			Vector2i(0, 0),
 			Vector2i(-1, 0),
@@ -114,7 +114,7 @@ var dict: Dictionary[ActionType, Dictionary] = {
 		"on_get_function": delete_current_action,
 		"temporary": true,
 		"action_zone": [],
-		"probability": 0.6
+		"probability": 0.1
 	}
 }
 
