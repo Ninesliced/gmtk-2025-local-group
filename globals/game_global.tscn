@@ -1,8 +1,9 @@
-[gd_scene load_steps=15 format=3 uid="uid://byxp1bvr3gl84"]
+[gd_scene load_steps=16 format=3 uid="uid://byxp1bvr3gl84"]
 
 [ext_resource type="Script" uid="uid://q581v4j3vmv4" path="res://globals/game_global.gd" id="1_gu6ii"]
 [ext_resource type="Texture2D" uid="uid://dgdfmi7kbpgg6" path="res://assets/images/actions/rotate.png" id="3_gc13h"]
-[ext_resource type="PackedScene" uid="uid://4laqtk44qchp" path="res://scenes/ui/actions_container.tscn" id="3_woeo0"]
+[ext_resource type="PackedScene" uid="uid://bi3akamp77mgs" path="res://globals/request/request.tscn" id="3_iovrn"]
+[ext_resource type="PackedScene" path="res://scenes/ui/actions_container.tscn" id="3_woeo0"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_gc13h"]
 atlas = ExtResource("3_gc13h")
@@ -64,6 +65,8 @@ action_textures = Dictionary[int, Texture2D]({
 9: SubResource("AtlasTexture_lcri1"),
 10: SubResource("AtlasTexture_kyo4h")
 })
+
+[node name="Request" parent="." instance=ExtResource("3_iovrn")]
 
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
 

@@ -95,7 +95,7 @@ scale = Vector2(0.775, 0.775)
 shape = SubResource("RectangleShape2D_4t6fi")
 debug_color = Color(0, 0.6, 0.701961, 0.0745098)
 
-[node name="3DShader" type="CanvasGroup" parent="."]
+[node name="3DShader" type="Node2D" parent="."]
 material = ExtResource("2_iawyn")
 position = Vector2(16, 16)
 

@@ -1,5 +1,5 @@
 @tool
-extends Node2D
+extends CanvasGroup
 
 class_name Map
 
@@ -21,7 +21,7 @@ func _ready() -> void:
 	_update_grid()
 	print("Generate grid")
 	generate_grid()
-	# print(GameGlobal)
+	# print(GameGlobal)	
 
 func _update_grid() -> void:
 	for child in grid:
@@ -37,7 +37,7 @@ func _update_grid() -> void:
 		grid.append(column)
 
 func generate_grid() -> void:
-	GameGlobal.rng.seed = randi()
+	GameGlobal.rng.seed = hash(GameGlobal.rng_seed)
 	for x in range(grid_size.x):
 		for y in range(grid_size.y):
 			if grid[x][y] == null:

@@ -315,7 +315,8 @@ func nop(_tile: Tile, _event: InputEvent):
 @export var camera: Camera2D = null
 var is_game_have_start: bool = false
 var rng = RandomNumberGenerator.new()
-
+var rng_seed = str(randi())
+var leaderboard = null
 
 @export var action_ui_scene: PackedScene = preload("res://scenes/ui/action_ui.tscn")
 @export var gap: int = 2
