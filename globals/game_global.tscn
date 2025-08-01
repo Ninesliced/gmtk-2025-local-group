@@ -32,6 +32,10 @@ region = Rect2(96, 0, 16, 16)
 atlas = ExtResource("3_gc13h")
 region = Rect2(112, 0, 16, 16)
 
+[sub_resource type="AtlasTexture" id="AtlasTexture_672fk"]
+atlas = ExtResource("3_gc13h")
+region = Rect2(112, 0, 16, 16)
+
 [sub_resource type="AtlasTexture" id="AtlasTexture_xofr3"]
 atlas = ExtResource("3_gc13h")
 region = Rect2(55, 0, 16, 16)
