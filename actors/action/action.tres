@@ -1,24 +1,9 @@
-[gd_resource type="ShaderMaterial" load_steps=5 format=3 uid="uid://ctsbqcehyf6ux"]
+[gd_resource type="ShaderMaterial" load_steps=2 format=3 uid="uid://ctsbqcehyf6ux"]
 
-[ext_resource type="Shader" uid="uid://cby6kgsyom03b" path="res://actors/action/action.gdshader" id="1_fqh66"]
-
-[sub_resource type="Gradient" id="Gradient_iwvlb"]
-
-[sub_resource type="FastNoiseLite" id="FastNoiseLite_ixysk"]
-noise_type = 2
-frequency = 0.0032
-offset = Vector3(258.43, 0, 0)
-
-[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_iwvlb"]
-invert = true
-seamless = true
-color_ramp = SubResource("Gradient_iwvlb")
-noise = SubResource("FastNoiseLite_ixysk")
+[ext_resource type="Shader" uid="uid://birv8v71nvo3v" path="res://addons/shaker/components/vfx/shaders/fill_color.gdshader" id="1_fqh66"]
 
 [resource]
 resource_local_to_scene = true
 shader = ExtResource("1_fqh66")
-shader_parameter/dissolve_texture = SubResource("NoiseTexture2D_iwvlb")
-shader_parameter/v = 1.0
-shader_parameter/burn_size = 0.1
-shader_parameter/burn_color = Color(0.976471, 0.639216, 0.105882, 1)
+shader_parameter/color = Color(1, 1, 1, 1)
+shader_parameter/force = 0.0
