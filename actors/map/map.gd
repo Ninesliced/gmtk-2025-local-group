@@ -19,6 +19,7 @@ var grid : Array[Array] = []
 func _ready() -> void:
 	GameGlobal.map = $"."
 	_update_grid()
+	print("Generate grid")
 	generate_grid()
 	# print(GameGlobal)
 
@@ -37,13 +38,14 @@ func _update_grid() -> void:
 		grid.append(column)
 
 func generate_grid() -> void:
+	GameGlobal.rng.seed = randi()
 	for x in range(grid_size.x):
 		for y in range(grid_size.y):
 			if grid[x][y] == null:
-				var selected_tile: Resource = tiles[randi() % tiles.size()]
+				var selected_tile: Resource = tiles[GameGlobal.rng.randi() % tiles.size()]
 				var tile_scene = load(selected_tile.resource_path)
 				var tile = tile_scene.instantiate()
-				tile.tile_rotation = randi() % 4
+				tile.tile_rotation = GameGlobal.rng.randi() % 4
 				tile.position = Vector2i(x, y) * tile_size
 				tile.grid_position = (Vector2i(x, y))
 				add_child(tile)

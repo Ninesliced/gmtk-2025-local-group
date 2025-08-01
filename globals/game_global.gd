@@ -152,6 +152,7 @@ func act_tile(tile: Tile, event: InputEvent) -> void:
 	var action = action_stacks.pop_front()
 	var action_ui = action_ui_stacks.pop_front()
 	if action in dict:
+		tile.on_action(next_action)
 		on_action.emit()
 		dict[action]["function"].call(tile, event)
 	else:
@@ -183,7 +184,7 @@ func transform_cross(tile: Tile, event: InputEvent) -> void:
 	for i in range(-1,2):
 		for j in range(-1,2):
 			var current_tile = map.grid[(tile.grid_position.x+i)%map.grid_size.x][(tile.grid_position.y+j)%map.grid_size.y]
-			var rnd = randi_range(0,1)
+			var rnd = rng.randi_range(0,1)
 			var new_tile: Tile = null
 			match rnd:
 				0:
@@ -231,7 +232,7 @@ func nop(tile: Tile, event: InputEvent):
 @export var map: Map = null
 @export var camera: Camera2D = null
 var is_game_have_start: bool = false
-
+var rng = RandomNumberGenerator.new()
 
 
 @export var action_ui_scene: PackedScene = preload("res://scenes/ui/action_ui.tscn")
@@ -291,7 +292,7 @@ func pick_weighted_random_action() -> ActionType:
 		cumulative.append({ "action": action, "threshold": acc })
 
 	# 4. Tirage
-	var r = randf()
+	var r = rng.randf()
 	for entry in cumulative:
 		if r <= entry.threshold:
 			return entry.action
