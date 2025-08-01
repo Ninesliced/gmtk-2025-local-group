@@ -20,3 +20,4 @@ script = ExtResource("2_t7646")
 
 [node name="Player" parent="." instance=ExtResource("1_fk7tf")]
 position = Vector2(113, 79)
+collision_layer = 1

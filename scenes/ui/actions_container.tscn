@@ -1,6 +1,4 @@
-[gd_scene load_steps=2 format=3 uid="uid://4laqtk44qchp"]
-
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_5frcr"]
+[gd_scene load_steps=0 format=3 uid="uid://4laqtk44qchp"]
 
 [node name="ActionsContainer" type="Control"]
 material = SubResource("ShaderMaterial_5frcr")
