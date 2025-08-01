@@ -21,19 +21,19 @@ shader = ExtResource("4_bhu5p")
 shader_parameter/color = Color(1, 1, 1, 1)
 shader_parameter/force = 0.0
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_xtk13"]
+[sub_resource type="AtlasTexture" id="AtlasTexture_ufbh8"]
 atlas = ExtResource("2_xtk13")
-region = Rect2(64, 32, 32, 32)
+region = Rect2(128, 64, 32, 32)
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_snc5v"]
+[sub_resource type="AtlasTexture" id="AtlasTexture_bhu5p"]
 atlas = ExtResource("2_xtk13")
-region = Rect2(32, 32, 32, 32)
+region = Rect2(128, 32, 32, 32)
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_ufbh8"]
 animations = [{
 "frames": [{
 "duration": 1.0,
-"texture": SubResource("AtlasTexture_xtk13")
+"texture": SubResource("AtlasTexture_ufbh8")
 }],
 "loop": true,
 "name": &"spike_in",
@@ -41,7 +41,7 @@ animations = [{
 }, {
 "frames": [{
 "duration": 1.0,
-"texture": SubResource("AtlasTexture_snc5v")
+"texture": SubResource("AtlasTexture_bhu5p")
 }],
 "loop": true,
 "name": &"spike_out",
@@ -60,7 +60,7 @@ material = SubResource("ShaderMaterial_0vltg")
 [node name="Sprite" parent="3DShader" index="0"]
 material = SubResource("ShaderMaterial_iq723")
 sprite_frames = SubResource("SpriteFrames_ufbh8")
-animation = &"spike_in"
+animation = &"spike_out"
 autoplay = "spike_in"
 
 [node name="AreaSpike" type="Area2D" parent="." index="5"]
