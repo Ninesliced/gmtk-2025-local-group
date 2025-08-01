@@ -46,6 +46,9 @@ var is_hover : bool = false
 var is_player_inside: bool = false
 ### PUBLIC
 
+func is_transform_to_full() -> bool:
+	return _transform_to_full
+
 func set_grid_position(new_grid_position: Vector2i) -> void:
 	grid_position = new_grid_position
 

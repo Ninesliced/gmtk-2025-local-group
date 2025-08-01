@@ -1,11 +1,11 @@
 extends Node2D
 
 @export var action: GameGlobal.ActionType = GameGlobal.ActionType.ROTATE_CLOCK
-
+var deleting: bool = false
 func _ready() -> void:
 	%Sprite2D.texture = GameGlobal.action_textures[action]
 	
-
+@onready var animation_player: AnimationPlayer = $AnimationPlayer
 """
 func _on_area_2d_area_entered(area: Area2D) -> void:
 	var player = area.get_parent()
@@ -20,6 +20,8 @@ func _on_area_2d_area_entered(area: Area2D) -> void:
 """
 
 func _on_area_2d_body_entered(player: Node2D) -> void:
+	if deleting:
+		return
 	print("Entered", player)
 	if !(player is Player):
 		return
@@ -31,6 +33,11 @@ func _on_area_2d_body_entered(player: Node2D) -> void:
 		
 		# TODO: action_ui.animation_player: A
 		GameGlobal.add_action(action, action_ui)
+	deleting = true
+
+	animation_player.play("consume")
+	await animation_player.animation_finished
+	
 	queue_free()
 
 

@@ -1,8 +1,8 @@
 shader_type canvas_item;
 
 uniform sampler2D dissolve_texture : source_color;
-uniform float v : hint_range(0,1);
-uniform float burn_size: hint_range(0.0, 1.0, 0.01);
+uniform float v : hint_range(-0.1,1);
+uniform float burn_size: hint_range(-0.1, 1.0, 0.01);
 uniform vec4 burn_color: source_color;
 
 void fragment(){

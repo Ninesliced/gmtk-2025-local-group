@@ -1,4 +1,4 @@
-[gd_scene load_steps=11 format=3 uid="uid://b3pjr7rfln6g1"]
+[gd_scene load_steps=11 format=3 uid="uid://b5yy05msh4uyu"]
 
 [ext_resource type="PackedScene" uid="uid://bkuf38ni4q62k" path="res://actors/tile/Tile.tscn" id="1_rwwjv"]
 [ext_resource type="Texture2D" uid="uid://dabe5dmwfsby2" path="res://assets/spritesheet.png" id="2_qklxe"]
@@ -44,9 +44,6 @@ size = Vector2(6.25, 6.25)
 [node name="Area" parent="." index="0"]
 collision_mask = 17
 
-[node name="Shape" parent="Area" index="0"]
-visible = true
-
 [node name="3DShader" parent="." index="1"]
 material = SubResource("ShaderMaterial_pd3d8")
 
@@ -55,7 +52,7 @@ material = SubResource("ShaderMaterial_fb66d")
 sprite_frames = SubResource("SpriteFrames_amehe")
 animation = &"new_animation"
 
-[node name="StaticBody2D" parent="." index="2"]
+[node name="StaticBody2D" parent="." index="3"]
 visible = false
 
 [node name="TopLeftShape" type="CollisionShape2D" parent="StaticBody2D" index="0"]
@@ -74,5 +71,6 @@ shape = SubResource("RectangleShape2D_76t4f")
 position = Vector2(12, 12)
 shape = SubResource("RectangleShape2D_76t4f")
 
-[node name="CursedComponent" type="Node" parent="." index="5"]
+[node name="CursedComponent" type="Node" parent="." index="5" node_paths=PackedStringArray("area")]
 script = ExtResource("5_fb66d")
+area = NodePath("../Area")
