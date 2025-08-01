@@ -19,7 +19,7 @@ grid_position = Vector2(3, 2)
 
 [node name="Border" parent="." instance=ExtResource("3_o6xl0")]
 position = Vector2(-27, -16)
-speed = 0.0
+speed = 15.0
 
 [node name="Camera2D" type="Camera2D" parent="."]
 position = Vector2(112, 80)

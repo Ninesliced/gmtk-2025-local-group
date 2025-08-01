@@ -64,3 +64,7 @@ action_textures = Dictionary[int, Texture2D]({
 
 [node name="ActionsContainer" parent="CanvasLayer" instance=ExtResource("3_woeo0")]
 unique_name_in_owner = true
+offset_left = 3.0
+offset_top = 4.0
+offset_right = 3.0
+offset_bottom = 4.0

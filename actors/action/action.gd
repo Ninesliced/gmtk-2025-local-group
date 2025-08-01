@@ -1,6 +1,6 @@
 extends Node2D
 
-@export var action: GameGlobal.ActionType = 0
+@export var action: GameGlobal.ActionType = GameGlobal.ActionType.ROTATE_CLOCK
 
 func _ready() -> void:
 	%Sprite2D.texture = GameGlobal.action_textures[action]

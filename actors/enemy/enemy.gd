@@ -37,7 +37,7 @@ func get_new_target_tile():
 	var can_move := Vector2i((int)(is_move_possible(Vector2(move_direction.x,0))),(int)(is_move_possible(Vector2(0,move_direction.y))))
 
 	if can_move.x and can_move.y:
-		match randi_range(0,1):
+		match GameGlobal.rng.randi_range(0,1):
 			0:
 				move_direction = Vector2(move_direction.x,0)
 			1:
@@ -53,7 +53,7 @@ func get_new_target_tile():
 		grid_position += move_direction
 		animated_sprite_2d.play("jump")
 	elif abs(move_direction.y) >= 1 and abs(move_direction.x) >= 1:
-		match randi_range(0,1):
+		match GameGlobal.rng.randi_range(0,1):
 			0:
 				target_move = Vector2(move_direction.x,0)
 			1:

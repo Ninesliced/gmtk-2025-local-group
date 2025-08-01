@@ -2,8 +2,8 @@
 
 [ext_resource type="Script" uid="uid://cqs1u51r42gli" path="res://actors/action/action.gd" id="1_thx0n"]
 [ext_resource type="Texture2D" uid="uid://dgdfmi7kbpgg6" path="res://assets/images/actions/rotate.png" id="2_0i1e8"]
-[ext_resource type="Shader" path="res://actors/action/action.gdshader" id="2_iwvlb"]
-[ext_resource type="Script" path="res://actors/action/sinus.gd" id="3_c8ouv"]
+[ext_resource type="Shader" uid="uid://cby6kgsyom03b" path="res://actors/action/action.gdshader" id="2_iwvlb"]
+[ext_resource type="Script" uid="uid://cy11r33aig10l" path="res://actors/action/sinus.gd" id="3_c8ouv"]
 
 [sub_resource type="Gradient" id="Gradient_iwvlb"]
 
