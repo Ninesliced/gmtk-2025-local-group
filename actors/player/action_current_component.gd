@@ -13,7 +13,7 @@ func _ready() -> void:
 	GameGlobal.on_action_stack_changed.connect(set_current_action)
 	set_current_action()
 
-func _process(delta: float) -> void:
+func _process(_delta: float) -> void:
 	pass
 func set_current_action():
 	if GameGlobal.action_stacks.size() == 0:

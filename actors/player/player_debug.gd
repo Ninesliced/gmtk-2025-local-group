@@ -4,7 +4,7 @@ extends Node2D
 
 @onready var label: Label = $Label
 
-func _process(delta: float) -> void:
+func _process(_delta: float) -> void:
 	if DebugGlobal.is_debug:
 		show()
 	else:

@@ -224,7 +224,7 @@ func delete_current_action() -> void:
 	_update_size()
 
 # No operation
-func nop(tile: Tile, event: InputEvent):
+func nop(_tile: Tile, _event: InputEvent):
 	return
 
 @export var player: Player = null
@@ -311,4 +311,4 @@ func reset_game() -> void:
 		actions_ui.append(action_ui)
 		_update_size()
 	GameGlobal.action_ui_stacks = actions_ui
-	GameGlobal.on_action_stack_changed.connect(_update_size)
+	# GameGlobal.on_action_stack_changed.connect(_update_size)

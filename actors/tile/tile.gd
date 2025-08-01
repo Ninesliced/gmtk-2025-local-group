@@ -10,15 +10,18 @@ enum Rotation {
 	LEFT = 3
 }
 
-signal on_tile_full
+# Never used
+# signal on_tile_full
 
 
 @onready var tile_bigger: AnimationPlayer = %TileBigger
 @export var rotation_speed: float = 0.2
 @export var tile_rotation : Rotation = Rotation.UP : 
 	set(x):
-		var clockwise = x > tile_rotation
+		# var clockwise = x > tile_rotation
 		var new_rotation = x
+		if not is_inside_tree():
+			return
 		if get_tree():
 			rotate_animated(new_rotation)
 		else:
@@ -41,7 +44,6 @@ func set_grid_position(new_grid_position: Vector2i) -> void:
 	grid_position = new_grid_position
 
 func rotate_clock() -> void:
-	print("rotating clockwise")
 	tile_clicked(1)
 
 func rotate_counter_clock() -> void:
@@ -50,7 +52,7 @@ func rotate_counter_clock() -> void:
 func swap(map: Map,vector : Vector2i) -> void:
 	var tile_size = map.tile_size
 	
-	var real_co_vector = vector * tile_size
+	# var real_co_vector = vector * tile_size
 	var neighbor = map.grid[(grid_position.x+vector.x)%map.grid_size.x][(grid_position.y+vector.y)%map.grid_size.y]
 	
 	translation_animated((grid_position + vector)%map.grid_size * tile_size - grid_position* tile_size)
