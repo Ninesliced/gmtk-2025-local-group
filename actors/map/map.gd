@@ -17,10 +17,10 @@ class_name Map
 var grid : Array[Array] = []
 
 func _ready() -> void:
+	GameGlobal.map = $"."
 	_update_grid()
 	generate_grid()
 	# print(GameGlobal)
-	GameGlobal.map = $"."
 
 func _update_grid() -> void:
 	for child in grid:

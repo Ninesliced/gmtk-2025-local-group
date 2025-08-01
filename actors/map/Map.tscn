@@ -1,11 +1,10 @@
-[gd_scene load_steps=9 format=3 uid="uid://b7fgpkbuim0vj"]
+[gd_scene load_steps=8 format=3 uid="uid://b7fgpkbuim0vj"]
 
 [ext_resource type="Script" uid="uid://btngkayrce3q0" path="res://actors/map/map.gd" id="1_fvbrk"]
 [ext_resource type="PackedScene" uid="uid://bqtjiyvuyby2g" path="res://actors/tile/t.tscn" id="3_hhh0s"]
 [ext_resource type="PackedScene" uid="uid://s2om5ju6lrn" path="res://actors/tile/four.tscn" id="3_wofu4"]
 [ext_resource type="PackedScene" uid="uid://d2wqej3jpir1g" path="res://actors/tile/line.tscn" id="4_e10xn"]
 [ext_resource type="PackedScene" uid="uid://b8ylngr75sxvp" path="res://actors/tile/corner.tscn" id="5_efm3v"]
-[ext_resource type="PackedScene" uid="uid://lch1hj6crvy8" path="res://actors/tile/spike.tscn" id="6_efm3v"]
 
 [sub_resource type="Shader" id="Shader_e10xn"]
 code = "shader_type canvas_item;
@@ -32,4 +31,4 @@ shader = SubResource("Shader_e10xn")
 [node name="Map" type="Node2D"]
 material = SubResource("ShaderMaterial_efm3v")
 script = ExtResource("1_fvbrk")
-tiles = Array[PackedScene]([ExtResource("3_hhh0s"), ExtResource("3_wofu4"), ExtResource("4_e10xn"), ExtResource("5_efm3v"), ExtResource("6_efm3v")])
+tiles = Array[PackedScene]([ExtResource("3_hhh0s"), ExtResource("3_wofu4"), ExtResource("4_e10xn"), ExtResource("5_efm3v")])
