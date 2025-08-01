@@ -10,6 +10,7 @@ const ENEMY = preload("res://actors/enemy/enemy.tscn")
 	ActionType.ROTATE_COUNTER_CLOCK,
 	ActionType.ROTATE_COUNTER_CLOCK,
 	ActionType.TRANSFORM_EMPTY,
+	ActionType.TRANSFORM_EMPTY_CURSED,
 	ActionType.HORIZONTAL_SWAP,
 	ActionType.HORIZONTAL_SWAP,
 	ActionType.VERTICAL_SWAP,
@@ -38,7 +39,8 @@ enum ActionType {
 	BOMB_SQUARE,
 	ENEMY,
 	DELETE_CURRENT_ACTION,
-	VERTICAL_SPIKE
+	VERTICAL_SPIKE,
+	TRANSFORM_EMPTY_CURSED,
 }
 
 var dict: Dictionary[ActionType, Dictionary] = {
@@ -63,6 +65,17 @@ var dict: Dictionary[ActionType, Dictionary] = {
 		"action_zone": [
 			Vector2i(0, 0)
 		]
+	},
+	ActionType.TRANSFORM_EMPTY_CURSED: {
+		"name": "Transform  in a row",
+		"function": transform_empty_cursed,
+		"action_zone": [
+			Vector2i(0, 0),
+			Vector2i(1, 0),
+			Vector2i(2, 0),
+			Vector2i(3, 0)
+		],
+		"temporary": true,
 	},
 	ActionType.HORIZONTAL_SWAP: {
 		"name": "SWAP HORIZONTAL TILES",
@@ -193,7 +206,13 @@ func rotate_counter_clock(tile: Tile, event: InputEvent) -> void:
 
 func transform_empty(tile: Tile, event: InputEvent) -> void:
 	tile.transform_to_another_type(load("res://actors/tile/four.tscn"))
-	
+
+func transform_empty_cursed(tile: Tile, event: InputEvent) -> void:
+	var grid_pos = tile.grid_position
+	for i in range(0, 4):
+		var current_tile = map.grid[(grid_pos.x + i) % map.grid_size.x][grid_pos.y]
+		current_tile.transform_to_another_type(load("res://actors/tile/cursed_four.tscn"),true)
+		await get_tree().create_timer(0.1).timeout
 func transform_cross(tile: Tile, event: InputEvent) -> void:
 	for i in range(-1,2):
 		for j in range(-1,2):
@@ -348,3 +367,4 @@ func reset_game() -> void:
 		actions_ui.append(action_ui)
 		_update_size()
 	GameGlobal.action_ui_stacks = actions_ui
+	# GameGlobal.on_action_stack_changed.connect(_update_size)

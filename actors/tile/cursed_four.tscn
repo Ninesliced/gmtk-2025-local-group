@@ -9,8 +9,8 @@
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_pd3d8"]
 resource_local_to_scene = true
 shader = ExtResource("3_fb66d")
-shader_parameter/ground_col = Color(0.25098, 0.196078, 0.32549, 1)
-shader_parameter/wall_col = Color(0.737255, 0.290196, 0.611765, 1)
+shader_parameter/ground_col = Color(0.278431, 0.227451, 0.258824, 1)
+shader_parameter/wall_col = Color(0.396078, 0.466667, 0.270588, 1)
 shader_parameter/wall_col2 = Color(0.1323, 0.1323, 0.21, 1)
 shader_parameter/color_fill = Color(1, 1, 1, 1)
 shader_parameter/force = 0.0
