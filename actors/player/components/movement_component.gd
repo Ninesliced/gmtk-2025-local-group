@@ -15,6 +15,8 @@ var grid_position : Vector2i = Vector2i(0, 2) :
 			return
 		
 		var map = GameGlobal.map
+		if !map:
+			return
 		grid_position.x = value.x % map.grid_size.x
 		grid_position.y = value.y % map.grid_size.y
 		
