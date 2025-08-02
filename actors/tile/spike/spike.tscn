@@ -1,0 +1,37 @@
+[gd_scene load_steps=9 format=3 uid="uid://lch1hj6crvy8"]
+
+[ext_resource type="PackedScene" uid="uid://bkuf38ni4q62k" path="res://actors/tile/Tile.tscn" id="1_wybci"]
+[ext_resource type="Shader" uid="uid://jkmh5ksc1ejd" path="res://actors/tile/tile3D.gdshader" id="2_5th3q"]
+[ext_resource type="Script" uid="uid://dvisy31qkpoao" path="res://actors/tile/spike/spike.gd" id="2_w7enm"]
+[ext_resource type="Shader" uid="uid://birv8v71nvo3v" path="res://addons/shaker/components/vfx/shaders/fill_color.gdshader" id="3_w7enm"]
+[ext_resource type="PackedScene" uid="uid://pp6pg03hbkuj" path="res://actors/tile/components/spike_component.tscn" id="5_4w6y0"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_0vltg"]
+resource_local_to_scene = true
+shader = ExtResource("2_5th3q")
+shader_parameter/number_of_ground_cols = 4
+shader_parameter/color_fill = Color(1, 1, 1, 1)
+shader_parameter/force = 0.0
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_iq723"]
+resource_local_to_scene = true
+shader = ExtResource("3_w7enm")
+shader_parameter/color = Color(1, 1, 1, 1)
+shader_parameter/force = 0.0
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_wybci"]
+
+[node name="Spike2" instance=ExtResource("1_wybci")]
+script = ExtResource("2_w7enm")
+outline_min = 0.1
+chance_action_spawn = 0.1
+lock_rotation = true
+
+[node name="3DShader" parent="." index="1"]
+material = SubResource("ShaderMaterial_0vltg")
+
+[node name="Sprite" parent="3DShader" index="0"]
+material = SubResource("ShaderMaterial_iq723")
+sprite_frames = SubResource("SpriteFrames_wybci")
+
+[node name="SpikeComponent" parent="." index="5" instance=ExtResource("5_4w6y0")]

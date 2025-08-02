@@ -93,19 +93,3 @@ animation = &"winter"
 
 [node name="Outline" parent="." index="2"]
 z_index = 0
-
-[node name="StaticBody2D" parent="." index="3"]
-rotation = 3.14159
-collision_mask = 0
-
-[node name="CollisionPolygon2D2" type="CollisionPolygon2D" parent="StaticBody2D" index="0"]
-position = Vector2(-16, -16.2)
-polygon = PackedVector2Array(1, 25, 7, 25, 7, 31, 1, 31)
-
-[node name="CollisionPolygon2D3" type="CollisionPolygon2D" parent="StaticBody2D" index="1"]
-position = Vector2(8, -16.2)
-polygon = PackedVector2Array(1, 25, 7, 25, 7, 31, 1, 31)
-
-[node name="CollisionPolygon2D4" type="CollisionPolygon2D" parent="StaticBody2D" index="2"]
-position = Vector2(-16, -16.2)
-polygon = PackedVector2Array(1, 7, 1, 1, 31, 1, 31, 7, 1, 7)

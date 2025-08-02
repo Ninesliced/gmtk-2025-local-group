@@ -4,10 +4,10 @@ var start_touch_pos := Vector2.ZERO
 var is_dragging := false
 const DRAG_THRESHOLD := 20.0
 
-func _input(event):        # not _gui_event() ?
-	# print(event)
+func _input(event): 
+	if GameGlobal.in_menu:
+		return
 	if event is InputEventMouseButton and event.pressed:
-		print("get_triggered")
 		accept_event()
 	if event is InputEventMouseButton:
 		if event.pressed:

@@ -16,35 +16,47 @@ enum Rotation {
 
 @onready var tile_bigger: AnimationPlayer = %TileBigger
 @onready var outline: Node2D = %Outline
-@onready var sound_action: AudioStreamPlayer2D = %SoundEffect
 @onready var sprite: AnimatedSprite2D = %Sprite
 
 @onready var seasons = ["spring","summer","fall","winter"]
 var outline_color: Color = Color(1, 1, 1, 1)
 var outline_tween: Tween = null
+
 @export var outline_min = 0.1
 @export var outline_max = 0.5
 
+@export var sound_action: AudioStreamPlayer2D
+
 @export var rotation_speed: float = 0.2
+@export var rotation_sound_effect: AudioStreamPlayer2D
+@export var idle_rotation_sound_effect: AudioStreamPlayer2D
+
 @export var is_changeable := true
 @export var tile_rotation : Rotation = Rotation.UP : 
-	set(x):
+	set(new_rotation):
 		if lock_rotation:
 			return
 		# var clockwise = x > tile_rotation
-		var new_rotation = x
+		# var new_rotation = x
 		# if not is_inside_tree():
 		# 	return
 		if is_inside_tree() && get_tree():
 			rotate_animated(new_rotation)
 		else:
 			%Sprite.rotation = PI / 2 * new_rotation
-			%StaticBody2D.rotation = PI / 2 * new_rotation
 
+		if tile_rotation == new_rotation: # i.e. no rotation change
+			idle_rotation_sound_effect.play()
+		else:
+			rotation_sound_effect.play()
+			rotation_sound_effect.pitch_scale = randf_range(0.6, 1.0)
+		
 		tile_rotation = new_rotation % 4
+
 @export var is_action_spawnable: bool = true
 @export_range(0,1,0.01) var chance_action_spawn: float = 0.1
 @export var lock_rotation: bool = false
+
 var _transform_to_full: bool = false
 
 var is_hover : bool = false
@@ -123,14 +135,15 @@ func tile_clicked(way: int) -> void:
 	if lock_rotation:
 		tile_bigger.play("rotate_lock")
 		return
+		
 	tile_rotation = (tile_rotation + way) % 4
+	
 	if tile_rotation < 0:
 		tile_rotation += 4
 
 func tile_hovered() -> void:
 	var action = GameGlobal.action_stacks[0]
 	spawn_outline(action)
-	GameGlobal.hovered_tile = $"."
 
 func tile_unhovered() -> void:
 	var action = GameGlobal.action_stacks[0]
@@ -174,7 +187,7 @@ func spawn_outline(action) -> void:
 		if tile and tile.outline:
 			tiles.append(tile)
 		
-		if tile.grid_position == GameGlobal.player.movement_component.grid_position:
+		if tile.grid_position == GameGlobal.player.get_movement_component().grid_position:
 			is_action_valid = false
 	
 	for tile in tiles:
@@ -230,7 +243,6 @@ func _on_area_body_exited(body: Node2D) -> void:
 	tile.tile_rotation = randi() % 4
 
 func rotate_animated(new_rotation: int) -> void:
-	%StaticBody2D.rotation = PI / 2 * new_rotation
 	print(new_rotation)
 	print(%Sprite.rotation, " vs ", PI / 2 * new_rotation)
 	if abs(%Sprite.rotation - PI / 2 * new_rotation) > PI:
@@ -255,6 +267,7 @@ func translation_animated(target: Vector2) -> void:
 
 
 func transform_to_another_type(new_tile: PackedScene, play_animation: bool = true) -> Tile:
+	print(new_tile.resource_name)
 	if not is_changeable:
 		return self
 	if is_player_inside:
@@ -273,6 +286,13 @@ func transform_to_another_type(new_tile: PackedScene, play_animation: bool = tru
 	GameGlobal.map.grid[grid_position.x][grid_position.y] = tile_instance
 	queue_free()
 	return tile_instance
+
+func play_sound() -> void:
+	if not sound_action:
+		print("no sound action set")
+		return
+	print("Playing sound")
+	sound_action.play()
 
 func can_pass(direction: Rotation) -> bool:
 	return true

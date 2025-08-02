@@ -102,7 +102,8 @@ func move_player(move_direction: Vector2i) -> void:
 	GameGlobal.number_of_actions += 1
 	
 	actual_score += move_direction.x * 10
-
+	
+	walk_sound_effect.pitch_scale = randf_range(0.8, 1.3)
 	walk_sound_effect.play()
 	
 	# Update outline

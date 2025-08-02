@@ -2,7 +2,7 @@ extends Node
 
 signal on_action_stack_changed
 signal on_action
-
+var in_menu: bool = false
 const ENEMY = preload("res://actors/enemy/enemy.tscn")
 @onready var canvas_layer: CanvasLayer = %CanvasLayer
 @export var action_stacks : Array[ActionType] = [
@@ -295,24 +295,26 @@ func spawn_enemy(tile: Tile, event: InputEvent) -> void:
 	enemy.grid_position = tile.grid_position
 
 func spawn_vertical_spikes(tile: Tile, event: InputEvent) -> void:
+	var spike := load("res://actors/tile/spike/four_spike.tscn")
+	var full := load("res://actors/tile/full.tscn")
 	
 	for i in range(-1,2,2):
 		var current_tile = map.grid[(tile.grid_position.x + i)%map.grid_size.x][(tile.grid_position.y)%map.grid_size.y]
 		var new_tile = null
-		new_tile = current_tile.transform_to_another_type(load("res://actors/tile/spike.tscn"), false)
+		new_tile = current_tile.transform_to_another_type(spike, false)
 		if new_tile && new_tile.tile_bigger:
 			new_tile.tile_bigger.play_full(0.1*(i+1))
 	
 	for j in range(-1,2,2):
 		var current_tile = map.grid[(tile.grid_position.x)%map.grid_size.x][(tile.grid_position.y + j)%map.grid_size.y]
 		var new_tile = null
-		new_tile = current_tile.transform_to_another_type(load("res://actors/tile/spike.tscn"), false)
+		new_tile = current_tile.transform_to_another_type(spike, false)
 		if new_tile && new_tile.tile_bigger:
 			new_tile.tile_bigger.play_full(0.1*(j+1))
 
 	var current_tile = map.grid[(tile.grid_position.x)%map.grid_size.x][(tile.grid_position.y)%map.grid_size.y]
 	var new_tile = null
-	new_tile = current_tile.transform_to_another_type(load("res://actors/tile/full.tscn"), false)
+	new_tile = current_tile.transform_to_another_type(full, false)
 	if new_tile && new_tile.tile_bigger:
 		new_tile.tile_bigger.play_full(0.1)
 

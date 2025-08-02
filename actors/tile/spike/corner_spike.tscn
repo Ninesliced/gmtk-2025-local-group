@@ -1,0 +1,46 @@
+[gd_scene load_steps=10 format=3 uid="uid://csuor3mha41hx"]
+
+[ext_resource type="PackedScene" uid="uid://lch1hj6crvy8" path="res://actors/tile/spike/spike.tscn" id="1_80lbd"]
+[ext_resource type="Shader" uid="uid://jkmh5ksc1ejd" path="res://actors/tile/tile3D.gdshader" id="2_h5pyb"]
+[ext_resource type="Script" uid="uid://k0qtybi1qqel" path="res://actors/tile/spike/corner_spike.gd" id="2_ws680"]
+[ext_resource type="Shader" uid="uid://birv8v71nvo3v" path="res://addons/shaker/components/vfx/shaders/fill_color.gdshader" id="3_ws680"]
+[ext_resource type="Texture2D" uid="uid://pl8capar1rck" path="res://assets/tilesheet_seasons.png" id="4_h5pyb"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_4487x"]
+resource_local_to_scene = true
+shader = ExtResource("2_h5pyb")
+shader_parameter/number_of_ground_cols = 4
+shader_parameter/color_fill = Color(1, 1, 1, 1)
+shader_parameter/force = 0.0
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_aourn"]
+resource_local_to_scene = true
+shader = ExtResource("3_ws680")
+shader_parameter/color = Color(1, 1, 1, 1)
+shader_parameter/force = 0.0
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ws680"]
+atlas = ExtResource("4_h5pyb")
+region = Rect2(192, 128, 32, 32)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_4487x"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ws680")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}]
+
+[node name="Spike2" instance=ExtResource("1_80lbd")]
+script = ExtResource("2_ws680")
+lock_rotation = false
+
+[node name="3DShader" parent="." index="1"]
+material = SubResource("ShaderMaterial_4487x")
+
+[node name="Sprite" parent="3DShader" index="0"]
+material = SubResource("ShaderMaterial_aourn")
+sprite_frames = SubResource("SpriteFrames_4487x")
