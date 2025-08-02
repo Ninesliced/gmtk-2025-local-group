@@ -118,6 +118,7 @@ outline_min = 0.2
 rotation_sound_effect = NodePath("RotationSoundEffect")
 idle_rotation_sound_effect = NodePath("IdleRotationSoundEffect")
 chance_action_spawn = 0.05
+tileName = null
 
 [node name="Area" type="Area2D" parent="."]
 position = Vector2(16, 16)
