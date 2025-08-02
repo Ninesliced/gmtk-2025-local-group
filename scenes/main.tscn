@@ -36,7 +36,8 @@ collision_mask = 17
 
 [node name="Border" parent="." instance=ExtResource("3_o6xl0")]
 position = Vector2(-27, -16)
-speed = 5.0
+speed = 3.0
+speed_increase_per_min = 1.0
 
 [node name="Camera2D" type="Camera2D" parent="."]
 position = Vector2(112, 80)

@@ -62,7 +62,6 @@ var dict: Dictionary[ActionType, Dictionary] = {
 	ActionType.ROTATE_CLOCK: {
 		"name": "Rotate Clockwise",
 		"function": rotate_clock,
-		"probability": 0.1,
 		"action_zone": [
 			Vector2i(0, 0)
 		]
@@ -163,6 +162,7 @@ var dict: Dictionary[ActionType, Dictionary] = {
 	ActionType.VERTICAL_SPIKE: {
 		"name": "VERTICAL SPIKE",
 		"function": spawn_vertical_spikes,
+		"probability": 0.1,
 		"action_zone": [
 			Vector2i(0, 1),
 			Vector2i(0, 0),

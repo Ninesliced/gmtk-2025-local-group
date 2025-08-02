@@ -1,7 +1,7 @@
 extends Node2D
 
-@export var speed : float = 10
-@export var speed_increase_per_min : float = 10
+@export var speed : float = 4
+@export var speed_increase_per_min : float = 2
 
 func _physics_process(delta):
 	if !GameGlobal.is_game_have_start:
