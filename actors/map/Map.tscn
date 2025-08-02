@@ -1,10 +1,13 @@
-[gd_scene load_steps=4 format=3 uid="uid://b7fgpkbuim0vj"]
+[gd_scene load_steps=7 format=3 uid="uid://b7fgpkbuim0vj"]
 
 [ext_resource type="Script" uid="uid://btngkayrce3q0" path="res://actors/map/map.gd" id="1_fvbrk"]
 [ext_resource type="PackedScene" uid="uid://s2om5ju6lrn" path="res://actors/tile/four.tscn" id="3_wofu4"]
+[ext_resource type="PackedScene" uid="uid://b8ylngr75sxvp" path="res://actors/tile/corner.tscn" id="5_ggbst"]
 [ext_resource type="Material" uid="uid://di7gr2544ckj1" path="res://actors/tile/tile_material.tres" id="6_efm3v"]
+[ext_resource type="PackedScene" uid="uid://bqtjiyvuyby2g" path="res://actors/tile/t.tscn" id="6_ggbst"]
+[ext_resource type="PackedScene" uid="uid://d2wqej3jpir1g" path="res://actors/tile/line.tscn" id="6_wq4hh"]
 
 [node name="Map" type="CanvasGroup"]
 material = ExtResource("6_efm3v")
 script = ExtResource("1_fvbrk")
-tiles = Array[PackedScene]([ExtResource("3_wofu4")])
+tiles = Array[PackedScene]([ExtResource("6_wq4hh"), ExtResource("5_ggbst"), ExtResource("3_wofu4"), ExtResource("6_ggbst")])

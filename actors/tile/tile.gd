@@ -15,17 +15,18 @@ enum Rotation {
 
 
 @onready var tile_bigger: AnimationPlayer = %TileBigger
-@onready var outline : Node2D = %Outline
+@onready var outline: Node2D = %Outline
+@onready var sound_action: AudioStreamPlayer2D = %SoundEffect
+@onready var sprite: AnimatedSprite2D = %Sprite
+
 @onready var seasons = ["spring","summer","fall","winter"]
 var outline_color: Color = Color(1, 1, 1, 1)
 var outline_tween: Tween = null
 @export var outline_min = 0.1
 @export var outline_max = 0.5
-@onready var sprite: AnimatedSprite2D = %Sprite
-
-@export var sound_action: AudioStreamPlayer2D
 
 @export var rotation_speed: float = 0.2
+@export var is_changeable := true
 @export var tile_rotation : Rotation = Rotation.UP : 
 	set(x):
 		if lock_rotation:
@@ -67,11 +68,13 @@ func rotate_counter_clock() -> void:
 func swap(map: Map,vector : Vector2i) -> void:
 	var tile_size = map.tile_size
 	
-	# var real_co_vector = vector * tile_size
 	var neighbor = map.grid[(grid_position.x+vector.x)%map.grid_size.x][(grid_position.y+vector.y)%map.grid_size.y]
 	
-	translation_animated((grid_position + vector)%map.grid_size * tile_size - grid_position* tile_size)
-	neighbor.translation_animated(-((grid_position + vector)%map.grid_size * tile_size - grid_position* tile_size))
+	var pos_neigh = neighbor.position
+	var pos = position
+	
+	translation_animated(pos_neigh)
+	neighbor.translation_animated(pos)
 	
 	map.swap_tiles(grid_position,(grid_position+vector)%map.grid_size)
 
@@ -113,7 +116,7 @@ func _on_area_2d_mouse_exited() -> void:
 
 func _on_area_2d_input_event(viewport: Node, event: InputEvent, shape_idx: int) -> void:
 	if event is InputEventMouseButton:
-		if event.pressed:
+		if !event.pressed:
 			GameGlobal.act_tile(self, event)
 
 func tile_clicked(way: int) -> void:
@@ -127,6 +130,7 @@ func tile_clicked(way: int) -> void:
 func tile_hovered() -> void:
 	var action = GameGlobal.action_stacks[0]
 	spawn_outline(action)
+	GameGlobal.hovered_tile = $"."
 
 func tile_unhovered() -> void:
 	var action = GameGlobal.action_stacks[0]
@@ -170,7 +174,7 @@ func spawn_outline(action) -> void:
 		if tile and tile.outline:
 			tiles.append(tile)
 		
-		if tile.grid_position == GameGlobal.player.movementComponent.grid_position:
+		if tile.grid_position == GameGlobal.player.movement_component.grid_position:
 			is_action_valid = false
 	
 	for tile in tiles:
@@ -221,8 +225,9 @@ func _on_area_body_exited(body: Node2D) -> void:
 #		return
 #	_transform_to_full = false
 #	transform_to_another_type(load("res://actors/tile/full.tscn"))
-	var tiles = GameGlobal.map.tiles
-	transform_to_another_type(tiles[GameGlobal.rng.randi() % tiles.size()])
+	var tiles      = GameGlobal.map.tiles
+	var tile: Tile = transform_to_another_type(tiles[GameGlobal.rng.randi() % tiles.size()])
+	tile.tile_rotation = randi() % 4
 
 func rotate_animated(new_rotation: int) -> void:
 	%StaticBody2D.rotation = PI / 2 * new_rotation
@@ -239,18 +244,19 @@ func rotate_animated(new_rotation: int) -> void:
 	tween.set_ease(Tween.EASE_OUT)
 	tween.set_trans(Tween.TRANS_ELASTIC)
 	
-func translation_animated(new_translation: Vector2) -> void:
-	var target = position + new_translation
-	%Sprite.position -= new_translation
+func translation_animated(target: Vector2) -> void:
+	var pos = position
+	%Sprite.position -= target - pos
 	position = target
 	var tween = get_tree().create_tween()
 	tween.tween_property(%Sprite, "position", Vector2(0,0), 0.2)
 	tween.set_ease(Tween.EASE_IN_OUT)
 	tween.set_trans(Tween.TRANS_LINEAR)
 
-	await tween.finished
 
 func transform_to_another_type(new_tile: PackedScene, play_animation: bool = true) -> Tile:
+	if not is_changeable:
+		self
 	if is_player_inside:
 		print("Player is still inside the tile, cannot transform")
 		return null
@@ -267,13 +273,6 @@ func transform_to_another_type(new_tile: PackedScene, play_animation: bool = tru
 	GameGlobal.map.grid[grid_position.x][grid_position.y] = tile_instance
 	queue_free()
 	return tile_instance
-
-func play_sound() -> void:
-	if not sound_action:
-		print("no sound action set")
-		return
-	print("Playing sound")
-	sound_action.play()
 
 func can_pass(direction: Rotation) -> bool:
 	return true

@@ -28,6 +28,8 @@ const ENEMY = preload("res://actors/enemy/enemy.tscn")
 var action_stack_backup = action_stacks.duplicate()
 var action_ui_stacks : Array[ActionUI] = []
 
+var hovered_tile: Tile = null
+
 ## include movement of player
 signal on_player_action
 var number_of_actions: int = 0:
@@ -156,7 +158,7 @@ var dict: Dictionary[ActionType, Dictionary] = {
 		"on_get_function": delete_current_action,
 		"temporary": true,
 		"action_zone": [],
-		"probability": 0.0
+		"probability": 0.01
 	},
 	ActionType.VERTICAL_SPIKE: {
 		"name": "VERTICAL SPIKE",
@@ -199,7 +201,7 @@ func act_tile(tile: Tile, event: InputEvent) -> void:
 		if target_pos.y < 0:
 			target_pos.y += map.grid_size.y
 		
-		if target_pos == player.movementComponent.grid_position:
+		if target_pos == player.movement_component.grid_position:
 			return
 	
 	var action = action_stacks.pop_front()
@@ -239,8 +241,9 @@ func transform_empty_cursed(tile: Tile, event: InputEvent) -> void:
 	for i in range(0, 4):
 		var current_tile = map.grid[(grid_pos.x + i) % map.grid_size.x][grid_pos.y]
 		var new_tile = current_tile.transform_to_another_type(load("res://actors/tile/cursed_four.tscn"),true)
-		new_tile.play_sound()
+		# FIXME: Alexis: play "pop" sound
 		await get_tree().create_timer(0.1).timeout
+
 func transform_cross(tile: Tile, event: InputEvent) -> void:
 	for i in range(-1,2):
 		for j in range(-1,2):
@@ -314,12 +317,14 @@ func spawn_vertical_spikes(tile: Tile, event: InputEvent) -> void:
 		new_tile.tile_bigger.play_full(0.1)
 
 func delete_current_action() -> void:
-	print("Delete current Action")
-	GameGlobal.action_stacks.pop_front()
+	var to_remove_action = GameGlobal.action_stacks.pop_front()
 	var action_ui = GameGlobal.action_ui_stacks.pop_front()
 	action_ui.queue_free()
 	# if action_stacks.size() == 0:
 	_update_size()
+	on_action_stack_changed.emit()
+	hovered_tile.on_action(to_remove_action)
+	
 
 # No operation
 func nop(_tile: Tile, _event: InputEvent):
