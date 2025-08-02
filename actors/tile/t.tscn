@@ -10,9 +10,7 @@
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_vepyk"]
 resource_local_to_scene = true
 shader = ExtResource("3_tq1lr")
-shader_parameter/ground_col = Color(0.396078, 0.466667, 0.270588, 1)
-shader_parameter/wall_col = Color(0.666667, 0.772549, 0.290196, 1)
-shader_parameter/wall_col2 = Color(0.223529, 0.27451, 0.207843, 1)
+shader_parameter/number_of_ground_cols = 4
 shader_parameter/color_fill = Color(1, 1, 1, 1)
 shader_parameter/force = 0.0
 
@@ -78,6 +76,10 @@ script = ExtResource("2_p7gss")
 outline_min = 0.1
 tile_rotation = 2
 
+[node name="Area" parent="." index="0"]
+collision_layer = 9
+collision_mask = 1
+
 [node name="Shape" parent="Area" index="0"]
 debug_color = Color(0.543288, 0.527368, 0.571434, 0.0745098)
 
@@ -86,9 +88,11 @@ material = SubResource("ShaderMaterial_vepyk")
 
 [node name="Sprite" parent="3DShader" index="0"]
 material = SubResource("ShaderMaterial_v2c08")
-rotation = 3.14159
 sprite_frames = SubResource("SpriteFrames_m00eq")
 animation = &"winter"
+
+[node name="Outline" parent="." index="2"]
+z_index = 0
 
 [node name="StaticBody2D" parent="." index="3"]
 rotation = 3.14159

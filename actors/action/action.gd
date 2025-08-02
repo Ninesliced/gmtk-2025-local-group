@@ -40,6 +40,5 @@ func _on_area_2d_body_entered(player: Node2D) -> void:
 	
 	queue_free()
 
-
 func choose_an_random_action() -> void:
 	action = GameGlobal.pick_weighted_random_action()

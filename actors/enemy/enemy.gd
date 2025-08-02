@@ -1,3 +1,5 @@
+class_name Enemy
+
 extends Node2D
 var target_move : Vector2i
 var is_moving : bool = false
@@ -25,13 +27,14 @@ func _ready() -> void:
 	GameGlobal.on_action.connect(on_action_performed)
 	
 func get_new_target_tile():
-	var next_pos = target.movementComponent.grid_position - grid_position
+	var next_pos = target.position - position
+		
 	var move_direction := Vector2i.ZERO
 	
-	if abs(next_pos.x) >= 1:
+	if abs(next_pos.x) >= 0:
 		move_direction.x = next_pos.x/abs(next_pos.x)
 		
-	if abs(next_pos.y) >= 1:
+	if abs(next_pos.y) >= 0:
 		move_direction.y = next_pos.y/abs(next_pos.y)
 
 	var can_move := Vector2i((int)(is_move_possible(Vector2(move_direction.x,0))),(int)(is_move_possible(Vector2(0,move_direction.y))))
@@ -131,10 +134,6 @@ func _on_area_2d_area_entered(area: Area2D) -> void:
 	print(area.get_class())
 	queue_free()
 	
-
-
-
 func _on_animated_sprite_2d_animation_finished() -> void:
 	if animated_sprite_2d.animation == "jump":
 		animated_sprite_2d.play("idel")
-		

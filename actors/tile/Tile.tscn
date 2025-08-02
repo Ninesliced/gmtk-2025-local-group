@@ -5,7 +5,7 @@
 [ext_resource type="Material" uid="uid://di7gr2544ckj1" path="res://actors/tile/tile_material.tres" id="2_iawyn"]
 [ext_resource type="Shader" uid="uid://birv8v71nvo3v" path="res://addons/shaker/components/vfx/shaders/fill_color.gdshader" id="3_ewfg4"]
 [ext_resource type="Script" uid="uid://dq0rbo0c6kl8c" path="res://actors/tile/tile_bigger.gd" id="4_1qs4h"]
-[ext_resource type="SpriteFrames" uid="uid://dkrhk1r3dpkj8" path="res://resources/full.tres" id="4_187ej"]
+[ext_resource type="SpriteFrames" uid="uid://c5scel157ist2" path="res://resources/full.tres" id="4_187ej"]
 [ext_resource type="AudioStream" uid="uid://fa2qk01efkg8" path="res://assets/sfx/grass.mp3" id="6_i7in2"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_4t6fi"]

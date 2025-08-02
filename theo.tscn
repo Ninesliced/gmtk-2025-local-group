@@ -1,13 +1,22 @@
-[gd_scene load_steps=5 format=3 uid="uid://bkr0o2f3o21an"]
+[gd_scene load_steps=7 format=3 uid="uid://bkr0o2f3o21an"]
 
 [ext_resource type="PackedScene" uid="uid://b7fgpkbuim0vj" path="res://actors/map/Map.tscn" id="1_1uohx"]
 [ext_resource type="PackedScene" uid="uid://c5lqig57oxpyb" path="res://actors/player/player.tscn" id="2_rq4rr"]
+[ext_resource type="Shader" uid="uid://jkmh5ksc1ejd" path="res://actors/tile/tile3D.gdshader" id="2_tsois"]
 [ext_resource type="Script" uid="uid://cpvd8mjlsp6tj" path="res://scenes/camera_2d.gd" id="3_tsois"]
 [ext_resource type="PackedScene" uid="uid://v6wht25gui7" path="res://scenes/border/border.tscn" id="5_rq4rr"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_on80f"]
+resource_local_to_scene = true
+shader = ExtResource("2_tsois")
+shader_parameter/number_of_ground_cols = 4
+shader_parameter/color_fill = Color(1, 1, 1, 1)
+shader_parameter/force = 0.0
 
 [node name="Theo" type="Node2D"]
 
 [node name="Map" parent="." instance=ExtResource("1_1uohx")]
+material = SubResource("ShaderMaterial_on80f")
 position = Vector2(0, 10)
 grid_size = Vector2i(25, 5)
 

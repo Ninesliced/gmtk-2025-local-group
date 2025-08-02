@@ -1,26 +1,96 @@
-[gd_scene load_steps=7 format=3 uid="uid://b72bu5lvtm2bv"]
+[gd_scene load_steps=13 format=3 uid="uid://b72bu5lvtm2bv"]
 
 [ext_resource type="PackedScene" uid="uid://c5lqig57oxpyb" path="res://actors/player/player.tscn" id="1_fk7tf"]
 [ext_resource type="Shader" uid="uid://jkmh5ksc1ejd" path="res://actors/tile/tile3D.gdshader" id="2_fwjos"]
 [ext_resource type="Script" uid="uid://cpvd8mjlsp6tj" path="res://scenes/camera_2d.gd" id="2_t7646"]
 [ext_resource type="PackedScene" uid="uid://v6wht25gui7" path="res://scenes/border/border.tscn" id="3_fwjos"]
+[ext_resource type="Texture2D" uid="uid://3inqpne41gwy" path="res://assets/shader_texture_tile.png" id="3_p1pyd"]
+[ext_resource type="PackedScene" uid="uid://s2om5ju6lrn" path="res://actors/tile/four.tscn" id="3_yj3ko"]
 [ext_resource type="PackedScene" uid="uid://b7fgpkbuim0vj" path="res://actors/map/Map.tscn" id="4_bff3v"]
+[ext_resource type="Shader" uid="uid://birv8v71nvo3v" path="res://addons/shaker/components/vfx/shaders/fill_color.gdshader" id="4_yj3ko"]
+[ext_resource type="PackedScene" uid="uid://lch1hj6crvy8" path="res://actors/tile/spike.tscn" id="6_ii521"]
 
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_yj3ko"]
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_tipki"]
 resource_local_to_scene = true
 shader = ExtResource("2_fwjos")
-shader_parameter/ground_col = Color(0.396078, 0.466667, 0.270588, 1)
-shader_parameter/wall_col = Color(0.666667, 0.772549, 0.290196, 1)
-shader_parameter/wall_col2 = Color(0.223529, 0.27451, 0.207843, 1)
+shader_parameter/ground_cols = ExtResource("3_p1pyd")
+shader_parameter/number_of_ground_cols = 9
 shader_parameter/color_fill = Color(1, 1, 1, 1)
+shader_parameter/force = 0.0
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_p1pyd"]
+resource_local_to_scene = true
+shader = ExtResource("2_fwjos")
+shader_parameter/number_of_ground_cols = 4
+shader_parameter/color_fill = Color(1, 1, 1, 1)
+shader_parameter/force = 0.0
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_ii521"]
+resource_local_to_scene = true
+shader = ExtResource("4_yj3ko")
+shader_parameter/color = Color(1, 1, 1, 1)
 shader_parameter/force = 0.0
 
 [node name="Guigui" type="Node2D"]
 
 [node name="Map" parent="." instance=ExtResource("4_bff3v")]
-material = SubResource("ShaderMaterial_yj3ko")
+material = SubResource("ShaderMaterial_tipki")
 position = Vector2(0, 32)
 grid_size = Vector2i(20, 5)
+
+[node name="Tile3" parent="Map" instance=ExtResource("3_yj3ko")]
+position = Vector2(64, 0)
+
+[node name="3DShader" parent="Map/Tile3" index="1"]
+material = SubResource("ShaderMaterial_p1pyd")
+
+[node name="Sprite" parent="Map/Tile3/3DShader" index="0"]
+material = SubResource("ShaderMaterial_ii521")
+animation = &"spring"
+
+[node name="StaticBody2D" parent="Map/Tile3" index="3"]
+visible = false
+
+[node name="Tile4" parent="Map" instance=ExtResource("3_yj3ko")]
+position = Vector2(96, 0)
+
+[node name="3DShader" parent="Map/Tile4" index="1"]
+material = SubResource("ShaderMaterial_p1pyd")
+
+[node name="Sprite" parent="Map/Tile4/3DShader" index="0"]
+material = SubResource("ShaderMaterial_ii521")
+
+[node name="StaticBody2D" parent="Map/Tile4" index="3"]
+visible = false
+
+[node name="Tile5" parent="Map" instance=ExtResource("3_yj3ko")]
+position = Vector2(128, 0)
+
+[node name="3DShader" parent="Map/Tile5" index="1"]
+material = SubResource("ShaderMaterial_p1pyd")
+
+[node name="Sprite" parent="Map/Tile5/3DShader" index="0"]
+material = SubResource("ShaderMaterial_ii521")
+animation = &"winter"
+
+[node name="StaticBody2D" parent="Map/Tile5" index="3"]
+visible = false
+
+[node name="Tile6" parent="Map" instance=ExtResource("3_yj3ko")]
+position = Vector2(160, 0)
+
+[node name="3DShader" parent="Map/Tile6" index="1"]
+material = SubResource("ShaderMaterial_p1pyd")
+
+[node name="Sprite" parent="Map/Tile6/3DShader" index="0"]
+material = SubResource("ShaderMaterial_ii521")
+animation = &"summer"
+
+[node name="StaticBody2D" parent="Map/Tile6" index="3"]
+visible = false
+
+[node name="Spike" parent="Map" instance=ExtResource("6_ii521")]
+position = Vector2(32, 0)
 
 [node name="Camera2D" type="Camera2D" parent="."]
 position = Vector2(114, 90)
@@ -32,3 +102,8 @@ script = ExtResource("2_t7646")
 [node name="Player" parent="." instance=ExtResource("1_fk7tf")]
 position = Vector2(113, 79)
 collision_layer = 1
+
+[editable path="Map/Tile3"]
+[editable path="Map/Tile4"]
+[editable path="Map/Tile5"]
+[editable path="Map/Tile6"]

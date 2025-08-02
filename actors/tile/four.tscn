@@ -159,3 +159,6 @@ shape = SubResource("RectangleShape2D_76t4f")
 [node name="BottomRightShape" type="CollisionShape2D" parent="StaticBody2D" index="3"]
 position = Vector2(12, 12)
 shape = SubResource("RectangleShape2D_76t4f")
+
+[node name="AudioStreamPlayer2D" parent="." index="6"]
+stream = null
