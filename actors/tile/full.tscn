@@ -142,11 +142,15 @@ material = SubResource("ShaderMaterial_irehs")
 [node name="Sprite" parent="3DShader" index="0"]
 material = SubResource("ShaderMaterial_smgc2")
 sprite_frames = SubResource("SpriteFrames_smgc2")
-animation = &"winter"
+animation = &"fall"
+frame_progress = 0.765682
 
-[node name="RandomizeSprite" parent="3DShader/Sprite" index="0" instance=ExtResource("6_irehs")]
+[node name="RandomizeSprite" parent="3DShader" index="1" node_paths=PackedStringArray("sprite", "root_parent") instance=ExtResource("6_irehs")]
+sprite = NodePath("../Sprite")
+root_parent = NodePath("../..")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D" index="0"]
+visible = false
 position = Vector2(0, -0.5)
 shape = SubResource("RectangleShape2D_fm2mu")
 

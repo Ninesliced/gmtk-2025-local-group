@@ -95,6 +95,7 @@ shape = SubResource("CircleShape2D_lsqbn")
 [node name="PlayerAnimation" type="AnimatedSprite2D" parent="."]
 sprite_frames = SubResource("SpriteFrames_nvxhs")
 animation = &"walk_horizontal"
+frame_progress = 0.957293
 script = ExtResource("5_15y17")
 
 [node name="MovementComponent" type="Node" parent="."]
