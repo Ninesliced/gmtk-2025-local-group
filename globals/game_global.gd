@@ -234,7 +234,7 @@ func rotate_counter_clock(tile: Tile, event: InputEvent) -> void:
 	pass
 
 func transform_empty(tile: Tile, event: InputEvent) -> void:
-	tile.transform_to_another_type(load("res://actors/tile/four.tscn"))
+	tile.transform_to_another_type(load("res://actors/tile/cursed_four.tscn"))
 
 func transform_empty_cursed(tile: Tile, event: InputEvent) -> void:
 	var grid_pos = tile.grid_position

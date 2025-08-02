@@ -140,7 +140,6 @@ func _on_area_body_entered(body: Node2D) -> void:
 [node name="Tile3" instance=ExtResource("1_wv4m7")]
 outline_min = null
 outline_max = null
-is_changeable = false
 lock_rotation = true
 
 [node name="3DShader" parent="." index="1"]

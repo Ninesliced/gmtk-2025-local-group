@@ -256,7 +256,7 @@ func translation_animated(target: Vector2) -> void:
 
 func transform_to_another_type(new_tile: PackedScene, play_animation: bool = true) -> Tile:
 	if not is_changeable:
-		self
+		return self
 	if is_player_inside:
 		print("Player is still inside the tile, cannot transform")
 		return null

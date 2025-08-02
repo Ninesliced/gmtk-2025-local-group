@@ -6,6 +6,8 @@ var is_moving : bool = false
 @onready var grid = GameGlobal.map.grid
 @export var target : Player 
 @onready var animated_sprite_2d: AnimatedSprite2D = $AnimatedSprite2D
+@onready var label: Label = $Label
+
 
 var grid_position : Vector2i = Vector2i(3, 2) :
 	set(value):
@@ -31,10 +33,10 @@ func get_new_target_tile():
 		
 	var move_direction := Vector2i.ZERO
 	
-	if abs(next_pos.x) >= 0:
+	if abs(next_pos.x) > 0:
 		move_direction.x = next_pos.x/abs(next_pos.x)
 		
-	if abs(next_pos.y) >= 0:
+	if abs(next_pos.y) > 0:
 		move_direction.y = next_pos.y/abs(next_pos.y)
 
 	var can_move := Vector2i((int)(is_move_possible(Vector2(move_direction.x,0))),(int)(is_move_possible(Vector2(0,move_direction.y))))
@@ -125,6 +127,8 @@ func on_action_performed():
 		animated_sprite_2d.play("jump")
 	else:
 		get_new_target_tile()
+	if target_move:
+		label.text = str(target_move)
 
 func stop_movement() -> void:
 	is_moving = false
