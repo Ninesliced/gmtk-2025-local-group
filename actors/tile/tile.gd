@@ -262,11 +262,13 @@ func _on_area_body_exited(body: Node2D) -> void:
 #		return
 #	_transform_to_full = false
 #	transform_to_another_type(load("res://actors/tile/full.tscn"))
-	var tiles      = GameGlobal.map.tiles
+	var tiles = GameGlobal.map.tiles
 	# var tile: Tile = transform_to_another_type(tiles[GameGlobal.rng.randi() % tiles.size()])
 	# tile.tile_rotation = randi() % 4
 	var direction = GameGlobal.player.movement_component.last_inside_direction
 	var tile: Tile = transform_with_1ddl_less(direction, true)
+	
+	tile.tile_bigger.play_full()
 	tile._play_idle_rotation_sound()
 	
 	

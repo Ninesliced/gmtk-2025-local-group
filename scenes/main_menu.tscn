@@ -1,7 +1,7 @@
 [gd_scene load_steps=23 format=3 uid="uid://bvbyb8jdqjcei"]
 
 [ext_resource type="Script" uid="uid://tk3v0572hok5" path="res://scenes/main_menu.gd" id="1_bqqt6"]
-[ext_resource type="PackedScene" uid="uid://d2i4w4joysljq" path="res://scenes/ui/button.tscn" id="1_ekxnf"]
+[ext_resource type="PackedScene" path="res://scenes/ui/button.tscn" id="1_ekxnf"]
 [ext_resource type="Script" path="res://scenes/ui/button.gd" id="2_ekxnf"]
 [ext_resource type="PackedScene" uid="uid://cqwxuni5qjhvu" path="res://scenes/main.tscn" id="2_wu84c"]
 [ext_resource type="Texture2D" uid="uid://3tdc4o7fiqnb" path="res://assets/images/ui/rect/right_panel.png" id="5_8ln24"]
@@ -13,7 +13,7 @@
 [ext_resource type="Material" uid="uid://ctsbqcehyf6ux" path="res://actors/action/action.tres" id="11_rcqid"]
 [ext_resource type="Texture2D" uid="uid://dv03djiyk4tok" path="res://assets/images/ui/rect/play.png" id="12_flqon"]
 [ext_resource type="Texture2D" uid="uid://dtyov2htrcqvk" path="res://assets/images/ui/rect/play_pressed.png" id="13_7b55j"]
-[ext_resource type="PackedScene" uid="uid://g63ms4dlkya7" path="res://scenes/ui/tile_grid_ui.tscn" id="14_1ajci"]
+[ext_resource type="PackedScene" path="res://scenes/ui/tile_grid_ui.tscn" id="14_1ajci"]
 
 [sub_resource type="GDScript" id="GDScript_rcqid"]
 script/source = "extends Control
