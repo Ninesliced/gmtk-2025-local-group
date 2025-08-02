@@ -45,7 +45,7 @@ router.post('/submit', async (req, res) => {
 router.get('/leaderboard', async (req, res) => {
     const seed = await getTodaySeed();
     const result = await db.query(
-        'SELECT pseudo, score FROM scores WHERE seed = $1 ORDER BY score DESC LIMIT 10',
+        'SELECT pseudo, score FROM scores WHERE seed = $1 ORDER BY score DESC LIMIT 5',
         [seed]
     );
     res.json(result.rows);
