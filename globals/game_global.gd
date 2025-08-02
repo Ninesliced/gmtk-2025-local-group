@@ -238,7 +238,8 @@ func transform_empty_cursed(tile: Tile, event: InputEvent) -> void:
 	var grid_pos = tile.grid_position
 	for i in range(0, 4):
 		var current_tile = map.grid[(grid_pos.x + i) % map.grid_size.x][grid_pos.y]
-		current_tile.transform_to_another_type(load("res://actors/tile/cursed_four.tscn"),true)
+		var new_tile = current_tile.transform_to_another_type(load("res://actors/tile/cursed_four.tscn"),true)
+		new_tile.play_sound()
 		await get_tree().create_timer(0.1).timeout
 func transform_cross(tile: Tile, event: InputEvent) -> void:
 	for i in range(-1,2):

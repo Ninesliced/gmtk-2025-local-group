@@ -23,6 +23,8 @@ var outline_tween: Tween = null
 @export var outline_max = 0.5
 @onready var sprite: AnimatedSprite2D = %Sprite
 
+@export var sound_action: AudioStreamPlayer2D
+
 @export var rotation_speed: float = 0.2
 @export var tile_rotation : Rotation = Rotation.UP : 
 	set(x):
@@ -265,6 +267,13 @@ func transform_to_another_type(new_tile: PackedScene, play_animation: bool = tru
 	GameGlobal.map.grid[grid_position.x][grid_position.y] = tile_instance
 	queue_free()
 	return tile_instance
+
+func play_sound() -> void:
+	if not sound_action:
+		print("no sound action set")
+		return
+	print("Playing sound")
+	sound_action.play()
 
 func can_pass(direction: Rotation) -> bool:
 	return true

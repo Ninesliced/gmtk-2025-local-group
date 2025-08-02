@@ -93,3 +93,6 @@ script = ExtResource("6_amehe")
 area = NodePath("../Area")
 sprite = NodePath("../3DShader/Sprite")
 tile_bigger = NodePath("../TileBigger")
+
+[node name="AudioStreamPlayer2D" parent="." index="8"]
+max_polyphony = 10
