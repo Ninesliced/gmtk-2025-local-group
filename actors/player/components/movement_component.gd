@@ -100,6 +100,11 @@ func move_player(move_direction: Vector2i) -> void:
 	GameGlobal.number_of_actions += 1
 	
 	actual_score += move_direction.x * 10
+	
+	# Update outline
+	var hovered_tile = GameGlobal.hovered_tile
+	if hovered_tile:
+		hovered_tile.on_action(GameGlobal.action_stacks[0])
 
 
 func update_position():

@@ -129,6 +129,7 @@ func tile_clicked(way: int) -> void:
 func tile_hovered() -> void:
 	var action = GameGlobal.action_stacks[0]
 	spawn_outline(action)
+	GameGlobal.hovered_tile = $"."
 
 func tile_unhovered() -> void:
 	var action = GameGlobal.action_stacks[0]

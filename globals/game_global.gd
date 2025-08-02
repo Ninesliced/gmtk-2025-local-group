@@ -28,6 +28,8 @@ const ENEMY = preload("res://actors/enemy/enemy.tscn")
 var action_stack_backup = action_stacks.duplicate()
 var action_ui_stacks : Array[ActionUI] = []
 
+var hovered_tile: Tile = null
+
 ## include movement of player
 signal on_player_action
 var number_of_actions: int = 0:
@@ -156,7 +158,7 @@ var dict: Dictionary[ActionType, Dictionary] = {
 		"on_get_function": delete_current_action,
 		"temporary": true,
 		"action_zone": [],
-		"probability": 0.0
+		"probability": 0.01
 	},
 	ActionType.VERTICAL_SPIKE: {
 		"name": "VERTICAL SPIKE",
@@ -314,12 +316,14 @@ func spawn_vertical_spikes(tile: Tile, event: InputEvent) -> void:
 		new_tile.tile_bigger.play_full(0.1)
 
 func delete_current_action() -> void:
-	print("Delete current Action")
-	GameGlobal.action_stacks.pop_front()
+	var to_remove_action = GameGlobal.action_stacks.pop_front()
 	var action_ui = GameGlobal.action_ui_stacks.pop_front()
 	action_ui.queue_free()
 	# if action_stacks.size() == 0:
 	_update_size()
+	on_action_stack_changed.emit()
+	hovered_tile.on_action(to_remove_action)
+	
 
 # No operation
 func nop(_tile: Tile, _event: InputEvent):
