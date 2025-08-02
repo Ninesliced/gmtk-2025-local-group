@@ -1,0 +1,94 @@
+[gd_scene load_steps=6 format=3 uid="uid://d2i4w4joysljq"]
+
+[ext_resource type="Theme" uid="uid://c06a0wpkb3qyr" path="res://resources/theme.tres" id="1_di1ux"]
+
+[sub_resource type="Animation" id="Animation_di1ux"]
+resource_name = "hover"
+length = 0.25
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:rotation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.0625, 0.1875, 0.25),
+"transitions": PackedFloat32Array(0.574349, 1.6245, 0.5, 1),
+"update": 0,
+"values": [0.0, 0.0872665, -0.0872665, 0.0]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath(".:scale")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.0333333, 0.1),
+"transitions": PackedFloat32Array(0.406126, 0.406126, 1),
+"update": 0,
+"values": [Vector2(1, 1), Vector2(1.1, 1.1), Vector2(1, 1)]
+}
+
+[sub_resource type="Animation" id="Animation_3xo2w"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:rotation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [0.0]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath(".:scale")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(1, 1)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_3xo2w"]
+_data = {
+&"RESET": SubResource("Animation_3xo2w"),
+&"hover": SubResource("Animation_di1ux")
+}
+
+[sub_resource type="GDScript" id="GDScript_di1ux"]
+script/source = "extends AnimationPlayer
+
+
+func _on_button_focus_entered():
+	play(\"hover\")
+	pass # Replace with function body.
+
+
+func _on_button_mouse_entered():
+	play(\"hover\")
+	pass # Replace with function body.
+"
+
+[node name="Button" type="Button"]
+custom_minimum_size = Vector2(128, 0)
+pivot_offset = Vector2(64, 16)
+theme = ExtResource("1_di1ux")
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+text = "Play"
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+&"": SubResource("AnimationLibrary_3xo2w")
+}
+script = SubResource("GDScript_di1ux")
+
+[connection signal="focus_entered" from="." to="AnimationPlayer" method="_on_button_focus_entered"]
+[connection signal="mouse_entered" from="." to="AnimationPlayer" method="_on_button_mouse_entered"]

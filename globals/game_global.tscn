@@ -98,6 +98,7 @@ action_textures = Dictionary[int, Texture2D]({
 
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
 unique_name_in_owner = true
+visible = false
 
 [node name="ActionsContainer" parent="CanvasLayer" instance=ExtResource("3_woeo0")]
 unique_name_in_owner = true
