@@ -209,11 +209,13 @@ func _process(delta: float) -> void:
 func _on_area_body_exited(body: Node2D) -> void:
 	if not body is Player:
 		return
-	is_player_inside = false
-	if !_transform_to_full:
-		return
-	_transform_to_full = false
-	transform_to_another_type(load("res://actors/tile/full.tscn"))
+#	is_player_inside = false
+#	if !_transform_to_full:
+#		return
+#	_transform_to_full = false
+#	transform_to_another_type(load("res://actors/tile/full.tscn"))
+	var tiles = GameGlobal.map.tiles
+	transform_to_another_type(tiles[GameGlobal.rng.randi() % tiles.size()])
 
 func rotate_animated(new_rotation: int) -> void:
 	%StaticBody2D.rotation = PI / 2 * new_rotation
@@ -264,16 +266,13 @@ func can_pass(direction: Rotation) -> bool:
 	return true
 
 
-func _on_area_body_entered(body):
-	if not body is Player:
-		return
-	var player: Player = body
-	is_player_inside = true
-	if player.randomTileCount < player.randomTileMax and player.randomTileMax > 0:
-		player.randomTileCount += 1
-		if player.randomTileCount >= player.randomTileMax:
-			_transform_to_full = true
-			player.randomTileCount = 0
-	
-
-	pass # Replace with function body.
+#func _on_area_body_entered(body):
+#	if not body is Player:
+#		return
+#	var player: Player = body
+#	is_player_inside = true
+#	if player.randomTileCount < player.randomTileMax and player.randomTileMax > 0:
+#		player.randomTileCount += 1
+#		if player.randomTileCount >= player.randomTileMax:
+#			_transform_to_full = true
+#			player.randomTileCount = 0

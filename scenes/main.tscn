@@ -1,10 +1,9 @@
-[gd_scene load_steps=8 format=3 uid="uid://cqwxuni5qjhvu"]
+[gd_scene load_steps=7 format=3 uid="uid://cqwxuni5qjhvu"]
 
 [ext_resource type="PackedScene" uid="uid://b7fgpkbuim0vj" path="res://actors/map/Map.tscn" id="1_tbgi4"]
 [ext_resource type="Shader" uid="uid://jkmh5ksc1ejd" path="res://actors/tile/tile3D.gdshader" id="2_o6xl0"]
 [ext_resource type="Script" uid="uid://cpvd8mjlsp6tj" path="res://scenes/camera_2d.gd" id="2_tefeu"]
 [ext_resource type="PackedScene" uid="uid://v6wht25gui7" path="res://scenes/border/border.tscn" id="3_o6xl0"]
-[ext_resource type="PackedScene" uid="uid://c7yy27v3jsd76" path="res://actors/action/actions.tscn" id="4_tbgi4"]
 [ext_resource type="PackedScene" uid="uid://c5lqig57oxpyb" path="res://actors/player/player.tscn" id="4_tipki"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_tipki"]
@@ -29,9 +28,8 @@ collision_mask = 17
 
 [node name="Border" parent="." instance=ExtResource("3_o6xl0")]
 position = Vector2(-27, -16)
+speed = 5.0
 
 [node name="Camera2D" type="Camera2D" parent="."]
 position = Vector2(112, 80)
 script = ExtResource("2_tefeu")
-
-[node name="Actions" parent="." instance=ExtResource("4_tbgi4")]
