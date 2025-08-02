@@ -16,23 +16,26 @@ enum Rotation {
 
 @onready var tile_bigger: AnimationPlayer = %TileBigger
 @onready var outline: Node2D = %Outline
-@onready var sound_action: AudioStreamPlayer2D = %SoundEffect
 @onready var sprite: AnimatedSprite2D = %Sprite
 
 @onready var seasons = ["spring","summer","fall","winter"]
 var outline_color: Color = Color(1, 1, 1, 1)
 var outline_tween: Tween = null
+
 @export var outline_min = 0.1
 @export var outline_max = 0.5
 
 @export var rotation_speed: float = 0.2
+@export var rotation_sound_effect: AudioStreamPlayer2D
+@export var idle_rotation_sound_effect: AudioStreamPlayer2D
+
 @export var is_changeable := true
 @export var tile_rotation : Rotation = Rotation.UP : 
-	set(x):
+	set(new_rotation):
 		if lock_rotation:
 			return
 		# var clockwise = x > tile_rotation
-		var new_rotation = x
+		# var new_rotation = x
 		# if not is_inside_tree():
 		# 	return
 		if is_inside_tree() && get_tree():
@@ -41,10 +44,18 @@ var outline_tween: Tween = null
 			%Sprite.rotation = PI / 2 * new_rotation
 			%StaticBody2D.rotation = PI / 2 * new_rotation
 
+		if tile_rotation == new_rotation: # i.e. no rotation change
+			idle_rotation_sound_effect.play()
+		else:
+			rotation_sound_effect.play()
+			rotation_sound_effect.pitch_scale = randf_range(0.6, 1.0)
+		
 		tile_rotation = new_rotation % 4
+
 @export var is_action_spawnable: bool = true
 @export_range(0,1,0.01) var chance_action_spawn: float = 0.1
 @export var lock_rotation: bool = false
+
 var _transform_to_full: bool = false
 
 var is_hover : bool = false
@@ -123,7 +134,9 @@ func tile_clicked(way: int) -> void:
 	if lock_rotation:
 		tile_bigger.play("rotate_lock")
 		return
+		
 	tile_rotation = (tile_rotation + way) % 4
+	
 	if tile_rotation < 0:
 		tile_rotation += 4
 
