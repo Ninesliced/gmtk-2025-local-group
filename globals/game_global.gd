@@ -203,6 +203,10 @@ func _play_long_explosion_sound_effect():
 	%LongExplosionSoundEffect.play()
 
 
+func _play_swap_sound_effect():
+	%SwapSoundEffect.play()
+
+
 func act_tile(tile: Tile, event: InputEvent) -> void:
 	if action_stacks.size() == 0:
 		_update_size()
@@ -304,10 +308,14 @@ func transform_empty_bomb(tile: Tile, event: InputEvent) -> void:
 
 func horizontal_swap(tile: Tile, event: InputEvent) -> void:
 	tile.horizontal_swap(map)
+	_play_swap_sound_effect()
+
 
 func vertical_swap(tile: Tile, event: InputEvent) -> void:
 	tile.vertical_swap(map)
-	
+	_play_swap_sound_effect()
+
+
 func spawn_enemy(tile: Tile, event: InputEvent) -> void:
 	for i in range(-1,2):
 		var current_tile = map.grid[(tile.grid_position.x + i)%map.grid_size.x][(tile.grid_position.y)%map.grid_size.y]
