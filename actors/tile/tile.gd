@@ -25,21 +25,13 @@ var outline_tween: Tween = null
 @export var outline_min = 0.1
 @export var outline_max = 0.5
 
-@export var sound_action: AudioStreamPlayer2D
-
 @export var rotation_speed: float = 0.2
-@export var rotation_sound_effect: AudioStreamPlayer2D
-@export var idle_rotation_sound_effect: AudioStreamPlayer2D
+@export var rotation_sound_effect: AudioStreamPlayer
+@export var idle_rotation_sound_effect: AudioStreamPlayer
 
 @export var is_changeable := true
 @export var tile_rotation : Rotation = Rotation.UP : 
 	set(new_rotation):
-		if tile_rotation == new_rotation: # i.e. no rotation change
-			idle_rotation_sound_effect.play()
-		else:
-			rotation_sound_effect.play()
-			rotation_sound_effect.pitch_scale = randf_range(0.6, 1.0)
-		
 		if lock_rotation:
 			return
 
@@ -96,12 +88,22 @@ func swap(map: Map,vector : Vector2i) -> void:
 func horizontal_swap(map: Map) -> void:
 	swap(map,Vector2i(1,0))
 	
+
 func vertical_swap(map: Map) -> void:
 	swap(map,Vector2i(0,1))
 
 
+func _play_rotation_sound() -> void:
+	rotation_sound_effect.play()
+	rotation_sound_effect.pitch_scale = randf_range(0.6, 1.0)
 
-func _ready():
+
+func _play_idle_rotation_sound() -> void:
+	idle_rotation_sound_effect.play()
+	idle_rotation_sound_effect.pitch_scale = randf_range(0.6, 1.0)
+
+
+func _ready() -> void:
 	# Generation de l'action
 	sprite.speed_scale = 0
 	
@@ -119,6 +121,7 @@ func _ready():
 	var season = seasons[i]
 	sprite.play(season)
 
+
 func _on_area_2d_mouse_entered() -> void:
 	tile_hovered()
 	is_hover = true
@@ -134,6 +137,7 @@ func _on_area_2d_input_event(viewport: Node, event: InputEvent, shape_idx: int) 
 		if !event.pressed and event.button_index < 3:
 			GameGlobal.act_tile(self, event)
 
+
 func tile_clicked(way: int) -> void:
 	if lock_rotation:
 		tile_bigger.play("rotate_lock")
@@ -144,18 +148,22 @@ func tile_clicked(way: int) -> void:
 	if tile_rotation < 0:
 		tile_rotation += 4
 
+
 func tile_hovered() -> void:
 	var action = GameGlobal.action_stacks[0]
 	spawn_outline(action)
+
 
 func tile_unhovered() -> void:
 	var action = GameGlobal.action_stacks[0]
 	clear_outline(action)
 
+
 func on_action(action) -> void:
 	clear_outline(action)
 	var new_action = GameGlobal.action_stacks[0] if len(GameGlobal.action_stacks) > 0 else action
 	spawn_outline(new_action)
+
 
 func clear_outline(action) -> void:
 	var action_property = GameGlobal.dict[action]
@@ -171,6 +179,7 @@ func clear_outline(action) -> void:
 		var tile: Tile = GameGlobal.map.grid[grid_pos.x][grid_pos.y]
 		if tile and tile.outline:
 			tile.hide_outline()
+
 
 func spawn_outline(action) -> void:
 	var action_property = GameGlobal.dict[action]
@@ -200,14 +209,17 @@ func spawn_outline(action) -> void:
 			tile.outline.modulate = Color(1, 50./255., 50./255., 1)
 		tile.show_outline()
 
+
 func show_outline() -> void:
 	outline.visible = true
 	low_visibility_outline()
+
 
 func hide_outline() -> void:
 	outline.visible = false
 	if outline_tween:
 		outline_tween.stop()
+
 
 func low_visibility_outline() -> void:
 	if not outline.visible:
@@ -219,6 +231,7 @@ func low_visibility_outline() -> void:
 	outline_tween.set_ease(Tween.EASE_IN_OUT)
 	outline_tween.tween_callback(high_visibility_outline)
 
+
 func high_visibility_outline() -> void:
 	if not outline.visible:
 		return
@@ -229,9 +242,11 @@ func high_visibility_outline() -> void:
 	outline_tween.set_ease(Tween.EASE_IN_OUT)
 	outline_tween.tween_callback(low_visibility_outline)
 
+
 func _process(delta: float) -> void:
 	# label.text = str(grid_position)
 	pass
+
 
 func _on_area_body_exited(body: Node2D) -> void:
 	if not body is Player:
@@ -245,8 +260,8 @@ func _on_area_body_exited(body: Node2D) -> void:
 	# var tile: Tile = transform_to_another_type(tiles[GameGlobal.rng.randi() % tiles.size()])
 	# tile.tile_rotation = randi() % 4
 	var direction = GameGlobal.player.movement_component.last_inside_direction
-	print("direction", direction)
 	var tile: Tile = transform_with_1ddl_less(direction, true)
+	tile._play_idle_rotation_sound()
 	
 	
 func rotate_animated(new_rotation: int) -> void:
@@ -262,6 +277,8 @@ func rotate_animated(new_rotation: int) -> void:
 	tween.tween_property(%Sprite, "rotation", PI / 2 * new_rotation, rotation_speed)
 	tween.set_ease(Tween.EASE_OUT)
 	tween.set_trans(Tween.TRANS_ELASTIC)
+	
+	_play_rotation_sound()
 	
 func translation_animated(target: Vector2) -> void:
 	var pos = position
@@ -292,6 +309,7 @@ func transform_to_another_type(new_tile: PackedScene, play_animation: bool = tru
 		tile_instance.tile_bigger.play_full()
 	GameGlobal.map.grid[grid_position.x][grid_position.y] = tile_instance
 	queue_free()
+
 	return tile_instance
 	
 var equivalance_pos_tile: Dictionary = {
@@ -311,12 +329,11 @@ var equivalance_tile_pos: Dictionary = {
 }
 
 
-
-
 func rotate_right_by_one(text: String) -> String:
 	if text.length() == 0:
 		return text
 	return text[-1] + text.substr(0, text.length() - 1)
+
 
 func transform_with_1ddl_less(direction: Rotation, play_animation: bool = true) -> Tile:
 	if not is_changeable:
@@ -378,13 +395,6 @@ func transform_with_1ddl_less(direction: Rotation, play_animation: bool = true) 
 	return tile_instance"""
 	return self
 
-
-func play_sound() -> void:
-	if not sound_action:
-		print("no sound action set")
-		return
-	print("Playing sound")
-	sound_action.play()
 
 func can_pass(direction: Rotation) -> bool:
 	return true
