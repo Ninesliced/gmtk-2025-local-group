@@ -23,7 +23,7 @@ script = ExtResource("1_tefeu")
 [node name="TouchControl" parent="." instance=ExtResource("2_tipki")]
 offset_top = -64.0
 offset_bottom = -24.0
-mouse_filter = 2
+mouse_filter = 1
 
 [node name="Map" parent="." instance=ExtResource("1_tbgi4")]
 material = SubResource("ShaderMaterial_o6xl0")

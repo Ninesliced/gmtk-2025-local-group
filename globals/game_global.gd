@@ -2,7 +2,7 @@ extends Node
 
 signal on_action_stack_changed
 signal on_action
-
+var in_menu: bool = false
 const ENEMY = preload("res://actors/enemy/enemy.tscn")
 @onready var canvas_layer: CanvasLayer = %CanvasLayer
 @export var action_stacks : Array[ActionType] = [
