@@ -251,7 +251,7 @@ func rotate_clock(tile: Tile) -> void:
 func rotate_counter_clock(tile: Tile) -> void:
 	tile.rotate_counter_clock()
 
-func transform_empty(tile: Tile, event: InputEvent) -> Tile:
+func transform_empty(tile: Tile) -> Tile:
 	var new_tile := tile.transform_to_another_type(load("res://actors/tile/cursed_four.tscn"))
 	
 	_play_short_explosion_sound_effect()

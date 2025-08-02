@@ -97,7 +97,9 @@ position = Vector2(16, 16)
 [node name="PopSoundEffect" type="AudioStreamPlayer2D" parent="." index="6"]
 
 [node name="RotationSoundEffect" parent="." index="7"]
+unique_name_in_owner = true
 volume_db = -15.0
 
 [node name="IdleRotationSoundEffect" parent="." index="8"]
+unique_name_in_owner = true
 volume_db = -15.0

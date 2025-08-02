@@ -1,6 +1,6 @@
 [gd_scene load_steps=10 format=3 uid="uid://cbpq7l51w5vth"]
 
-[ext_resource type="PackedScene" uid="uid://lch1hj6crvy8" path="res://actors/tile/spike.tscn" id="1_rjogy"]
+[ext_resource type="PackedScene" uid="uid://lch1hj6crvy8" path="res://actors/tile/spike/spike.tscn" id="1_rjogy"]
 [ext_resource type="Script" uid="uid://ccaqpjl4ug7fe" path="res://actors/tile/spike/full_spike.gd" id="2_6ajxb"]
 [ext_resource type="Shader" uid="uid://jkmh5ksc1ejd" path="res://actors/tile/tile3D.gdshader" id="2_bs1b6"]
 [ext_resource type="Shader" uid="uid://birv8v71nvo3v" path="res://addons/shaker/components/vfx/shaders/fill_color.gdshader" id="3_6ajxb"]
@@ -45,7 +45,6 @@ material = SubResource("ShaderMaterial_h55dy")
 [node name="Sprite" parent="3DShader" index="0"]
 material = SubResource("ShaderMaterial_rflu8")
 sprite_frames = SubResource("SpriteFrames_h55dy")
-animation = &"default"
 
 [node name="PopSoundEffect" type="AudioStreamPlayer2D" parent="." index="6"]
 
