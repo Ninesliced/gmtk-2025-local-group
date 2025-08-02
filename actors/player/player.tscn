@@ -122,7 +122,7 @@ mc = NodePath("../MovementComponent")
 [node name="WalkSoundEffect" type="AudioStreamPlayer" parent="."]
 unique_name_in_owner = true
 stream = ExtResource("11_hiosj")
-volume_db = -30.0
+volume_db = -40.0
 
 [node name="ItemTakeSoundEffect" type="AudioStreamPlayer" parent="."]
 unique_name_in_owner = true

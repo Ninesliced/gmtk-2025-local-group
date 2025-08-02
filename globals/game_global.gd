@@ -205,7 +205,7 @@ func _play_long_explosion_sound_effect():
 
 func _play_swap_sound_effect():
 	# FIXME: Godot is broken
-	%SwapSoundEffect.volume_db = -30.0
+	%SwapSoundEffect.volume_db = -40.0
 	%SwapSoundEffect.play()
 
 
