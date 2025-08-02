@@ -15,15 +15,15 @@ enum Rotation {
 
 
 @onready var tile_bigger: AnimationPlayer = %TileBigger
-@onready var outline : Node2D = %Outline
+@onready var outline: Node2D = %Outline
+@onready var sound_action: AudioStreamPlayer2D = %SoundEffect
+@onready var sprite: AnimatedSprite2D = %Sprite
+
 @onready var seasons = ["spring","summer","fall","winter"]
 var outline_color: Color = Color(1, 1, 1, 1)
 var outline_tween: Tween = null
 @export var outline_min = 0.1
 @export var outline_max = 0.5
-@onready var sprite: AnimatedSprite2D = %Sprite
-
-@export var sound_action: AudioStreamPlayer2D
 
 @export var rotation_speed: float = 0.2
 @export var tile_rotation : Rotation = Rotation.UP : 

@@ -6,7 +6,7 @@
 [ext_resource type="Shader" uid="uid://birv8v71nvo3v" path="res://addons/shaker/components/vfx/shaders/fill_color.gdshader" id="3_ewfg4"]
 [ext_resource type="Script" uid="uid://dq0rbo0c6kl8c" path="res://actors/tile/tile_bigger.gd" id="4_1qs4h"]
 [ext_resource type="SpriteFrames" uid="uid://c5scel157ist2" path="res://resources/full.tres" id="4_187ej"]
-[ext_resource type="AudioStream" uid="uid://fa2qk01efkg8" path="res://assets/sfx/grass.mp3" id="6_i7in2"]
+[ext_resource type="AudioStream" uid="uid://o3dk3yuuufpr" path="res://assets/sfx/work/walk.ogg" id="7_187ej"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_4t6fi"]
 size = Vector2(36.129, 36.129)
@@ -124,10 +124,9 @@ func _on_area_body_entered(body: Node2D) -> void:
 	pass # Replace with function body.
 "
 
-[node name="Tile3" type="Node2D" node_paths=PackedStringArray("sound_action")]
+[node name="Tile3" type="Node2D"]
 script = ExtResource("1_4t6fi")
 outline_min = 0.2
-sound_action = NodePath("AudioStreamPlayer2D")
 chance_action_spawn = 0.05
 
 [node name="Area" type="Area2D" parent="."]
@@ -172,13 +171,15 @@ script = ExtResource("4_1qs4h")
 [node name="ActionHolder" type="Node2D" parent="."]
 unique_name_in_owner = true
 
-[node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="."]
-stream = ExtResource("6_i7in2")
-volume_db = 10.0
+[node name="SoundEffect" type="AudioStreamPlayer2D" parent="."]
+unique_name_in_owner = true
+stream = ExtResource("7_187ej")
+stream_paused = true
+playback_type = 2
 script = SubResource("GDScript_i7in2")
 
 [connection signal="body_entered" from="Area" to="." method="_on_area_body_entered"]
-[connection signal="body_entered" from="Area" to="AudioStreamPlayer2D" method="_on_area_body_entered"]
+[connection signal="body_entered" from="Area" to="SoundEffect" method="_on_area_body_entered"]
 [connection signal="body_exited" from="Area" to="." method="_on_area_body_exited"]
 [connection signal="input_event" from="Area" to="." method="_on_area_2d_input_event"]
 [connection signal="mouse_entered" from="Area" to="." method="_on_area_2d_mouse_entered"]
