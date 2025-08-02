@@ -223,8 +223,9 @@ func _on_area_body_exited(body: Node2D) -> void:
 #		return
 #	_transform_to_full = false
 #	transform_to_another_type(load("res://actors/tile/full.tscn"))
-	var tiles = GameGlobal.map.tiles
-	transform_to_another_type(tiles[GameGlobal.rng.randi() % tiles.size()])
+	var tiles      = GameGlobal.map.tiles
+	var tile: Tile = transform_to_another_type(tiles[GameGlobal.rng.randi() % tiles.size()])
+	tile.tile_rotation = randi() % 4
 
 func rotate_animated(new_rotation: int) -> void:
 	%StaticBody2D.rotation = PI / 2 * new_rotation
