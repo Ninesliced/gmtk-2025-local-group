@@ -8,13 +8,7 @@ spacing_bottom = 3
 
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_7ct1h"]
 
-[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_886mr"]
-texture = ExtResource("1_7ct1h")
-texture_margin_left = 6.0
-texture_margin_top = 6.0
-texture_margin_right = 6.0
-texture_margin_bottom = 6.0
-region_rect = Rect2(0, 0, 13, 13)
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_886mr"]
 
 [sub_resource type="StyleBoxTexture" id="StyleBoxTexture_d4nwg"]
 texture = ExtResource("1_7ct1h")
@@ -45,7 +39,7 @@ default_font = SubResource("FontVariation_d4nwg")
 default_font_size = 8
 Button/fonts/font = SubResource("FontVariation_d4nwg")
 Button/styles/disabled = SubResource("StyleBoxEmpty_7ct1h")
-Button/styles/focus = SubResource("StyleBoxTexture_886mr")
+Button/styles/focus = SubResource("StyleBoxEmpty_886mr")
 Button/styles/hover = SubResource("StyleBoxTexture_d4nwg")
 Button/styles/normal = SubResource("StyleBoxTexture_tekt2")
 Button/styles/pressed = SubResource("StyleBoxTexture_7ct1h")

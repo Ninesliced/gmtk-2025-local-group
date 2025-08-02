@@ -1,9 +1,8 @@
 [gd_resource type="ShaderMaterial" load_steps=2 format=3 uid="uid://ctsbqcehyf6ux"]
 
-[ext_resource type="Shader" uid="uid://birv8v71nvo3v" path="res://addons/shaker/components/vfx/shaders/fill_color.gdshader" id="1_fqh66"]
+[ext_resource type="Shader" path="res://addons/shaker/components/vfx/shaders/outline2.gdshader" id="1_fqh66"]
 
 [resource]
 resource_local_to_scene = true
 shader = ExtResource("1_fqh66")
-shader_parameter/color = Color(1, 1, 1, 1)
-shader_parameter/force = 0.0
+shader_parameter/color = Color(0, 0, 0, 1)
