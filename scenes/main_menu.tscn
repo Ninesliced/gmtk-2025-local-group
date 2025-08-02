@@ -56,13 +56,5 @@ offset_right = 128.0
 offset_bottom = 32.0
 text = "Quit"
 
-[node name="Button" type="Button" parent="."]
-layout_mode = 0
-offset_left = 96.0
-offset_top = 64.0
-offset_right = 104.0
-offset_bottom = 72.0
-text = "sqdqsddqsds"
-
 [connection signal="pressed" from="HBoxContainer/Control/Play" to="." method="_on_play_pressed"]
 [connection signal="pressed" from="HBoxContainer/Control2/Quit" to="." method="_on_quit_pressed"]
