@@ -1,4 +1,4 @@
-[gd_scene load_steps=6 format=3 uid="uid://cr65lasl6pn2l"]
+[gd_scene load_steps=7 format=3 uid="uid://cr65lasl6pn2l"]
 
 [ext_resource type="PackedScene" uid="uid://b7fgpkbuim0vj" path="res://actors/map/Map.tscn" id="1_vwjwa"]
 [ext_resource type="Script" uid="uid://cpvd8mjlsp6tj" path="res://scenes/camera_2d.gd" id="2_ui5ad"]
@@ -6,9 +6,13 @@
 [ext_resource type="PackedScene" uid="uid://c7yy27v3jsd76" path="res://actors/action/actions.tscn" id="4_ryr8l"]
 [ext_resource type="PackedScene" uid="uid://c5lqig57oxpyb" path="res://actors/player/player.tscn" id="5_683xw"]
 
-[node name="Arkan" type="Node2D"]
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_vwjwa"]
+resource_local_to_scene = true
+
+[node name="Arkan2" type="Node2D"]
 
 [node name="Map" parent="." instance=ExtResource("1_vwjwa")]
+material = SubResource("ShaderMaterial_vwjwa")
 position = Vector2(0, 10)
 grid_size = Vector2i(25, 5)
 

@@ -34,8 +34,15 @@ var outline_tween: Tween = null
 @export var is_changeable := true
 @export var tile_rotation : Rotation = Rotation.UP : 
 	set(new_rotation):
+		if tile_rotation == new_rotation: # i.e. no rotation change
+			idle_rotation_sound_effect.play()
+		else:
+			rotation_sound_effect.play()
+			rotation_sound_effect.pitch_scale = randf_range(0.6, 1.0)
+		
 		if lock_rotation:
 			return
+
 		# var clockwise = x > tile_rotation
 		# var new_rotation = x
 		# if not is_inside_tree():
@@ -44,18 +51,14 @@ var outline_tween: Tween = null
 			rotate_animated(new_rotation)
 		else:
 			%Sprite.rotation = PI / 2 * new_rotation
-
-		if tile_rotation == new_rotation: # i.e. no rotation change
-			idle_rotation_sound_effect.play()
-		else:
-			rotation_sound_effect.play()
-			rotation_sound_effect.pitch_scale = randf_range(0.6, 1.0)
 		
 		tile_rotation = new_rotation % 4
 
 @export var is_action_spawnable: bool = true
 @export_range(0,1,0.01) var chance_action_spawn: float = 0.1
 @export var lock_rotation: bool = false
+@export var tileName: String = ""
+
 
 var _transform_to_full: bool = false
 
@@ -128,7 +131,7 @@ func _on_area_2d_mouse_exited() -> void:
 
 func _on_area_2d_input_event(viewport: Node, event: InputEvent, shape_idx: int) -> void:
 	if event is InputEventMouseButton:
-		if !event.pressed:
+		if !event.pressed and event.button_index < 3:
 			GameGlobal.act_tile(self, event)
 
 func tile_clicked(way: int) -> void:
@@ -239,9 +242,13 @@ func _on_area_body_exited(body: Node2D) -> void:
 #	_transform_to_full = false
 #	transform_to_another_type(load("res://actors/tile/full.tscn"))
 	var tiles      = GameGlobal.map.tiles
-	var tile: Tile = transform_to_another_type(tiles[GameGlobal.rng.randi() % tiles.size()])
-	tile.tile_rotation = randi() % 4
-
+	# var tile: Tile = transform_to_another_type(tiles[GameGlobal.rng.randi() % tiles.size()])
+	# tile.tile_rotation = randi() % 4
+	var direction = GameGlobal.player.movement_component.last_inside_direction
+	print("direction", direction)
+	var tile: Tile = transform_with_1ddl_less(direction, true)
+	
+	
 func rotate_animated(new_rotation: int) -> void:
 	print(new_rotation)
 	print(%Sprite.rotation, " vs ", PI / 2 * new_rotation)
@@ -266,7 +273,7 @@ func translation_animated(target: Vector2) -> void:
 	tween.set_trans(Tween.TRANS_LINEAR)
 
 
-func transform_to_another_type(new_tile: PackedScene, play_animation: bool = true) -> Tile:
+func transform_to_another_type(new_tile: PackedScene, play_animation: bool = true, new_tile_rotation: Rotation = tile_rotation) -> Tile:
 	print(new_tile.resource_name)
 	if not is_changeable:
 		return self
@@ -274,6 +281,89 @@ func transform_to_another_type(new_tile: PackedScene, play_animation: bool = tru
 		print("Player is still inside the tile, cannot transform")
 		return null
 	var tile_instance: Tile = new_tile.instantiate()
+	tile_instance.position = position
+	tile_instance.grid_position = grid_position
+	tile_instance.tile_rotation = new_tile_rotation
+	if get_parent():
+		get_parent().add_child(tile_instance)
+	else:
+		push_error("why does this tile have no parent?")
+	if tile_instance.tile_bigger and play_animation:
+		tile_instance.tile_bigger.play_full()
+	GameGlobal.map.grid[grid_position.x][grid_position.y] = tile_instance
+	queue_free()
+	return tile_instance
+	
+var equivalance_pos_tile: Dictionary = {
+	"1111": load("res://actors/tile/full.tscn"),
+	"1000": load("res://actors/tile/t.tscn"),
+	"1010": load("res://actors/tile/line.tscn"),
+	"1100": load("res://actors/tile/corner.tscn"),
+	"0000": load("res://actors/tile/four.tscn")
+}
+var equivalance_tile_pos: Dictionary = {
+	# 1 c'est un mur
+	"FullTile": "1111",
+	"TTile": "1000",
+	"LineTile": "1010",
+	"CornerTile": "1100",
+	"FourTile": "0000"
+}
+
+
+
+
+func rotate_right_by_one(text: String) -> String:
+	if text.length() == 0:
+		return text
+	return text[-1] + text.substr(0, text.length() - 1)
+
+func transform_with_1ddl_less(direction: Rotation, play_animation: bool = true) -> Tile:
+	if not is_changeable:
+		return self
+	if is_player_inside:
+		print("Player is still inside the tile, cannot transform")
+		return null
+	 
+	print("---------------------")
+	print(tileName, tile_rotation, direction)
+	
+	if tileName not in equivalance_tile_pos.keys():
+		print("Not found")
+		var tile: Tile = transform_to_another_type(GameGlobal.map.tiles[GameGlobal.rng.randi() % GameGlobal.map.tiles.size()])
+		tile.tile_rotation = randi() % 4
+		return tile
+
+	var encodage = equivalance_tile_pos[tileName]
+	var direction_to_depop = (direction - tile_rotation + 8) % 4
+
+	print("encodage before ", encodage, " dir to depop ", direction_to_depop)
+	if direction_to_depop == Rotation.UP:
+		encodage[0] = "1"
+	elif direction_to_depop == Rotation.RIGHT:
+		encodage[1] = "1"
+	elif direction_to_depop == Rotation.DOWN:
+		encodage[2] = "1"
+	elif direction_to_depop == Rotation.LEFT:
+		encodage[3] = "1"
+	print("encodage after  ", encodage)
+	if encodage.count("1") >= 3:
+		var tile = transform_to_another_type(load("res://actors/tile/full.tscn"), true) 
+		return tile
+		
+	for rot in range(4):
+		if encodage in equivalance_pos_tile.keys():
+			var to_load_tile: PackedScene = equivalance_pos_tile[encodage]
+			var tile = transform_to_another_type(to_load_tile, false, (tile_rotation - rot + 8) % 4)
+			# ation = rot
+			# tile.tile_rotation = (0 - rot) % 4
+			print("Transformet to ", tile.tileName)
+			return tile
+
+		encodage = rotate_right_by_one(encodage)
+	print("Not found rotation")
+
+	"""var tile_instance: Tile = new_tile.instantiate()
 	tile_instance.position = position
 	tile_instance.grid_position = grid_position
 	tile_instance.tile_rotation = tile_rotation
@@ -285,7 +375,9 @@ func transform_to_another_type(new_tile: PackedScene, play_animation: bool = tru
 		tile_instance.tile_bigger.play_full()
 	GameGlobal.map.grid[grid_position.x][grid_position.y] = tile_instance
 	queue_free()
-	return tile_instance
+	return tile_instance"""
+	return self
+
 
 func play_sound() -> void:
 	if not sound_action:

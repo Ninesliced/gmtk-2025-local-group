@@ -73,6 +73,8 @@ animations = [{
 
 [node name="Tile4" instance=ExtResource("1_7uncb")]
 script = ExtResource("2_r882n")
+outline_min = 0.1
+tileName = "CornerTile"
 
 [node name="Area" parent="." index="0"]
 collision_layer = 9

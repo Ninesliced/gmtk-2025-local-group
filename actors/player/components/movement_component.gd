@@ -66,7 +66,8 @@ func _process(delta):
 		move_direction = Vector2i(0, -1)
 	move_player(move_direction)
 	
-	
+var last_inside_direction: Tile.Rotation
+
 func move_player(move_direction: Vector2i) -> void:
 	var map : Map = GameGlobal.map
 	var next_pos = Vector2i(grid_position + move_direction) % map.grid_size
@@ -94,7 +95,9 @@ func move_player(move_direction: Vector2i) -> void:
 	if !DebugGlobal.no_clip:
 		if current_tile == null or next_tile == null or not current_tile.can_pass(inside_direction) or not next_tile.can_pass(outside_direction):
 			return
-
+			
+	last_inside_direction = inside_direction
+	
 	GameGlobal.is_game_have_start = true
 
 	on_move.emit(move_direction)

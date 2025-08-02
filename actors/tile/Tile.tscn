@@ -157,17 +157,15 @@ script = ExtResource("4_1qs4h")
 [node name="ActionHolder" type="Node2D" parent="."]
 unique_name_in_owner = true
 
-[node name="PopSoundEffect" type="AudioStreamPlayer2D" parent="."]
-
 [node name="RotationSoundEffect" type="AudioStreamPlayer2D" parent="."]
 unique_name_in_owner = true
 stream = ExtResource("7_187ej")
-volume_db = -15.0
+volume_db = -30.0
 
 [node name="IdleRotationSoundEffect" type="AudioStreamPlayer2D" parent="."]
 unique_name_in_owner = true
 stream = ExtResource("8_d7a5y")
-volume_db = -15.0
+volume_db = -30.0
 
 [connection signal="body_entered" from="Area" to="." method="_on_area_body_entered"]
 [connection signal="body_exited" from="Area" to="." method="_on_area_body_exited"]

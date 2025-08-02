@@ -128,6 +128,7 @@ size = Vector2(6.25, 6.25)
 outline_min = null
 outline_max = null
 lock_rotation = true
+tileName = "FourTile"
 
 [node name="3DShader" parent="." index="1"]
 material = SubResource("ShaderMaterial_rjnl6")

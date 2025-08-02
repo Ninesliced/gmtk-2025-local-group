@@ -3,15 +3,15 @@
 importer="texture"
 type="CompressedTexture2D"
 uid="uid://6p5kfxtb28n4"
-path="res://.godot/imported/ninepatch_hover.png-bee0316483d0dadee2af83c7cd0116db.ctex"
+path="res://.godot/imported/ninepatch_hover.png-75c8a4e9b518b3c3c723ecbe538395e3.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/images/player/ui/rect/ninepatch_hover.png"
-dest_files=["res://.godot/imported/ninepatch_hover.png-bee0316483d0dadee2af83c7cd0116db.ctex"]
+source_file="res://assets/images/ui/rect/ninepatch_hover.png"
+dest_files=["res://.godot/imported/ninepatch_hover.png-75c8a4e9b518b3c3c723ecbe538395e3.ctex"]
 
 [params]
 
