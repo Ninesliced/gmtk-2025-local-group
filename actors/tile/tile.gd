@@ -243,7 +243,6 @@ func translation_animated(new_translation: Vector2) -> void:
 	var target = position + new_translation
 	%Sprite.position -= new_translation
 	position = target
-	print("Translation tile to: ", new_translation)
 	var tween = get_tree().create_tween()
 	tween.tween_property(%Sprite, "position", Vector2(0,0), 0.2)
 	tween.set_ease(Tween.EASE_IN_OUT)
