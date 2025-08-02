@@ -48,7 +48,7 @@ var outline_tween: Tween = null
 		tile_rotation = new_rotation % 4
 
 @export var is_action_spawnable: bool = true
-@export_range(0,1,0.01) var chance_action_spawn: float = 0.1
+@export_range(0,1,0.01) var chance_action_spawn: float = 0.025
 @export var lock_rotation: bool = false
 @export var tileName: String = ""
 

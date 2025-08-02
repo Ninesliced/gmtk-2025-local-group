@@ -130,7 +130,6 @@ animations = [{
 
 [node name="Tile4" instance=ExtResource("1_fm2mu")]
 script = ExtResource("2_1oojr")
-is_changeable = false
 is_action_spawnable = false
 lock_rotation = true
 tileName = "FullTile"
