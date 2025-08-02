@@ -38,7 +38,7 @@ enabled=PackedStringArray("res://addons/shaker/plugin.cfg")
 
 [gui]
 
-theme/custom_font="res://assets/fonts/thin_sans.ttf"
+theme/custom_font="uid://8i46uymhn3cb"
 
 [input]
 

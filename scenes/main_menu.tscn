@@ -1,19 +1,19 @@
-[gd_scene load_steps=23 format=3 uid="uid://72csgcoeo0nv"]
+[gd_scene load_steps=23 format=3 uid="uid://bvbyb8jdqjcei"]
 
 [ext_resource type="Script" uid="uid://tk3v0572hok5" path="res://scenes/main_menu.gd" id="1_bqqt6"]
 [ext_resource type="PackedScene" uid="uid://d2i4w4joysljq" path="res://scenes/ui/button.tscn" id="1_ekxnf"]
-[ext_resource type="Script" uid="uid://dhy4wxhaj8mpg" path="res://scenes/ui/button.gd" id="2_ekxnf"]
+[ext_resource type="Script" path="res://scenes/ui/button.gd" id="2_ekxnf"]
 [ext_resource type="PackedScene" uid="uid://cqwxuni5qjhvu" path="res://scenes/main.tscn" id="2_wu84c"]
 [ext_resource type="Texture2D" uid="uid://3tdc4o7fiqnb" path="res://assets/images/ui/rect/right_panel.png" id="5_8ln24"]
 [ext_resource type="Texture2D" uid="uid://k2pm4cv4l84n" path="res://assets/images/ui/rect/leaderboard_card.png" id="5_rtw2f"]
-[ext_resource type="Shader" uid="uid://dhrxdnevtv4vp" path="res://addons/shaker/components/vfx/shaders/outline2.gdshader" id="6_jk1qb"]
+[ext_resource type="Shader" path="res://addons/shaker/components/vfx/shaders/outline2.gdshader" id="6_jk1qb"]
 [ext_resource type="Theme" uid="uid://c06a0wpkb3qyr" path="res://resources/theme.tres" id="7_5dd4i"]
 [ext_resource type="PackedScene" uid="uid://bc11r74o1iibq" path="res://scenes/main_menu/play/leaderboard_data_ui.tscn" id="8_flqon"]
 [ext_resource type="Texture2D" uid="uid://cncpqu3fcgw0s" path="res://assets/images/ui/rect/seed_input.png" id="11_lgwnu"]
 [ext_resource type="Material" uid="uid://ctsbqcehyf6ux" path="res://actors/action/action.tres" id="11_rcqid"]
-[ext_resource type="FontFile" uid="uid://1cpdi1n60v38" path="res://assets/fonts/Thin Sans.ttf" id="12_1ajci"]
 [ext_resource type="Texture2D" uid="uid://dv03djiyk4tok" path="res://assets/images/ui/rect/play.png" id="12_flqon"]
 [ext_resource type="Texture2D" uid="uid://dtyov2htrcqvk" path="res://assets/images/ui/rect/play_pressed.png" id="13_7b55j"]
+[ext_resource type="PackedScene" uid="uid://g63ms4dlkya7" path="res://scenes/ui/tile_grid_ui.tscn" id="14_1ajci"]
 
 [sub_resource type="GDScript" id="GDScript_rcqid"]
 script/source = "extends Control
@@ -67,7 +67,7 @@ Button/constants/align_to_largest_stylebox = 0
 Button/constants/h_separation = 4
 Button/constants/icon_max_width = 0
 Button/constants/outline_size = 0
-Button/fonts/font = ExtResource("12_1ajci")
+Button/fonts/font = null
 Button/styles/disabled = SubResource("StyleBoxTexture_7b55j")
 Button/styles/focus = SubResource("StyleBoxTexture_5pajh")
 Button/styles/hover = SubResource("StyleBoxTexture_flqon")
@@ -84,6 +84,8 @@ grow_vertical = 2
 mouse_filter = 2
 script = ExtResource("1_bqqt6")
 main_menu_scene = ExtResource("2_wu84c")
+
+[node name="TileGridUi" parent="." instance=ExtResource("14_1ajci")]
 
 [node name="HBoxContainer" type="VBoxContainer" parent="."]
 unique_name_in_owner = true
@@ -114,6 +116,7 @@ text = "Quit"
 
 [node name="Play" type="Control" parent="."]
 unique_name_in_owner = true
+z_index = 100
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
