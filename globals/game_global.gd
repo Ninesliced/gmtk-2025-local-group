@@ -2,8 +2,11 @@ extends Node
 
 signal on_action_stack_changed
 signal on_action
+
 var in_menu: bool = false
 const ENEMY = preload("res://actors/enemy/enemy.tscn")
+
+var main_menu_scene: PackedScene = preload("res://scenes/main_menu.tscn")
 @onready var canvas_layer: CanvasLayer = %CanvasLayer
 @export var action_stacks : Array[ActionType] = [
 	ActionType.ROTATE_CLOCK,
@@ -469,7 +472,8 @@ func pick_weighted_random_action() -> ActionType:
 
 
 func reset_game() -> void:
-
+	%Score.show()
+	%ActionsContainer.show()
 	score = 0
 	number_of_actions = 0
 
@@ -484,3 +488,27 @@ func reset_game() -> void:
 		actions_ui.append(action_ui)
 		_update_size()
 	GameGlobal.action_ui_stacks = actions_ui
+
+
+
+func end_game() -> void:
+	in_menu = true
+	get_tree().paused = true
+	%AnimationPlayer.play("game_over")
+	
+
+func _on_retry_pressed():
+	%AnimationPlayer.play("RESET")
+	TransitionManager.reload_scene()
+	get_tree().paused = false
+	pass # Replace with function body.
+
+
+func _on_menu_pressed():
+	%AnimationPlayer.play("RESET")
+	TransitionManager.change_scene(GameGlobal.main_menu_scene, "circle_gradient")
+	get_tree().paused = false
+	%ActionsContainer.hide()
+	%Score.hide()
+
+	pass # Replace with function body.
