@@ -107,6 +107,7 @@ speed_scale = 0.0
 [node name="Outline" type="Sprite2D" parent="."]
 unique_name_in_owner = true
 visible = false
+z_index = 2
 position = Vector2(16, 16)
 texture = SubResource("AtlasTexture_ewfg4")
 
