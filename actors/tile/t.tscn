@@ -75,6 +75,7 @@ animations = [{
 script = ExtResource("2_p7gss")
 outline_min = 0.1
 tile_rotation = 2
+tileName = "TTile"
 
 [node name="Area" parent="." index="0"]
 collision_layer = 9
@@ -97,3 +98,11 @@ z_index = 0
 [node name="StaticBody2D" type="StaticBody2D" parent="." index="3"]
 unique_name_in_owner = true
 position = Vector2(16, 16)
+
+[node name="PopSoundEffect" type="AudioStreamPlayer2D" parent="." index="6"]
+
+[node name="RotationSoundEffect" parent="." index="7"]
+volume_db = -15.0
+
+[node name="IdleRotationSoundEffect" parent="." index="8"]
+volume_db = -15.0

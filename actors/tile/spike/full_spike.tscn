@@ -44,3 +44,11 @@ material = SubResource("ShaderMaterial_h55dy")
 [node name="Sprite" parent="3DShader" index="0"]
 material = SubResource("ShaderMaterial_rflu8")
 sprite_frames = SubResource("SpriteFrames_h55dy")
+
+[node name="PopSoundEffect" type="AudioStreamPlayer2D" parent="." index="6"]
+
+[node name="RotationSoundEffect" parent="." index="7"]
+volume_db = -15.0
+
+[node name="IdleRotationSoundEffect" parent="." index="8"]
+volume_db = -15.0

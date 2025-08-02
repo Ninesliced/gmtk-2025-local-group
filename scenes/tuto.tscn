@@ -1,0 +1,43 @@
+[gd_scene load_steps=10 format=3 uid="uid://ccbddjuw4fas3"]
+
+[ext_resource type="PackedScene" uid="uid://bptay3un6robe" path="res://scenes/mobile/touch_control.tscn" id="1_kisrk"]
+[ext_resource type="Script" uid="uid://b5n4nspk7bk7w" path="res://scenes/tuto.gd" id="1_onjet"]
+[ext_resource type="PackedScene" uid="uid://b7fgpkbuim0vj" path="res://actors/map/Map.tscn" id="2_onjet"]
+[ext_resource type="PackedScene" uid="uid://v6wht25gui7" path="res://scenes/border/border.tscn" id="2_ser3y"]
+[ext_resource type="Shader" uid="uid://jkmh5ksc1ejd" path="res://actors/tile/tile3D.gdshader" id="3_ser3y"]
+[ext_resource type="Texture2D" uid="uid://3inqpne41gwy" path="res://assets/shader_texture_tile.png" id="4_drxqf"]
+[ext_resource type="PackedScene" uid="uid://c5lqig57oxpyb" path="res://actors/player/player.tscn" id="5_bur5e"]
+[ext_resource type="Script" uid="uid://cpvd8mjlsp6tj" path="res://scenes/camera_2d.gd" id="6_bvb2u"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_y20xe"]
+resource_local_to_scene = true
+shader = ExtResource("3_ser3y")
+shader_parameter/ground_cols = ExtResource("4_drxqf")
+shader_parameter/number_of_ground_cols = 8
+shader_parameter/color_fill = Color(1, 1, 1, 1)
+shader_parameter/force = 0.0
+
+[node name="Tuto" type="Node2D"]
+script = ExtResource("1_onjet")
+
+[node name="Border" parent="." instance=ExtResource("2_ser3y")]
+speed = 0.0
+speed_increase_per_min = 0.0
+
+[node name="TouchControl" parent="." instance=ExtResource("1_kisrk")]
+offset_top = -64.0
+offset_bottom = -24.0
+mouse_filter = 1
+
+[node name="Map" parent="." instance=ExtResource("2_onjet")]
+material = SubResource("ShaderMaterial_y20xe")
+position = Vector2(0, 10)
+grid_size = Vector2i(25, 5)
+
+[node name="Player" parent="." instance=ExtResource("5_bur5e")]
+position = Vector2(15, 89)
+collision_mask = 17
+
+[node name="Camera2D" type="Camera2D" parent="."]
+position = Vector2(112, 80)
+script = ExtResource("6_bvb2u")

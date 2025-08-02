@@ -128,6 +128,7 @@ size = Vector2(6.25, 6.25)
 outline_min = null
 outline_max = null
 lock_rotation = true
+tileName = "FourTile"
 
 [node name="3DShader" parent="." index="1"]
 material = SubResource("ShaderMaterial_rjnl6")
@@ -163,3 +164,11 @@ shape = SubResource("RectangleShape2D_76t4f")
 [node name="BottomRightShape" type="CollisionShape2D" parent="StaticBody2D" index="3"]
 position = Vector2(12, 12)
 shape = SubResource("RectangleShape2D_76t4f")
+
+[node name="PopSoundEffect" type="AudioStreamPlayer2D" parent="." index="6"]
+
+[node name="RotationSoundEffect" parent="." index="7"]
+volume_db = -15.0
+
+[node name="IdleRotationSoundEffect" parent="." index="8"]
+volume_db = -15.0
