@@ -17,6 +17,7 @@ enum Rotation {
 @onready var tile_bigger: AnimationPlayer = %TileBigger
 @onready var outline: Node2D = %Outline
 @onready var sprite: AnimatedSprite2D = %Sprite
+@onready var action_holder: Node2D = %ActionHolder
 
 @onready var seasons = ["spring","summer","fall","winter"]
 var outline_color: Color = Color(1, 1, 1, 1)
@@ -153,11 +154,13 @@ func tile_clicked(way: int) -> void:
 
 
 func tile_hovered() -> void:
+	if len(GameGlobal.action_stacks) == 0: return
 	var action = GameGlobal.action_stacks[0]
 	spawn_outline(action)
 
 
 func tile_unhovered() -> void:
+	if len(GameGlobal.action_stacks) == 0: return
 	var action = GameGlobal.action_stacks[0]
 	clear_outline(action)
 

@@ -121,14 +121,16 @@ func translation_animation(target_position: Vector2) -> void:
 	is_moving = true
 	
 func on_action_performed():
-	if target_move:
-		grid_position += target_move
-		target_move = Vector2i.ZERO
-		animated_sprite_2d.play("jump")
-	else:
-		get_new_target_tile()
-	if target_move:
-		label.text = str(target_move)
+	print(abs(position.x - target.position.x))
+	if abs(position.x - target.position.x) <= 160:
+		if target_move:
+			grid_position += target_move
+			target_move = Vector2i.ZERO
+			animated_sprite_2d.play("jump")
+		else:
+			get_new_target_tile()
+		if target_move:
+			label.text = str(target_move)
 
 func stop_movement() -> void:
 	is_moving = false
