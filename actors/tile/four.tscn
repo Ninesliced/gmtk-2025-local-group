@@ -1,4 +1,4 @@
-[gd_scene load_steps=22 format=3 uid="uid://s2om5ju6lrn"]
+[gd_scene load_steps=23 format=3 uid="uid://s2om5ju6lrn"]
 
 [ext_resource type="PackedScene" uid="uid://bkuf38ni4q62k" path="res://actors/tile/Tile.tscn" id="1_wv4m7"]
 [ext_resource type="Texture2D" uid="uid://dabe5dmwfsby2" path="res://assets/spritesheet.png" id="2_a8f14"]
@@ -124,6 +124,19 @@ animations = [{
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_76t4f"]
 size = Vector2(6.25, 6.25)
 
+[sub_resource type="GDScript" id="GDScript_i7in2"]
+script/source = "extends AudioStreamPlayer2D
+
+func play_sound():
+	play()
+
+
+func _on_area_body_entered(body: Node2D) -> void:
+	pitch_scale = randf_range(0.8, 1.2)
+	play()
+	pass # Replace with function body.
+"
+
 [node name="Tile3" instance=ExtResource("1_wv4m7")]
 outline_min = null
 outline_max = null
@@ -161,5 +174,8 @@ shape = SubResource("RectangleShape2D_76t4f")
 position = Vector2(12, 12)
 shape = SubResource("RectangleShape2D_76t4f")
 
-[node name="AudioStreamPlayer2D" parent="." index="6"]
-stream = null
+[node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="." index="6"]
+volume_db = 10.0
+script = SubResource("GDScript_i7in2")
+
+[connection signal="body_entered" from="Area" to="AudioStreamPlayer2D" method="_on_area_body_entered"]

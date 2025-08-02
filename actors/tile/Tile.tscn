@@ -110,7 +110,7 @@ _data = {
 &"rotate_lock": SubResource("Animation_i7in2")
 }
 
-[node name="Tile3" type="Node2D"]
+[node name="Tile4" type="Node2D"]
 script = ExtResource("1_4t6fi")
 outline_min = 0.2
 chance_action_spawn = 0.05

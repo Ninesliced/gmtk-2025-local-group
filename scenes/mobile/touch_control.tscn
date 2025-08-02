@@ -1,0 +1,10 @@
+[gd_scene load_steps=2 format=3 uid="uid://bptay3un6robe"]
+
+[ext_resource type="Script" uid="uid://c8l262v0vhjq" path="res://globals/touch_control.gd" id="1_dq2cu"]
+
+[node name="TouchControl" type="Control"]
+layout_mode = 3
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+script = ExtResource("1_dq2cu")
