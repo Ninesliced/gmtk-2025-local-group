@@ -205,13 +205,13 @@ func _play_long_explosion_sound_effect():
 
 func _play_swap_sound_effect():
 	# FIXME: Godot is broken
-	%SwapSoundEffect.volume_db = -40.0
+	%SwapSoundEffect.volume_db = -35.0
 	%SwapSoundEffect.play()
 
 
 func _play_wolf_spawn_sound_effect():
 	# FIXME: Godot is broken
-	%WolfSpawnSoundEffect.volume_db = -30.0
+	%WolfSpawnSoundEffect.volume_db = -25.0
 	%WolfSpawnSoundEffect.pitch_scale = randf_range(0.7, 1.2)
 	%WolfSpawnSoundEffect.play()
 

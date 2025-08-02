@@ -25,8 +25,17 @@ var grid_position : Vector2i = Vector2i(3, 2) :
 		
 		update_position()
 
+
 func _ready() -> void:
 	GameGlobal.on_action.connect(on_action_performed)
+
+	
+func _play_wolf_growl_sound_effect():
+	# FIXME: Godot is broken
+	%WolfGrowlSoundEffect.volume_db = -30.0
+	%WolfGrowlSoundEffect.pitch_scale = randf_range(0.7, 1.2)
+	%WolfGrowlSoundEffect.play()
+
 	
 func get_new_target_tile():
 	var next_pos = target.position - position
@@ -64,12 +73,15 @@ func get_new_target_tile():
 			1:
 				target_move = Vector2(0,move_direction.y)
 		animated_sprite_2d.play("anticipation")
+		_play_wolf_growl_sound_effect()
 	elif abs(move_direction.x) >= 1:
 		target_move = Vector2(move_direction.x,0)
 		animated_sprite_2d.play("anticipation")
+		_play_wolf_growl_sound_effect()
 	elif abs(move_direction.y) >= 1:
 		target_move = Vector2(0,move_direction.y)
 		animated_sprite_2d.play("anticipation")
+		_play_wolf_growl_sound_effect()
 	else:
 		return
 	
