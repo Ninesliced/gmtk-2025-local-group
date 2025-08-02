@@ -1,4 +1,4 @@
-[gd_scene load_steps=14 format=3 uid="uid://s2om5ju6lrn"]
+[gd_scene load_steps=17 format=3 uid="uid://s2om5ju6lrn"]
 
 [ext_resource type="PackedScene" uid="uid://bkuf38ni4q62k" path="res://actors/tile/Tile.tscn" id="1_wv4m7"]
 [ext_resource type="Texture2D" uid="uid://dabe5dmwfsby2" path="res://assets/spritesheet.png" id="2_a8f14"]
@@ -29,6 +29,18 @@ region = Rect2(32, 32, 32, 32)
 atlas = ExtResource("2_a8f14")
 region = Rect2(32, 0, 32, 32)
 
+[sub_resource type="AtlasTexture" id="AtlasTexture_fciqi"]
+atlas = ExtResource("2_a8f14")
+region = Rect2(0, 96, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ou636"]
+atlas = ExtResource("2_a8f14")
+region = Rect2(0, 64, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_galv2"]
+atlas = ExtResource("2_a8f14")
+region = Rect2(32, 128, 32, 32)
+
 [sub_resource type="AtlasTexture" id="AtlasTexture_8ioip"]
 atlas = ExtResource("4_pd3d8")
 region = Rect2(32, 96, 32, 32)
@@ -50,6 +62,15 @@ animations = [{
 "frames": [{
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_wv4m7")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_fciqi")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ou636")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_galv2")
 }],
 "loop": true,
 "name": &"spring",

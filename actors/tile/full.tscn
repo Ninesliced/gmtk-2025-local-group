@@ -1,11 +1,11 @@
 [gd_scene load_steps=23 format=3 uid="uid://5x8ludb4a3gs"]
 
 [ext_resource type="PackedScene" uid="uid://bkuf38ni4q62k" path="res://actors/tile/Tile.tscn" id="1_fm2mu"]
-[ext_resource type="Script" path="res://actors/tile/full.gd" id="2_1oojr"]
+[ext_resource type="Script" uid="uid://ck4alt5qsfjf7" path="res://actors/tile/full.gd" id="2_1oojr"]
 [ext_resource type="Shader" uid="uid://jkmh5ksc1ejd" path="res://actors/tile/tile3D.gdshader" id="3_ltboa"]
-[ext_resource type="Script" uid="uid://dbj80gdqmhu1w" path="res://actors/tile/randomize_sprite.gd" id="3_ssas8"]
 [ext_resource type="Shader" uid="uid://birv8v71nvo3v" path="res://addons/shaker/components/vfx/shaders/fill_color.gdshader" id="4_irehs"]
 [ext_resource type="Texture2D" uid="uid://pl8capar1rck" path="res://assets/tilesheet_seasons.png" id="5_irehs"]
+[ext_resource type="PackedScene" uid="uid://torggi0th3pi" path="res://actors/tile/components/randomize_sprite.tscn" id="6_irehs"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_irehs"]
 resource_local_to_scene = true
@@ -144,6 +144,8 @@ material = SubResource("ShaderMaterial_smgc2")
 sprite_frames = SubResource("SpriteFrames_smgc2")
 animation = &"winter"
 
+[node name="RandomizeSprite" parent="3DShader/Sprite" index="0" instance=ExtResource("6_irehs")]
+
 [node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D" index="0"]
 position = Vector2(0, -0.5)
 shape = SubResource("RectangleShape2D_fm2mu")
@@ -151,6 +153,3 @@ shape = SubResource("RectangleShape2D_fm2mu")
 [node name="Label" type="Label" parent="." index="4"]
 offset_right = 40.0
 offset_bottom = 23.0
-
-[node name="RandomizeSprite" type="Node" parent="." index="5"]
-script = ExtResource("3_ssas8")

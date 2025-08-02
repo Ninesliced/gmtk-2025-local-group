@@ -1,9 +1,12 @@
 extends Node
 
-@onready var sprite: AnimatedSprite2D = %Sprite
+var sprite: AnimatedSprite2D
 
 func _ready() -> void:
-	await get_parent()._ready()
+	await get_parent().ready
+	var parent = get_parent()
+	if !(parent is AnimatedSprite2D):
+		return
 	play_random_sprite()
 
 func play_random_sprite():

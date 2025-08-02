@@ -1,0 +1,6 @@
+[gd_scene load_steps=2 format=3 uid="uid://torggi0th3pi"]
+
+[ext_resource type="Script" uid="uid://dbj80gdqmhu1w" path="res://actors/tile/randomize_sprite.gd" id="1_2fcit"]
+
+[node name="RandomizeSprite" type="Node"]
+script = ExtResource("1_2fcit")
