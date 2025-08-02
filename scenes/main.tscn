@@ -17,6 +17,7 @@ shader_parameter/color_fill = Color(1, 1, 1, 1)
 shader_parameter/force = 0.0
 
 [node name="Arkan" type="Node2D"]
+script = ExtResource("1_tefeu")
 
 [node name="Map" parent="." instance=ExtResource("1_tbgi4")]
 material = SubResource("ShaderMaterial_o6xl0")
@@ -29,9 +30,8 @@ collision_mask = 17
 
 [node name="Border" parent="." instance=ExtResource("3_o6xl0")]
 position = Vector2(-27, -16)
+speed = 5.0
 
 [node name="Camera2D" type="Camera2D" parent="."]
 position = Vector2(112, 80)
 script = ExtResource("2_tefeu")
-
-[node name="Actions" parent="." instance=ExtResource("4_tbgi4")]
