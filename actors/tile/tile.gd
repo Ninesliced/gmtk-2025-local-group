@@ -27,7 +27,7 @@ var outline_tween: Tween = null
 @export var tile_rotation : Rotation = Rotation.UP : 
 	set(x):
 		if lock_rotation:
-			returnw
+			return
 		# var clockwise = x > tile_rotation
 		var new_rotation = x
 		# if not is_inside_tree():
