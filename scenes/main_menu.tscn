@@ -1,31 +1,78 @@
-[gd_scene load_steps=16 format=3 uid="uid://bvbyb8jdqjcei"]
+[gd_scene load_steps=23 format=3 uid="uid://bvbyb8jdqjcei"]
 
 [ext_resource type="Script" uid="uid://tk3v0572hok5" path="res://scenes/main_menu.gd" id="1_bqqt6"]
-[ext_resource type="PackedScene" path="res://scenes/ui/button.tscn" id="1_ekxnf"]
+[ext_resource type="PackedScene" uid="uid://d2i4w4joysljq" path="res://scenes/ui/button.tscn" id="1_ekxnf"]
 [ext_resource type="Script" path="res://scenes/ui/button.gd" id="2_ekxnf"]
 [ext_resource type="PackedScene" uid="uid://cqwxuni5qjhvu" path="res://scenes/main.tscn" id="2_wu84c"]
 [ext_resource type="Texture2D" uid="uid://3tdc4o7fiqnb" path="res://assets/images/ui/rect/right_panel.png" id="5_8ln24"]
 [ext_resource type="Texture2D" uid="uid://k2pm4cv4l84n" path="res://assets/images/ui/rect/leaderboard_card.png" id="5_rtw2f"]
 [ext_resource type="Shader" path="res://addons/shaker/components/vfx/shaders/outline2.gdshader" id="6_jk1qb"]
-[ext_resource type="Texture2D" uid="uid://mkw848d48s1w" path="res://assets/images/ui/rect/name_tag.png" id="6_oa1go"]
 [ext_resource type="Theme" uid="uid://c06a0wpkb3qyr" path="res://resources/theme.tres" id="7_5dd4i"]
-[ext_resource type="Texture2D" uid="uid://1gvcwddrnu8s" path="res://assets/images/ui/rect/score_leaderboard.png" id="7_tbmy8"]
+[ext_resource type="PackedScene" uid="uid://bc11r74o1iibq" path="res://scenes/main_menu/play/leaderboard_data_ui.tscn" id="8_flqon"]
 [ext_resource type="Texture2D" uid="uid://cncpqu3fcgw0s" path="res://assets/images/ui/rect/seed_input.png" id="11_lgwnu"]
+[ext_resource type="Material" uid="uid://ctsbqcehyf6ux" path="res://actors/action/action.tres" id="11_rcqid"]
 [ext_resource type="Texture2D" uid="uid://dv03djiyk4tok" path="res://assets/images/ui/rect/play.png" id="12_flqon"]
+[ext_resource type="Texture2D" uid="uid://dtyov2htrcqvk" path="res://assets/images/ui/rect/play_pressed.png" id="13_7b55j"]
+[ext_resource type="PackedScene" uid="uid://g63ms4dlkya7" path="res://scenes/ui/tile_grid_ui.tscn" id="14_1ajci"]
+
+[sub_resource type="GDScript" id="GDScript_rcqid"]
+script/source = "extends Control
+
+func _ready():
+	hide()
+"
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_5dd4i"]
 shader = ExtResource("6_jk1qb")
 shader_parameter/color = Color(0, 0, 0, 1)
 
-[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_lgwnu"]
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_flqon"]
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_7b55j"]
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_5pajh"]
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_flqon"]
 texture = ExtResource("12_flqon")
 texture_margin_left = 3.0
-texture_margin_top = 3.0
+texture_margin_top = 2.0
 texture_margin_right = 3.0
-texture_margin_bottom = 6.0
+texture_margin_bottom = 5.0
+region_rect = Rect2(0, 1, 7, 8)
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_lgwnu"]
+texture = ExtResource("13_7b55j")
+texture_margin_left = 3.0
+texture_margin_top = 2.0
+texture_margin_right = 3.0
+texture_margin_bottom = 5.0
+region_rect = Rect2(0, 1, 7, 8)
 
 [sub_resource type="Theme" id="Theme_lgwnu"]
-Button/styles/normal = SubResource("StyleBoxTexture_lgwnu")
+default_font_size = 8
+Button/colors/font_color = Color(0.164706, 0.180392, 0.329412, 1)
+Button/colors/font_disabled_color = Color(0.875, 0.875, 0.875, 0.5)
+Button/colors/font_focus_color = Color(0.95, 0.95, 0.95, 1)
+Button/colors/font_hover_color = Color(0.95, 0.95, 0.95, 1)
+Button/colors/font_hover_pressed_color = Color(1, 1, 1, 1)
+Button/colors/font_outline_color = Color(0, 0, 0, 1)
+Button/colors/font_pressed_color = Color(1, 1, 1, 1)
+Button/colors/icon_disabled_color = Color(1, 1, 1, 0.4)
+Button/colors/icon_focus_color = Color(1, 1, 1, 1)
+Button/colors/icon_hover_color = Color(1, 1, 1, 1)
+Button/colors/icon_hover_pressed_color = Color(1, 1, 1, 1)
+Button/colors/icon_normal_color = Color(0, 0, 0, 1)
+Button/colors/icon_pressed_color = Color(1, 1, 1, 1)
+Button/constants/align_to_largest_stylebox = 0
+Button/constants/h_separation = 4
+Button/constants/icon_max_width = 0
+Button/constants/outline_size = 0
+Button/fonts/font = null
+Button/styles/disabled = SubResource("StyleBoxTexture_7b55j")
+Button/styles/focus = SubResource("StyleBoxTexture_5pajh")
+Button/styles/hover = SubResource("StyleBoxTexture_flqon")
+Button/styles/normal = SubResource("StyleBoxTexture_flqon")
+Button/styles/pressed = SubResource("StyleBoxTexture_lgwnu")
 
 [node name="MainMenu" type="Control"]
 layout_mode = 3
@@ -38,8 +85,11 @@ mouse_filter = 2
 script = ExtResource("1_bqqt6")
 main_menu_scene = ExtResource("2_wu84c")
 
+[node name="TileGridUi" parent="." instance=ExtResource("14_1ajci")]
+
 [node name="HBoxContainer" type="VBoxContainer" parent="."]
 unique_name_in_owner = true
+visible = false
 z_index = 50
 layout_mode = 1
 anchors_preset = 8
@@ -66,13 +116,14 @@ text = "Quit"
 
 [node name="Play" type="Control" parent="."]
 unique_name_in_owner = true
-visible = false
+z_index = 100
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+script = SubResource("GDScript_rcqid")
 
 [node name="Container" type="MarginContainer" parent="Play"]
 layout_mode = 1
@@ -111,81 +162,63 @@ offset_bottom = -4.0
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="Label" type="Label" parent="Play/Container/HBoxContainer/NinePatchRect/VBoxContainer"]
+[node name="Header" type="HBoxContainer" parent="Play/Container/HBoxContainer/NinePatchRect/VBoxContainer"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="Play/Container/HBoxContainer/NinePatchRect/VBoxContainer/Header"]
 material = SubResource("ShaderMaterial_5dd4i")
 layout_mode = 2
 theme = ExtResource("7_5dd4i")
 text = "SCOREBOARD"
 horizontal_alignment = 1
 
-[node name="Leaderboard" type="HBoxContainer" parent="Play/Container/HBoxContainer/NinePatchRect/VBoxContainer"]
+[node name="Leaderboard" parent="Play/Container/HBoxContainer/NinePatchRect/VBoxContainer" instance=ExtResource("8_flqon")]
 layout_mode = 2
-alignment = 1
 
-[node name="NinePatchRect" type="NinePatchRect" parent="Play/Container/HBoxContainer/NinePatchRect/VBoxContainer/Leaderboard"]
-custom_minimum_size = Vector2(0, 20)
+[node name="Leaderboard2" parent="Play/Container/HBoxContainer/NinePatchRect/VBoxContainer" instance=ExtResource("8_flqon")]
 layout_mode = 2
-size_flags_horizontal = 3
-texture = ExtResource("6_oa1go")
-region_rect = Rect2(0, 0, 14, 16)
-patch_margin_left = 6
-patch_margin_top = 6
-patch_margin_right = 5
-patch_margin_bottom = 7
-axis_stretch_horizontal = 1
-axis_stretch_vertical = 1
 
-[node name="NinePatchRect2" type="NinePatchRect" parent="Play/Container/HBoxContainer/NinePatchRect/VBoxContainer/Leaderboard"]
-custom_minimum_size = Vector2(0, 20)
+[node name="Leaderboard3" parent="Play/Container/HBoxContainer/NinePatchRect/VBoxContainer" instance=ExtResource("8_flqon")]
 layout_mode = 2
-size_flags_horizontal = 3
-size_flags_stretch_ratio = 0.6
-texture = ExtResource("7_tbmy8")
-region_rect = Rect2(0, 1, 9, 8)
-patch_margin_left = 6
-patch_margin_top = 6
-patch_margin_right = 5
-patch_margin_bottom = 6
-axis_stretch_horizontal = 1
-axis_stretch_vertical = 1
 
-[node name="Leaderboard2" type="HBoxContainer" parent="Play/Container/HBoxContainer/NinePatchRect/VBoxContainer"]
+[node name="Leaderboard4" parent="Play/Container/HBoxContainer/NinePatchRect/VBoxContainer" instance=ExtResource("8_flqon")]
 layout_mode = 2
-alignment = 1
-
-[node name="NinePatchRect" type="NinePatchRect" parent="Play/Container/HBoxContainer/NinePatchRect/VBoxContainer/Leaderboard2"]
-custom_minimum_size = Vector2(0, 20)
-layout_mode = 2
-size_flags_horizontal = 3
-texture = ExtResource("6_oa1go")
-region_rect = Rect2(0, 0, 14, 16)
-patch_margin_left = 6
-patch_margin_top = 6
-patch_margin_right = 5
-patch_margin_bottom = 7
-axis_stretch_horizontal = 1
-axis_stretch_vertical = 1
-
-[node name="NinePatchRect2" type="NinePatchRect" parent="Play/Container/HBoxContainer/NinePatchRect/VBoxContainer/Leaderboard2"]
-custom_minimum_size = Vector2(0, 20)
-layout_mode = 2
-size_flags_horizontal = 3
-size_flags_stretch_ratio = 0.6
-texture = ExtResource("7_tbmy8")
-region_rect = Rect2(0, 1, 9, 8)
-patch_margin_left = 6
-patch_margin_top = 6
-patch_margin_right = 5
-patch_margin_bottom = 6
-axis_stretch_horizontal = 1
-axis_stretch_vertical = 1
 
 [node name="right" type="VBoxContainer" parent="Play/Container/HBoxContainer"]
 layout_mode = 2
 
-[node name="MarginContainer" type="MarginContainer" parent="Play/Container/HBoxContainer/right"]
+[node name="SeedOfTheDay" type="NinePatchRect" parent="Play/Container/HBoxContainer/right"]
+custom_minimum_size = Vector2(0, 48)
 layout_mode = 2
-size_flags_vertical = 3
+texture = ExtResource("5_8ln24")
+patch_margin_left = 5
+patch_margin_top = 3
+patch_margin_right = 5
+patch_margin_bottom = 7
+
+[node name="Label2" type="Label" parent="Play/Container/HBoxContainer/right/SeedOfTheDay"]
+material = ExtResource("11_rcqid")
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_font_sizes/font_size = 8
+text = "Seed of the day"
+horizontal_alignment = 1
+
+[node name="Label" type="Label" parent="Play/Container/HBoxContainer/right/SeedOfTheDay"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_top = 19.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_font_sizes/font_size = 8
+text = "AAAAAAAAAAAA"
+horizontal_alignment = 1
 
 [node name="panel" type="NinePatchRect" parent="Play/Container/HBoxContainer/right"]
 custom_minimum_size = Vector2(98, 102)
@@ -219,25 +252,59 @@ patch_margin_top = 5
 patch_margin_right = 2
 patch_margin_bottom = 2
 
-[node name="SeedInput" type="TextEdit" parent="Play/Container/HBoxContainer/right/panel/VBoxContainer/NinePatchRect"]
+[node name="SeedInput" type="LineEdit" parent="Play/Container/HBoxContainer/right/panel/VBoxContainer/NinePatchRect"]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
+offset_left = 6.0
+offset_top = -6.0
+offset_right = -4.0
+offset_bottom = 7.0
 grow_horizontal = 2
 grow_vertical = 2
 theme_override_font_sizes/font_size = 8
-placeholder_text = "sdqsdqsd"
+theme_override_styles/normal = SubResource("StyleBoxEmpty_flqon")
+placeholder_text = "The seeds"
+max_length = 12
+
+[node name="NinePatchRect2" type="NinePatchRect" parent="Play/Container/HBoxContainer/right/panel/VBoxContainer"]
+custom_minimum_size = Vector2(0, 19)
+layout_mode = 2
+texture = ExtResource("11_lgwnu")
+region_rect = Rect2(0, 0, 6, 8)
+patch_margin_left = 3
+patch_margin_top = 5
+patch_margin_right = 2
+patch_margin_bottom = 2
+
+[node name="Username" type="LineEdit" parent="Play/Container/HBoxContainer/right/panel/VBoxContainer/NinePatchRect2"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 6.0
+offset_top = -6.0
+offset_right = -4.0
+offset_bottom = 7.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_font_sizes/font_size = 8
+theme_override_styles/normal = SubResource("StyleBoxEmpty_flqon")
+placeholder_text = "Username"
+max_length = 9
 
 [node name="MarginContainer" type="MarginContainer" parent="Play/Container/HBoxContainer/right/panel/VBoxContainer"]
 layout_mode = 2
 size_flags_vertical = 3
 
-[node name="Button" type="Button" parent="Play/Container/HBoxContainer/right/panel/VBoxContainer"]
+[node name="PlayButton" type="Button" parent="Play/Container/HBoxContainer/right/panel/VBoxContainer"]
 layout_mode = 2
 theme = SubResource("Theme_lgwnu")
-theme_override_font_sizes/font_size = 8
-text = "PLAY"
+text = "Play"
 
 [connection signal="pressed" from="HBoxContainer/PlayButton" to="." method="_on_play_pressed"]
 [connection signal="pressed" from="HBoxContainer/Quit" to="." method="_on_quit_pressed"]
+[connection signal="text_changed" from="Play/Container/HBoxContainer/right/panel/VBoxContainer/NinePatchRect/SeedInput" to="Play/Container/HBoxContainer/right/panel/VBoxContainer/NinePatchRect/SeedInput" method="_on_text_changed"]
+[connection signal="text_changed" from="Play/Container/HBoxContainer/right/panel/VBoxContainer/NinePatchRect2/Username" to="Play/Container/HBoxContainer/right/panel/VBoxContainer/NinePatchRect2/Username" method="_on_text_changed"]
+[connection signal="pressed" from="Play/Container/HBoxContainer/right/panel/VBoxContainer/PlayButton" to="." method="_on_play_button_pressed"]

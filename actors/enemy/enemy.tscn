@@ -1,8 +1,9 @@
-[gd_scene load_steps=14 format=3 uid="uid://qgas0f5a707u"]
+[gd_scene load_steps=15 format=3 uid="uid://qgas0f5a707u"]
 
 [ext_resource type="Script" uid="uid://dagd8pn234k01" path="res://actors/enemy/enemy.gd" id="1_jqx28"]
 [ext_resource type="Texture2D" uid="uid://b605qj4yor8p7" path="res://assets/images/enemy/wolf_animation.png" id="2_r6xaq"]
 [ext_resource type="Texture2D" uid="uid://hbrcluauojbn" path="res://assets/images/enemy/wolf_idle-Sheet.png" id="3_hptor"]
+[ext_resource type="AudioStream" uid="uid://b4rqyq21dbx1s" path="res://assets/sfx/work/wolf_growl_original.ogg" id="4_ooidh"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_r6xaq"]
 radius = 6.0
@@ -99,7 +100,6 @@ shape = SubResource("CircleShape2D_r6xaq")
 sprite_frames = SubResource("SpriteFrames_ooidh")
 animation = &"idel"
 autoplay = "idel"
-frame_progress = 0.814312
 
 [node name="Area2D2" type="Area2D" parent="."]
 collision_layer = 8
@@ -112,6 +112,11 @@ shape = SubResource("CircleShape2D_hptor")
 visible = false
 offset_right = 40.0
 offset_bottom = 13.0
+
+[node name="WolfGrowlSoundEffect" type="AudioStreamPlayer" parent="."]
+unique_name_in_owner = true
+stream = ExtResource("4_ooidh")
+volume_db = -25.0
 
 [connection signal="area_entered" from="Area2D" to="." method="_on_area_2d_area_entered"]
 [connection signal="animation_finished" from="AnimatedSprite2D" to="." method="_on_animated_sprite_2d_animation_finished"]

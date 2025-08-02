@@ -204,7 +204,16 @@ func _play_long_explosion_sound_effect():
 
 
 func _play_swap_sound_effect():
+	# FIXME: Godot is broken
+	%SwapSoundEffect.volume_db = -40.0
 	%SwapSoundEffect.play()
+
+
+func _play_wolf_spawn_sound_effect():
+	# FIXME: Godot is broken
+	%WolfSpawnSoundEffect.volume_db = -25.0
+	%WolfSpawnSoundEffect.pitch_scale = randf_range(0.7, 1.2)
+	%WolfSpawnSoundEffect.play()
 
 
 func act_tile(tile: Tile, event: InputEvent) -> void:
@@ -319,6 +328,9 @@ func spawn_enemy_on_tile(tile: Tile) -> void:
 	player.get_parent().add_child(enemy)
 	enemy.grid_position = tile.grid_position
 	
+	_play_wolf_spawn_sound_effect()
+
+
 func spawn_enemy(tile: Tile) -> void:
 
 	for i in range(-1,2):
