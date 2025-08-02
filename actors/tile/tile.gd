@@ -15,17 +15,18 @@ enum Rotation {
 
 
 @onready var tile_bigger: AnimationPlayer = %TileBigger
-@onready var outline : Node2D = %Outline
+@onready var outline: Node2D = %Outline
+@onready var sound_action: AudioStreamPlayer2D = %SoundEffect
+@onready var sprite: AnimatedSprite2D = %Sprite
+
 @onready var seasons = ["spring","summer","fall","winter"]
 var outline_color: Color = Color(1, 1, 1, 1)
 var outline_tween: Tween = null
 @export var outline_min = 0.1
 @export var outline_max = 0.5
-@onready var sprite: AnimatedSprite2D = %Sprite
-
-@export var sound_action: AudioStreamPlayer2D
 
 @export var rotation_speed: float = 0.2
+@export var is_changeable := true
 @export var tile_rotation : Rotation = Rotation.UP : 
 	set(x):
 		if lock_rotation:
@@ -173,7 +174,7 @@ func spawn_outline(action) -> void:
 		if tile and tile.outline:
 			tiles.append(tile)
 		
-		if tile.grid_position == GameGlobal.player.movementComponent.grid_position:
+		if tile.grid_position == GameGlobal.player.movement_component.grid_position:
 			is_action_valid = false
 	
 	for tile in tiles:
@@ -254,6 +255,8 @@ func translation_animated(target: Vector2) -> void:
 
 
 func transform_to_another_type(new_tile: PackedScene, play_animation: bool = true) -> Tile:
+	if not is_changeable:
+		self
 	if is_player_inside:
 		print("Player is still inside the tile, cannot transform")
 		return null
@@ -270,13 +273,6 @@ func transform_to_another_type(new_tile: PackedScene, play_animation: bool = tru
 	GameGlobal.map.grid[grid_position.x][grid_position.y] = tile_instance
 	queue_free()
 	return tile_instance
-
-func play_sound() -> void:
-	if not sound_action:
-		print("no sound action set")
-		return
-	print("Playing sound")
-	sound_action.play()
 
 func can_pass(direction: Rotation) -> bool:
 	return true

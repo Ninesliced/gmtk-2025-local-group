@@ -201,7 +201,7 @@ func act_tile(tile: Tile, event: InputEvent) -> void:
 		if target_pos.y < 0:
 			target_pos.y += map.grid_size.y
 		
-		if target_pos == player.movementComponent.grid_position:
+		if target_pos == player.movement_component.grid_position:
 			return
 	
 	var action = action_stacks.pop_front()
@@ -241,8 +241,9 @@ func transform_empty_cursed(tile: Tile, event: InputEvent) -> void:
 	for i in range(0, 4):
 		var current_tile = map.grid[(grid_pos.x + i) % map.grid_size.x][grid_pos.y]
 		var new_tile = current_tile.transform_to_another_type(load("res://actors/tile/cursed_four.tscn"),true)
-		new_tile.play_sound()
+		# FIXME: Alexis: play "pop" sound
 		await get_tree().create_timer(0.1).timeout
+
 func transform_cross(tile: Tile, event: InputEvent) -> void:
 	for i in range(-1,2):
 		for j in range(-1,2):

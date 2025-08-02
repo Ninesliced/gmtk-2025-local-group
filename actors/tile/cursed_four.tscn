@@ -53,6 +53,7 @@ size = Vector2(6.25, 6.25)
 [node name="Tile4" instance=ExtResource("1_rwwjv")]
 outline_min = null
 outline_max = null
+is_changeable = true
 lock_rotation = true
 
 [node name="3DShader" parent="." index="1"]
