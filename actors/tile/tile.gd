@@ -118,6 +118,7 @@ func _on_area_2d_input_event(viewport: Node, event: InputEvent, shape_idx: int) 
 
 func tile_clicked(way: int) -> void:
 	if lock_rotation:
+		tile_bigger.play("rotate_lock")
 		return
 	tile_rotation = (tile_rotation + way) % 4
 	if tile_rotation < 0:

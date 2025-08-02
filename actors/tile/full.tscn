@@ -1,4 +1,4 @@
-[gd_scene load_steps=23 format=3 uid="uid://5x8ludb4a3gs"]
+[gd_scene load_steps=24 format=3 uid="uid://5x8ludb4a3gs"]
 
 [ext_resource type="PackedScene" uid="uid://bkuf38ni4q62k" path="res://actors/tile/Tile.tscn" id="1_fm2mu"]
 [ext_resource type="Script" uid="uid://ck4alt5qsfjf7" path="res://actors/tile/full.gd" id="2_1oojr"]
@@ -6,6 +6,7 @@
 [ext_resource type="Shader" uid="uid://birv8v71nvo3v" path="res://addons/shaker/components/vfx/shaders/fill_color.gdshader" id="4_irehs"]
 [ext_resource type="Texture2D" uid="uid://pl8capar1rck" path="res://assets/tilesheet_seasons.png" id="5_irehs"]
 [ext_resource type="PackedScene" uid="uid://torggi0th3pi" path="res://actors/tile/components/randomize_sprite.tscn" id="6_irehs"]
+[ext_resource type="Texture2D" uid="uid://dabe5dmwfsby2" path="res://assets/spritesheet.png" id="6_smgc2"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_irehs"]
 resource_local_to_scene = true
@@ -35,16 +36,16 @@ atlas = ExtResource("5_irehs")
 region = Rect2(160, 32, 32, 32)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_bctan"]
-atlas = ExtResource("5_irehs")
+atlas = ExtResource("6_smgc2")
 region = Rect2(96, 0, 32, 32)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_xbl4c"]
-atlas = ExtResource("5_irehs")
-region = Rect2(128, 0, 32, 32)
+atlas = ExtResource("6_smgc2")
+region = Rect2(96, 32, 32, 32)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_5goud"]
-atlas = ExtResource("5_irehs")
-region = Rect2(160, 0, 32, 32)
+atlas = ExtResource("6_smgc2")
+region = Rect2(96, 64, 32, 32)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_ekc14"]
 atlas = ExtResource("5_irehs")
@@ -142,8 +143,7 @@ material = SubResource("ShaderMaterial_irehs")
 [node name="Sprite" parent="3DShader" index="0"]
 material = SubResource("ShaderMaterial_smgc2")
 sprite_frames = SubResource("SpriteFrames_smgc2")
-animation = &"fall"
-frame_progress = 0.765682
+animation = &"spring"
 
 [node name="RandomizeSprite" parent="3DShader" index="1" node_paths=PackedStringArray("sprite", "root_parent") instance=ExtResource("6_irehs")]
 sprite = NodePath("../Sprite")

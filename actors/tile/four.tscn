@@ -1,10 +1,11 @@
-[gd_scene load_steps=17 format=3 uid="uid://s2om5ju6lrn"]
+[gd_scene load_steps=22 format=3 uid="uid://s2om5ju6lrn"]
 
 [ext_resource type="PackedScene" uid="uid://bkuf38ni4q62k" path="res://actors/tile/Tile.tscn" id="1_wv4m7"]
 [ext_resource type="Texture2D" uid="uid://dabe5dmwfsby2" path="res://assets/spritesheet.png" id="2_a8f14"]
 [ext_resource type="Shader" uid="uid://jkmh5ksc1ejd" path="res://actors/tile/tile3D.gdshader" id="3_a8f14"]
 [ext_resource type="Shader" uid="uid://birv8v71nvo3v" path="res://addons/shaker/components/vfx/shaders/fill_color.gdshader" id="3_rjnl6"]
 [ext_resource type="Texture2D" uid="uid://pl8capar1rck" path="res://assets/tilesheet_seasons.png" id="4_pd3d8"]
+[ext_resource type="PackedScene" uid="uid://torggi0th3pi" path="res://actors/tile/components/randomize_sprite.tscn" id="6_pgiy5"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_rjnl6"]
 resource_local_to_scene = true
@@ -93,12 +94,42 @@ animations = [{
 "speed": 5.0
 }]
 
+[sub_resource type="AtlasTexture" id="AtlasTexture_pd3d8"]
+atlas = ExtResource("2_a8f14")
+region = Rect2(0, 64, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_kp2tk"]
+atlas = ExtResource("2_a8f14")
+region = Rect2(0, 96, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_y8qex"]
+atlas = ExtResource("2_a8f14")
+region = Rect2(32, 128, 32, 32)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_pd3d8"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_pd3d8")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_kp2tk")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_y8qex")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}]
+
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_76t4f"]
 size = Vector2(6.25, 6.25)
 
 [node name="Tile3" instance=ExtResource("1_wv4m7")]
 outline_min = null
 outline_max = null
+lock_rotation = true
 
 [node name="3DShader" parent="." index="1"]
 material = SubResource("ShaderMaterial_rjnl6")
@@ -107,6 +138,13 @@ material = SubResource("ShaderMaterial_rjnl6")
 material = SubResource("ShaderMaterial_pd3d8")
 sprite_frames = SubResource("SpriteFrames_a8f14")
 animation = &"fall"
+
+[node name="Sprite2D" type="AnimatedSprite2D" parent="3DShader/Sprite" index="0"]
+modulate = Color(0.0916667, 0, 0.25, 0.352941)
+sprite_frames = SubResource("SpriteFrames_pd3d8")
+
+[node name="RandomizeSprite" parent="3DShader/Sprite/Sprite2D" index="0" node_paths=PackedStringArray("sprite") instance=ExtResource("6_pgiy5")]
+sprite = NodePath("..")
 
 [node name="TopLeftShape" type="CollisionShape2D" parent="StaticBody2D" index="0"]
 position = Vector2(-12, -12)
