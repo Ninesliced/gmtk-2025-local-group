@@ -95,17 +95,17 @@ func vertical_swap(map: Map) -> void:
 
 
 func _play_rotation_sound() -> void:
-	rotation_sound_effect.play()
 	rotation_sound_effect.pitch_scale = randf_range(0.6, 1.0)
 	# FIXME: Godot is broken
-	rotation_sound_effect.volume_db = -30.0
+	rotation_sound_effect.volume_db = -22.0
+	rotation_sound_effect.play()
 
 
 func _play_idle_rotation_sound() -> void:
-	idle_rotation_sound_effect.play()
 	idle_rotation_sound_effect.pitch_scale = randf_range(0.6, 1.0)
 	# FIXME: Godot is broken
-	idle_rotation_sound_effect.volume_db = -30.0
+	idle_rotation_sound_effect.volume_db = -28.0
+	idle_rotation_sound_effect.play()
 
 func _ready() -> void:
 	# Generation de l'action
