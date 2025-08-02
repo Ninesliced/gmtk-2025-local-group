@@ -5,6 +5,9 @@
 [ext_resource type="Shader" uid="uid://jkmh5ksc1ejd" path="res://actors/tile/tile3D.gdshader" id="3_xy1wa"]
 [ext_resource type="Shader" uid="uid://birv8v71nvo3v" path="res://addons/shaker/components/vfx/shaders/fill_color.gdshader" id="4_xy1wa"]
 
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_76t4f"]
+size = Vector2(31.125, 31.125)
+
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_npfhd"]
 resource_local_to_scene = true
 shader = ExtResource("3_xy1wa")
@@ -18,19 +21,16 @@ shader = ExtResource("4_xy1wa")
 shader_parameter/color = Color(1, 1, 1, 1)
 shader_parameter/force = 0.0
 
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_76t4f"]
-size = Vector2(31.125, 31.125)
-
 [node name="Tile2" instance=ExtResource("1_ppcfh")]
 script = ExtResource("2_xy1wa")
 timer_before_unblock = 1.0
 
-[node name="3DShader" parent="." index="1"]
+[node name="StaticBody2D#TopLeftShape" type="CollisionShape2D" parent="." index="0"]
+position = Vector2(0.4375, 0.4375)
+shape = SubResource("RectangleShape2D_76t4f")
+
+[node name="3DShader" parent="." index="2"]
 material = SubResource("ShaderMaterial_npfhd")
 
 [node name="Sprite" parent="3DShader" index="0"]
 material = SubResource("ShaderMaterial_intv6")
-
-[node name="TopLeftShape" type="CollisionShape2D" parent="StaticBody2D" index="0"]
-position = Vector2(0.4375, 0.4375)
-shape = SubResource("RectangleShape2D_76t4f")

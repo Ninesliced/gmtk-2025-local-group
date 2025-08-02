@@ -73,8 +73,6 @@ animations = [{
 
 [node name="Tile2" instance=ExtResource("1_hwkvx")]
 script = ExtResource("2_p7gss")
-outline_min = 0.1
-tile_rotation = 2
 
 [node name="Area" parent="." index="0"]
 collision_layer = 9

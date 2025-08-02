@@ -1,4 +1,4 @@
-[gd_scene load_steps=14 format=3 uid="uid://b72bu5lvtm2bv"]
+[gd_scene load_steps=13 format=3 uid="uid://b72bu5lvtm2bv"]
 
 [ext_resource type="PackedScene" uid="uid://c5lqig57oxpyb" path="res://actors/player/player.tscn" id="1_fk7tf"]
 [ext_resource type="Shader" uid="uid://jkmh5ksc1ejd" path="res://actors/tile/tile3D.gdshader" id="2_fwjos"]
@@ -31,19 +31,6 @@ shader = ExtResource("4_yj3ko")
 shader_parameter/color = Color(1, 1, 1, 1)
 shader_parameter/force = 0.0
 
-[sub_resource type="GDScript" id="GDScript_de6hr"]
-script/source = "extends AudioStreamPlayer2D
-
-func play_sound():
-	play()
-
-
-func _on_area_body_entered(body: Node2D) -> void:
-	pitch_scale = randf_range(0.8, 1.2)
-	play()
-	pass # Replace with function body.
-"
-
 [node name="Guigui" type="Node2D"]
 
 [node name="Map" parent="." instance=ExtResource("4_bff3v")]
@@ -51,10 +38,8 @@ material = SubResource("ShaderMaterial_tipki")
 position = Vector2(0, 32)
 grid_size = Vector2i(20, 5)
 
-[node name="Tile3" parent="Map" node_paths=PackedStringArray("sound_action") instance=ExtResource("3_yj3ko")]
+[node name="Tile3" parent="Map" instance=ExtResource("3_yj3ko")]
 position = Vector2(64, 0)
-sound_action = NodePath("AudioStreamPlayer2D")
-is_changeable = null
 
 [node name="3DShader" parent="Map/Tile3" index="1"]
 material = SubResource("ShaderMaterial_p1pyd")
@@ -64,19 +49,10 @@ material = SubResource("ShaderMaterial_ii521")
 animation = &"spring"
 
 [node name="StaticBody2D" parent="Map/Tile3" index="3"]
-unique_name_in_owner = true
 visible = false
-position = Vector2(16, 16)
 
-[node name="AudioStreamPlayer2D" parent="Map/Tile3" index="6"]
-unique_name_in_owner = false
-volume_db = 10.0
-script = SubResource("GDScript_de6hr")
-
-[node name="Tile4" parent="Map" node_paths=PackedStringArray("sound_action") instance=ExtResource("3_yj3ko")]
+[node name="Tile4" parent="Map" instance=ExtResource("3_yj3ko")]
 position = Vector2(96, 0)
-sound_action = NodePath("AudioStreamPlayer2D")
-is_changeable = null
 
 [node name="3DShader" parent="Map/Tile4" index="1"]
 material = SubResource("ShaderMaterial_p1pyd")
@@ -85,19 +61,10 @@ material = SubResource("ShaderMaterial_p1pyd")
 material = SubResource("ShaderMaterial_ii521")
 
 [node name="StaticBody2D" parent="Map/Tile4" index="3"]
-unique_name_in_owner = true
 visible = false
-position = Vector2(16, 16)
 
-[node name="AudioStreamPlayer2D" parent="Map/Tile4" index="6"]
-unique_name_in_owner = false
-volume_db = 10.0
-script = SubResource("GDScript_de6hr")
-
-[node name="Tile5" parent="Map" node_paths=PackedStringArray("sound_action") instance=ExtResource("3_yj3ko")]
+[node name="Tile5" parent="Map" instance=ExtResource("3_yj3ko")]
 position = Vector2(128, 0)
-sound_action = NodePath("AudioStreamPlayer2D")
-is_changeable = null
 
 [node name="3DShader" parent="Map/Tile5" index="1"]
 material = SubResource("ShaderMaterial_p1pyd")
@@ -107,19 +74,10 @@ material = SubResource("ShaderMaterial_ii521")
 animation = &"winter"
 
 [node name="StaticBody2D" parent="Map/Tile5" index="3"]
-unique_name_in_owner = true
 visible = false
-position = Vector2(16, 16)
 
-[node name="AudioStreamPlayer2D" parent="Map/Tile5" index="6"]
-unique_name_in_owner = false
-volume_db = 10.0
-script = SubResource("GDScript_de6hr")
-
-[node name="Tile6" parent="Map" node_paths=PackedStringArray("sound_action") instance=ExtResource("3_yj3ko")]
+[node name="Tile6" parent="Map" instance=ExtResource("3_yj3ko")]
 position = Vector2(160, 0)
-sound_action = NodePath("AudioStreamPlayer2D")
-is_changeable = null
 
 [node name="3DShader" parent="Map/Tile6" index="1"]
 material = SubResource("ShaderMaterial_p1pyd")
@@ -129,14 +87,7 @@ material = SubResource("ShaderMaterial_ii521")
 animation = &"summer"
 
 [node name="StaticBody2D" parent="Map/Tile6" index="3"]
-unique_name_in_owner = true
 visible = false
-position = Vector2(16, 16)
-
-[node name="AudioStreamPlayer2D" parent="Map/Tile6" index="6"]
-unique_name_in_owner = false
-volume_db = 10.0
-script = SubResource("GDScript_de6hr")
 
 [node name="Spike" parent="Map" instance=ExtResource("6_ii521")]
 position = Vector2(32, 0)
@@ -151,11 +102,6 @@ script = ExtResource("2_t7646")
 [node name="Player" parent="." instance=ExtResource("1_fk7tf")]
 position = Vector2(113, 79)
 collision_layer = 1
-
-[connection signal="body_entered" from="Map/Tile3/Area" to="Map/Tile3/AudioStreamPlayer2D" method="_on_area_body_entered"]
-[connection signal="body_entered" from="Map/Tile4/Area" to="Map/Tile4/AudioStreamPlayer2D" method="_on_area_body_entered"]
-[connection signal="body_entered" from="Map/Tile5/Area" to="Map/Tile5/AudioStreamPlayer2D" method="_on_area_body_entered"]
-[connection signal="body_entered" from="Map/Tile6/Area" to="Map/Tile6/AudioStreamPlayer2D" method="_on_area_body_entered"]
 
 [editable path="Map/Tile3"]
 [editable path="Map/Tile4"]
