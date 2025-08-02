@@ -44,7 +44,7 @@ var score : int = 0:
 	set(value):
 		score = max(score, value)
 		%Score.text = "Score: " + str(score)
-
+		$CanvasLayer/GameOver/VBoxContainer2/VBoxContainer/NinePatchRect2/Number.text = str(score)
 
 @export var action_textures : Dictionary[ActionType, Texture2D] = {}
 enum ActionType {
@@ -406,7 +406,10 @@ func nop(_tile: Tile, _event: InputEvent):
 @export var camera: Camera2D = null
 var is_game_have_start: bool = false
 var rng = RandomNumberGenerator.new()
-var rng_seed = str(randi())
+var rng_seed = str(randi()):
+	set(x):
+		rng_seed = x
+		$CanvasLayer/GameOver/VBoxContainer2/VBoxContainer2/NinePatchRect2/Number.text = x
 var leaderboard = null
 
 @export var action_ui_scene: PackedScene = preload("res://scenes/ui/action_ui.tscn")

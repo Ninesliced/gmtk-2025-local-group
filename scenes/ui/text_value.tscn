@@ -1,4 +1,4 @@
-[gd_scene load_steps=3 format=3 uid="uid://dinl415fakmpw"]
+[gd_scene load_steps=3 format=3 uid="uid://inym5effhr3j"]
 
 [ext_resource type="Texture2D" uid="uid://c34og7lgqx01n" path="res://assets/images/ui/rect/score_bunny.png" id="1_3vxro"]
 [ext_resource type="Texture2D" uid="uid://cncpqu3fcgw0s" path="res://assets/images/ui/rect/seed_input.png" id="2_3vxro"]
