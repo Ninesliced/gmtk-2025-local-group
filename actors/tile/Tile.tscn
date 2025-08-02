@@ -1,4 +1,4 @@
-[gd_scene load_steps=14 format=3 uid="uid://bkuf38ni4q62k"]
+[gd_scene load_steps=16 format=3 uid="uid://bkuf38ni4q62k"]
 
 [ext_resource type="Script" uid="uid://ckoaogse5dba6" path="res://actors/tile/tile.gd" id="1_4t6fi"]
 [ext_resource type="Texture2D" uid="uid://dabe5dmwfsby2" path="res://assets/spritesheet.png" id="2_4t6fi"]
@@ -6,6 +6,8 @@
 [ext_resource type="Shader" uid="uid://birv8v71nvo3v" path="res://addons/shaker/components/vfx/shaders/fill_color.gdshader" id="3_ewfg4"]
 [ext_resource type="Script" uid="uid://dq0rbo0c6kl8c" path="res://actors/tile/tile_bigger.gd" id="4_1qs4h"]
 [ext_resource type="SpriteFrames" uid="uid://c5scel157ist2" path="res://resources/full.tres" id="4_187ej"]
+[ext_resource type="AudioStream" uid="uid://boi0cyoxrxhpc" path="res://assets/sfx/work/rotate.ogg" id="7_187ej"]
+[ext_resource type="AudioStream" uid="uid://bwoml3le6rll3" path="res://assets/sfx/work/rotate_idle.ogg" id="8_d7a5y"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_4t6fi"]
 size = Vector2(36.129, 36.129)
@@ -110,10 +112,11 @@ _data = {
 &"rotate_lock": SubResource("Animation_i7in2")
 }
 
-[node name="Tile4" type="Node2D"]
+[node name="Tile3" type="Node2D" node_paths=PackedStringArray("rotation_sound_effect", "idle_rotation_sound_effect")]
 script = ExtResource("1_4t6fi")
 outline_min = 0.2
-sound_action = NodePath("AudioStreamPlayer2D")
+rotation_sound_effect = NodePath("RotationSoundEffect")
+idle_rotation_sound_effect = NodePath("IdleRotationSoundEffect")
 chance_action_spawn = 0.05
 
 [node name="Area" type="Area2D" parent="."]
@@ -157,6 +160,18 @@ script = ExtResource("4_1qs4h")
 
 [node name="ActionHolder" type="Node2D" parent="."]
 unique_name_in_owner = true
+
+[node name="PopSoundEffect" type="AudioStreamPlayer2D" parent="."]
+
+[node name="RotationSoundEffect" type="AudioStreamPlayer2D" parent="."]
+unique_name_in_owner = true
+stream = ExtResource("7_187ej")
+volume_db = -15.0
+
+[node name="IdleRotationSoundEffect" type="AudioStreamPlayer2D" parent="."]
+unique_name_in_owner = true
+stream = ExtResource("8_d7a5y")
+volume_db = -15.0
 
 [connection signal="body_entered" from="Area" to="." method="_on_area_body_entered"]
 [connection signal="body_exited" from="Area" to="." method="_on_area_body_exited"]

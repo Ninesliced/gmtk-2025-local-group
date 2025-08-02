@@ -102,10 +102,7 @@ script = ExtResource("5_15y17")
 [node name="MovementComponent" type="Node" parent="." node_paths=PackedStringArray("walk_sound_effect")]
 unique_name_in_owner = true
 script = ExtResource("3_ax26v")
-walk_sound_effect = NodePath("WalkSoundEffect")
-
-[node name="WalkSoundEffect" type="AudioStreamPlayer2D" parent="MovementComponent"]
-stream = ExtResource("11_hiosj")
+walk_sound_effect = NodePath("../WalkSoundEffect")
 
 [node name="ActionUI" parent="." instance=ExtResource("8_a744p")]
 modulate = Color(1, 1, 1, 0.690196)
@@ -120,6 +117,10 @@ script = ExtResource("9_388e2")
 [node name="Debug" parent="." node_paths=PackedStringArray("mc") instance=ExtResource("10_lsln6")]
 position = Vector2(20, -20)
 mc = NodePath("../MovementComponent")
+
+[node name="WalkSoundEffect" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("11_hiosj")
+volume_db = -25.0
 
 [connection signal="area_entered" from="HitboxComponent" to="." method="_on_hitbox_component_area_entered"]
 [connection signal="child_exiting_tree" from="MovementComponent" to="PlayerAnimation" method="_on_movement_component_child_exiting_tree"]
