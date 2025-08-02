@@ -36,6 +36,7 @@ animations = [{
 
 [node name="Spike" instance=ExtResource("1_rjogy")]
 script = ExtResource("2_6ajxb")
+is_changeable = false
 
 [node name="3DShader" parent="." index="1"]
 material = SubResource("ShaderMaterial_h55dy")

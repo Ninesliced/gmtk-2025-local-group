@@ -6,7 +6,6 @@
 [ext_resource type="Shader" uid="uid://birv8v71nvo3v" path="res://addons/shaker/components/vfx/shaders/fill_color.gdshader" id="3_rjnl6"]
 [ext_resource type="Texture2D" uid="uid://pl8capar1rck" path="res://assets/tilesheet_seasons.png" id="4_pd3d8"]
 [ext_resource type="PackedScene" uid="uid://torggi0th3pi" path="res://actors/tile/components/randomize_sprite.tscn" id="6_pgiy5"]
-[ext_resource type="AudioStream" uid="uid://fa2qk01efkg8" path="res://assets/sfx/grass.mp3" id="7_8ioip"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_rjnl6"]
 resource_local_to_scene = true
@@ -122,34 +121,12 @@ animations = [{
 "speed": 5.0
 }]
 
-[sub_resource type="GDScript" id="GDScript_i7in2"]
-script/source = "extends AudioStreamPlayer2D
-
-func play_sound():
-	play()
-
-
-func _on_area_body_entered(body: Node2D) -> void:
-	pitch_scale = randf_range(0.8, 1.2)
-	play()
-	pass # Replace with function body.
-"
-
-[sub_resource type="GDScript" id="GDScript_de6hr"]
-script/source = "extends AudioStreamPlayer2D
-
-func play_sound():
-	play()
-
-
-func _on_area_body_entered(body: Node2D) -> void:
-	pitch_scale = randf_range(0.8, 1.2)
-	play()
-	pass # Replace with function body.
-"
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_76t4f"]
+size = Vector2(6.25, 6.25)
 
 [node name="Tile3" instance=ExtResource("1_wv4m7")]
-outline_min = 0.1
+outline_min = null
+outline_max = null
 lock_rotation = true
 
 [node name="3DShader" parent="." index="1"]
@@ -167,6 +144,10 @@ sprite_frames = SubResource("SpriteFrames_pd3d8")
 [node name="RandomizeSprite" parent="3DShader/Sprite/Sprite2D" index="0" node_paths=PackedStringArray("sprite") instance=ExtResource("6_pgiy5")]
 sprite = NodePath("..")
 
+[node name="StaticBody2D" type="StaticBody2D" parent="." index="3"]
+unique_name_in_owner = true
+position = Vector2(16, 16)
+
 [node name="TopLeftShape" type="CollisionShape2D" parent="StaticBody2D" index="0"]
 position = Vector2(-12, -12)
 shape = SubResource("RectangleShape2D_76t4f")
@@ -182,14 +163,3 @@ shape = SubResource("RectangleShape2D_76t4f")
 [node name="BottomRightShape" type="CollisionShape2D" parent="StaticBody2D" index="3"]
 position = Vector2(12, 12)
 shape = SubResource("RectangleShape2D_76t4f")
-
-[node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="." index="2"]
-volume_db = 10.0
-script = SubResource("GDScript_i7in2")
-
-[node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="." index="7"]
-stream = ExtResource("7_8ioip")
-volume_db = 10.0
-script = SubResource("GDScript_de6hr")
-
-[connection signal="body_entered" from="Area" to="AudioStreamPlayer2D" method="_on_area_body_entered"]

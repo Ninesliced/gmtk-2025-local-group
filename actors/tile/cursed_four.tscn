@@ -1,4 +1,4 @@
-[gd_scene load_steps=12 format=3 uid="uid://cv5urcmya54ct"]
+[gd_scene load_steps=12 format=3 uid="uid://b3pjr7rfln6g1"]
 
 [ext_resource type="PackedScene" uid="uid://bkuf38ni4q62k" path="res://actors/tile/Tile.tscn" id="1_rwwjv"]
 [ext_resource type="Texture2D" uid="uid://dabe5dmwfsby2" path="res://assets/spritesheet.png" id="2_qklxe"]
@@ -68,3 +68,7 @@ script = ExtResource("6_amehe")
 area = NodePath("../Area")
 sprite = NodePath("../3DShader/Sprite")
 tile_bigger = NodePath("../TileBigger")
+
+[node name="StaticBody2D" type="StaticBody2D" parent="." index="5"]
+unique_name_in_owner = true
+position = Vector2(16, 16)

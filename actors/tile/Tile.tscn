@@ -112,7 +112,7 @@ _data = {
 &"rotate_lock": SubResource("Animation_i7in2")
 }
 
-[node name="Tile3" type="Node2D" node_paths=PackedStringArray("rotation_sound_effect", "idle_rotation_sound_effect")]
+[node name="Tile5" type="Node2D" node_paths=PackedStringArray("rotation_sound_effect", "idle_rotation_sound_effect")]
 script = ExtResource("1_4t6fi")
 outline_min = 0.2
 rotation_sound_effect = NodePath("RotationSoundEffect")

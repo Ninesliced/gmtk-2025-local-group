@@ -93,3 +93,7 @@ animation = &"winter"
 
 [node name="Outline" parent="." index="2"]
 z_index = 0
+
+[node name="StaticBody2D" type="StaticBody2D" parent="." index="3"]
+unique_name_in_owner = true
+position = Vector2(16, 16)
