@@ -23,9 +23,13 @@ var outline_tween: Tween = null
 @export var outline_max = 0.5
 @onready var sprite: AnimatedSprite2D = %Sprite
 
+@export var sound_action: AudioStreamPlayer2D
+
 @export var rotation_speed: float = 0.2
 @export var tile_rotation : Rotation = Rotation.UP : 
 	set(x):
+		if lock_rotation:
+			return
 		# var clockwise = x > tile_rotation
 		var new_rotation = x
 		# if not is_inside_tree():
@@ -39,7 +43,7 @@ var outline_tween: Tween = null
 		tile_rotation = new_rotation % 4
 @export var is_action_spawnable: bool = true
 @export_range(0,1,0.01) var chance_action_spawn: float = 0.1
-
+@export var lock_rotation: bool = false
 var _transform_to_full: bool = false
 
 var is_hover : bool = false
@@ -113,6 +117,9 @@ func _on_area_2d_input_event(viewport: Node, event: InputEvent, shape_idx: int) 
 			GameGlobal.act_tile(self, event)
 
 func tile_clicked(way: int) -> void:
+	if lock_rotation:
+		tile_bigger.play("rotate_lock")
+		return
 	tile_rotation = (tile_rotation + way) % 4
 	if tile_rotation < 0:
 		tile_rotation += 4
@@ -261,6 +268,13 @@ func transform_to_another_type(new_tile: PackedScene, play_animation: bool = tru
 	GameGlobal.map.grid[grid_position.x][grid_position.y] = tile_instance
 	queue_free()
 	return tile_instance
+
+func play_sound() -> void:
+	if not sound_action:
+		print("no sound action set")
+		return
+	print("Playing sound")
+	sound_action.play()
 
 func can_pass(direction: Rotation) -> bool:
 	return true

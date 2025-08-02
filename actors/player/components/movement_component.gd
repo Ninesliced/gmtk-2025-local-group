@@ -86,8 +86,9 @@ func _process(delta):
 	else:
 		return
 	
-	if current_tile == null or next_tile == null or not current_tile.can_pass(inside_direction) or not next_tile.can_pass(outside_direction):
-		return
+	if !DebugGlobal.no_clip:
+		if current_tile == null or next_tile == null or not current_tile.can_pass(inside_direction) or not next_tile.can_pass(outside_direction):
+			return
 
 	GameGlobal.is_game_have_start = true
 

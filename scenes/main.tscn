@@ -1,21 +1,23 @@
-[gd_scene load_steps=7 format=3 uid="uid://cqwxuni5qjhvu"]
+[gd_scene load_steps=9 format=3 uid="uid://cqwxuni5qjhvu"]
 
 [ext_resource type="PackedScene" uid="uid://b7fgpkbuim0vj" path="res://actors/map/Map.tscn" id="1_tbgi4"]
+[ext_resource type="Script" uid="uid://cut4le3576dye" path="res://scenes/main.gd" id="1_tefeu"]
 [ext_resource type="Shader" uid="uid://jkmh5ksc1ejd" path="res://actors/tile/tile3D.gdshader" id="2_o6xl0"]
 [ext_resource type="Script" uid="uid://cpvd8mjlsp6tj" path="res://scenes/camera_2d.gd" id="2_tefeu"]
 [ext_resource type="PackedScene" uid="uid://v6wht25gui7" path="res://scenes/border/border.tscn" id="3_o6xl0"]
+[ext_resource type="Texture2D" uid="uid://3inqpne41gwy" path="res://assets/shader_texture_tile.png" id="4_o6xl0"]
 [ext_resource type="PackedScene" uid="uid://c5lqig57oxpyb" path="res://actors/player/player.tscn" id="4_tipki"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_tipki"]
 resource_local_to_scene = true
 shader = ExtResource("2_o6xl0")
-shader_parameter/ground_col = Color(0.396078, 0.466667, 0.270588, 1)
-shader_parameter/wall_col = Color(0.666667, 0.772549, 0.290196, 1)
-shader_parameter/wall_col2 = Color(0.223529, 0.27451, 0.207843, 1)
+shader_parameter/ground_cols = ExtResource("4_o6xl0")
+shader_parameter/number_of_ground_cols = 8
 shader_parameter/color_fill = Color(1, 1, 1, 1)
 shader_parameter/force = 0.0
 
 [node name="Arkan" type="Node2D"]
+script = ExtResource("1_tefeu")
 
 [node name="Map" parent="." instance=ExtResource("1_tbgi4")]
 material = SubResource("ShaderMaterial_tipki")

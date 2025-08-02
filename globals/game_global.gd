@@ -4,7 +4,7 @@ signal on_action_stack_changed
 signal on_action
 
 const ENEMY = preload("res://actors/enemy/enemy.tscn")
-
+@onready var canvas_layer: CanvasLayer = %CanvasLayer
 @export var action_stacks : Array[ActionType] = [
 	ActionType.ROTATE_CLOCK,
 	ActionType.ROTATE_COUNTER_CLOCK,
@@ -156,7 +156,7 @@ var dict: Dictionary[ActionType, Dictionary] = {
 		"on_get_function": delete_current_action,
 		"temporary": true,
 		"action_zone": [],
-		"probability": 0.1
+		"probability": 0.0
 	},
 	ActionType.VERTICAL_SPIKE: {
 		"name": "VERTICAL SPIKE",
@@ -238,7 +238,8 @@ func transform_empty_cursed(tile: Tile, event: InputEvent) -> void:
 	var grid_pos = tile.grid_position
 	for i in range(0, 4):
 		var current_tile = map.grid[(grid_pos.x + i) % map.grid_size.x][grid_pos.y]
-		current_tile.transform_to_another_type(load("res://actors/tile/cursed_four.tscn"),true)
+		var new_tile = current_tile.transform_to_another_type(load("res://actors/tile/cursed_four.tscn"),true)
+		new_tile.play_sound()
 		await get_tree().create_timer(0.1).timeout
 func transform_cross(tile: Tile, event: InputEvent) -> void:
 	for i in range(-1,2):
@@ -398,6 +399,10 @@ func pick_weighted_random_action() -> ActionType:
 
 
 func reset_game() -> void:
+
+	score = 0
+	number_of_actions = 0
+
 	GameGlobal.action_stacks = GameGlobal.action_stack_backup.duplicate()
 	for action_ui in GameGlobal.action_ui_stacks:
 		action_ui.queue_free()
@@ -409,4 +414,3 @@ func reset_game() -> void:
 		actions_ui.append(action_ui)
 		_update_size()
 	GameGlobal.action_ui_stacks = actions_ui
-	# GameGlobal.on_action_stack_changed.connect(_update_size)

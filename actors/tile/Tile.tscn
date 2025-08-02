@@ -1,10 +1,12 @@
-[gd_scene load_steps=12 format=3 uid="uid://bkuf38ni4q62k"]
+[gd_scene load_steps=16 format=3 uid="uid://bkuf38ni4q62k"]
 
 [ext_resource type="Script" uid="uid://ckoaogse5dba6" path="res://actors/tile/tile.gd" id="1_4t6fi"]
 [ext_resource type="Texture2D" uid="uid://dabe5dmwfsby2" path="res://assets/spritesheet.png" id="2_4t6fi"]
 [ext_resource type="Material" uid="uid://di7gr2544ckj1" path="res://actors/tile/tile_material.tres" id="2_iawyn"]
 [ext_resource type="Shader" uid="uid://birv8v71nvo3v" path="res://addons/shaker/components/vfx/shaders/fill_color.gdshader" id="3_ewfg4"]
 [ext_resource type="Script" uid="uid://dq0rbo0c6kl8c" path="res://actors/tile/tile_bigger.gd" id="4_1qs4h"]
+[ext_resource type="SpriteFrames" uid="uid://ci7o5vt87e8b0" path="res://resources/full.tres" id="4_187ej"]
+[ext_resource type="AudioStream" uid="uid://fa2qk01efkg8" path="res://assets/sfx/grass.mp3" id="6_i7in2"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_4t6fi"]
 size = Vector2(36.129, 36.129)
@@ -45,6 +47,18 @@ tracks/1/keys = {
 "update": 0,
 "values": [0.0]
 }
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("3DShader/Sprite:rotation")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [0.0]
+}
 
 [sub_resource type="Animation" id="Animation_ewfg4"]
 resource_name = "full"
@@ -74,20 +88,52 @@ tracks/1/keys = {
 "values": [1.0, 0.0]
 }
 
+[sub_resource type="Animation" id="Animation_i7in2"]
+resource_name = "rotate_lock"
+length = 0.25
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("3DShader/Sprite:rotation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.0625, 0.1875, 0.25),
+"transitions": PackedFloat32Array(0.5, 0.378929, 0.574349, 1),
+"update": 0,
+"values": [0.0, 0.174533, -0.174533, 0.0]
+}
+
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_1qs4h"]
 _data = {
 &"RESET": SubResource("Animation_1qs4h"),
-&"full": SubResource("Animation_ewfg4")
+&"full": SubResource("Animation_ewfg4"),
+&"rotate_lock": SubResource("Animation_i7in2")
 }
 
-[node name="Tile3" type="Node2D"]
+[sub_resource type="GDScript" id="GDScript_i7in2"]
+script/source = "extends AudioStreamPlayer2D
+
+func play_sound():
+	play()
+
+
+func _on_area_body_entered(body: Node2D) -> void:
+	pitch_scale = randf_range(0.8, 1.2)
+	play()
+	pass # Replace with function body.
+"
+
+[node name="Tile3" type="Node2D" node_paths=PackedStringArray("sound_action")]
 script = ExtResource("1_4t6fi")
 outline_min = 0.2
+sound_action = NodePath("AudioStreamPlayer2D")
 chance_action_spawn = 0.05
 
 [node name="Area" type="Area2D" parent="."]
 position = Vector2(16, 16)
-collision_layer = 9
+collision_layer = 8
+collision_mask = 16
 
 [node name="Shape" type="CollisionShape2D" parent="Area"]
 position = Vector2(-9.53674e-07, -9.53674e-07)
@@ -102,11 +148,13 @@ position = Vector2(16, 16)
 [node name="Sprite" type="AnimatedSprite2D" parent="3DShader"]
 unique_name_in_owner = true
 material = SubResource("ShaderMaterial_1qs4h")
+sprite_frames = ExtResource("4_187ej")
 speed_scale = 0.0
 
 [node name="Outline" type="Sprite2D" parent="."]
 unique_name_in_owner = true
 visible = false
+z_index = 2
 position = Vector2(16, 16)
 texture = SubResource("AtlasTexture_ewfg4")
 
@@ -124,7 +172,13 @@ script = ExtResource("4_1qs4h")
 [node name="ActionHolder" type="Node2D" parent="."]
 unique_name_in_owner = true
 
+[node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("6_i7in2")
+volume_db = 10.0
+script = SubResource("GDScript_i7in2")
+
 [connection signal="body_entered" from="Area" to="." method="_on_area_body_entered"]
+[connection signal="body_entered" from="Area" to="AudioStreamPlayer2D" method="_on_area_body_entered"]
 [connection signal="body_exited" from="Area" to="." method="_on_area_body_exited"]
 [connection signal="input_event" from="Area" to="." method="_on_area_2d_input_event"]
 [connection signal="mouse_entered" from="Area" to="." method="_on_area_2d_mouse_entered"]

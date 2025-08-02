@@ -8,7 +8,6 @@ var randomTileCount: int = 0
 @onready var movementComponent: MovementComponent = %MovementComponent
 
 func _ready() -> void:
-	GameGlobal.reset_game()
 	GameGlobal.player = $"."
 	movementComponent.grid_position = Vector2i(grid_position)
 

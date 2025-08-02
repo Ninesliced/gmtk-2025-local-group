@@ -53,6 +53,7 @@ radius = 12.0
 
 [node name="Spike" instance=ExtResource("1_ijg11")]
 script = ExtResource("2_snc5v")
+lock_rotation = true
 
 [node name="3DShader" parent="." index="1"]
 material = SubResource("ShaderMaterial_0vltg")
