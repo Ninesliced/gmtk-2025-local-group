@@ -23,7 +23,8 @@ func _on_hitbox_component_area_entered(area:Area2D):
 
 func kill_player() -> void:
 	GameGlobal.is_game_have_start = false
-	TransitionManager.reload_scene("square_gradient")
+	GameGlobal.end_game()
+	# TransitionManager.reload_scene("square_gradient")
 
 
 func get_movement_component() -> MovementComponent:
