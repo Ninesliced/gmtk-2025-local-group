@@ -40,6 +40,7 @@ grid_size = Vector2i(20, 5)
 
 [node name="Tile3" parent="Map" instance=ExtResource("3_yj3ko")]
 position = Vector2(64, 0)
+is_changeable = null
 
 [node name="3DShader" parent="Map/Tile3" index="1"]
 material = SubResource("ShaderMaterial_p1pyd")
@@ -53,6 +54,7 @@ visible = false
 
 [node name="Tile4" parent="Map" instance=ExtResource("3_yj3ko")]
 position = Vector2(96, 0)
+is_changeable = null
 
 [node name="3DShader" parent="Map/Tile4" index="1"]
 material = SubResource("ShaderMaterial_p1pyd")
@@ -65,6 +67,7 @@ visible = false
 
 [node name="Tile5" parent="Map" instance=ExtResource("3_yj3ko")]
 position = Vector2(128, 0)
+is_changeable = null
 
 [node name="3DShader" parent="Map/Tile5" index="1"]
 material = SubResource("ShaderMaterial_p1pyd")
@@ -78,6 +81,7 @@ visible = false
 
 [node name="Tile6" parent="Map" instance=ExtResource("3_yj3ko")]
 position = Vector2(160, 0)
+is_changeable = null
 
 [node name="3DShader" parent="Map/Tile6" index="1"]
 material = SubResource("ShaderMaterial_p1pyd")
@@ -91,7 +95,6 @@ visible = false
 
 [node name="Spike" parent="Map" instance=ExtResource("6_ii521")]
 position = Vector2(32, 0)
-is_changeable = true
 
 [node name="Camera2D" type="Camera2D" parent="."]
 position = Vector2(114, 90)
