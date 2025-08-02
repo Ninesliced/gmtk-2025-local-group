@@ -19,11 +19,11 @@ func _physics_process(delta):
 
 
 func _on_tile_mover_area_area_entered(area: Area2D) -> void:
-	var selected_tile = area.get_parent()
-	if selected_tile is not Tile:
+	var selected_actor = area.get_parent()
+	if (selected_actor is not Tile) and (selected_actor is not Enemy):
 		return
 	# On bouge vers la droite
 	if !GameGlobal.map:
 		return
 	var espacement = GameGlobal.map.grid_size.x * GameGlobal.map.tile_size.x
-	selected_tile.position.x += espacement
+	selected_actor.position.x += espacement

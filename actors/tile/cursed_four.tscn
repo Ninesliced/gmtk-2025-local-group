@@ -5,7 +5,7 @@
 [ext_resource type="Shader" uid="uid://jkmh5ksc1ejd" path="res://actors/tile/tile3D.gdshader" id="3_fb66d"]
 [ext_resource type="Shader" uid="uid://birv8v71nvo3v" path="res://addons/shaker/components/vfx/shaders/fill_color.gdshader" id="3_qklxe"]
 [ext_resource type="Script" uid="uid://c2gcn1bk0ygbk" path="res://actors/tile/components/cursed_component.gd" id="5_fb66d"]
-[ext_resource type="Script" uid="uid://cwt24lt1cbe0i" path="res://actors/tile/components/carrot_eat_component.gd" id="6_amehe"]
+[ext_resource type="Script" path="res://actors/tile/components/carrot_eat_component.gd" id="6_amehe"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_pd3d8"]
 resource_local_to_scene = true
@@ -93,4 +93,5 @@ sprite = NodePath("../3DShader/Sprite")
 tile_bigger = NodePath("../TileBigger")
 
 [node name="AudioStreamPlayer2D" parent="." index="8"]
+stream = null
 max_polyphony = 10

@@ -105,7 +105,7 @@ collision_layer = 4
 collision_mask = 0
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
-position = Vector2(0, 96)
+position = Vector2(-11, 95)
 shape = SubResource("RectangleShape2D_p1tfl")
 
 [node name="TileMoverArea" type="Area2D" parent="."]
