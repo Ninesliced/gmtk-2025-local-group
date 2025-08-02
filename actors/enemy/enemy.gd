@@ -32,7 +32,7 @@ func _ready() -> void:
 	
 func _play_wolf_growl_sound_effect():
 	# FIXME: Godot is broken
-	%WolfGrowlSoundEffect.volume_db = -30.0
+	%WolfGrowlSoundEffect.volume_db = -10.0
 	%WolfGrowlSoundEffect.pitch_scale = randf_range(0.7, 1.2)
 	%WolfGrowlSoundEffect.play()
 

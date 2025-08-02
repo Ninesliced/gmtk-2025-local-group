@@ -1,9 +1,10 @@
-[gd_scene load_steps=23 format=3 uid="uid://bvbyb8jdqjcei"]
+[gd_scene load_steps=24 format=3 uid="uid://bvbyb8jdqjcei"]
 
 [ext_resource type="Script" uid="uid://tk3v0572hok5" path="res://scenes/main_menu.gd" id="1_bqqt6"]
 [ext_resource type="PackedScene" path="res://scenes/ui/button.tscn" id="1_ekxnf"]
 [ext_resource type="Script" path="res://scenes/ui/button.gd" id="2_ekxnf"]
 [ext_resource type="PackedScene" uid="uid://cqwxuni5qjhvu" path="res://scenes/main.tscn" id="2_wu84c"]
+[ext_resource type="PackedScene" uid="uid://bi3akamp77mgs" path="res://globals/request/request.tscn" id="3_7b55j"]
 [ext_resource type="Texture2D" uid="uid://3tdc4o7fiqnb" path="res://assets/images/ui/rect/right_panel.png" id="5_8ln24"]
 [ext_resource type="Texture2D" uid="uid://k2pm4cv4l84n" path="res://assets/images/ui/rect/leaderboard_card.png" id="5_rtw2f"]
 [ext_resource type="Shader" path="res://addons/shaker/components/vfx/shaders/outline2.gdshader" id="6_jk1qb"]
@@ -84,6 +85,8 @@ grow_vertical = 2
 mouse_filter = 2
 script = ExtResource("1_bqqt6")
 main_menu_scene = ExtResource("2_wu84c")
+
+[node name="Request" parent="." instance=ExtResource("3_7b55j")]
 
 [node name="TileGridUi" parent="." instance=ExtResource("14_1ajci")]
 
@@ -169,7 +172,7 @@ layout_mode = 2
 material = SubResource("ShaderMaterial_5dd4i")
 layout_mode = 2
 theme = ExtResource("7_5dd4i")
-text = "SCOREBOARD"
+text = "SCOREBOARD OF THE DAY"
 horizontal_alignment = 1
 
 [node name="Leaderboard" parent="Play/Container/HBoxContainer/NinePatchRect/VBoxContainer" instance=ExtResource("8_flqon")]
@@ -208,7 +211,8 @@ theme_override_font_sizes/font_size = 8
 text = "Seed of the day"
 horizontal_alignment = 1
 
-[node name="Label" type="Label" parent="Play/Container/HBoxContainer/right/SeedOfTheDay"]
+[node name="Seed_of_the_day" type="Label" parent="Play/Container/HBoxContainer/right/SeedOfTheDay"]
+unique_name_in_owner = true
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -217,7 +221,7 @@ offset_top = 19.0
 grow_horizontal = 2
 grow_vertical = 2
 theme_override_font_sizes/font_size = 8
-text = "AAAAAAAAAAAA"
+text = "Not Yet Loaded"
 horizontal_alignment = 1
 
 [node name="panel" type="NinePatchRect" parent="Play/Container/HBoxContainer/right"]
