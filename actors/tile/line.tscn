@@ -93,3 +93,11 @@ z_index = 0
 [node name="StaticBody2D" type="StaticBody2D" parent="." index="3"]
 unique_name_in_owner = true
 position = Vector2(16, 16)
+
+[node name="PopSoundEffect" type="AudioStreamPlayer2D" parent="." index="6"]
+
+[node name="RotationSoundEffect" parent="." index="7"]
+volume_db = -15.0
+
+[node name="IdleRotationSoundEffect" parent="." index="8"]
+volume_db = -15.0
