@@ -7,6 +7,6 @@
 resource_local_to_scene = true
 shader = ExtResource("1_8cob7")
 shader_parameter/ground_cols = ExtResource("2_bxwrn")
-shader_parameter/number_of_ground_cols = 8
+shader_parameter/number_of_ground_cols = 9
 shader_parameter/color_fill = Color(1, 1, 1, 1)
 shader_parameter/force = 0.0
