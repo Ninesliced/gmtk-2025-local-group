@@ -1,9 +1,31 @@
-[gd_scene load_steps=5 format=3 uid="uid://bvbyb8jdqjcei"]
+[gd_scene load_steps=16 format=3 uid="uid://72csgcoeo0nv"]
 
-[ext_resource type="Script" path="res://scenes/main_menu.gd" id="1_bqqt6"]
-[ext_resource type="PackedScene" path="res://scenes/ui/button.tscn" id="1_ekxnf"]
-[ext_resource type="Script" path="res://scenes/ui/button.gd" id="2_ekxnf"]
+[ext_resource type="Script" uid="uid://tk3v0572hok5" path="res://scenes/main_menu.gd" id="1_bqqt6"]
+[ext_resource type="PackedScene" uid="uid://d2i4w4joysljq" path="res://scenes/ui/button.tscn" id="1_ekxnf"]
+[ext_resource type="Script" uid="uid://dhy4wxhaj8mpg" path="res://scenes/ui/button.gd" id="2_ekxnf"]
 [ext_resource type="PackedScene" uid="uid://cqwxuni5qjhvu" path="res://scenes/main.tscn" id="2_wu84c"]
+[ext_resource type="Texture2D" uid="uid://3tdc4o7fiqnb" path="res://assets/images/ui/rect/right_panel.png" id="5_8ln24"]
+[ext_resource type="Texture2D" uid="uid://k2pm4cv4l84n" path="res://assets/images/ui/rect/leaderboard_card.png" id="5_rtw2f"]
+[ext_resource type="Shader" uid="uid://dhrxdnevtv4vp" path="res://addons/shaker/components/vfx/shaders/outline2.gdshader" id="6_jk1qb"]
+[ext_resource type="Texture2D" uid="uid://mkw848d48s1w" path="res://assets/images/ui/rect/name_tag.png" id="6_oa1go"]
+[ext_resource type="Theme" uid="uid://c06a0wpkb3qyr" path="res://resources/theme.tres" id="7_5dd4i"]
+[ext_resource type="Texture2D" uid="uid://1gvcwddrnu8s" path="res://assets/images/ui/rect/score_leaderboard.png" id="7_tbmy8"]
+[ext_resource type="Texture2D" uid="uid://cncpqu3fcgw0s" path="res://assets/images/ui/rect/seed_input.png" id="11_lgwnu"]
+[ext_resource type="Texture2D" uid="uid://dv03djiyk4tok" path="res://assets/images/ui/rect/play.png" id="12_flqon"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_5dd4i"]
+shader = ExtResource("6_jk1qb")
+shader_parameter/color = Color(0, 0, 0, 1)
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_lgwnu"]
+texture = ExtResource("12_flqon")
+texture_margin_left = 3.0
+texture_margin_top = 3.0
+texture_margin_right = 3.0
+texture_margin_bottom = 6.0
+
+[sub_resource type="Theme" id="Theme_lgwnu"]
+Button/styles/normal = SubResource("StyleBoxTexture_lgwnu")
 
 [node name="MainMenu" type="Control"]
 layout_mode = 3
@@ -17,6 +39,7 @@ script = ExtResource("1_bqqt6")
 main_menu_scene = ExtResource("2_wu84c")
 
 [node name="HBoxContainer" type="VBoxContainer" parent="."]
+unique_name_in_owner = true
 z_index = 50
 layout_mode = 1
 anchors_preset = 8
@@ -32,7 +55,8 @@ grow_horizontal = 2
 grow_vertical = 2
 alignment = 1
 
-[node name="Play" parent="HBoxContainer" instance=ExtResource("1_ekxnf")]
+[node name="PlayButton" parent="HBoxContainer" instance=ExtResource("1_ekxnf")]
+unique_name_in_owner = true
 layout_mode = 2
 script = ExtResource("2_ekxnf")
 
@@ -40,5 +64,180 @@ script = ExtResource("2_ekxnf")
 layout_mode = 2
 text = "Quit"
 
-[connection signal="pressed" from="HBoxContainer/Play" to="." method="_on_play_pressed"]
+[node name="Play" type="Control" parent="."]
+unique_name_in_owner = true
+visible = false
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Container" type="MarginContainer" parent="Play"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/margin_left = 20
+theme_override_constants/margin_top = 20
+theme_override_constants/margin_right = 20
+theme_override_constants/margin_bottom = 20
+
+[node name="HBoxContainer" type="HBoxContainer" parent="Play/Container"]
+layout_mode = 2
+alignment = 1
+
+[node name="NinePatchRect" type="NinePatchRect" parent="Play/Container/HBoxContainer"]
+custom_minimum_size = Vector2(180, 152)
+layout_mode = 2
+texture = ExtResource("5_rtw2f")
+patch_margin_left = 5
+patch_margin_top = 2
+patch_margin_right = 3
+patch_margin_bottom = 8
+
+[node name="VBoxContainer" type="VBoxContainer" parent="Play/Container/HBoxContainer/NinePatchRect"]
+layout_mode = 1
+anchors_preset = -1
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 4.0
+offset_top = 4.0
+offset_right = -4.0
+offset_bottom = -4.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Label" type="Label" parent="Play/Container/HBoxContainer/NinePatchRect/VBoxContainer"]
+material = SubResource("ShaderMaterial_5dd4i")
+layout_mode = 2
+theme = ExtResource("7_5dd4i")
+text = "SCOREBOARD"
+horizontal_alignment = 1
+
+[node name="Leaderboard" type="HBoxContainer" parent="Play/Container/HBoxContainer/NinePatchRect/VBoxContainer"]
+layout_mode = 2
+alignment = 1
+
+[node name="NinePatchRect" type="NinePatchRect" parent="Play/Container/HBoxContainer/NinePatchRect/VBoxContainer/Leaderboard"]
+custom_minimum_size = Vector2(0, 20)
+layout_mode = 2
+size_flags_horizontal = 3
+texture = ExtResource("6_oa1go")
+region_rect = Rect2(0, 0, 14, 16)
+patch_margin_left = 6
+patch_margin_top = 6
+patch_margin_right = 5
+patch_margin_bottom = 7
+axis_stretch_horizontal = 1
+axis_stretch_vertical = 1
+
+[node name="NinePatchRect2" type="NinePatchRect" parent="Play/Container/HBoxContainer/NinePatchRect/VBoxContainer/Leaderboard"]
+custom_minimum_size = Vector2(0, 20)
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_stretch_ratio = 0.6
+texture = ExtResource("7_tbmy8")
+region_rect = Rect2(0, 1, 9, 8)
+patch_margin_left = 6
+patch_margin_top = 6
+patch_margin_right = 5
+patch_margin_bottom = 6
+axis_stretch_horizontal = 1
+axis_stretch_vertical = 1
+
+[node name="Leaderboard2" type="HBoxContainer" parent="Play/Container/HBoxContainer/NinePatchRect/VBoxContainer"]
+layout_mode = 2
+alignment = 1
+
+[node name="NinePatchRect" type="NinePatchRect" parent="Play/Container/HBoxContainer/NinePatchRect/VBoxContainer/Leaderboard2"]
+custom_minimum_size = Vector2(0, 20)
+layout_mode = 2
+size_flags_horizontal = 3
+texture = ExtResource("6_oa1go")
+region_rect = Rect2(0, 0, 14, 16)
+patch_margin_left = 6
+patch_margin_top = 6
+patch_margin_right = 5
+patch_margin_bottom = 7
+axis_stretch_horizontal = 1
+axis_stretch_vertical = 1
+
+[node name="NinePatchRect2" type="NinePatchRect" parent="Play/Container/HBoxContainer/NinePatchRect/VBoxContainer/Leaderboard2"]
+custom_minimum_size = Vector2(0, 20)
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_stretch_ratio = 0.6
+texture = ExtResource("7_tbmy8")
+region_rect = Rect2(0, 1, 9, 8)
+patch_margin_left = 6
+patch_margin_top = 6
+patch_margin_right = 5
+patch_margin_bottom = 6
+axis_stretch_horizontal = 1
+axis_stretch_vertical = 1
+
+[node name="right" type="VBoxContainer" parent="Play/Container/HBoxContainer"]
+layout_mode = 2
+
+[node name="MarginContainer" type="MarginContainer" parent="Play/Container/HBoxContainer/right"]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="panel" type="NinePatchRect" parent="Play/Container/HBoxContainer/right"]
+custom_minimum_size = Vector2(98, 102)
+layout_mode = 2
+texture = ExtResource("5_8ln24")
+region_rect = Rect2(0, 0, 11, 11)
+patch_margin_left = 3
+patch_margin_top = 3
+patch_margin_right = 2
+patch_margin_bottom = 7
+
+[node name="VBoxContainer" type="VBoxContainer" parent="Play/Container/HBoxContainer/right/panel"]
+layout_mode = 1
+anchors_preset = -1
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 4.0
+offset_top = 4.0
+offset_right = -4.0
+offset_bottom = -9.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="NinePatchRect" type="NinePatchRect" parent="Play/Container/HBoxContainer/right/panel/VBoxContainer"]
+custom_minimum_size = Vector2(0, 19)
+layout_mode = 2
+texture = ExtResource("11_lgwnu")
+region_rect = Rect2(0, 0, 6, 8)
+patch_margin_left = 3
+patch_margin_top = 5
+patch_margin_right = 2
+patch_margin_bottom = 2
+
+[node name="SeedInput" type="TextEdit" parent="Play/Container/HBoxContainer/right/panel/VBoxContainer/NinePatchRect"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_font_sizes/font_size = 8
+placeholder_text = "sdqsdqsd"
+
+[node name="MarginContainer" type="MarginContainer" parent="Play/Container/HBoxContainer/right/panel/VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="Button" type="Button" parent="Play/Container/HBoxContainer/right/panel/VBoxContainer"]
+layout_mode = 2
+theme = SubResource("Theme_lgwnu")
+theme_override_font_sizes/font_size = 8
+text = "PLAY"
+
+[connection signal="pressed" from="HBoxContainer/PlayButton" to="." method="_on_play_pressed"]
 [connection signal="pressed" from="HBoxContainer/Quit" to="." method="_on_quit_pressed"]
