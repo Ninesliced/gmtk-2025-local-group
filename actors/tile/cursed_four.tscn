@@ -57,9 +57,6 @@ outline_min = null
 outline_max = null
 lock_rotation = true
 
-[node name="Area" parent="." index="0"]
-collision_mask = 17
-
 [node name="3DShader" parent="." index="1"]
 material = SubResource("ShaderMaterial_pd3d8")
 

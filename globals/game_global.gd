@@ -156,7 +156,7 @@ var dict: Dictionary[ActionType, Dictionary] = {
 		"on_get_function": delete_current_action,
 		"temporary": true,
 		"action_zone": [],
-		"probability": 0.1
+		"probability": 0.0
 	},
 	ActionType.VERTICAL_SPIKE: {
 		"name": "VERTICAL SPIKE",
