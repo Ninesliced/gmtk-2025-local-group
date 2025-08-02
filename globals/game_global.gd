@@ -62,7 +62,6 @@ var dict: Dictionary[ActionType, Dictionary] = {
 	ActionType.ROTATE_CLOCK: {
 		"name": "Rotate Clockwise",
 		"function": rotate_clock,
-		"probability": 0.1,
 		"action_zone": [
 			Vector2i(0, 0)
 		]
@@ -163,6 +162,7 @@ var dict: Dictionary[ActionType, Dictionary] = {
 	ActionType.VERTICAL_SPIKE: {
 		"name": "VERTICAL SPIKE",
 		"function": spawn_vertical_spikes,
+		"probability": 0.1,
 		"action_zone": [
 			Vector2i(0, 1),
 			Vector2i(0, 0),
@@ -186,6 +186,7 @@ func _ready():
 		_update_size()
 	GameGlobal.action_ui_stacks = actions_ui
 	GameGlobal.on_action_stack_changed.connect(_update_size)
+
 
 func act_tile(tile: Tile, event: InputEvent) -> void:
 	if action_stacks.size() == 0:
@@ -222,6 +223,7 @@ func act_tile(tile: Tile, event: InputEvent) -> void:
 	GameGlobal.is_game_have_start = true
 	number_of_actions += 1
 
+
 func rotate_clock(tile: Tile, event: InputEvent) -> void:
 	if event.button_index == MOUSE_BUTTON_RIGHT:
 		tile.rotate_counter_clock()
@@ -229,20 +231,24 @@ func rotate_clock(tile: Tile, event: InputEvent) -> void:
 		tile.rotate_clock()
 	pass
 
+
 func rotate_counter_clock(tile: Tile, event: InputEvent) -> void:
 	tile.rotate_counter_clock()
 	pass
 
+
 func transform_empty(tile: Tile, event: InputEvent) -> void:
+	tile.is_changeable = true
 	tile.transform_to_another_type(load("res://actors/tile/cursed_four.tscn"))
+
 
 func transform_empty_cursed(tile: Tile, event: InputEvent) -> void:
 	var grid_pos = tile.grid_position
 	for i in range(0, 4):
-		var current_tile = map.grid[(grid_pos.x + i) % map.grid_size.x][grid_pos.y]
-		var new_tile = current_tile.transform_to_another_type(load("res://actors/tile/cursed_four.tscn"),true)
-		# FIXME: Alexis: play "pop" sound
+		var current_tile: Tile = map.grid[(grid_pos.x + i) % map.grid_size.x][grid_pos.y]
+		transform_empty(current_tile, event)
 		await get_tree().create_timer(0.1).timeout
+
 
 func transform_cross(tile: Tile, event: InputEvent) -> void:
 	for i in range(-1,2):
@@ -259,6 +265,7 @@ func transform_cross(tile: Tile, event: InputEvent) -> void:
 			if new_tile && new_tile.tile_bigger:
 				new_tile.tile_bigger.play_full(abs((-i) * 0.1 + (-j) * 0.1))
 
+
 func transform_empty_bomb(tile: Tile, event: InputEvent) -> void:
 	for i in range(-1,2):
 		for j in range(-1,2):
@@ -267,6 +274,7 @@ func transform_empty_bomb(tile: Tile, event: InputEvent) -> void:
 			if new_tile && new_tile.tile_bigger:
 				new_tile.tile_bigger.play_full((i+1) * 0.1 + (j+1) * 0.1)
 
+
 func horizontal_swap(tile: Tile, event: InputEvent) -> void:
 	tile.horizontal_swap(map)
 
@@ -274,7 +282,6 @@ func vertical_swap(tile: Tile, event: InputEvent) -> void:
 	tile.vertical_swap(map)
 	
 func spawn_enemy(tile: Tile, event: InputEvent) -> void:
-	
 	for i in range(-1,2):
 		var current_tile = map.grid[(tile.grid_position.x + i)%map.grid_size.x][(tile.grid_position.y)%map.grid_size.y]
 		var new_tile = null
@@ -294,27 +301,33 @@ func spawn_enemy(tile: Tile, event: InputEvent) -> void:
 	player.get_parent().add_child(enemy)
 	enemy.grid_position = tile.grid_position
 
+
 func spawn_vertical_spikes(tile: Tile, event: InputEvent) -> void:
+	var spike := load("res://actors/tile/spike/four_spike.tscn")
+	var full := load("res://actors/tile/full.tscn")
 	
 	for i in range(-1,2,2):
 		var current_tile = map.grid[(tile.grid_position.x + i)%map.grid_size.x][(tile.grid_position.y)%map.grid_size.y]
 		var new_tile = null
-		new_tile = current_tile.transform_to_another_type(load("res://actors/tile/spike.tscn"), false)
+		new_tile = current_tile.transform_to_another_type(spike, false)
 		if new_tile && new_tile.tile_bigger:
 			new_tile.tile_bigger.play_full(0.1*(i+1))
 	
 	for j in range(-1,2,2):
 		var current_tile = map.grid[(tile.grid_position.x)%map.grid_size.x][(tile.grid_position.y + j)%map.grid_size.y]
 		var new_tile = null
-		new_tile = current_tile.transform_to_another_type(load("res://actors/tile/spike.tscn"), false)
+		new_tile = current_tile.transform_to_another_type(spike, false)
 		if new_tile && new_tile.tile_bigger:
 			new_tile.tile_bigger.play_full(0.1*(j+1))
 
 	var current_tile = map.grid[(tile.grid_position.x)%map.grid_size.x][(tile.grid_position.y)%map.grid_size.y]
 	var new_tile = null
-	new_tile = current_tile.transform_to_another_type(load("res://actors/tile/full.tscn"), false)
+	new_tile = current_tile.transform_to_another_type(full, false)
 	if new_tile && new_tile.tile_bigger:
 		new_tile.tile_bigger.play_full(0.1)
+		
+	%ExplosionSoundEffect.play()
+
 
 func delete_current_action() -> void:
 	var to_remove_action = GameGlobal.action_stacks.pop_front()
@@ -323,6 +336,8 @@ func delete_current_action() -> void:
 	# if action_stacks.size() == 0:
 	_update_size()
 	on_action_stack_changed.emit()
+	if !hovered_tile:
+		return
 	hovered_tile.on_action(to_remove_action)
 	
 
