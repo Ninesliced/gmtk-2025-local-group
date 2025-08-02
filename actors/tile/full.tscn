@@ -132,7 +132,6 @@ animations = [{
 script = ExtResource("2_1oojr")
 is_changeable = false
 is_action_spawnable = false
-lock_rotation = true
 
 [node name="3DShader" parent="." index="1"]
 material = SubResource("ShaderMaterial_irehs")
