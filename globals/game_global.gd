@@ -199,7 +199,7 @@ func act_tile(tile: Tile, event: InputEvent) -> void:
 		if target_pos.y < 0:
 			target_pos.y += map.grid_size.y
 		
-		if target_pos == player.movementComponent.grid_position:
+		if target_pos == player.movement_component.grid_position:
 			return
 	
 	var action = action_stacks.pop_front()

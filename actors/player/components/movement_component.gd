@@ -2,6 +2,8 @@ extends Node
 
 class_name MovementComponent
 
+@export var walk_sound_effect: AudioStreamPlayer2D
+
 var parent : Player
 
 var is_moving : bool = false
@@ -100,6 +102,8 @@ func move_player(move_direction: Vector2i) -> void:
 	GameGlobal.number_of_actions += 1
 	
 	actual_score += move_direction.x * 10
+	
+	walk_sound_effect.play()
 
 
 func update_position():

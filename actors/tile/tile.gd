@@ -173,7 +173,7 @@ func spawn_outline(action) -> void:
 		if tile and tile.outline:
 			tiles.append(tile)
 		
-		if tile.grid_position == GameGlobal.player.movementComponent.grid_position:
+		if tile.grid_position == GameGlobal.player.movement_component.grid_position:
 			is_action_valid = false
 	
 	for tile in tiles:
@@ -272,13 +272,6 @@ func transform_to_another_type(new_tile: PackedScene, play_animation: bool = tru
 	GameGlobal.map.grid[grid_position.x][grid_position.y] = tile_instance
 	queue_free()
 	return tile_instance
-
-func play_sound() -> void:
-	if not sound_action:
-		print("no sound action set")
-		return
-	print("Playing sound")
-	sound_action.play()
 
 func can_pass(direction: Rotation) -> bool:
 	return true
