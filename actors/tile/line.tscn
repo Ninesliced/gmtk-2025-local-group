@@ -76,6 +76,7 @@ size = Vector2(31, 5.51172)
 
 [node name="Tile" instance=ExtResource("1_4nd4i")]
 script = ExtResource("2_6xt0b")
+tileName = "LineTile"
 
 [node name="Area" parent="." index="0"]
 collision_layer = 9

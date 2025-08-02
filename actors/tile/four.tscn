@@ -141,6 +141,7 @@ func _on_area_body_entered(body: Node2D) -> void:
 outline_min = null
 outline_max = null
 lock_rotation = true
+tileName = "FourTile"
 
 [node name="3DShader" parent="." index="1"]
 material = SubResource("ShaderMaterial_rjnl6")
