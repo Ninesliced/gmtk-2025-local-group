@@ -163,7 +163,7 @@ volume_db = -30.0
 
 [node name="IdleRotationSoundEffect" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("8_d7a5y")
-volume_db = -30.0
+volume_db = -35.0
 
 [connection signal="body_entered" from="Area" to="." method="_on_area_body_entered"]
 [connection signal="body_exited" from="Area" to="." method="_on_area_body_exited"]

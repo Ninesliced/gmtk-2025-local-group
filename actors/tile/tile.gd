@@ -101,7 +101,8 @@ func _play_rotation_sound() -> void:
 func _play_idle_rotation_sound() -> void:
 	idle_rotation_sound_effect.play()
 	idle_rotation_sound_effect.pitch_scale = randf_range(0.6, 1.0)
-
+	# FIXME: Godot is broken
+	idle_rotation_sound_effect.volume_db = -30.0
 
 func _ready() -> void:
 	# Generation de l'action

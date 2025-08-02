@@ -45,3 +45,6 @@ material = SubResource("ShaderMaterial_ejcap")
 [node name="Sprite" parent="3DShader" index="0"]
 material = SubResource("ShaderMaterial_5fs2v")
 sprite_frames = SubResource("SpriteFrames_ejcap")
+
+[node name="IdleRotationSoundEffect" parent="." index="7"]
+volume_db = -30.0
