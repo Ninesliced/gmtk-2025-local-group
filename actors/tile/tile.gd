@@ -26,6 +26,8 @@ var outline_tween: Tween = null
 @export var rotation_speed: float = 0.2
 @export var tile_rotation : Rotation = Rotation.UP : 
 	set(x):
+		if lock_rotation:
+			return
 		# var clockwise = x > tile_rotation
 		var new_rotation = x
 		# if not is_inside_tree():
@@ -39,7 +41,7 @@ var outline_tween: Tween = null
 		tile_rotation = new_rotation % 4
 @export var is_action_spawnable: bool = true
 @export_range(0,1,0.01) var chance_action_spawn: float = 0.1
-
+@export var lock_rotation: bool = false
 var _transform_to_full: bool = false
 
 var is_hover : bool = false
@@ -113,6 +115,8 @@ func _on_area_2d_input_event(viewport: Node, event: InputEvent, shape_idx: int) 
 			GameGlobal.act_tile(self, event)
 
 func tile_clicked(way: int) -> void:
+	if lock_rotation:
+		return
 	tile_rotation = (tile_rotation + way) % 4
 	if tile_rotation < 0:
 		tile_rotation += 4

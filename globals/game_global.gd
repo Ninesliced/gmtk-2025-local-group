@@ -4,7 +4,7 @@ signal on_action_stack_changed
 signal on_action
 
 const ENEMY = preload("res://actors/enemy/enemy.tscn")
-
+@onready var canvas_layer: CanvasLayer = %CanvasLayer
 @export var action_stacks : Array[ActionType] = [
 	ActionType.ROTATE_CLOCK,
 	ActionType.ROTATE_COUNTER_CLOCK,
@@ -398,6 +398,10 @@ func pick_weighted_random_action() -> ActionType:
 
 
 func reset_game() -> void:
+
+	score = 0
+	number_of_actions = 0
+
 	GameGlobal.action_stacks = GameGlobal.action_stack_backup.duplicate()
 	for action_ui in GameGlobal.action_ui_stacks:
 		action_ui.queue_free()
@@ -409,4 +413,3 @@ func reset_game() -> void:
 		actions_ui.append(action_ui)
 		_update_size()
 	GameGlobal.action_ui_stacks = actions_ui
-	# GameGlobal.on_action_stack_changed.connect(_update_size)
