@@ -1,4 +1,4 @@
-[gd_scene load_steps=23 format=3 uid="uid://byxp1bvr3gl84"]
+[gd_scene load_steps=25 format=3 uid="uid://byxp1bvr3gl84"]
 
 [ext_resource type="Script" uid="uid://q581v4j3vmv4" path="res://globals/game_global.gd" id="1_gu6ii"]
 [ext_resource type="Texture2D" uid="uid://dgdfmi7kbpgg6" path="res://assets/images/actions/rotate.png" id="3_gc13h"]
@@ -6,9 +6,11 @@
 [ext_resource type="PackedScene" path="res://scenes/ui/actions_container.tscn" id="3_woeo0"]
 [ext_resource type="Script" path="res://globals/debug.gd" id="5_iovrn"]
 [ext_resource type="Theme" uid="uid://c06a0wpkb3qyr" path="res://resources/theme.tres" id="6_6cuha"]
-[ext_resource type="PackedScene" uid="uid://yyv5brw5hlqn" path="res://scenes/ui/death_scene.tscn" id="7_opdgg"]
+[ext_resource type="PackedScene" path="res://scenes/ui/death_scene.tscn" id="7_opdgg"]
 [ext_resource type="AudioStream" uid="uid://crcfboaukdtof" path="res://assets/sfx/work/explode.ogg" id="8_l7e3u"]
+[ext_resource type="AudioStream" uid="uid://bpdsn3u7k4n8x" path="res://assets/sfx/work/explode_short.ogg" id="8_xofr3"]
 [ext_resource type="AudioStream" uid="uid://ct3kkknswudc0" path="res://assets/sfx/work/explode_long.ogg" id="9_672fk"]
+[ext_resource type="AudioStream" uid="uid://ihmp5eyi7gmb" path="res://assets/sfx/work/swap.ogg" id="11_lcri1"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_gc13h"]
 atlas = ExtResource("3_gc13h")
@@ -141,14 +143,26 @@ offset_bottom = 23.0
 theme_override_font_sizes/font_size = 8
 text = "Score: 0"
 
-[node name="ExplosionSoundEffect" type="AudioStreamPlayer" parent="."]
+[node name="SoundEffects" type="Node" parent="."]
+
+[node name="ShortExplosionSoundEffect" type="AudioStreamPlayer" parent="SoundEffects"]
+unique_name_in_owner = true
+stream = ExtResource("8_xofr3")
+volume_db = -30.0
+
+[node name="ExplosionSoundEffect" type="AudioStreamPlayer" parent="SoundEffects"]
 unique_name_in_owner = true
 stream = ExtResource("8_l7e3u")
 volume_db = -35.0
 
-[node name="LongExplosionSoundEffect" type="AudioStreamPlayer" parent="."]
+[node name="LongExplosionSoundEffect" type="AudioStreamPlayer" parent="SoundEffects"]
 unique_name_in_owner = true
 stream = ExtResource("9_672fk")
+volume_db = -35.0
+
+[node name="SwapSoundEffect" type="AudioStreamPlayer" parent="SoundEffects"]
+unique_name_in_owner = true
+stream = ExtResource("11_lcri1")
 volume_db = -35.0
 
 [connection signal="pressed" from="CanvasLayer/debug/Button" to="CanvasLayer/debug/Button" method="_on_pressed"]

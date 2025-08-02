@@ -188,6 +188,11 @@ func _ready():
 	GameGlobal.on_action_stack_changed.connect(_update_size)
 
 
+func _play_short_explosion_sound_effect():
+	%ShortExplosionSoundEffect.pitch_scale = randf_range(0.7, 1.2)
+	%ShortExplosionSoundEffect.play()
+
+
 func _play_explosion_sound_effect():
 	%ExplosionSoundEffect.pitch_scale = randf_range(0.7, 1.2)
 	%ExplosionSoundEffect.play()
@@ -196,6 +201,10 @@ func _play_explosion_sound_effect():
 func _play_long_explosion_sound_effect():
 	%LongExplosionSoundEffect.pitch_scale = randf_range(0.7, 1.2)
 	%LongExplosionSoundEffect.play()
+
+
+func _play_swap_sound_effect():
+	%SwapSoundEffect.play()
 
 
 func act_tile(tile: Tile, event: InputEvent) -> void:
@@ -242,8 +251,12 @@ func rotate_clock(tile: Tile) -> void:
 func rotate_counter_clock(tile: Tile) -> void:
 	tile.rotate_counter_clock()
 
-func transform_empty(tile: Tile) -> Tile:
-	return tile.transform_to_another_type(load("res://actors/tile/cursed_four.tscn"))
+func transform_empty(tile: Tile, event: InputEvent) -> Tile:
+	var new_tile := tile.transform_to_another_type(load("res://actors/tile/cursed_four.tscn"))
+	
+	_play_short_explosion_sound_effect()
+	
+	return new_tile
 
 ## ultimate carrot
 func transform_empty_cursed(tile: Tile) -> void:
@@ -293,9 +306,12 @@ func transform_empty_bomb(tile: Tile) -> void:
 
 func horizontal_swap(tile: Tile) -> void:
 	tile.horizontal_swap(map)
+	_play_swap_sound_effect()
+
 
 func vertical_swap(tile: Tile) -> void:
 	tile.vertical_swap(map)
+	_play_swap_sound_effect()
 	
 func spawn_enemy_on_tile(tile: Tile) -> void:
 	var enemy := ENEMY.instantiate()
@@ -304,6 +320,7 @@ func spawn_enemy_on_tile(tile: Tile) -> void:
 	enemy.grid_position = tile.grid_position
 	
 func spawn_enemy(tile: Tile) -> void:
+
 	for i in range(-1,2):
 		var current_tile = map.grid[(tile.grid_position.x + i)%map.grid_size.x][(tile.grid_position.y)%map.grid_size.y]
 		var new_tile = null

@@ -34,6 +34,7 @@ animations = [{
 }]
 
 [node name="Spike2" instance=ExtResource("1_jbjxv")]
+tileName = "FourSpikeTile"
 
 [node name="3DShader" parent="." index="1"]
 material = SubResource("ShaderMaterial_tst6t")

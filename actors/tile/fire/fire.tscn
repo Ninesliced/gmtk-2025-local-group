@@ -1,8 +1,13 @@
-[gd_scene load_steps=14 format=3 uid="uid://okrs43t8rojr"]
+[gd_scene load_steps=13 format=3 uid="uid://okrs43t8rojr"]
 
 [ext_resource type="PackedScene" uid="uid://bkuf38ni4q62k" path="res://actors/tile/Tile.tscn" id="1_4duv0"]
-[ext_resource type="Texture2D" uid="uid://dabe5dmwfsby2" path="res://assets/spritesheet.png" id="2_e7k0h"]
-[ext_resource type="Shader" uid="uid://dvnb0sb4vvhty" path="res://actors/tile/fire/fire.gdshader" id="2_ta8ea"]
+[ext_resource type="Shader" path="res://actors/tile/fire/fire.gdshader" id="2_ta8ea"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_76t4f"]
+size = Vector2(6.25, 6.25)
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_e7k0h"]
+resource_local_to_scene = true
 
 [sub_resource type="Gradient" id="Gradient_ta8ea"]
 interpolation_mode = 1
@@ -37,36 +42,27 @@ shader_parameter/noise_texture = SubResource("NoiseTexture2D_6eao6")
 shader_parameter/gradiant_texture = SubResource("GradientTexture2D_ta8ea")
 shader_parameter/color_texture = SubResource("GradientTexture1D_6eao6")
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_wv4m7"]
-resource_local_to_scene = true
-atlas = ExtResource("2_e7k0h")
-region = Rect2(96, 96, 32, 32)
-
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_76t4f"]
-size = Vector2(6.25, 6.25)
-
 [node name="Tile" instance=ExtResource("1_4duv0")]
 
-[node name="Shape" parent="Area" index="0"]
-visible = true
+[node name="StaticBody2D#TopLeftShape" type="CollisionShape2D" parent="." index="0"]
+position = Vector2(-12, -12)
+shape = SubResource("RectangleShape2D_76t4f")
+
+[node name="StaticBody2D#TopRightShape" type="CollisionShape2D" parent="." index="1"]
+position = Vector2(12.125, -12.125)
+shape = SubResource("RectangleShape2D_76t4f")
+
+[node name="StaticBody2D#BottomLeftShape" type="CollisionShape2D" parent="." index="2"]
+position = Vector2(-12, 12)
+shape = SubResource("RectangleShape2D_76t4f")
+
+[node name="StaticBody2D#BottomRightShape" type="CollisionShape2D" parent="." index="3"]
+position = Vector2(12, 12)
+shape = SubResource("RectangleShape2D_76t4f")
+
+[node name="3DShader" parent="." index="5"]
+material = SubResource("ShaderMaterial_e7k0h")
 
 [node name="Sprite" parent="3DShader" index="0"]
 material = SubResource("ShaderMaterial_4duv0")
 position = Vector2(-2.44379e-06, -9.53674e-07)
-texture = SubResource("AtlasTexture_wv4m7")
-
-[node name="TopLeftShape" type="CollisionShape2D" parent="StaticBody2D" index="0"]
-position = Vector2(-12, -12)
-shape = SubResource("RectangleShape2D_76t4f")
-
-[node name="TopRightShape" type="CollisionShape2D" parent="StaticBody2D" index="1"]
-position = Vector2(12.125, -12.125)
-shape = SubResource("RectangleShape2D_76t4f")
-
-[node name="BottomLeftShape" type="CollisionShape2D" parent="StaticBody2D" index="2"]
-position = Vector2(-12, 12)
-shape = SubResource("RectangleShape2D_76t4f")
-
-[node name="BottomRightShape" type="CollisionShape2D" parent="StaticBody2D" index="3"]
-position = Vector2(12, 12)
-shape = SubResource("RectangleShape2D_76t4f")
