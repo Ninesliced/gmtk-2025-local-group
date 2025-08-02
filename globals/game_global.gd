@@ -188,6 +188,11 @@ func _ready():
 	GameGlobal.on_action_stack_changed.connect(_update_size)
 
 
+func _play_short_explosion_sound_effect():
+	%ShortExplosionSoundEffect.pitch_scale = randf_range(0.7, 1.2)
+	%ShortExplosionSoundEffect.play()
+
+
 func _play_explosion_sound_effect():
 	%ExplosionSoundEffect.pitch_scale = randf_range(0.7, 1.2)
 	%ExplosionSoundEffect.play()
@@ -198,7 +203,21 @@ func _play_long_explosion_sound_effect():
 	%LongExplosionSoundEffect.play()
 
 
+func _play_swap_sound_effect():
+	# FIXME: Godot is broken
+	%SwapSoundEffect.volume_db = -30.0
+	%SwapSoundEffect.play()
+
+
+func _play_wolf_spawn_sound_effect():
+	# FIXME: Godot is broken
+	%WolfSpawnSoundEffect.volume_db = -30.0
+	%WolfSpawnSoundEffect.pitch_scale = randf_range(0.7, 1.2)
+	%WolfSpawnSoundEffect.play()
+
+
 func act_tile(tile: Tile, event: InputEvent) -> void:
+	if len(GameGlobal.action_stacks) == 0: return
 	if action_stacks.size() == 0:
 		_update_size()
 	var next_action: ActionType = action_stacks[0]
@@ -220,7 +239,7 @@ func act_tile(tile: Tile, event: InputEvent) -> void:
 	if action in dict:
 		tile.on_action(next_action)
 		on_action.emit()
-		dict[action]["function"].call(tile, event)
+		dict[action]["function"].call(tile)
 	else:
 		print("Action not found: ", action)
 	if !("temporary" in dict[action] && dict[action]["temporary"]):
@@ -234,21 +253,22 @@ func act_tile(tile: Tile, event: InputEvent) -> void:
 	number_of_actions += 1
 
 
-func rotate_clock(tile: Tile, event: InputEvent) -> void:
-	if event.button_index == MOUSE_BUTTON_RIGHT:
-		tile.rotate_counter_clock()
-	else:
-		tile.rotate_clock()
+func rotate_clock(tile: Tile) -> void:
+	tile.rotate_clock()
 
 
-func rotate_counter_clock(tile: Tile, event: InputEvent) -> void:
+func rotate_counter_clock(tile: Tile) -> void:
 	tile.rotate_counter_clock()
 
-func transform_empty(tile: Tile, event: InputEvent) -> Tile:
-	return tile.transform_to_another_type(load("res://actors/tile/cursed_four.tscn"))
+func transform_empty(tile: Tile) -> Tile:
+	var new_tile := tile.transform_to_another_type(load("res://actors/tile/cursed_four.tscn"))
+	
+	_play_short_explosion_sound_effect()
+	
+	return new_tile
 
 ## ultimate carrot
-func transform_empty_cursed(tile: Tile, event: InputEvent) -> void:
+func transform_empty_cursed(tile: Tile) -> void:
 	var grid_pos = tile.grid_position
 	
 	_play_long_explosion_sound_effect()
@@ -256,11 +276,11 @@ func transform_empty_cursed(tile: Tile, event: InputEvent) -> void:
 	for i in range(0, 4):
 		var current_tile: Tile = map.grid[(grid_pos.x + i) % map.grid_size.x][grid_pos.y]
 		current_tile.is_changeable = true
-		transform_empty(current_tile, event)
+		transform_empty(current_tile)
 		await get_tree().create_timer(0.1).timeout
 
 
-func transform_cross(tile: Tile, event: InputEvent) -> void:
+func transform_cross(tile: Tile) -> void:
 	var list_random = [0,0,0,0,1,1,1,2,2]
 	list_random.shuffle()
 
@@ -282,7 +302,7 @@ func transform_cross(tile: Tile, event: InputEvent) -> void:
 	_play_explosion_sound_effect()
 
 
-func transform_empty_bomb(tile: Tile, event: InputEvent) -> void:
+func transform_empty_bomb(tile: Tile) -> void:
 	for i in range(-1,2):
 		for j in range(-1,2):
 			var current_tile = map.grid[(tile.grid_position.x+i)%map.grid_size.x][(tile.grid_position.y+j)%map.grid_size.y]
@@ -293,13 +313,26 @@ func transform_empty_bomb(tile: Tile, event: InputEvent) -> void:
 	_play_explosion_sound_effect()
 
 
-func horizontal_swap(tile: Tile, event: InputEvent) -> void:
+func horizontal_swap(tile: Tile) -> void:
 	tile.horizontal_swap(map)
+	_play_swap_sound_effect()
 
-func vertical_swap(tile: Tile, event: InputEvent) -> void:
+
+func vertical_swap(tile: Tile) -> void:
 	tile.vertical_swap(map)
+	_play_swap_sound_effect()
 	
-func spawn_enemy(tile: Tile, event: InputEvent) -> void:
+func spawn_enemy_on_tile(tile: Tile) -> void:
+	var enemy := ENEMY.instantiate()
+	enemy.target = player
+	player.get_parent().add_child(enemy)
+	enemy.grid_position = tile.grid_position
+	
+	_play_wolf_spawn_sound_effect()
+
+
+func spawn_enemy(tile: Tile) -> void:
+
 	for i in range(-1,2):
 		var current_tile = map.grid[(tile.grid_position.x + i)%map.grid_size.x][(tile.grid_position.y)%map.grid_size.y]
 		var new_tile = null
@@ -314,15 +347,12 @@ func spawn_enemy(tile: Tile, event: InputEvent) -> void:
 		if new_tile && new_tile.tile_bigger:
 			new_tile.tile_bigger.play_full(0.1*(i+1))
 	
-	var enemy := ENEMY.instantiate()
-	enemy.target = player
-	player.get_parent().add_child(enemy)
-	enemy.grid_position = tile.grid_position
+	spawn_enemy_on_tile(tile)
 	
 	_play_explosion_sound_effect()
 
 
-func spawn_vertical_spikes(tile: Tile, event: InputEvent) -> void:
+func spawn_vertical_spikes(tile: Tile) -> void:
 	var spike := load("res://actors/tile/spike/four_spike.tscn")
 	var full := load("res://actors/tile/full.tscn")
 	

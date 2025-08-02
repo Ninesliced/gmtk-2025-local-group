@@ -4,7 +4,7 @@
 [ext_resource type="Shader" uid="uid://jkmh5ksc1ejd" path="res://actors/tile/tile3D.gdshader" id="2_5th3q"]
 [ext_resource type="Script" uid="uid://dvisy31qkpoao" path="res://actors/tile/spike/spike.gd" id="2_w7enm"]
 [ext_resource type="Shader" uid="uid://birv8v71nvo3v" path="res://addons/shaker/components/vfx/shaders/fill_color.gdshader" id="3_w7enm"]
-[ext_resource type="PackedScene" uid="uid://pp6pg03hbkuj" path="res://actors/tile/components/spike_component.tscn" id="5_4w6y0"]
+[ext_resource type="PackedScene" path="res://actors/tile/components/spike_component.tscn" id="5_4w6y0"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_0vltg"]
 resource_local_to_scene = true

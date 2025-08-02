@@ -48,9 +48,8 @@ animations = [{
 [sub_resource type="CircleShape2D" id="CircleShape2D_ufbh8"]
 radius = 12.0
 
-[node name="Spike" instance=ExtResource("1_ijg11")]
+[node name="Spike2" instance=ExtResource("1_ijg11")]
 lock_rotation = true
-tileName = null
 
 [node name="3DShader" parent="." index="1"]
 material = SubResource("ShaderMaterial_0vltg")

@@ -9,7 +9,7 @@ async function getTodaySeed() {
         return existing.rows[0].seed;
     }
 
-    const seed = crypto.randomBytes(Number(process.env.SEED_LENGTH) || 16).toString('hex');
+    const seed = crypto.randomBytes(Number(process.env.SEED_LENGTH) || 6).toString('hex');
     await db.query('INSERT INTO seeds (date, seed) VALUES ($1, $2)', [today, seed]);
     return seed;
 }
