@@ -36,6 +36,7 @@ animations = [{
 
 [node name="Spike2" instance=ExtResource("1_a2qbe")]
 script = ExtResource("2_ecmtl")
+chance_action_spawn = 0.025
 lock_rotation = false
 tileName = "LineSpikeTile"
 
@@ -45,6 +46,9 @@ material = SubResource("ShaderMaterial_ejcap")
 [node name="Sprite" parent="3DShader" index="0"]
 material = SubResource("ShaderMaterial_5fs2v")
 sprite_frames = SubResource("SpriteFrames_ejcap")
+
+[node name="RotationSoundEffect" parent="." index="6"]
+volume_db = -30.0
 
 [node name="IdleRotationSoundEffect" parent="." index="7"]
 volume_db = -30.0

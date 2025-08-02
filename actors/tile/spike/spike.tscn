@@ -24,7 +24,7 @@ shader_parameter/force = 0.0
 [node name="Spike2" instance=ExtResource("1_wybci")]
 script = ExtResource("2_w7enm")
 outline_min = 0.1
-chance_action_spawn = 0.1
+chance_action_spawn = 0.025
 lock_rotation = true
 
 [node name="3DShader" parent="." index="1"]

@@ -122,12 +122,12 @@ mc = NodePath("../MovementComponent")
 [node name="WalkSoundEffect" type="AudioStreamPlayer" parent="."]
 unique_name_in_owner = true
 stream = ExtResource("11_hiosj")
-volume_db = -40.0
+volume_db = -20.0
 
 [node name="ItemTakeSoundEffect" type="AudioStreamPlayer" parent="."]
 unique_name_in_owner = true
 stream = ExtResource("12_ssdk0")
-volume_db = -30.0
+volume_db = -20.0
 parameters/looping = false
 
 [connection signal="area_entered" from="HitboxComponent" to="." method="_on_hitbox_component_area_entered"]

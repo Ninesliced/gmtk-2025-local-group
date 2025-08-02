@@ -34,6 +34,7 @@ animations = [{
 }]
 
 [node name="Spike2" instance=ExtResource("1_jbjxv")]
+chance_action_spawn = 0.025
 tileName = "FourSpikeTile"
 
 [node name="3DShader" parent="." index="1"]
@@ -42,3 +43,9 @@ material = SubResource("ShaderMaterial_tst6t")
 [node name="Sprite" parent="3DShader" index="0"]
 material = SubResource("ShaderMaterial_0qa0e")
 sprite_frames = SubResource("SpriteFrames_7g0ve")
+
+[node name="RotationSoundEffect" parent="." index="6"]
+volume_db = -30.0
+
+[node name="IdleRotationSoundEffect" parent="." index="7"]
+volume_db = -35.0
