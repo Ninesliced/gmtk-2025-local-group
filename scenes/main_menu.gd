@@ -7,6 +7,8 @@ class_name MainMenu
 @onready var request: Node2D = $Request
 @onready var seed_of_the_day: Label = %Seed_of_the_day
 
+@onready var leaderboards: Array[HBoxContainer] = [%Leaderboard, %Leaderboard2, %Leaderboard3, %Leaderboard4, %Leaderboard5]
+
 @onready var hbox_container: VBoxContainer = $HBoxContainer
 func _ready():
 	UIManager.first_unclosable = true

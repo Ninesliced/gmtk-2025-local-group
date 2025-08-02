@@ -176,15 +176,23 @@ text = "SCOREBOARD OF THE DAY"
 horizontal_alignment = 1
 
 [node name="Leaderboard" parent="Play/Container/HBoxContainer/NinePatchRect/VBoxContainer" instance=ExtResource("8_flqon")]
+unique_name_in_owner = true
 layout_mode = 2
 
 [node name="Leaderboard2" parent="Play/Container/HBoxContainer/NinePatchRect/VBoxContainer" instance=ExtResource("8_flqon")]
+unique_name_in_owner = true
 layout_mode = 2
 
 [node name="Leaderboard3" parent="Play/Container/HBoxContainer/NinePatchRect/VBoxContainer" instance=ExtResource("8_flqon")]
+unique_name_in_owner = true
 layout_mode = 2
 
 [node name="Leaderboard4" parent="Play/Container/HBoxContainer/NinePatchRect/VBoxContainer" instance=ExtResource("8_flqon")]
+unique_name_in_owner = true
+layout_mode = 2
+
+[node name="Leaderboard5" parent="Play/Container/HBoxContainer/NinePatchRect/VBoxContainer" instance=ExtResource("8_flqon")]
+unique_name_in_owner = true
 layout_mode = 2
 
 [node name="right" type="VBoxContainer" parent="Play/Container/HBoxContainer"]

@@ -271,8 +271,8 @@ func _on_area_body_exited(body: Node2D) -> void:
 	
 	
 func rotate_animated(new_rotation: int) -> void:
-	print(new_rotation)
-	print(%Sprite.rotation, " vs ", PI / 2 * new_rotation)
+	# print(new_rotation)
+	# print(%Sprite.rotation, " vs ", PI / 2 * new_rotation)
 	if abs(%Sprite.rotation - PI / 2 * new_rotation) > PI:
 		if %Sprite.rotation < PI / 2 * new_rotation:
 			%Sprite.rotation += PI * 2
