@@ -67,11 +67,13 @@ func rotate_counter_clock() -> void:
 func swap(map: Map,vector : Vector2i) -> void:
 	var tile_size = map.tile_size
 	
-	# var real_co_vector = vector * tile_size
 	var neighbor = map.grid[(grid_position.x+vector.x)%map.grid_size.x][(grid_position.y+vector.y)%map.grid_size.y]
 	
-	translation_animated((grid_position + vector)%map.grid_size * tile_size - grid_position* tile_size)
-	neighbor.translation_animated(-((grid_position + vector)%map.grid_size * tile_size - grid_position* tile_size))
+	var pos_neigh = neighbor.position
+	var pos = position
+	
+	translation_animated(pos_neigh)
+	neighbor.translation_animated(pos)
 	
 	map.swap_tiles(grid_position,(grid_position+vector)%map.grid_size)
 
@@ -239,17 +241,15 @@ func rotate_animated(new_rotation: int) -> void:
 	tween.set_ease(Tween.EASE_OUT)
 	tween.set_trans(Tween.TRANS_ELASTIC)
 	
-func translation_animated(new_translation: Vector2) -> void:
-	var target = position + new_translation
-	%Sprite.position -= new_translation
+func translation_animated(target: Vector2) -> void:
+	var pos = position
+	%Sprite.position -= target - pos
 	position = target
-	print("Translation tile to: ", new_translation)
 	var tween = get_tree().create_tween()
 	tween.tween_property(%Sprite, "position", Vector2(0,0), 0.2)
 	tween.set_ease(Tween.EASE_IN_OUT)
 	tween.set_trans(Tween.TRANS_LINEAR)
 
-	await tween.finished
 
 func transform_to_another_type(new_tile: PackedScene, play_animation: bool = true) -> Tile:
 	if is_player_inside:
