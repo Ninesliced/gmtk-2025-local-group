@@ -116,7 +116,7 @@ func _on_area_2d_mouse_exited() -> void:
 
 func _on_area_2d_input_event(viewport: Node, event: InputEvent, shape_idx: int) -> void:
 	if event is InputEventMouseButton:
-		if event.pressed:
+		if !event.pressed:
 			GameGlobal.act_tile(self, event)
 
 func tile_clicked(way: int) -> void:

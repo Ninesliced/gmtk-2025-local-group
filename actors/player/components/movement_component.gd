@@ -52,7 +52,6 @@ func _process(delta):
 		return
 	
 	var move_direction: Vector2i = Vector2i.ZERO
-	var map : Map = GameGlobal.map
 	
 	if x_direction > 0.4:
 		move_direction = Vector2i(1, 0)
@@ -63,7 +62,11 @@ func _process(delta):
 		move_direction = Vector2i(0, 1)
 	elif y_direction < -0.4:
 		move_direction = Vector2i(0, -1)
+	move_player(move_direction)
 	
+	
+func move_player(move_direction: Vector2i) -> void:
+	var map : Map = GameGlobal.map
 	var next_pos = Vector2i(grid_position + move_direction) % map.grid_size
 	
 	var current_tile : Tile = GameGlobal.map.grid[grid_position.x][grid_position.y]
