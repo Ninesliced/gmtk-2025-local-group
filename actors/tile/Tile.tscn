@@ -112,7 +112,7 @@ _data = {
 &"rotate_lock": SubResource("Animation_i7in2")
 }
 
-[node name="Tile5" type="Node2D" node_paths=PackedStringArray("rotation_sound_effect", "idle_rotation_sound_effect")]
+[node name="Tile" type="Node2D" node_paths=PackedStringArray("rotation_sound_effect", "idle_rotation_sound_effect")]
 script = ExtResource("1_4t6fi")
 outline_min = 0.2
 rotation_sound_effect = NodePath("RotationSoundEffect")
@@ -157,13 +157,11 @@ script = ExtResource("4_1qs4h")
 [node name="ActionHolder" type="Node2D" parent="."]
 unique_name_in_owner = true
 
-[node name="RotationSoundEffect" type="AudioStreamPlayer2D" parent="."]
-unique_name_in_owner = true
+[node name="RotationSoundEffect" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("7_187ej")
 volume_db = -30.0
 
-[node name="IdleRotationSoundEffect" type="AudioStreamPlayer2D" parent="."]
-unique_name_in_owner = true
+[node name="IdleRotationSoundEffect" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("8_d7a5y")
 volume_db = -30.0
 

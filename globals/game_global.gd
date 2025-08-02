@@ -188,6 +188,11 @@ func _ready():
 	GameGlobal.on_action_stack_changed.connect(_update_size)
 
 
+func _play_short_explosion_sound_effect():
+	%ShortExplosionSoundEffect.pitch_scale = randf_range(0.7, 1.2)
+	%ShortExplosionSoundEffect.play()
+
+
 func _play_explosion_sound_effect():
 	%ExplosionSoundEffect.pitch_scale = randf_range(0.7, 1.2)
 	%ExplosionSoundEffect.play()
@@ -245,7 +250,11 @@ func rotate_counter_clock(tile: Tile, event: InputEvent) -> void:
 	tile.rotate_counter_clock()
 
 func transform_empty(tile: Tile, event: InputEvent) -> Tile:
-	return tile.transform_to_another_type(load("res://actors/tile/cursed_four.tscn"))
+	var new_tile := tile.transform_to_another_type(load("res://actors/tile/cursed_four.tscn"))
+	
+	_play_short_explosion_sound_effect()
+	
+	return new_tile
 
 ## ultimate carrot
 func transform_empty_cursed(tile: Tile, event: InputEvent) -> void:
