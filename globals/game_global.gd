@@ -205,6 +205,8 @@ func _play_long_explosion_sound_effect():
 
 func _play_swap_sound_effect():
 	%SwapSoundEffect.play()
+	# FIXME: Godot is broken
+	%SwapSoundEffect.volume_db = -30.0
 
 
 func act_tile(tile: Tile, event: InputEvent) -> void:
