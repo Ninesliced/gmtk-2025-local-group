@@ -51,6 +51,12 @@ animation = &"spring"
 [node name="StaticBody2D" parent="Map/Tile3" index="3"]
 visible = false
 
+[node name="RotationSoundEffect" parent="Map/Tile3" index="7"]
+unique_name_in_owner = true
+
+[node name="IdleRotationSoundEffect" parent="Map/Tile3" index="8"]
+unique_name_in_owner = true
+
 [node name="Tile4" parent="Map" instance=ExtResource("3_yj3ko")]
 position = Vector2(96, 0)
 
@@ -62,6 +68,12 @@ material = SubResource("ShaderMaterial_ii521")
 
 [node name="StaticBody2D" parent="Map/Tile4" index="3"]
 visible = false
+
+[node name="RotationSoundEffect" parent="Map/Tile4" index="7"]
+unique_name_in_owner = true
+
+[node name="IdleRotationSoundEffect" parent="Map/Tile4" index="8"]
+unique_name_in_owner = true
 
 [node name="Tile5" parent="Map" instance=ExtResource("3_yj3ko")]
 position = Vector2(128, 0)
@@ -76,6 +88,12 @@ animation = &"winter"
 [node name="StaticBody2D" parent="Map/Tile5" index="3"]
 visible = false
 
+[node name="RotationSoundEffect" parent="Map/Tile5" index="7"]
+unique_name_in_owner = true
+
+[node name="IdleRotationSoundEffect" parent="Map/Tile5" index="8"]
+unique_name_in_owner = true
+
 [node name="Tile6" parent="Map" instance=ExtResource("3_yj3ko")]
 position = Vector2(160, 0)
 
@@ -88,6 +106,12 @@ animation = &"summer"
 
 [node name="StaticBody2D" parent="Map/Tile6" index="3"]
 visible = false
+
+[node name="RotationSoundEffect" parent="Map/Tile6" index="7"]
+unique_name_in_owner = true
+
+[node name="IdleRotationSoundEffect" parent="Map/Tile6" index="8"]
+unique_name_in_owner = true
 
 [node name="Spike" parent="Map" instance=ExtResource("6_ii521")]
 position = Vector2(32, 0)
