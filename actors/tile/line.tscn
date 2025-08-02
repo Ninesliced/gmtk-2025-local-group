@@ -85,7 +85,7 @@ material = SubResource("ShaderMaterial_nnt7w")
 [node name="Sprite" parent="3DShader" index="0"]
 material = SubResource("ShaderMaterial_ye3st")
 sprite_frames = SubResource("SpriteFrames_pmyu8")
-animation = &"winter"
+animation = &"spring"
 
 [node name="Outline" parent="." index="2"]
 z_index = 0

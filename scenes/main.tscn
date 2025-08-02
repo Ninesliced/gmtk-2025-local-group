@@ -28,7 +28,6 @@ mouse_filter = 1
 [node name="Map" parent="." instance=ExtResource("1_tbgi4")]
 material = SubResource("ShaderMaterial_o6xl0")
 position = Vector2(0, 10)
-tiles_degree_of_freedom = null
 grid_size = Vector2i(25, 5)
 
 [node name="Player" parent="." instance=ExtResource("4_tipki")]

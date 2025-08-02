@@ -1,6 +1,6 @@
 [gd_scene load_steps=10 format=3 uid="uid://mva638opsugy"]
 
-[ext_resource type="PackedScene" uid="uid://lch1hj6crvy8" path="res://actors/tile/spike/spike.tscn" id="1_a2qbe"]
+[ext_resource type="PackedScene" uid="uid://lch1hj6crvy8" path="res://actors/tile/spike.tscn" id="1_a2qbe"]
 [ext_resource type="Shader" uid="uid://jkmh5ksc1ejd" path="res://actors/tile/tile3D.gdshader" id="2_2t65l"]
 [ext_resource type="Script" uid="uid://daj72jk7n0sli" path="res://actors/tile/spike/line_spike.gd" id="2_ecmtl"]
 [ext_resource type="Shader" uid="uid://birv8v71nvo3v" path="res://addons/shaker/components/vfx/shaders/fill_color.gdshader" id="3_ecmtl"]
@@ -45,6 +45,7 @@ material = SubResource("ShaderMaterial_ejcap")
 [node name="Sprite" parent="3DShader" index="0"]
 material = SubResource("ShaderMaterial_5fs2v")
 sprite_frames = SubResource("SpriteFrames_ejcap")
+animation = &"default"
 
 [node name="IdleRotationSoundEffect" parent="." index="7"]
 volume_db = -30.0
