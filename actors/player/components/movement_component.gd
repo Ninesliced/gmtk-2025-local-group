@@ -5,6 +5,10 @@ class_name MovementComponent
 var parent : Player
 
 var is_moving : bool = false
+var actual_score: int = 0:
+	set(value):
+		actual_score = value
+		GameGlobal.score = value
 
 signal on_move(direction: Vector2)
 signal on_idle()
@@ -42,11 +46,8 @@ func _process(delta):
 	if x_direction == 0 and y_direction == 0:
 		if !is_moving:
 			on_idle.emit()
-	if x_direction **2 + y_direction **2 > 0.4:
-		GameGlobal.is_game_have_start = true
-	else:
 		return
-		
+	
 	if is_moving:
 		return
 	
@@ -85,12 +86,17 @@ func _process(delta):
 	else:
 		return
 	
-	if current_tile == null or next_tile == null or not current_tile.can_pass(inside_direction) or not next_tile.can_pass(outside_direction):
-		return
+	if !DebugGlobal.no_clip:
+		if current_tile == null or next_tile == null or not current_tile.can_pass(inside_direction) or not next_tile.can_pass(outside_direction):
+			return
+
+	GameGlobal.is_game_have_start = true
 
 	on_move.emit(move_direction)
 	grid_position += move_direction
 	GameGlobal.number_of_actions += 1
+	
+	actual_score += move_direction.x * 10
 
 
 func update_position():

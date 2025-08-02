@@ -1,17 +1,16 @@
-[gd_scene load_steps=11 format=3 uid="uid://b3pjr7rfln6g1"]
+[gd_scene load_steps=13 format=3 uid="uid://b3pjr7rfln6g1"]
 
 [ext_resource type="PackedScene" uid="uid://bkuf38ni4q62k" path="res://actors/tile/Tile.tscn" id="1_rwwjv"]
 [ext_resource type="Texture2D" uid="uid://dabe5dmwfsby2" path="res://assets/spritesheet.png" id="2_qklxe"]
 [ext_resource type="Shader" uid="uid://jkmh5ksc1ejd" path="res://actors/tile/tile3D.gdshader" id="3_fb66d"]
 [ext_resource type="Shader" uid="uid://birv8v71nvo3v" path="res://addons/shaker/components/vfx/shaders/fill_color.gdshader" id="3_qklxe"]
 [ext_resource type="Script" uid="uid://c2gcn1bk0ygbk" path="res://actors/tile/components/cursed_component.gd" id="5_fb66d"]
+[ext_resource type="Script" uid="uid://cwt24lt1cbe0i" path="res://actors/tile/components/carrot_eat_component.gd" id="6_amehe"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_pd3d8"]
 resource_local_to_scene = true
 shader = ExtResource("3_fb66d")
-shader_parameter/ground_col = Color(0.278431, 0.227451, 0.258824, 1)
-shader_parameter/wall_col = Color(0.396078, 0.466667, 0.270588, 1)
-shader_parameter/wall_col2 = Color(0.1323, 0.1323, 0.21, 1)
+shader_parameter/number_of_ground_cols = 4
 shader_parameter/color_fill = Color(1, 1, 1, 1)
 shader_parameter/force = 0.0
 
@@ -25,6 +24,10 @@ shader_parameter/force = 0.0
 atlas = ExtResource("2_qklxe")
 region = Rect2(64, 32, 32, 32)
 
+[sub_resource type="AtlasTexture" id="AtlasTexture_amehe"]
+atlas = ExtResource("2_qklxe")
+region = Rect2(96, 128, 32, 32)
+
 [sub_resource type="SpriteFrames" id="SpriteFrames_amehe"]
 animations = [{
 "frames": [{
@@ -32,7 +35,15 @@ animations = [{
 "texture": SubResource("AtlasTexture_fb66d")
 }],
 "loop": true,
-"name": &"new_animation",
+"name": &"carrot",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_amehe")
+}],
+"loop": true,
+"name": &"no_carrot",
 "speed": 5.0
 }]
 
@@ -42,9 +53,7 @@ size = Vector2(6.25, 6.25)
 [node name="Tile4" instance=ExtResource("1_rwwjv")]
 outline_min = null
 outline_max = null
-
-[node name="Area" parent="." index="0"]
-collision_mask = 17
+lock_rotation = true
 
 [node name="3DShader" parent="." index="1"]
 material = SubResource("ShaderMaterial_pd3d8")
@@ -52,7 +61,7 @@ material = SubResource("ShaderMaterial_pd3d8")
 [node name="Sprite" parent="3DShader" index="0"]
 material = SubResource("ShaderMaterial_fb66d")
 sprite_frames = SubResource("SpriteFrames_amehe")
-animation = &"new_animation"
+animation = &"carrot"
 
 [node name="StaticBody2D" parent="." index="3"]
 visible = false
@@ -76,3 +85,12 @@ shape = SubResource("RectangleShape2D_76t4f")
 [node name="CursedComponent" type="Node" parent="." index="5" node_paths=PackedStringArray("area")]
 script = ExtResource("5_fb66d")
 area = NodePath("../Area")
+
+[node name="CarrotEatComponent" type="Node" parent="." index="7" node_paths=PackedStringArray("area", "sprite", "tile_bigger")]
+script = ExtResource("6_amehe")
+area = NodePath("../Area")
+sprite = NodePath("../3DShader/Sprite")
+tile_bigger = NodePath("../TileBigger")
+
+[node name="AudioStreamPlayer2D" parent="." index="8"]
+max_polyphony = 10
