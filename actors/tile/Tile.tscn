@@ -174,7 +174,6 @@ unique_name_in_owner = true
 [node name="SoundEffect" type="AudioStreamPlayer2D" parent="."]
 unique_name_in_owner = true
 stream = ExtResource("7_187ej")
-stream_paused = true
 playback_type = 2
 script = SubResource("GDScript_i7in2")
 

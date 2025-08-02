@@ -26,6 +26,7 @@ var outline_tween: Tween = null
 @export var outline_max = 0.5
 
 @export var rotation_speed: float = 0.2
+@export var is_changeable := true
 @export var tile_rotation : Rotation = Rotation.UP : 
 	set(x):
 		if lock_rotation:
@@ -253,6 +254,8 @@ func translation_animated(target: Vector2) -> void:
 
 
 func transform_to_another_type(new_tile: PackedScene, play_animation: bool = true) -> Tile:
+	if not is_changeable:
+		self
 	if is_player_inside:
 		print("Player is still inside the tile, cannot transform")
 		return null
