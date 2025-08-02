@@ -234,14 +234,15 @@ func rotate_counter_clock(tile: Tile, event: InputEvent) -> void:
 	pass
 
 func transform_empty(tile: Tile, event: InputEvent) -> void:
+	tile.is_changeable = true
 	tile.transform_to_another_type(load("res://actors/tile/cursed_four.tscn"))
 
+## carrot
 func transform_empty_cursed(tile: Tile, event: InputEvent) -> void:
 	var grid_pos = tile.grid_position
 	for i in range(0, 4):
-		var current_tile = map.grid[(grid_pos.x + i) % map.grid_size.x][grid_pos.y]
-		current_tile.transform_to_another_type(load("res://actors/tile/cursed_four.tscn"),true, true)
-		# FIXME: Alexis: play "pop" sound
+		var current_tile: Tile = map.grid[(grid_pos.x + i) % map.grid_size.x][grid_pos.y]
+		transform_empty(current_tile, event)
 		await get_tree().create_timer(0.1).timeout
 
 func transform_cross(tile: Tile, event: InputEvent) -> void:
@@ -325,6 +326,8 @@ func delete_current_action() -> void:
 	# if action_stacks.size() == 0:
 	_update_size()
 	on_action_stack_changed.emit()
+	if !hovered_tile:
+		return
 	hovered_tile.on_action(to_remove_action)
 	
 
