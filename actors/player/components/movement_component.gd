@@ -2,7 +2,7 @@ extends Node
 
 class_name MovementComponent
 
-@export var walk_sound_effect: AudioStreamPlayer2D
+@export var walk_sound_effect: AudioStreamPlayer
 
 var parent : Player
 

@@ -30,12 +30,21 @@ func _on_get_seed_completed(result, response_code, headers, body):
 		return
 	var json = JSON.parse_string(body.get_string_from_utf8())
 	GameGlobal.rng_seed = json["seed"]
+	if get_parent() is MainMenu:
+		get_parent().seed_of_the_day.text = json["seed"]
 
 func _on_get_leaderboard_completed(result, response_code, headers, body):
 	if response_code != 200:
 		return
 	var json = JSON.parse_string(body.get_string_from_utf8())
-	GameGlobal.leaderboard = json
+	# GameGlobal.leaderboard = json
+	if get_parent() is not MainMenu:
+		return
+	var leaderboards = get_parent().leaderboards
+	for i in range(len(json)):
+		var value = json[i]
+		leaderboards[i].change_data(value["pseudo"], str(value["score"]))
+		
 
 
 func _on_get_rank_completed(result, response_code, headers, body):

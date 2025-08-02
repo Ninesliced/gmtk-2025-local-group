@@ -1,4 +1,4 @@
-[gd_scene load_steps=20 format=3 uid="uid://c5lqig57oxpyb"]
+[gd_scene load_steps=21 format=3 uid="uid://c5lqig57oxpyb"]
 
 [ext_resource type="Script" uid="uid://7i2kh250crxr" path="res://actors/player/player.gd" id="1_nvxhs"]
 [ext_resource type="Texture2D" uid="uid://dhb2r2w2v4525" path="res://assets/player.png" id="2_ilk7j"]
@@ -11,6 +11,7 @@
 [ext_resource type="Script" uid="uid://bdcm77c68c11f" path="res://actors/player/action_current_component.gd" id="9_388e2"]
 [ext_resource type="PackedScene" uid="uid://b3oy1hgm6m7u8" path="res://actors/player/debug/player_debug.tscn" id="10_lsln6"]
 [ext_resource type="AudioStream" uid="uid://o3dk3yuuufpr" path="res://assets/sfx/work/walk.ogg" id="11_hiosj"]
+[ext_resource type="AudioStream" uid="uid://b03vg13som2qc" path="res://assets/sfx/work/action.ogg" id="12_ssdk0"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_lsqbn"]
 radius = 6.5192
@@ -118,9 +119,16 @@ script = ExtResource("9_388e2")
 position = Vector2(20, -20)
 mc = NodePath("../MovementComponent")
 
-[node name="WalkSoundEffect" type="AudioStreamPlayer2D" parent="."]
+[node name="WalkSoundEffect" type="AudioStreamPlayer" parent="."]
+unique_name_in_owner = true
 stream = ExtResource("11_hiosj")
-volume_db = -25.0
+volume_db = -20.0
+
+[node name="ItemTakeSoundEffect" type="AudioStreamPlayer" parent="."]
+unique_name_in_owner = true
+stream = ExtResource("12_ssdk0")
+volume_db = -20.0
+parameters/looping = false
 
 [connection signal="area_entered" from="HitboxComponent" to="." method="_on_hitbox_component_area_entered"]
 [connection signal="child_exiting_tree" from="MovementComponent" to="PlayerAnimation" method="_on_movement_component_child_exiting_tree"]

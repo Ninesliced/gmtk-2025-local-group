@@ -9,12 +9,11 @@
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_vwjwa"]
 resource_local_to_scene = true
 
-[node name="Arkan2" type="Node2D"]
+[node name="Arkan3" type="Node2D"]
 
 [node name="Map" parent="." instance=ExtResource("1_vwjwa")]
 material = SubResource("ShaderMaterial_vwjwa")
 position = Vector2(0, 10)
-tiles_degree_of_freedom = null
 grid_size = Vector2i(25, 5)
 
 [node name="Player" parent="." instance=ExtResource("5_683xw")]
