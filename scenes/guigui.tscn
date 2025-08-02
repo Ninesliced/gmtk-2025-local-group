@@ -40,7 +40,6 @@ grid_size = Vector2i(20, 5)
 
 [node name="Tile3" parent="Map" instance=ExtResource("3_yj3ko")]
 position = Vector2(64, 0)
-tileName = null
 
 [node name="3DShader" parent="Map/Tile3" index="1"]
 material = SubResource("ShaderMaterial_p1pyd")
@@ -52,15 +51,8 @@ animation = &"spring"
 [node name="StaticBody2D" parent="Map/Tile3" index="3"]
 visible = false
 
-[node name="RotationSoundEffect" parent="Map/Tile3" index="7"]
-volume_db = -15.0
-
-[node name="IdleRotationSoundEffect" parent="Map/Tile3" index="8"]
-volume_db = -15.0
-
 [node name="Tile4" parent="Map" instance=ExtResource("3_yj3ko")]
 position = Vector2(96, 0)
-tileName = null
 
 [node name="3DShader" parent="Map/Tile4" index="1"]
 material = SubResource("ShaderMaterial_p1pyd")
@@ -71,15 +63,8 @@ material = SubResource("ShaderMaterial_ii521")
 [node name="StaticBody2D" parent="Map/Tile4" index="3"]
 visible = false
 
-[node name="RotationSoundEffect" parent="Map/Tile4" index="7"]
-volume_db = -15.0
-
-[node name="IdleRotationSoundEffect" parent="Map/Tile4" index="8"]
-volume_db = -15.0
-
 [node name="Tile5" parent="Map" instance=ExtResource("3_yj3ko")]
 position = Vector2(128, 0)
-tileName = null
 
 [node name="3DShader" parent="Map/Tile5" index="1"]
 material = SubResource("ShaderMaterial_p1pyd")
@@ -91,15 +76,8 @@ animation = &"winter"
 [node name="StaticBody2D" parent="Map/Tile5" index="3"]
 visible = false
 
-[node name="RotationSoundEffect" parent="Map/Tile5" index="7"]
-volume_db = -15.0
-
-[node name="IdleRotationSoundEffect" parent="Map/Tile5" index="8"]
-volume_db = -15.0
-
 [node name="Tile6" parent="Map" instance=ExtResource("3_yj3ko")]
 position = Vector2(160, 0)
-tileName = null
 
 [node name="3DShader" parent="Map/Tile6" index="1"]
 material = SubResource("ShaderMaterial_p1pyd")
@@ -111,15 +89,9 @@ animation = &"summer"
 [node name="StaticBody2D" parent="Map/Tile6" index="3"]
 visible = false
 
-[node name="RotationSoundEffect" parent="Map/Tile6" index="7"]
-volume_db = -15.0
-
-[node name="IdleRotationSoundEffect" parent="Map/Tile6" index="8"]
-volume_db = -15.0
-
 [node name="Spike" parent="Map" instance=ExtResource("6_ii521")]
 position = Vector2(32, 0)
-tileName = null
+tileName = ""
 
 [node name="Camera2D" type="Camera2D" parent="."]
 position = Vector2(114, 90)

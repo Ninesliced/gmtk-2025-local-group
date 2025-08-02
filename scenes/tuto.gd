@@ -5,15 +5,25 @@ func _ready():
 	GameGlobal.canvas_layer.show()
 	GameGlobal.reset_game()
 	GameGlobal.map.generate_grid_from_numbers([
-		[0 ,0 ,0 ,0 ,0 ,21,0 ,0 ,0 ,0 ,0 ,0 ,0 ,0 ,0 ,0 ,0 ,0 ,0 ,0 ,0 ,0 ,0 ,0 ,0 ,0 ,0 ,0],
-		[0 ,0 ,0 ,0 ,0 ,21,0 ,0 ,0 ,0 ,0 ,0 ,0 ,0 ,0 ,0 ,0 ,0 ,0 ,0 ,0 ,0 ,0 ,0 ,0 ,0 ,0 ,0],
-		[0 ,0 ,2 ,2 ,2 ,11,0 ,13,2 ,2 ,2 ,2 ,2 ,2 ,21,2 ,2 ,2 ,0 ,0 ,0 ,0 ,0 ,0 ,0 ,0 ,0 ,0],
-		[0 ,0 ,0 ,0 ,0 ,0 ,0 ,21,0 ,0 ,0 ,0 ,0 ,0 ,0 ,0 ,0 ,0 ,0 ,0 ,0 ,0 ,0 ,0 ,0 ,0 ,0 ,0],
-		[0 ,0 ,0 ,0 ,0 ,13,2 ,11,0 ,0 ,0 ,0 ,0 ,0 ,0 ,0 ,0 ,0 ,0 ,0 ,0 ,0 ,0 ,0 ,0 ,0 ,0 ,0],
+		[0 ,0 ,0 ,0 ,0 ,21,0 ,0 ,0 ,0 ,0 ,0 ,0 ,0 ,0 ,0 ,0 ,0 ,0 ,0 ,0 ,0 ,0 ,0 ,0 ,0 ,0 ,0 ,0 ],
+		[0 ,0 ,0 ,0 ,0 ,21,0 ,0 ,0 ,0 ,0 ,0 ,0 ,0 ,0 ,0 ,0 ,0 ,0 ,0 ,0 ,0 ,0 ,0 ,0 ,0 ,0 ,0 ,0 ],
+		[0 ,0 ,2 ,2 ,2 ,11,0 ,13,2 ,2 ,21,2 ,2 ,5 ,5 ,5 ,2 ,1 ,0 ,13,3 ,2 ,21,21,21,21,2 ,2 ,2 ],
+		[0 ,0 ,0 ,0 ,0 ,0 ,0 ,21,0 ,0 ,0 ,0 ,0 ,0 ,0 ,0 ,0 ,12,2 ,32,11,0 ,0 ,0 ,0 ,0 ,0 ,0 ,0 ],
+		[0 ,0 ,0 ,0 ,0 ,13,2 ,11,0 ,0 ,0 ,0 ,0 ,0 ,0 ,0 ,0 ,0 ,0 ,0 ,0 ,0 ,0 ,0 ,0 ,0 ,0 ,0 ,0 ],
 	])
+	
+	print(len(GameGlobal.action_stacks))
+	for i in range(len(GameGlobal.actions_ui)):
+		GameGlobal.actions_ui[i].queue_free()
+		
+	GameGlobal.action_stacks=[]
+	GameGlobal.actions_ui.clear()
+
 	
 	var action_load: PackedScene = load("res://actors/action/action.tscn")
 	var action = action_load.instantiate()
-	action.choose_an_random_action()
+	action.action = GameGlobal.ActionType.ROTATE_CLOCK
 	action.position = Vector2i(8,8)
-	GameGlobal.map.add_child(action)
+	GameGlobal.map.grid[8][2].action_holder.add_child(action)
+	
+	GameGlobal.spawn_enemy_on_tile(GameGlobal.map.grid[19][2])
