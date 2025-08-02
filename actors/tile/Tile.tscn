@@ -147,10 +147,6 @@ z_index = 2
 position = Vector2(16, 16)
 texture = SubResource("AtlasTexture_ewfg4")
 
-[node name="StaticBody2D" type="StaticBody2D" parent="."]
-unique_name_in_owner = true
-position = Vector2(16, 16)
-
 [node name="TileBigger" type="AnimationPlayer" parent="."]
 unique_name_in_owner = true
 libraries = {

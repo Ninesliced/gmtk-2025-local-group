@@ -1,4 +1,4 @@
-[gd_scene load_steps=23 format=3 uid="uid://s2om5ju6lrn"]
+[gd_scene load_steps=22 format=3 uid="uid://s2om5ju6lrn"]
 
 [ext_resource type="PackedScene" uid="uid://bkuf38ni4q62k" path="res://actors/tile/Tile.tscn" id="1_wv4m7"]
 [ext_resource type="Texture2D" uid="uid://dabe5dmwfsby2" path="res://assets/spritesheet.png" id="2_a8f14"]
@@ -121,9 +121,6 @@ animations = [{
 "speed": 5.0
 }]
 
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_76t4f"]
-size = Vector2(6.25, 6.25)
-
 [sub_resource type="GDScript" id="GDScript_i7in2"]
 script/source = "extends AudioStreamPlayer2D
 
@@ -137,9 +134,8 @@ func _on_area_body_entered(body: Node2D) -> void:
 	pass # Replace with function body.
 "
 
-[node name="Tile3" instance=ExtResource("1_wv4m7")]
-outline_min = null
-outline_max = null
+[node name="Tile4" instance=ExtResource("1_wv4m7")]
+outline_min = 0.1
 lock_rotation = true
 
 [node name="3DShader" parent="." index="1"]
@@ -157,23 +153,7 @@ sprite_frames = SubResource("SpriteFrames_pd3d8")
 [node name="RandomizeSprite" parent="3DShader/Sprite/Sprite2D" index="0" node_paths=PackedStringArray("sprite") instance=ExtResource("6_pgiy5")]
 sprite = NodePath("..")
 
-[node name="TopLeftShape" type="CollisionShape2D" parent="StaticBody2D" index="0"]
-position = Vector2(-12, -12)
-shape = SubResource("RectangleShape2D_76t4f")
-
-[node name="TopRightShape" type="CollisionShape2D" parent="StaticBody2D" index="1"]
-position = Vector2(12.125, -12.125)
-shape = SubResource("RectangleShape2D_76t4f")
-
-[node name="BottomLeftShape" type="CollisionShape2D" parent="StaticBody2D" index="2"]
-position = Vector2(-12, 12)
-shape = SubResource("RectangleShape2D_76t4f")
-
-[node name="BottomRightShape" type="CollisionShape2D" parent="StaticBody2D" index="3"]
-position = Vector2(12, 12)
-shape = SubResource("RectangleShape2D_76t4f")
-
-[node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="." index="6"]
+[node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="." index="2"]
 volume_db = 10.0
 script = SubResource("GDScript_i7in2")
 
