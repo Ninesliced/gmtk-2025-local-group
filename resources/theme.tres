@@ -4,7 +4,8 @@
 [ext_resource type="Texture2D" uid="uid://dh5ub6glbgkpc" path="res://assets/images/ui/rect/ninepatch.png" id="1_d4nwg"]
 
 [sub_resource type="FontVariation" id="FontVariation_d4nwg"]
-spacing_bottom = 3
+spacing_top = -8
+spacing_bottom = -2
 
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_7ct1h"]
 

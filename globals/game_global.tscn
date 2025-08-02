@@ -1,12 +1,13 @@
-[gd_scene load_steps=26 format=3 uid="uid://byxp1bvr3gl84"]
+[gd_scene load_steps=30 format=3 uid="uid://byxp1bvr3gl84"]
 
 [ext_resource type="Script" uid="uid://q581v4j3vmv4" path="res://globals/game_global.gd" id="1_gu6ii"]
 [ext_resource type="Texture2D" uid="uid://dgdfmi7kbpgg6" path="res://assets/images/actions/rotate.png" id="3_gc13h"]
 [ext_resource type="PackedScene" uid="uid://bi3akamp77mgs" path="res://globals/request/request.tscn" id="3_iovrn"]
 [ext_resource type="PackedScene" uid="uid://4laqtk44qchp" path="res://scenes/ui/actions_container.tscn" id="3_woeo0"]
-[ext_resource type="Script" path="res://globals/debug.gd" id="5_iovrn"]
+[ext_resource type="PackedScene" uid="uid://d1i466e3d6vcr" path="res://scenes/ui/game_over.tscn" id="4_q00l3"]
+[ext_resource type="Script" uid="uid://cb33l6hekcc2j" path="res://globals/debug.gd" id="5_iovrn"]
 [ext_resource type="Theme" uid="uid://c06a0wpkb3qyr" path="res://resources/theme.tres" id="6_6cuha"]
-[ext_resource type="PackedScene" path="res://scenes/ui/death_scene.tscn" id="7_opdgg"]
+[ext_resource type="PackedScene" uid="uid://yyv5brw5hlqn" path="res://scenes/ui/death_scene.tscn" id="7_opdgg"]
 [ext_resource type="AudioStream" uid="uid://crcfboaukdtof" path="res://assets/sfx/work/explode.ogg" id="8_l7e3u"]
 [ext_resource type="AudioStream" uid="uid://bpdsn3u7k4n8x" path="res://assets/sfx/work/explode_short.ogg" id="8_xofr3"]
 [ext_resource type="AudioStream" uid="uid://ct3kkknswudc0" path="res://assets/sfx/work/explode_long.ogg" id="9_672fk"]
@@ -81,7 +82,45 @@ func set_txt():
 	text = \"No clip \" + (\"on\" if DebugGlobal.no_clip else \"off\")
 "
 
+[sub_resource type="Animation" id="Animation_r0nu2"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("GameOver:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(45, -200)]
+}
+
+[sub_resource type="Animation" id="Animation_q00l3"]
+resource_name = "game_over"
+length = 0.25
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("GameOver:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.25),
+"transitions": PackedFloat32Array(0.535887, 1),
+"update": 0,
+"values": [Vector2(45, -200), Vector2(45, 21)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_r0nu2"]
+_data = {
+&"RESET": SubResource("Animation_r0nu2"),
+&"game_over": SubResource("Animation_q00l3")
+}
+
 [node name="GameGlobal" type="Node"]
+process_mode = 3
 script = ExtResource("1_gu6ii")
 action_stacks = Array[int]([0, 3, 2, 7])
 action_textures = Dictionary[int, Texture2D]({
@@ -102,16 +141,17 @@ action_textures = Dictionary[int, Texture2D]({
 
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
 unique_name_in_owner = true
-visible = false
 
 [node name="ActionsContainer" parent="CanvasLayer" instance=ExtResource("3_woeo0")]
 unique_name_in_owner = true
+visible = false
 offset_left = 3.0
 offset_top = 4.0
 offset_right = 3.0
 offset_bottom = 4.0
 
 [node name="debug" type="Control" parent="CanvasLayer"]
+visible = false
 layout_mode = 3
 anchors_preset = 0
 offset_right = 320.0
@@ -139,37 +179,56 @@ script = SubResource("GDScript_opdgg")
 
 [node name="Score" type="Label" parent="CanvasLayer"]
 unique_name_in_owner = true
+visible = false
 offset_right = 40.0
 offset_bottom = 23.0
 theme_override_font_sizes/font_size = 8
 text = "Score: 0"
+
+[node name="GameOver" parent="CanvasLayer" instance=ExtResource("4_q00l3")]
+offset_top = -290.0
+offset_bottom = -152.0
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="CanvasLayer"]
+unique_name_in_owner = true
+process_mode = 3
+libraries = {
+&"": SubResource("AnimationLibrary_r0nu2")
+}
+speed_scale = 0.5
 
 [node name="SoundEffects" type="Node" parent="."]
 
 [node name="ShortExplosionSoundEffect" type="AudioStreamPlayer" parent="SoundEffects"]
 unique_name_in_owner = true
 stream = ExtResource("8_xofr3")
-volume_db = -20.0
+volume_db = -30.0
 
 [node name="ExplosionSoundEffect" type="AudioStreamPlayer" parent="SoundEffects"]
 unique_name_in_owner = true
 stream = ExtResource("8_l7e3u")
-volume_db = -20.0
+volume_db = -35.0
 
 [node name="LongExplosionSoundEffect" type="AudioStreamPlayer" parent="SoundEffects"]
 unique_name_in_owner = true
 stream = ExtResource("9_672fk")
-volume_db = -20.0
+volume_db = -35.0
 
 [node name="SwapSoundEffect" type="AudioStreamPlayer" parent="SoundEffects"]
 unique_name_in_owner = true
 stream = ExtResource("11_lcri1")
-volume_db = -20.0
+volume_db = -35.0
 
 [node name="WolfSpawnSoundEffect" type="AudioStreamPlayer" parent="SoundEffects"]
 unique_name_in_owner = true
 stream = ExtResource("12_kyo4h")
-volume_db = -20.0
+volume_db = -30.0
 
 [connection signal="pressed" from="CanvasLayer/debug/Button" to="CanvasLayer/debug/Button" method="_on_pressed"]
 [connection signal="pressed" from="CanvasLayer/debug/Noclip" to="CanvasLayer/debug/Noclip" method="_on_pressed"]
+[connection signal="pressed" from="CanvasLayer/GameOver/Retry" to="." method="_on_retry_pressed"]
+[connection signal="pressed" from="CanvasLayer/GameOver/Menu" to="." method="_on_menu_pressed"]
+
+[editable path="CanvasLayer/GameOver"]
+[editable path="CanvasLayer/GameOver/VBoxContainer2/VBoxContainer"]
+[editable path="CanvasLayer/GameOver/VBoxContainer2/VBoxContainer2"]
