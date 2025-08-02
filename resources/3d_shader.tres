@@ -1,0 +1,12 @@
+[gd_resource type="ShaderMaterial" load_steps=3 format=3 uid="uid://cm10lunry34ui"]
+
+[ext_resource type="Shader" uid="uid://jkmh5ksc1ejd" path="res://actors/tile/tile3D.gdshader" id="1_8cob7"]
+[ext_resource type="Texture2D" uid="uid://3inqpne41gwy" path="res://assets/shader_texture_tile.png" id="2_bxwrn"]
+
+[resource]
+resource_local_to_scene = true
+shader = ExtResource("1_8cob7")
+shader_parameter/ground_cols = ExtResource("2_bxwrn")
+shader_parameter/number_of_ground_cols = 8
+shader_parameter/color_fill = Color(1, 1, 1, 1)
+shader_parameter/force = 0.0

@@ -30,7 +30,7 @@ void fragment() {
 
 	bool is_wall = match_color(COLOR.rgb, new_wall_col);
 
-	vec4 downPixel = texture(screen_texture,vec2(SCREEN_UV.x, SCREEN_UV.y + SCREEN_PIXEL_SIZE.y * 2.0));
+	vec4 downPixel = texture(screen_texture,vec2(SCREEN_UV.x, SCREEN_UV.y + SCREEN_PIXEL_SIZE.y * 20.0));
 
 	bool is_down_ground = match_color(downPixel.rgb, new_ground_col);
 

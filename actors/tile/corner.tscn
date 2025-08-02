@@ -84,6 +84,10 @@ size = Vector2(8.5, 6)
 script = ExtResource("2_r882n")
 outline_min = 0.1
 
+[node name="Area" parent="." index="0"]
+collision_layer = 9
+collision_mask = 1
+
 [node name="3DShader" parent="." index="1"]
 material = SubResource("ShaderMaterial_mbmep")
 
@@ -91,6 +95,9 @@ material = SubResource("ShaderMaterial_mbmep")
 material = SubResource("ShaderMaterial_7864f")
 sprite_frames = SubResource("SpriteFrames_73myc")
 animation = &"winter"
+
+[node name="Outline" parent="." index="2"]
+z_index = 0
 
 [node name="TOP" type="CollisionShape2D" parent="StaticBody2D" index="0"]
 position = Vector2(0, -12.5)
