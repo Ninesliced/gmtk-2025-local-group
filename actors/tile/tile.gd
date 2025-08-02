@@ -294,12 +294,19 @@ func transform_to_another_type(new_tile: PackedScene, play_animation: bool = tru
 	queue_free()
 	return tile_instance
 	
-var equivalance_pos_tile: Dictionary = {
+var equivalance_pos_tile_classique: Dictionary = {
 	"1111": load("res://actors/tile/full.tscn"),
 	"1000": load("res://actors/tile/t.tscn"),
 	"1010": load("res://actors/tile/line.tscn"),
 	"1100": load("res://actors/tile/corner.tscn"),
 	"0000": load("res://actors/tile/four.tscn")
+}
+var equivalance_pos_tile_spike: Dictionary = {
+	"1111": load("res://actors/tile/spike/full_spike.tscn"),
+	"1000": load("res://actors/tile/spike/t_spike.tscn"),
+	"1010": load("res://actors/tile/spike/line_spike.tscn"),
+	"1100": load("res://actors/tile/spike/corner_spike.tscn"),
+	"0000": load("res://actors/tile/spike/four_spike.tscn")
 }
 var equivalance_tile_pos: Dictionary = {
 	# 1 c'est un mur
@@ -307,7 +314,12 @@ var equivalance_tile_pos: Dictionary = {
 	"TTile": "1000",
 	"LineTile": "1010",
 	"CornerTile": "1100",
-	"FourTile": "0000"
+	"FourTile": "0000",
+	"FullSpikeTile": "1111",
+	"TSpikeTile": "1000",
+	"LineSpikeTile": "1010",
+	"CornerSpikeTile": "1100",
+	"FourSpikeTile": "0000"
 }
 
 
@@ -325,11 +337,10 @@ func transform_with_1ddl_less(direction: Rotation, play_animation: bool = true) 
 		print("Player is still inside the tile, cannot transform")
 		return null
 	 
-	print("---------------------")
-	print(tileName, tile_rotation, direction)
+	var is_spike = "Spike" in tileName
+	var equivalance_pos_tile = equivalance_pos_tile_spike if is_spike else equivalance_pos_tile_classique
 	
 	if tileName not in equivalance_tile_pos.keys():
-		print("Not found")
 		var tile: Tile = transform_to_another_type(GameGlobal.map.tiles[GameGlobal.rng.randi() % GameGlobal.map.tiles.size()])
 		tile.tile_rotation = randi() % 4
 		return tile
@@ -337,7 +348,6 @@ func transform_with_1ddl_less(direction: Rotation, play_animation: bool = true) 
 	var encodage = equivalance_tile_pos[tileName]
 	var direction_to_depop = (direction - tile_rotation + 8) % 4
 
-	print("encodage before ", encodage, " dir to depop ", direction_to_depop)
 	if direction_to_depop == Rotation.UP:
 		encodage[0] = "1"
 	elif direction_to_depop == Rotation.RIGHT:
@@ -346,9 +356,8 @@ func transform_with_1ddl_less(direction: Rotation, play_animation: bool = true) 
 		encodage[2] = "1"
 	elif direction_to_depop == Rotation.LEFT:
 		encodage[3] = "1"
-	print("encodage after  ", encodage)
 	if encodage.count("1") >= 3:
-		var tile = transform_to_another_type(load("res://actors/tile/full.tscn"), true) 
+		var tile = transform_to_another_type(equivalance_pos_tile["1111"], true) 
 		return tile
 		
 	for rot in range(4):
@@ -357,12 +366,11 @@ func transform_with_1ddl_less(direction: Rotation, play_animation: bool = true) 
 			var tile = transform_to_another_type(to_load_tile, false, (tile_rotation - rot + 8) % 4)
 			# ation = rot
 			# tile.tile_rotation = (0 - rot) % 4
-			print("Transformet to ", tile.tileName)
 			return tile
 
 		encodage = rotate_right_by_one(encodage)
-	print("Not found rotation")
 
+	print("Error: Not found rotation")
 	"""var tile_instance: Tile = new_tile.instantiate()
 	tile_instance.position = position
 	tile_instance.grid_position = grid_position

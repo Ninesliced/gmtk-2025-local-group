@@ -1,6 +1,6 @@
 [gd_scene load_steps=10 format=3 uid="uid://di4xkcr017rao"]
 
-[ext_resource type="PackedScene" uid="uid://lch1hj6crvy8" path="res://actors/tile/spike/spike.tscn" id="1_oo1da"]
+[ext_resource type="PackedScene" uid="uid://lch1hj6crvy8" path="res://actors/tile/spike.tscn" id="1_oo1da"]
 [ext_resource type="Shader" uid="uid://jkmh5ksc1ejd" path="res://actors/tile/tile3D.gdshader" id="2_8wj2q"]
 [ext_resource type="Script" uid="uid://ce2uosu7lyhy1" path="res://actors/tile/spike/t_spike.gd" id="2_blqgg"]
 [ext_resource type="Shader" uid="uid://birv8v71nvo3v" path="res://addons/shaker/components/vfx/shaders/fill_color.gdshader" id="3_blqgg"]
@@ -37,6 +37,7 @@ animations = [{
 [node name="Spike2" instance=ExtResource("1_oo1da")]
 script = ExtResource("2_blqgg")
 lock_rotation = false
+tileName = "TSpikeTile"
 
 [node name="3DShader" parent="." index="1"]
 material = SubResource("ShaderMaterial_aj634")
@@ -44,3 +45,4 @@ material = SubResource("ShaderMaterial_aj634")
 [node name="Sprite" parent="3DShader" index="0"]
 material = SubResource("ShaderMaterial_4miwl")
 sprite_frames = SubResource("SpriteFrames_aj634")
+animation = &"default"
