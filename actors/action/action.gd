@@ -19,6 +19,7 @@ func _on_area_2d_area_entered(area: Area2D) -> void:
 	queue_free()
 """
 
+
 func _on_area_2d_body_entered(player: Node2D) -> void:
 	if deleting:
 		return
@@ -37,6 +38,8 @@ func _on_area_2d_body_entered(player: Node2D) -> void:
 
 	animation_player.play("consume")
 	await animation_player.animation_finished
+	
+	player._play_item_take_sound_effect()
 	
 	queue_free()
 
