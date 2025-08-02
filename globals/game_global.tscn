@@ -163,7 +163,7 @@ volume_db = -35.0
 [node name="SwapSoundEffect" type="AudioStreamPlayer" parent="SoundEffects"]
 unique_name_in_owner = true
 stream = ExtResource("11_lcri1")
-volume_db = -30.0
+volume_db = -35.0
 
 [connection signal="pressed" from="CanvasLayer/debug/Button" to="CanvasLayer/debug/Button" method="_on_pressed"]
 [connection signal="pressed" from="CanvasLayer/debug/Noclip" to="CanvasLayer/debug/Noclip" method="_on_pressed"]
