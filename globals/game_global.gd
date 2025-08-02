@@ -2,7 +2,7 @@ extends Node
 
 signal on_action_stack_changed
 signal on_action
-
+var in_menu: bool = false
 const ENEMY = preload("res://actors/enemy/enemy.tscn")
 @onready var canvas_layer: CanvasLayer = %CanvasLayer
 @export var action_stacks : Array[ActionType] = [
@@ -27,6 +27,8 @@ const ENEMY = preload("res://actors/enemy/enemy.tscn")
 
 var action_stack_backup = action_stacks.duplicate()
 var action_ui_stacks : Array[ActionUI] = []
+
+var hovered_tile: Tile = null
 
 ## include movement of player
 signal on_player_action
@@ -156,7 +158,7 @@ var dict: Dictionary[ActionType, Dictionary] = {
 		"on_get_function": delete_current_action,
 		"temporary": true,
 		"action_zone": [],
-		"probability": 0.0
+		"probability": 0.01
 	},
 	ActionType.VERTICAL_SPIKE: {
 		"name": "VERTICAL SPIKE",
@@ -232,7 +234,7 @@ func rotate_counter_clock(tile: Tile, event: InputEvent) -> void:
 	pass
 
 func transform_empty(tile: Tile, event: InputEvent) -> void:
-	tile.transform_to_another_type(load("res://actors/tile/four.tscn"))
+	tile.transform_to_another_type(load("res://actors/tile/cursed_four.tscn"))
 
 func transform_empty_cursed(tile: Tile, event: InputEvent) -> void:
 	var grid_pos = tile.grid_position
@@ -315,12 +317,14 @@ func spawn_vertical_spikes(tile: Tile, event: InputEvent) -> void:
 		new_tile.tile_bigger.play_full(0.1)
 
 func delete_current_action() -> void:
-	print("Delete current Action")
-	GameGlobal.action_stacks.pop_front()
+	var to_remove_action = GameGlobal.action_stacks.pop_front()
 	var action_ui = GameGlobal.action_ui_stacks.pop_front()
 	action_ui.queue_free()
 	# if action_stacks.size() == 0:
 	_update_size()
+	on_action_stack_changed.emit()
+	hovered_tile.on_action(to_remove_action)
+	
 
 # No operation
 func nop(_tile: Tile, _event: InputEvent):

@@ -105,6 +105,12 @@ func move_player(move_direction: Vector2i) -> void:
 	
 	walk_sound_effect.pitch_scale = randf_range(0.8, 1.3)
 	walk_sound_effect.play()
+	
+	# Update outline
+	var hovered_tile = GameGlobal.hovered_tile
+	if hovered_tile:
+		hovered_tile.on_action(GameGlobal.action_stacks[0])
+	
 
 
 func update_position():

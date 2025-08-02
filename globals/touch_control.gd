@@ -4,10 +4,10 @@ var start_touch_pos := Vector2.ZERO
 var is_dragging := false
 const DRAG_THRESHOLD := 20.0
 
-func _input(event):        # not _gui_event() ?
-	# print(event)
+func _input(event): 
+	if GameGlobal.in_menu:
+		return
 	if event is InputEventMouseButton and event.pressed:
-		print("get_triggered")
 		accept_event()
 	if event is InputEventMouseButton:
 		if event.pressed:
@@ -26,7 +26,7 @@ func _input(event):        # not _gui_event() ?
 					else:
 						move_direction = Vector2i(0, -1 if direction.y > 0 else 1)
 					print(move_direction)
-					GameGlobal.player.movementComponent.move_player(move_direction)
+					GameGlobal.player.get_movement_component().move_player(move_direction)
 			start_touch_pos = Vector2.ZERO
 
 
