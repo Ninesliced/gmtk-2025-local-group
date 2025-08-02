@@ -38,8 +38,7 @@ enabled=PackedStringArray("res://addons/shaker/plugin.cfg")
 
 [gui]
 
-theme/custom_font="res://resources/monogram.ttf"
-
+theme/custom_font="res://assets/fonts/thin_sans.ttf"
 [input]
 
 left={

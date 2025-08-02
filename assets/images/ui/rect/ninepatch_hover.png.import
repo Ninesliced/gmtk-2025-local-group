@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://bctfrsdt4tj3f"
-path="res://.godot/imported/ninepatch2.png-58d86a103ddbba84cecafd5641d3282e.ctex"
+uid="uid://6p5kfxtb28n4"
+path="res://.godot/imported/ninepatch_hover.png-75c8a4e9b518b3c3c723ecbe538395e3.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/ui/rect/ninepatch2.png"
-dest_files=["res://.godot/imported/ninepatch2.png-58d86a103ddbba84cecafd5641d3282e.ctex"]
+source_file="res://assets/images/ui/rect/ninepatch_hover.png"
+dest_files=["res://.godot/imported/ninepatch_hover.png-75c8a4e9b518b3c3c723ecbe538395e3.ctex"]
 
 [params]
 

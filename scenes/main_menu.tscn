@@ -32,29 +32,13 @@ grow_horizontal = 2
 grow_vertical = 2
 alignment = 1
 
-[node name="Control" type="Panel" parent="HBoxContainer"]
+[node name="Play" parent="HBoxContainer" instance=ExtResource("1_ekxnf")]
 layout_mode = 2
-size_flags_vertical = 3
-
-[node name="Play" parent="HBoxContainer/Control" instance=ExtResource("1_ekxnf")]
-layout_mode = 2
-offset_top = 4.0
-offset_right = 128.0
-offset_bottom = 32.0
-grow_horizontal = 2
-grow_vertical = 2
 script = ExtResource("2_ekxnf")
 
-[node name="Control2" type="Control" parent="HBoxContainer"]
+[node name="Quit" parent="HBoxContainer" instance=ExtResource("1_ekxnf")]
 layout_mode = 2
-size_flags_vertical = 3
-
-[node name="Quit" parent="HBoxContainer/Control2" instance=ExtResource("1_ekxnf")]
-layout_mode = 2
-offset_top = 4.0
-offset_right = 128.0
-offset_bottom = 32.0
 text = "Quit"
 
-[connection signal="pressed" from="HBoxContainer/Control/Play" to="." method="_on_play_pressed"]
-[connection signal="pressed" from="HBoxContainer/Control2/Quit" to="." method="_on_quit_pressed"]
+[connection signal="pressed" from="HBoxContainer/Play" to="." method="_on_play_pressed"]
+[connection signal="pressed" from="HBoxContainer/Quit" to="." method="_on_quit_pressed"]
