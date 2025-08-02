@@ -50,6 +50,7 @@ animations = [{
 [node name="Tile4" instance=ExtResource("1_rwwjv")]
 outline_min = 0.1
 lock_rotation = true
+tileName = null
 
 [node name="CursedComponent" type="Node" parent="." index="1" node_paths=PackedStringArray("area")]
 script = ExtResource("5_fb66d")
