@@ -106,6 +106,7 @@ walk_sound_effect = NodePath("WalkSoundEffect")
 
 [node name="WalkSoundEffect" type="AudioStreamPlayer2D" parent="MovementComponent"]
 stream = ExtResource("11_hiosj")
+volume_db = -15.0
 
 [node name="ActionUI" parent="." instance=ExtResource("8_a744p")]
 modulate = Color(1, 1, 1, 0.690196)
