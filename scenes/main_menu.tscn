@@ -1,8 +1,8 @@
-[gd_scene load_steps=5 format=3 uid="uid://72csgcoeo0nv"]
+[gd_scene load_steps=5 format=3 uid="uid://bvbyb8jdqjcei"]
 
-[ext_resource type="Script" uid="uid://tk3v0572hok5" path="res://scenes/main_menu.gd" id="1_bqqt6"]
+[ext_resource type="Script" path="res://scenes/main_menu.gd" id="1_bqqt6"]
 [ext_resource type="PackedScene" uid="uid://d2i4w4joysljq" path="res://scenes/ui/button.tscn" id="1_ekxnf"]
-[ext_resource type="Script" uid="uid://dhy4wxhaj8mpg" path="res://scenes/ui/button.gd" id="2_ekxnf"]
+[ext_resource type="Script" path="res://scenes/ui/button.gd" id="2_ekxnf"]
 [ext_resource type="PackedScene" uid="uid://cqwxuni5qjhvu" path="res://scenes/main.tscn" id="2_wu84c"]
 
 [node name="MainMenu" type="Control"]
@@ -32,29 +32,13 @@ grow_horizontal = 2
 grow_vertical = 2
 alignment = 1
 
-[node name="Control" type="Panel" parent="HBoxContainer"]
+[node name="Play" parent="HBoxContainer" instance=ExtResource("1_ekxnf")]
 layout_mode = 2
-size_flags_vertical = 3
-
-[node name="Play" parent="HBoxContainer/Control" instance=ExtResource("1_ekxnf")]
-layout_mode = 2
-offset_top = 4.0
-offset_right = 128.0
-offset_bottom = 32.0
-grow_horizontal = 2
-grow_vertical = 2
 script = ExtResource("2_ekxnf")
 
-[node name="Control2" type="Control" parent="HBoxContainer"]
+[node name="Quit" parent="HBoxContainer" instance=ExtResource("1_ekxnf")]
 layout_mode = 2
-size_flags_vertical = 3
-
-[node name="Quit" parent="HBoxContainer/Control2" instance=ExtResource("1_ekxnf")]
-layout_mode = 2
-offset_top = 4.0
-offset_right = 128.0
-offset_bottom = 32.0
 text = "Quit"
 
-[connection signal="pressed" from="HBoxContainer/Control/Play" to="." method="_on_play_pressed"]
-[connection signal="pressed" from="HBoxContainer/Control2/Quit" to="." method="_on_quit_pressed"]
+[connection signal="pressed" from="HBoxContainer/Play" to="." method="_on_play_pressed"]
+[connection signal="pressed" from="HBoxContainer/Quit" to="." method="_on_quit_pressed"]

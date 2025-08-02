@@ -244,12 +244,10 @@ func rotate_clock(tile: Tile, event: InputEvent) -> void:
 func rotate_counter_clock(tile: Tile, event: InputEvent) -> void:
 	tile.rotate_counter_clock()
 
+func transform_empty(tile: Tile, event: InputEvent) -> Tile:
+	return tile.transform_to_another_type(load("res://actors/tile/cursed_four.tscn"))
 
-func transform_empty(tile: Tile, event: InputEvent) -> void:
-	tile.is_changeable = true
-	tile.transform_to_another_type(load("res://actors/tile/cursed_four.tscn"))
-
-
+## ultimate carrot
 func transform_empty_cursed(tile: Tile, event: InputEvent) -> void:
 	var grid_pos = tile.grid_position
 	
@@ -257,22 +255,27 @@ func transform_empty_cursed(tile: Tile, event: InputEvent) -> void:
 	
 	for i in range(0, 4):
 		var current_tile: Tile = map.grid[(grid_pos.x + i) % map.grid_size.x][grid_pos.y]
+		current_tile.is_changeable = true
 		transform_empty(current_tile, event)
 		await get_tree().create_timer(0.1).timeout
 
 
 func transform_cross(tile: Tile, event: InputEvent) -> void:
+	var list_random = [0,0,0,0,1,1,1,2,2]
+	list_random.shuffle()
+
 	for i in range(-1,2):
 		for j in range(-1,2):
 			var current_tile = map.grid[(tile.grid_position.x+i)%map.grid_size.x][(tile.grid_position.y+j)%map.grid_size.y]
-			var rnd = rng.randi_range(0,1)
+			var pop = list_random.pop_front()
 			var new_tile: Tile = null
-			match rnd:
+			match pop:
+				1:
+					new_tile = current_tile.transform_to_another_type(load("res://actors/tile/cursed_four.tscn"), false)
 				0:
 					new_tile = current_tile.transform_to_another_type(load("res://actors/tile/four.tscn"), false)
-				1:
+				2:
 					new_tile = current_tile.transform_to_another_type(load("res://actors/tile/full.tscn"), false)
-
 			if new_tile && new_tile.tile_bigger:
 				new_tile.tile_bigger.play_full(abs((-i) * 0.1 + (-j) * 0.1))
 				

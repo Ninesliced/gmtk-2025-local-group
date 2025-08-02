@@ -1,4 +1,4 @@
-[gd_scene load_steps=23 format=3 uid="uid://5x8ludb4a3gs"]
+[gd_scene load_steps=24 format=3 uid="uid://5x8ludb4a3gs"]
 
 [ext_resource type="PackedScene" uid="uid://bkuf38ni4q62k" path="res://actors/tile/Tile.tscn" id="1_fm2mu"]
 [ext_resource type="Script" uid="uid://ck4alt5qsfjf7" path="res://actors/tile/full.gd" id="2_1oojr"]
@@ -128,10 +128,14 @@ animations = [{
 "speed": 5.0
 }]
 
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_fm2mu"]
+size = Vector2(32, 31)
+
 [node name="Tile4" instance=ExtResource("1_fm2mu")]
 script = ExtResource("2_1oojr")
 is_changeable = false
 is_action_spawnable = false
+tileName = "FullTile"
 lock_rotation = true
 
 [node name="3DShader" parent="." index="1"]
