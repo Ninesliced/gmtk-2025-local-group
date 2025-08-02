@@ -109,6 +109,11 @@ func update_position():
 		translation_animation(target_position)
 	else:
 		parent.position = target_position
+		is_moving = true
+		var tween = create_tween()
+		tween.tween_interval(0.2)
+		tween.tween_callback(stop_movement)
+
 
 func translation_animation(target_position: Vector2) -> void:
 	var tween: Tween = create_tween()
