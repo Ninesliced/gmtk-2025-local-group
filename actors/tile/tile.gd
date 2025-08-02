@@ -34,8 +34,15 @@ var outline_tween: Tween = null
 @export var is_changeable := true
 @export var tile_rotation : Rotation = Rotation.UP : 
 	set(new_rotation):
+		if tile_rotation == new_rotation: # i.e. no rotation change
+			idle_rotation_sound_effect.play()
+		else:
+			rotation_sound_effect.play()
+			rotation_sound_effect.pitch_scale = randf_range(0.6, 1.0)
+		
 		if lock_rotation:
 			return
+
 		# var clockwise = x > tile_rotation
 		# var new_rotation = x
 		# if not is_inside_tree():
@@ -44,12 +51,6 @@ var outline_tween: Tween = null
 			rotate_animated(new_rotation)
 		else:
 			%Sprite.rotation = PI / 2 * new_rotation
-
-		if tile_rotation == new_rotation: # i.e. no rotation change
-			idle_rotation_sound_effect.play()
-		else:
-			rotation_sound_effect.play()
-			rotation_sound_effect.pitch_scale = randf_range(0.6, 1.0)
 		
 		tile_rotation = new_rotation % 4
 
