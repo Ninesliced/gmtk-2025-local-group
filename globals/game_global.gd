@@ -188,6 +188,16 @@ func _ready():
 	GameGlobal.on_action_stack_changed.connect(_update_size)
 
 
+func _play_explosion_sound_effect():
+	%ExplosionSoundEffect.pitch_scale = randf_range(0.7, 1.2)
+	%ExplosionSoundEffect.play()
+	
+
+func _play_long_explosion_sound_effect():
+	%LongExplosionSoundEffect.pitch_scale = randf_range(0.7, 1.2)
+	%LongExplosionSoundEffect.play()
+
+
 func act_tile(tile: Tile, event: InputEvent) -> void:
 	if action_stacks.size() == 0:
 		_update_size()
@@ -229,12 +239,10 @@ func rotate_clock(tile: Tile, event: InputEvent) -> void:
 		tile.rotate_counter_clock()
 	else:
 		tile.rotate_clock()
-	pass
 
 
 func rotate_counter_clock(tile: Tile, event: InputEvent) -> void:
 	tile.rotate_counter_clock()
-	pass
 
 
 func transform_empty(tile: Tile, event: InputEvent) -> void:
@@ -244,6 +252,9 @@ func transform_empty(tile: Tile, event: InputEvent) -> void:
 
 func transform_empty_cursed(tile: Tile, event: InputEvent) -> void:
 	var grid_pos = tile.grid_position
+	
+	_play_long_explosion_sound_effect()
+	
 	for i in range(0, 4):
 		var current_tile: Tile = map.grid[(grid_pos.x + i) % map.grid_size.x][grid_pos.y]
 		transform_empty(current_tile, event)
@@ -264,6 +275,8 @@ func transform_cross(tile: Tile, event: InputEvent) -> void:
 
 			if new_tile && new_tile.tile_bigger:
 				new_tile.tile_bigger.play_full(abs((-i) * 0.1 + (-j) * 0.1))
+				
+	_play_explosion_sound_effect()
 
 
 func transform_empty_bomb(tile: Tile, event: InputEvent) -> void:
@@ -273,6 +286,8 @@ func transform_empty_bomb(tile: Tile, event: InputEvent) -> void:
 			var new_tile: Tile = current_tile.transform_to_another_type(load("res://actors/tile/four.tscn"), false)
 			if new_tile && new_tile.tile_bigger:
 				new_tile.tile_bigger.play_full((i+1) * 0.1 + (j+1) * 0.1)
+
+	_play_explosion_sound_effect()
 
 
 func horizontal_swap(tile: Tile, event: InputEvent) -> void:
@@ -300,6 +315,8 @@ func spawn_enemy(tile: Tile, event: InputEvent) -> void:
 	enemy.target = player
 	player.get_parent().add_child(enemy)
 	enemy.grid_position = tile.grid_position
+	
+	_play_explosion_sound_effect()
 
 
 func spawn_vertical_spikes(tile: Tile, event: InputEvent) -> void:
@@ -326,7 +343,7 @@ func spawn_vertical_spikes(tile: Tile, event: InputEvent) -> void:
 	if new_tile && new_tile.tile_bigger:
 		new_tile.tile_bigger.play_full(0.1)
 		
-	%ExplosionSoundEffect.play()
+	_play_explosion_sound_effect()
 
 
 func delete_current_action() -> void:
