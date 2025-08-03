@@ -5,6 +5,8 @@ class_name MainMenu
 @export var main_menu_scene: PackedScene
 @onready var play_button: Button = %PlayButton
 @onready var request: Node2D = $Request
+@onready var play_seed_of_the_day: Button = %PlaySeedOfTheDay
+
 var seed_of_the_day: String = ""
 
 @onready var leaderboards: Array[HBoxContainer] = [%Leaderboard, %Leaderboard2, %Leaderboard3, %Leaderboard4, %Leaderboard5]
@@ -12,8 +14,8 @@ var seed_of_the_day: String = ""
 @onready var hbox_container: VBoxContainer = $HBoxContainer
 func _ready():
 	UIManager.first_unclosable = true
+	UIManager._stack.clear() # HACK
 	UIManager.set_ui(hbox_container, play_button)
-	%PlaySeedOfTheDay.disabled
 
 func _on_play_pressed():
 	UIManager.set_ui(play)
