@@ -566,3 +566,11 @@ func go_to_main_menu():
 	%ActionsContainer.hide()
 	%CanvasLayer.hide()
 	GameGlobal.music_manager.calfed = true
+
+
+func _on_music_volume_slider_value_changed(value: float) -> void:
+	AudioServer.set_bus_volume_linear(1, value / 100.)
+
+
+func _on_sfx_volume_slider_value_changed(value: float) -> void:
+	AudioServer.set_bus_volume_linear(2, value / 100.)

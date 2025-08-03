@@ -47,6 +47,8 @@ animation = &"default"
 
 [node name="RotationSoundEffect" parent="." index="6"]
 volume_db = -30.0
+bus = &"Master"
 
 [node name="IdleRotationSoundEffect" parent="." index="7"]
 volume_db = -35.0
+bus = &"Master"

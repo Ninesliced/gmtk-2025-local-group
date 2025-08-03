@@ -1,0 +1,3 @@
+[gd_scene format=3 uid="uid://dfv54kvhrr4g7"]
+
+[node name="VerticalSlider" type="VSlider"]
