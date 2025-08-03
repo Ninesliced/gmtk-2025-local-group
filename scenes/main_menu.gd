@@ -17,6 +17,8 @@ func _ready():
 	UIManager._stack.clear() # HACK
 	UIManager.set_ui(hbox_container, play_button)
 	%Username.text = GameGlobal.username
+	if GameGlobal.username != "":
+		play_seed_of_the_day.is_username_valid = true
 	if !GameGlobal.is_seed_of_the_day and GameGlobal.is_user_seed:
 		%SeedInput.text = GameGlobal.rng_seed
 		
