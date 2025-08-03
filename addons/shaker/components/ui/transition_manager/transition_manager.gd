@@ -19,10 +19,10 @@ func change_scene(packed_scene: PackedScene, start="fade", end=null, speed=2.5) 
 	animation_player.speed_scale = old_speed
 
 
-func reload_scene(start="fade", end=null) -> void:
+func reload_scene(start="fade", end=null, speed=2.5) -> void:
 	var current_scene = get_tree().current_scene
 	if current_scene:	
 		var packed_scene = current_scene.scene_file_path
 		var packed_scene_resource = load(packed_scene)
 		if packed_scene_resource:
-			change_scene(packed_scene_resource, start, end)
+			change_scene(packed_scene_resource, start, end, speed)
