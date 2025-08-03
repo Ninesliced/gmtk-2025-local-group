@@ -427,7 +427,8 @@ var actions_ui: Array[ActionUI] = []
 
 func _update_size() -> void:
 	if actions_ui.size() == 0:
-		add_action(ActionType.ROTATE_CLOCK, new_action_ui(ActionType.ROTATE_CLOCK))
+		return
+		# add_action(ActionType.ROTATE_CLOCK, new_action_ui(ActionType.ROTATE_CLOCK))
 	var last_ui: ActionUI = actions_ui[actions_ui.size() - 1]
 	last_ui.animation_player.play("pop")
 	last_ui.position.x = (actions_ui.size() + 1) * (16 + gap)

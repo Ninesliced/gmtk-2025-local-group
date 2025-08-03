@@ -16,10 +16,10 @@ func _ready():
 	for i in range(len(GameGlobal.actions_ui)):
 		GameGlobal.actions_ui[i].queue_free()
 		
-	GameGlobal.action_stacks=[]
+	GameGlobal.action_stacks.clear()
 	GameGlobal.actions_ui.clear()
 
-	
+	GameGlobal.on_action_stack_changed.emit()
 	var action_load: PackedScene = load("res://actors/action/action.tscn")
 	var action = action_load.instantiate()
 	action.action = GameGlobal.ActionType.ROTATE_CLOCK

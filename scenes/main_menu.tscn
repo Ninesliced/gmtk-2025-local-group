@@ -15,7 +15,7 @@
 [ext_resource type="Texture2D" uid="uid://dv03djiyk4tok" path="res://assets/images/ui/rect/play.png" id="12_flqon"]
 [ext_resource type="Texture2D" uid="uid://dtyov2htrcqvk" path="res://assets/images/ui/rect/play_pressed.png" id="13_7b55j"]
 [ext_resource type="PackedScene" uid="uid://g63ms4dlkya7" path="res://scenes/ui/tile_grid_ui.tscn" id="14_1ajci"]
-[ext_resource type="Script" uid="uid://17dmnltu11in" path="res://scenes/play_seed_of_the_day.gd" id="16_5pajh"]
+[ext_resource type="Script" path="res://scenes/play_seed_of_the_day.gd" id="16_5pajh"]
 
 [sub_resource type="Shader" id="Shader_7b55j"]
 code = "shader_type canvas_item;
@@ -108,7 +108,6 @@ main_menu_scene = ExtResource("2_wu84c")
 
 [node name="HBoxContainer" type="VBoxContainer" parent="."]
 unique_name_in_owner = true
-visible = false
 z_index = 50
 layout_mode = 1
 anchors_preset = 8
@@ -129,6 +128,13 @@ unique_name_in_owner = true
 layout_mode = 2
 script = ExtResource("2_ekxnf")
 
+[node name="TutorialButton" parent="HBoxContainer" instance=ExtResource("1_ekxnf")]
+unique_name_in_owner = true
+layout_mode = 2
+text = "Tutorial
+"
+script = ExtResource("2_ekxnf")
+
 [node name="Quit" parent="HBoxContainer" instance=ExtResource("1_ekxnf")]
 layout_mode = 2
 text = "Quit"
@@ -146,6 +152,7 @@ color = Color(0.14, 0.1204, 0.1302, 0.615686)
 
 [node name="Play" type="Control" parent="."]
 unique_name_in_owner = true
+visible = false
 z_index = 100
 layout_mode = 1
 anchors_preset = 15
@@ -342,6 +349,7 @@ theme = SubResource("Theme_lgwnu")
 text = "Play"
 
 [connection signal="pressed" from="HBoxContainer/PlayButton" to="." method="_on_play_pressed"]
+[connection signal="pressed" from="HBoxContainer/TutorialButton" to="." method="_on_tutorial_button_pressed"]
 [connection signal="pressed" from="HBoxContainer/Quit" to="." method="_on_quit_pressed"]
 [connection signal="text_changed" from="Play/Container/HBoxContainer/right/SeedOfTheDay/VBoxContainer/NinePatchRect2/Username" to="." method="_on_username_text_changed"]
 [connection signal="text_changed" from="Play/Container/HBoxContainer/right/SeedOfTheDay/VBoxContainer/NinePatchRect2/Username" to="Play/Container/HBoxContainer/right/SeedOfTheDay/VBoxContainer/PlaySeedOfTheDay" method="_on_username_text_changed"]

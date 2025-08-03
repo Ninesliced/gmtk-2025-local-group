@@ -10,4 +10,5 @@ func animation_pop() -> void:
 		animation_player.play("pop")
 
 func set_texture_rect(texture: Texture2D) -> void:
+	print("set_texture_rect", texture)
 	%TextureRect.texture = texture

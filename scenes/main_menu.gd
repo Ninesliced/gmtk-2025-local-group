@@ -8,7 +8,7 @@ class_name MainMenu
 @onready var play_seed_of_the_day: Button = %PlaySeedOfTheDay
 
 var seed_of_the_day: String = ""
-
+@export var tutorial_scene: PackedScene = preload("res://scenes/tuto.tscn")
 @onready var leaderboards: Array[HBoxContainer] = [%Leaderboard, %Leaderboard2, %Leaderboard3, %Leaderboard4, %Leaderboard5]
 
 @onready var hbox_container: VBoxContainer = $HBoxContainer
@@ -51,3 +51,8 @@ func _on_play_seed_of_the_day_pressed() -> void:
 	if GameGlobal.username == "":
 		GameGlobal.username = "Noob"
 	TransitionManager.change_scene(main_menu_scene, "circle_gradient", null, 1.0)
+
+
+func _on_tutorial_button_pressed():
+	TransitionManager.change_scene(tutorial_scene, "circle_gradient", null, 1.0)
+	pass # Replace with function body.

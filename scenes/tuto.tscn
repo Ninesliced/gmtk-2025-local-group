@@ -1,4 +1,4 @@
-[gd_scene load_steps=10 format=3 uid="uid://ccbddjuw4fas3"]
+[gd_scene load_steps=10 format=3 uid="uid://buqpwp1x5wddy"]
 
 [ext_resource type="PackedScene" uid="uid://bptay3un6robe" path="res://scenes/mobile/touch_control.tscn" id="1_kisrk"]
 [ext_resource type="Script" uid="uid://b5n4nspk7bk7w" path="res://scenes/tuto.gd" id="1_onjet"]
