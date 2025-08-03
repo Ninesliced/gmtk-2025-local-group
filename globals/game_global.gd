@@ -184,9 +184,6 @@ var dict: Dictionary[ActionType, Dictionary] = {
 
 
 func _ready():
-	
-	print("test: ", action_stacks)
-
 	# Action UI
 	for action in GameGlobal.action_stacks:
 		var action_ui: ActionUI = action_ui_scene.instantiate()

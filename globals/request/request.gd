@@ -57,9 +57,7 @@ func _on_get_rank_completed(result, response_code, headers, body):
 	if response_code != 200:
 		return
 	var json = JSON.parse_string(body.get_string_from_utf8())
-	print(json["score"])
 
 func _on_submit_completed(result, response_code, headers, body):
 	if response_code != 200:
 		return
-	print("OK")

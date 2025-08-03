@@ -21,5 +21,5 @@ func set_current_action():
 		return
 	action_ui.animation_pop()
 	var texture = GameGlobal.action_textures[GameGlobal.action_stacks[0]]
-	print("Current action texture: ",action_ui.texture_rect)
+	# print("Current action texture: ",action_ui.texture_rect)
 	action_ui.set_texture_rect(texture)
