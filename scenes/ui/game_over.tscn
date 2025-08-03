@@ -1,9 +1,9 @@
-[gd_scene load_steps=5 format=3 uid="uid://bi4gq7xlh8bub"]
+[gd_scene load_steps=5 format=3 uid="uid://dcpdvruld4hl2"]
 
 [ext_resource type="Texture2D" uid="uid://3tdc4o7fiqnb" path="res://assets/images/ui/rect/right_panel.png" id="1_vfrx6"]
 [ext_resource type="PackedScene" uid="uid://inym5effhr3j" path="res://scenes/ui/text_value.tscn" id="2_o6b8n"]
 [ext_resource type="Texture2D" uid="uid://casoc1bifairv" path="res://assets/images/ui/rect/seed_rect.png" id="3_4583b"]
-[ext_resource type="PackedScene" uid="uid://d2i4w4joysljq" path="res://scenes/ui/button.tscn" id="4_b6337"]
+[ext_resource type="PackedScene" path="res://scenes/ui/button.tscn" id="4_b6337"]
 
 [node name="GameOver" type="NinePatchRect"]
 anchors_preset = 8
