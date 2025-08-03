@@ -1,4 +1,4 @@
-[gd_scene load_steps=25 format=3 uid="uid://c5lqig57oxpyb"]
+[gd_scene load_steps=23 format=3 uid="uid://c5lqig57oxpyb"]
 
 [ext_resource type="Script" uid="uid://7i2kh250crxr" path="res://actors/player/player.gd" id="1_nvxhs"]
 [ext_resource type="Texture2D" uid="uid://dhb2r2w2v4525" path="res://assets/player.png" id="2_ilk7j"]
@@ -157,5 +157,5 @@ parameters/looping = false
 [connection signal="child_exiting_tree" from="MovementComponent" to="PlayerAnimation" method="_on_movement_component_child_exiting_tree"]
 [connection signal="editor_state_changed" from="MovementComponent" to="." method="_on_movement_component_editor_state_changed"]
 [connection signal="on_idle" from="MovementComponent" to="PlayerAnimation" method="_on_movement_component_on_idle"]
-[connection signal="on_move" from="MovementComponent" to="PlayerAnimation" method="_on_movement_component_on_move"]
 [connection signal="on_move" from="MovementComponent" to="WalkParticle" method="_on_movement_component_on_move"]
+[connection signal="on_move" from="MovementComponent" to="PlayerAnimation" method="_on_movement_component_on_move"]

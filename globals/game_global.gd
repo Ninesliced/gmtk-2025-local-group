@@ -190,7 +190,9 @@ var dict: Dictionary[ActionType, Dictionary] = {
 			Vector2i(0, 0),
 			Vector2i(1, 1),
 			Vector2i(1, -1),
-		]
+		],
+		#remove proba no icon and maybe.discuss?
+		"probability": 0
 	},
 }
 
