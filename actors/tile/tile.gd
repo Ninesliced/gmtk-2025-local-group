@@ -52,6 +52,7 @@ var outline_tween: Tween = null
 @export var lock_rotation: bool = false
 @export var tileName: String = ""
 
+var force_transform_to_scene: PackedScene = null
 
 var _transform_to_full: bool = false
 
@@ -139,6 +140,8 @@ func _on_area_2d_mouse_exited() -> void:
 func _on_area_2d_input_event(viewport: Node, event: InputEvent, shape_idx: int) -> void:
 	if event is InputEventMouseButton:
 		if !event.pressed and event.button_index < 3:
+			print("name: ", name, " grid_position: ", grid_position, " event: ", event)
+			print("tile name:", tileName)
 			GameGlobal.act_tile(self, event)
 
 
@@ -262,7 +265,6 @@ func _on_area_body_exited(body: Node2D) -> void:
 #		return
 #	_transform_to_full = false
 #	transform_to_another_type(load("res://actors/tile/full.tscn"))
-	var tiles = GameGlobal.map.tiles
 	# var tile: Tile = transform_to_another_type(tiles[GameGlobal.rng.randi() % tiles.size()])
 	# tile.tile_rotation = randi() % 4
 	var direction = GameGlobal.player.movement_component.last_inside_direction
@@ -364,6 +366,11 @@ func transform_with_1ddl_less(direction: Rotation, play_animation: bool = true) 
 	 
 	var is_spike = "Spike" in tileName
 	var equivalance_pos_tile = equivalance_pos_tile_spike if is_spike else equivalance_pos_tile_classique
+
+	if force_transform_to_scene:
+		var tile: Tile = transform_to_another_type(force_transform_to_scene, play_animation)
+		# tile.tile_rotation = (tile.tile_rotation - direction + 8) % 4 # FIXME: if later update :3
+		return tile
 	
 	if tileName not in equivalance_tile_pos.keys():
 		var tile: Tile = transform_to_another_type(GameGlobal.map.tiles[GameGlobal.rng.randi() % GameGlobal.map.tiles.size()])
