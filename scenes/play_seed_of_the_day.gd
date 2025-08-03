@@ -13,8 +13,11 @@ func _ready() -> void:
 	disabled = true
 	
 func check_disabled():
+	
 	if has_seed_being_received and is_username_valid:
 		disabled = false
+	else:
+		disabled = true
 
 
 func _on_username_text_changed(new_text: String) -> void:
