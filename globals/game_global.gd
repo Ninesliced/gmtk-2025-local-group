@@ -27,6 +27,7 @@ var main_menu_scene: PackedScene = preload("res://scenes/main_menu.tscn")
 	ActionType.VERTICAL_SPIKE,
 	ActionType.SQUARE_SPIKE,
 	ActionType.VERTICAL_WALL,
+	ActionType.ULTIMATE_MEGA_SUPER_CARROT
 ] : 
 	set(value):
 		action_stacks = value
@@ -69,7 +70,8 @@ enum ActionType {
 	VERTICAL_SPIKE,
 	TRANSFORM_EMPTY_CURSED,
 	SQUARE_SPIKE,
-	VERTICAL_WALL
+	VERTICAL_WALL,
+	ULTIMATE_MEGA_SUPER_CARROT
 }
 
 var dict: Dictionary[ActionType, Dictionary] = {
@@ -207,6 +209,35 @@ var dict: Dictionary[ActionType, Dictionary] = {
 			Vector2i(0, -2),
 		]
 	},
+	ActionType.ULTIMATE_MEGA_SUPER_CARROT: {
+		"name": "aze",
+		"function": ultimate_transform_empty,
+		"temporary": true,
+		"probability": 0.1,
+		"action_zone": [
+			Vector2i(0, 0), #TKT
+			Vector2i(1, 0),
+			Vector2i(2, 0),
+			Vector2i(3, 0),
+			Vector2i(4, 0),
+			Vector2i(5, 0),
+			Vector2i(6, 0),
+			Vector2i(0, 1),
+			Vector2i(1, 1),
+			Vector2i(2, 1),
+			Vector2i(3, 1),
+			Vector2i(4, 1),
+			Vector2i(5, 1),
+			Vector2i(6, 1),
+			Vector2i(0, -1),
+			Vector2i(1, -1),
+			Vector2i(2, -1),
+			Vector2i(3, -1),
+			Vector2i(4, -1),
+			Vector2i(5, -1),
+			Vector2i(6, -1),
+		]
+	}
 }
 
 
@@ -304,13 +335,19 @@ func transform_empty(tile: Tile) -> Tile:
 	
 	return new_tile
 
+# true ultimate carrot
+func ultimate_transform_empty(tile: Tile) -> void:
+	for i in range(-1, 2):
+		var current_tile: Tile = map.grid[(tile.grid_position.x) % map.grid_size.x][(tile.grid_position.y + i) % map.grid_size.y]
+		transform_empty_cursed(current_tile, 6)	
+
 ## ultimate carrot
-func transform_empty_cursed(tile: Tile) -> void:
+func transform_empty_cursed(tile: Tile, number: int = 4) -> void:
 	var grid_pos = tile.grid_position
 	
 	_play_long_explosion_sound_effect()
 	
-	for i in range(0, 4):
+	for i in range(0, number):
 		var current_tile: Tile = map.grid[(grid_pos.x + i) % map.grid_size.x][grid_pos.y]
 		current_tile.is_changeable = true
 		transform_empty(current_tile)
