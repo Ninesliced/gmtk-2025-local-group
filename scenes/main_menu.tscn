@@ -108,6 +108,7 @@ main_menu_scene = ExtResource("2_wu84c")
 
 [node name="HBoxContainer" type="VBoxContainer" parent="."]
 unique_name_in_owner = true
+visible = false
 z_index = 50
 layout_mode = 1
 anchors_preset = 8
@@ -152,7 +153,6 @@ color = Color(0.14, 0.1204, 0.1302, 0.615686)
 
 [node name="Play" type="Control" parent="."]
 unique_name_in_owner = true
-visible = false
 z_index = 100
 layout_mode = 1
 anchors_preset = 15
@@ -278,6 +278,7 @@ offset_right = -4.0
 offset_bottom = 7.0
 grow_horizontal = 2
 grow_vertical = 2
+theme = ExtResource("7_5dd4i")
 theme_override_font_sizes/font_size = 8
 theme_override_styles/normal = SubResource("StyleBoxEmpty_flqon")
 placeholder_text = "Username"
@@ -337,6 +338,7 @@ offset_right = -4.0
 offset_bottom = 7.0
 grow_horizontal = 2
 grow_vertical = 2
+theme = ExtResource("7_5dd4i")
 theme_override_font_sizes/font_size = 8
 theme_override_styles/normal = SubResource("StyleBoxEmpty_flqon")
 placeholder_text = "The seeds"
