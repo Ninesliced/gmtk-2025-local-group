@@ -24,7 +24,8 @@ var main_menu_scene: PackedScene = preload("res://scenes/main_menu.tscn")
 	ActionType.ENEMY,
 	ActionType.DELETE_CURRENT_ACTION,
 	ActionType.DELETE_CURRENT_ACTION,
-	ActionType.VERTICAL_SPIKE
+	ActionType.VERTICAL_SPIKE,
+	ActionType.SQUARE_SPIKE
 ] : 
 	set(value):
 		action_stacks = value
@@ -67,6 +68,7 @@ enum ActionType {
 	DELETE_CURRENT_ACTION,
 	VERTICAL_SPIKE,
 	TRANSFORM_EMPTY_CURSED,
+	SQUARE_SPIKE
 }
 
 var dict: Dictionary[ActionType, Dictionary] = {
@@ -173,13 +175,22 @@ var dict: Dictionary[ActionType, Dictionary] = {
 	ActionType.VERTICAL_SPIKE: {
 		"name": "VERTICAL SPIKE",
 		"function": spawn_vertical_spikes,
-		"probability": 0.1,
 		"action_zone": [
 			Vector2i(0, 1),
 			Vector2i(0, 0),
 			Vector2i(0, -1),
 			Vector2i(1, 0),
 			Vector2i(-1, 0),
+		]
+	},
+	ActionType.SQUARE_SPIKE: {
+		"name": "SQUARE SPIKE",
+		"function": spawn_square_spikes,
+		"action_zone": [
+			Vector2i(1, 0),
+			Vector2i(0, 0),
+			Vector2i(1, 1),
+			Vector2i(1, -1),
 		]
 	},
 }
@@ -390,6 +401,30 @@ func spawn_vertical_spikes(tile: Tile) -> void:
 		
 	_play_explosion_sound_effect()
 
+func spawn_square_spikes(tile:Tile) -> void:
+	var spike_line := load("res://actors/tile/spike/line_spike.tscn")
+	var spike_t := load("res://actors/tile/spike/t_spike.tscn")
+	var spike_corner := load("res://actors/tile/spike/corner_spike.tscn")
+	
+	var current_tile = map.grid[(tile.grid_position.x)%map.grid_size.x][(tile.grid_position.y)%map.grid_size.y]
+	var new_tile = null
+	new_tile = current_tile.transform_to_another_type(spike_line, false)
+	new_tile.tile_bigger.play_full(0)
+	
+	current_tile = map.grid[(tile.grid_position.x)%map.grid_size.x+1][(tile.grid_position.y)%map.grid_size.y]
+	new_tile = null
+	new_tile = current_tile.transform_to_another_type(spike_t, false, 1)
+	new_tile.tile_bigger.play_full(0.1)
+	
+	current_tile = map.grid[(tile.grid_position.x)%map.grid_size.x+1][(tile.grid_position.y+1)%map.grid_size.y]
+	new_tile = null
+	new_tile = current_tile.transform_to_another_type(spike_corner, false, 2)
+	new_tile.tile_bigger.play_full(0.2)
+	
+	current_tile = map.grid[(tile.grid_position.x)%map.grid_size.x+1][(tile.grid_position.y-1)%map.grid_size.y]
+	new_tile = null
+	new_tile = current_tile.transform_to_another_type(spike_corner, false, 3)
+	new_tile.tile_bigger.play_full(0.2)
 
 func delete_current_action() -> void:
 	var to_remove_action = GameGlobal.action_stacks.pop_front()

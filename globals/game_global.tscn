@@ -1,4 +1,4 @@
-[gd_scene load_steps=32 format=3 uid="uid://byxp1bvr3gl84"]
+[gd_scene load_steps=33 format=3 uid="uid://byxp1bvr3gl84"]
 
 [ext_resource type="Script" uid="uid://q581v4j3vmv4" path="res://globals/game_global.gd" id="1_gu6ii"]
 [ext_resource type="Texture2D" uid="uid://dgdfmi7kbpgg6" path="res://assets/images/actions/rotate.png" id="3_gc13h"]
@@ -14,7 +14,7 @@
 [ext_resource type="AudioStream" uid="uid://ct3kkknswudc0" path="res://assets/sfx/work/explode_long.ogg" id="9_672fk"]
 [ext_resource type="AudioStream" uid="uid://ihmp5eyi7gmb" path="res://assets/sfx/work/swap.ogg" id="11_lcri1"]
 [ext_resource type="AudioStream" uid="uid://s1pso4bpxokg" path="res://assets/sfx/work/woof.ogg" id="12_kyo4h"]
-[ext_resource type="PackedScene" uid="uid://cbb8lsgv3vahf" path="res://globals/music_manager.tscn" id="15_0xphb"]
+[ext_resource type="PackedScene" path="res://globals/music_manager.tscn" id="15_0xphb"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_gc13h"]
 atlas = ExtResource("3_gc13h")
@@ -59,6 +59,10 @@ region = Rect2(144, 0, 16, 16)
 [sub_resource type="AtlasTexture" id="AtlasTexture_kyo4h"]
 atlas = ExtResource("3_gc13h")
 region = Rect2(160, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_0xphb"]
+atlas = ExtResource("3_gc13h")
+region = Rect2(138, 0, 16, 16)
 
 [sub_resource type="GDScript" id="GDScript_iovrn"]
 script/source = "extends Button
@@ -136,7 +140,8 @@ action_textures = Dictionary[int, Texture2D]({
 7: SubResource("AtlasTexture_672fk"),
 8: SubResource("AtlasTexture_xofr3"),
 9: SubResource("AtlasTexture_lcri1"),
-10: SubResource("AtlasTexture_kyo4h")
+10: SubResource("AtlasTexture_kyo4h"),
+11: SubResource("AtlasTexture_0xphb")
 })
 
 [node name="Request" parent="." instance=ExtResource("3_iovrn")]
