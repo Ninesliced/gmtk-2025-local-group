@@ -48,6 +48,20 @@ function collapseSpacedLetters(pseudo) {
     return pseudo.replace(/\s+/g, '');
 }
 
+function normalize(text) {
+	  return text
+	    .normalize("NFKD")
+	    .replace(/[\u0300-\u036f]/g, "")  // accents
+	    .replace(/[@4]/g, "a")
+	    .replace(/[$5]/g, "s")
+	    .replace(/[1!|i]/g, "i")
+	    .replace(/[0o]/g, "o")
+	    .replace(/[3]/g, "e")
+	    .replace(/[7]/g, "t")
+	    .replace(/[^a-z0-9]/gi, "")       // retire tout sauf lettres et chiffres
+	    .toLowerCase();
+}
+
 function maskOffensiveWords(pseudo) {
     const norm = normalize(pseudo);
 
