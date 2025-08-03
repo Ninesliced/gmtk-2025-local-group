@@ -482,7 +482,7 @@ func pick_weighted_random_action() -> ActionType:
 
 
 func reset_game() -> void:
-	%Score.show()
+	%CanvasLayer.show()
 	%ActionsContainer.show()
 	score = 0
 	number_of_actions = 0
@@ -519,6 +519,6 @@ func _on_menu_pressed():
 	TransitionManager.change_scene(GameGlobal.main_menu_scene, "circle_gradient")
 	get_tree().paused = false
 	%ActionsContainer.hide()
-	%Score.hide()
+	%CanvasLayer.hide()
 
 	pass # Replace with function body.
