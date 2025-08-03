@@ -23,7 +23,7 @@ func _on_area_2d_area_entered(area: Area2D) -> void:
 func _on_area_2d_body_entered(player: Node2D) -> void:
 	if deleting:
 		return
-	print("Entered", player)
+	# print("Entered", player)
 	if !(player is Player):
 		return
 	

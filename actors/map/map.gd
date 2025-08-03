@@ -19,7 +19,7 @@ var grid : Array[Array] = []
 func _ready() -> void:
 	GameGlobal.map = $"."
 	_update_grid()
-	print("Generate grid")
+	# print("Generate grid")
 	generate_grid()
 	# print(GameGlobal)	
 
@@ -59,13 +59,13 @@ func clear_grid() -> void:
 
 func generate_grid_from_numbers(list) -> void:
 	grid_size = Vector2(len(list[0]),len(list))
-	print(grid)
+	# print(grid)
 	for x in range(grid_size.x):
 		for y in range(grid_size.y):
 			var tile_number = int(str(list[y][x])[0])
 			var tile_rotation = int(str(list[y][x])[1]) if len(str(list[y][x]))>1 else 0
 			var selected_tile: Resource = tiles_degree_of_freedom[tile_number]
-			print(selected_tile)
+			# print(selected_tile)
 			var tile_scene = load(selected_tile.resource_path)
 			var tile : Tile= tile_scene.instantiate()
 			tile.is_action_spawnable = false

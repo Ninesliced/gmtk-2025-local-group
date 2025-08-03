@@ -142,5 +142,5 @@ func play_sound() -> void:
 	if not sound_action:
 		print("no sound action set")
 		return
-	print("Playing sound")
+	# print("Playing sound")
 	sound_action.play()

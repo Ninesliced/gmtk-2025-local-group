@@ -3,6 +3,8 @@ extends Node
 signal on_action_stack_changed
 signal on_action
 
+@onready var music_manager := %MusicManager
+
 var in_menu: bool = false
 var max_action_number = 6
 const ENEMY = preload("res://actors/enemy/enemy.tscn")
@@ -32,7 +34,8 @@ var main_menu_scene: PackedScene = preload("res://scenes/main_menu.tscn")
 var action_stack_backup = action_stacks.duplicate()
 var action_ui_stacks : Array[ActionUI] = []
 var is_seed_of_the_day: bool = false
-var username: String = "Pseudo"
+var username: String = ""
+var is_user_seed: bool = false
 var hovered_tile: Tile = null
 
 ## include movement of player
@@ -183,9 +186,6 @@ var dict: Dictionary[ActionType, Dictionary] = {
 
 
 func _ready():
-	
-	print("test: ", action_stacks)
-
 	# Action UI
 	for action in GameGlobal.action_stacks:
 		var action_ui: ActionUI = action_ui_scene.instantiate()
@@ -518,8 +518,7 @@ func _on_retry_pressed():
 	%AnimationPlayer.play("RESET")
 	TransitionManager.reload_scene("circle_gradient", null, 2.5)
 	get_tree().paused = false
-	pass # Replace with function body.
-
+	GameGlobal.music_manager.calfed = true
 
 func _on_menu_pressed():
 	%AnimationPlayer.play("RESET")
@@ -527,5 +526,4 @@ func _on_menu_pressed():
 	get_tree().paused = false
 	%ActionsContainer.hide()
 	%CanvasLayer.hide()
-
-	pass # Replace with function body.
+	GameGlobal.music_manager.calfed = true

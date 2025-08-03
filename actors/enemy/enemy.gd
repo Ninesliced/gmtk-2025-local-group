@@ -133,7 +133,7 @@ func translation_animation(target_position: Vector2) -> void:
 	is_moving = true
 	
 func on_action_performed():
-	print(abs(position.x - target.position.x))
+	# print(abs(position.x - target.position.x))
 	if abs(position.x - target.position.x) <= 160:
 		if target_move:
 			grid_position += target_move
@@ -149,7 +149,7 @@ func stop_movement() -> void:
 
 
 func _on_area_2d_area_entered(area: Area2D) -> void:
-	print(area.get_class())
+	# print(area.get_class())
 	queue_free()
 	
 func _on_animated_sprite_2d_animation_finished() -> void:
