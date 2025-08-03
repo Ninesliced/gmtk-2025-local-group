@@ -88,6 +88,7 @@ position = Vector2(8, 8)
 
 [node name="TextureRect" type="TextureRect" parent="Node2D"]
 unique_name_in_owner = true
+self_modulate = Color(1, 1, 1, 0.823529)
 material = SubResource("ShaderMaterial_jsuos")
 anchors_preset = 8
 anchor_left = 0.5

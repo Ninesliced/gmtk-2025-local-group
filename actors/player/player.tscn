@@ -1,4 +1,4 @@
-[gd_scene load_steps=21 format=3 uid="uid://c5lqig57oxpyb"]
+[gd_scene load_steps=19 format=3 uid="uid://c5lqig57oxpyb"]
 
 [ext_resource type="Script" uid="uid://7i2kh250crxr" path="res://actors/player/player.gd" id="1_nvxhs"]
 [ext_resource type="Texture2D" uid="uid://dhb2r2w2v4525" path="res://assets/player.png" id="2_ilk7j"]
@@ -7,8 +7,6 @@
 [ext_resource type="Script" uid="uid://chq08evtmxyos" path="res://actors/player/hitbox_component.gd" id="4_lsqbn"]
 [ext_resource type="Script" uid="uid://26l6scy4ngx6" path="res://actors/player/player_animation.gd" id="5_15y17"]
 [ext_resource type="Texture2D" uid="uid://kgyumya58wt5" path="res://assets/images/player/player_horizontal-Sheet.png" id="6_hiosj"]
-[ext_resource type="PackedScene" uid="uid://c38wfn8kedxlp" path="res://scenes/ui/action_ui.tscn" id="8_a744p"]
-[ext_resource type="Script" uid="uid://bdcm77c68c11f" path="res://actors/player/action_current_component.gd" id="9_388e2"]
 [ext_resource type="PackedScene" uid="uid://b3oy1hgm6m7u8" path="res://actors/player/debug/player_debug.tscn" id="10_lsln6"]
 [ext_resource type="AudioStream" uid="uid://o3dk3yuuufpr" path="res://assets/sfx/work/walk.ogg" id="11_hiosj"]
 [ext_resource type="AudioStream" uid="uid://b03vg13som2qc" path="res://assets/sfx/work/action.ogg" id="12_ssdk0"]
@@ -104,16 +102,6 @@ script = ExtResource("5_15y17")
 unique_name_in_owner = true
 script = ExtResource("3_ax26v")
 walk_sound_effect = NodePath("../WalkSoundEffect")
-
-[node name="ActionUI" parent="." instance=ExtResource("8_a744p")]
-modulate = Color(1, 1, 1, 0.690196)
-offset_left = -8.0
-offset_top = -24.0
-offset_right = 8.0
-offset_bottom = -8.0
-
-[node name="ActionCurrentComponent" type="Node" parent="ActionUI"]
-script = ExtResource("9_388e2")
 
 [node name="Debug" parent="." node_paths=PackedStringArray("mc") instance=ExtResource("10_lsln6")]
 position = Vector2(20, -20)
