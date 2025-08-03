@@ -73,3 +73,7 @@ func _on_play_seed_of_the_day_button_pressed() -> void:
 
 func _on_refresh_button_pressed() -> void:
 	%Request.get_leaderboard()
+
+
+func _on_close_button_pressed() -> void:
+	UIManager.close_ui()
