@@ -224,11 +224,8 @@ animations = [{
 atlas = ExtResource("4_rhdfl")
 region = Rect2(32, 96, 32, 32)
 
-[node name="TileUi" type="Node2D" node_paths=PackedStringArray("sound_action", "rotation_sound_effect", "idle_rotation_sound_effect")]
+[node name="TileUi" type="Node2D"]
 script = ExtResource("1_xx546")
-sound_action = NodePath("")
-rotation_sound_effect = NodePath("")
-idle_rotation_sound_effect = NodePath("")
 tile_rotation = 1
 
 [node name="Area" type="Area2D" parent="."]

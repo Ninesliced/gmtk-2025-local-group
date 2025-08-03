@@ -659,3 +659,10 @@ func _on_music_volume_slider_value_changed(value: float) -> void:
 
 func _on_sfx_volume_slider_value_changed(value: float) -> void:
 	AudioServer.set_bus_volume_linear(2, value / 100.)
+
+
+func _on_pause_button_pressed(event: InputEvent) -> void:
+	print(event)
+	if event is InputEventMouseButton and event.is_pressed():
+		print("ok")
+		%Menu.pause_game()
