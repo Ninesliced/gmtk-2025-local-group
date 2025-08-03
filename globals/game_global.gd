@@ -500,14 +500,25 @@ func spawn_square_spikes(tile:Tile) -> void:
 	new_tile.tile_bigger.play_full(0.2)
 
 func delete_current_action() -> void:
-	var to_remove_action = GameGlobal.action_stacks.pop_front()
-	var action_ui = GameGlobal.action_ui_stacks.pop_front()
+	var action_enemies : int = action_stacks.count(ActionType.ENEMY)
+	
+	var to_remove_action = null	
+	var action_ui = null
+
+	if action_enemies == 1 and action_stacks[0] == ActionType.ENEMY:
+		to_remove_action = action_stacks.pop_at(1)
+		action_ui = action_ui_stacks.pop_at(1)
+	else:
+		to_remove_action = GameGlobal.action_stacks.pop_front()
+		action_ui = GameGlobal.action_ui_stacks.pop_front()
+	
 	action_ui.queue_free()
 	# if action_stacks.size() == 0:
 	_update_size()
 	on_action_stack_changed.emit()
 	if !hovered_tile:
 		return
+	
 	hovered_tile.on_action(to_remove_action)
 	
 
