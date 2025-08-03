@@ -124,6 +124,7 @@ var dict: Dictionary[ActionType, Dictionary] = {
 	ActionType.TRANSFORM_CROSS: {
 		"name": "Transform Empty",
 		"function": transform_cross,
+		"temporary": true,
 		# "probability": 0,
 		"action_zone": [
 			Vector2i(0, 0),
@@ -187,6 +188,7 @@ var dict: Dictionary[ActionType, Dictionary] = {
 	ActionType.SQUARE_SPIKE: {
 		"name": "SQUARE SPIKE",
 		"function": spawn_square_spikes,
+		"temporary": true,
 		"action_zone": [
 			Vector2i(1, 0),
 			Vector2i(0, 0),
@@ -194,11 +196,12 @@ var dict: Dictionary[ActionType, Dictionary] = {
 			Vector2i(1, -1),
 		],
 		#remove proba no icon and maybe.discuss?
-		"probability": 0
+		#"probability": 0
 	},
 	ActionType.VERTICAL_WALL: {
 		"name": "VERTICAL WALL",
 		"function": vertical_wall,
+		"temporary": true,
 		"action_zone": [
 			Vector2i(0, 2),
 			Vector2i(0, 1),
@@ -428,7 +431,7 @@ func spawn_vertical_spikes(tile: Tile) -> void:
 
 	var current_tile = map.grid[(tile.grid_position.x)%map.grid_size.x][(tile.grid_position.y)%map.grid_size.y]
 	var new_tile = null
-	new_tile = current_tile.transform_to_another_type(full, false)
+	new_tile = current_tile.transform_to_another_type(full, false,0)
 	if new_tile && new_tile.tile_bigger:
 		new_tile.tile_bigger.play_full(0.1)
 		
@@ -510,7 +513,7 @@ func _update_size() -> void:
 func add_action(action: ActionType, action_ui: ActionUI) -> void:
 	action_stacks.append(action)
 	action_ui_stacks.append(action_ui)
-	if GameGlobal.action_stacks.size() > max_action_number:
+	if GameGlobal.action_stacks.size() > max_action_number :
 		delete_current_action()
 	on_action_stack_changed.emit()
 
