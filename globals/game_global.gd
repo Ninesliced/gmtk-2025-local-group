@@ -34,7 +34,8 @@ var main_menu_scene: PackedScene = preload("res://scenes/main_menu.tscn")
 var action_stack_backup = action_stacks.duplicate()
 var action_ui_stacks : Array[ActionUI] = []
 var is_seed_of_the_day: bool = false
-var username: String = "Pseudo"
+var username: String = ""
+var is_user_seed: bool = false
 var hovered_tile: Tile = null
 
 ## include movement of player

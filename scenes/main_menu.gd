@@ -16,7 +16,10 @@ func _ready():
 	UIManager.first_unclosable = true
 	UIManager._stack.clear() # HACK
 	UIManager.set_ui(hbox_container, play_button)
-
+	%Username.text = GameGlobal.username
+	if !GameGlobal.is_seed_of_the_day and GameGlobal.is_user_seed:
+		%SeedInput.text = GameGlobal.rng_seed
+		
 func _on_play_pressed():
 	UIManager.set_ui(play)
 	#print("Play button pressed")
@@ -37,9 +40,9 @@ func get_random_seed() -> String:
 	
 func _on_play_button_pressed():
 	var inputed_seed = $Play/Container/HBoxContainer/right/panel/VBoxContainer/NinePatchRect/SeedInput.text
-	print("Inputded_seed", inputed_seed)
 	if inputed_seed == "":
 		inputed_seed = get_random_seed()
+	GameGlobal.is_user_seed = (%SeedInput.text != "")
 	GameGlobal.rng_seed = inputed_seed
 	GameGlobal.is_seed_of_the_day = false
 	GameGlobal.music_manager.calfed = false
