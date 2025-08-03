@@ -64,4 +64,5 @@ func _on_play_seed_of_the_day_pressed() -> void:
 
 func _on_tutorial_button_pressed():
 	GameGlobal.music_manager.calfed = false
+	GameGlobal.is_seed_of_the_day = false
 	TransitionManager.change_scene(tutorial_scene, "circle_gradient", null, 1.0)
