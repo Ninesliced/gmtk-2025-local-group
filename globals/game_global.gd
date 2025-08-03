@@ -445,6 +445,7 @@ func nop(_tile: Tile, _event: InputEvent):
 @export var map: Map = null
 @export var camera: Camera2D = null
 var is_game_have_start: bool = false
+var is_in_game: bool = false
 var rng = RandomNumberGenerator.new()
 var rng_seed = str(randi()):
 	set(x):
@@ -558,6 +559,7 @@ func _on_menu_pressed():
 
 func go_to_main_menu():
 	is_game_have_start = false
+	is_in_game = false
 	%AnimationPlayer.play("RESET")
 	TransitionManager.change_scene(GameGlobal.main_menu_scene, "circle_gradient")
 	get_tree().paused = false

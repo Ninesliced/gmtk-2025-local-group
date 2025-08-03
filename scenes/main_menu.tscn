@@ -155,12 +155,12 @@ layout_mode = 1
 anchors_preset = -1
 anchor_right = 1.0
 anchor_bottom = 1.0
-offset_left = 4.0
-offset_top = 4.0
-offset_right = -4.0
-offset_bottom = -4.0
+offset_left = 3.38
+offset_right = -4.62
+offset_bottom = -8.0
 grow_horizontal = 2
 grow_vertical = 2
+theme_override_constants/separation = 5
 
 [node name="Header" type="HBoxContainer" parent="Play/Container/HBoxContainer/NinePatchRect/VBoxContainer"]
 layout_mode = 2
@@ -170,8 +170,13 @@ material = SubResource("ShaderMaterial_5dd4i")
 layout_mode = 2
 theme = ExtResource("7_5dd4i")
 theme_override_fonts/font = SubResource("FontVariation_7b55j")
-text = "SCOREBOARD OF THE DAY"
+text = "Scoreboard of the Day"
 horizontal_alignment = 1
+
+[node name="Button" parent="Play/Container/HBoxContainer/NinePatchRect/VBoxContainer/Header" instance=ExtResource("1_ekxnf")]
+custom_minimum_size = Vector2(0, 0)
+layout_mode = 2
+text = ""
 
 [node name="Leaderboard" parent="Play/Container/HBoxContainer/NinePatchRect/VBoxContainer" instance=ExtResource("8_flqon")]
 unique_name_in_owner = true
@@ -209,15 +214,15 @@ patch_margin_bottom = 7
 
 [node name="VBoxContainer" type="VBoxContainer" parent="Play/Container/HBoxContainer/right/SeedOfTheDay"]
 layout_mode = 0
-offset_left = 3.0
-offset_right = 95.0
+offset_left = 3.385
+offset_right = 95.385
 offset_bottom = 79.0
 
 [node name="Label2" type="Label" parent="Play/Container/HBoxContainer/right/SeedOfTheDay/VBoxContainer"]
 material = ExtResource("11_rcqid")
 layout_mode = 2
 theme_override_font_sizes/font_size = 8
-text = "Seed Of The Day"
+text = "Seed of the Day"
 horizontal_alignment = 1
 
 [node name="NinePatchRect2" type="NinePatchRect" parent="Play/Container/HBoxContainer/right/SeedOfTheDay/VBoxContainer"]
@@ -321,6 +326,6 @@ theme = ExtResource("14_j7ex8")
 [connection signal="pressed" from="HBoxContainer/TutorialButton" to="." method="_on_tutorial_button_pressed"]
 [connection signal="pressed" from="HBoxContainer/Quit" to="." method="_on_quit_pressed"]
 [connection signal="text_changed" from="Play/Container/HBoxContainer/right/SeedOfTheDay/VBoxContainer/NinePatchRect2/Username" to="Play/Container/HBoxContainer/right/SeedOfTheDay/VBoxContainer/PlaySeedOfTheDay" method="_on_username_text_changed"]
-[connection signal="pressed" from="Play/Container/HBoxContainer/right/SeedOfTheDay/VBoxContainer/PlaySeedOfTheDay" to="." method="_on_play_seed_of_the_day_button_pressed"]
+[connection signal="pressed" from="Play/Container/HBoxContainer/right/SeedOfTheDay/VBoxContainer/PlaySeedOfTheDay" to="." method="_on_play_seed_of_the_day_pressed"]
 [connection signal="text_changed" from="Play/Container/HBoxContainer/right/panel/VBoxContainer/NinePatchRect/SeedInput" to="Play/Container/HBoxContainer/right/panel/VBoxContainer/NinePatchRect/SeedInput" method="_on_text_changed"]
 [connection signal="pressed" from="Play/Container/HBoxContainer/right/panel/VBoxContainer/PlayCustomSeed" to="." method="_on_play_button_pressed"]
