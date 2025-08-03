@@ -2,9 +2,9 @@
 
 [ext_resource type="Texture2D" uid="uid://dabe5dmwfsby2" path="res://assets/spritesheet.png" id="1_pq2bt"]
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_irehs"]
+[sub_resource type="AtlasTexture" id="AtlasTexture_pq2bt"]
 atlas = ExtResource("1_pq2bt")
-region = Rect2(96, 0, 32, 32)
+region = Rect2(128, 128, 32, 32)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_1oojr"]
 atlas = ExtResource("1_pq2bt")
@@ -18,7 +18,7 @@ region = Rect2(96, 64, 32, 32)
 animations = [{
 "frames": [{
 "duration": 1.0,
-"texture": SubResource("AtlasTexture_irehs")
+"texture": SubResource("AtlasTexture_pq2bt")
 }],
 "loop": true,
 "name": &"default",
