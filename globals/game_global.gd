@@ -50,7 +50,6 @@ var score : int = 0:
 	set(value):
 		if value == 0:
 			score = 0
-			return
 		score = max(score, value)
 		%Score.text = "Score: " + str(score)
 		$CanvasLayer/GameOver/VBoxContainer2/VBoxContainer/NinePatchRect2/Number.text = str(score)
