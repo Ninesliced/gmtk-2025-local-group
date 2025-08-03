@@ -1,6 +1,6 @@
 [gd_resource type="ShaderMaterial" load_steps=2 format=3 uid="uid://ctsbqcehyf6ux"]
 
-[ext_resource type="Shader" path="res://addons/shaker/components/vfx/shaders/outline2.gdshader" id="1_fqh66"]
+[ext_resource type="Shader" uid="uid://dhrxdnevtv4vp" path="res://addons/shaker/components/vfx/shaders/outline2.gdshader" id="1_fqh66"]
 
 [resource]
 resource_local_to_scene = true
