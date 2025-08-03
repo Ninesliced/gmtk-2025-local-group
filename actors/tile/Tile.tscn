@@ -160,12 +160,10 @@ unique_name_in_owner = true
 [node name="RotationSoundEffect" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("7_187ej")
 volume_db = -10.0
-bus = &"SFX"
 
 [node name="IdleRotationSoundEffect" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("8_d7a5y")
 volume_db = -10.0
-bus = &"SFX"
 
 [connection signal="body_entered" from="Area" to="." method="_on_area_body_entered"]
 [connection signal="body_exited" from="Area" to="." method="_on_area_body_exited"]
