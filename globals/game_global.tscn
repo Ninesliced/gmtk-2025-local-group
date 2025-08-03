@@ -15,7 +15,7 @@
 [ext_resource type="PackedScene" uid="uid://d2i4w4joysljq" path="res://scenes/ui/button.tscn" id="10_jbxo6"]
 [ext_resource type="Script" uid="uid://dhflbjvlkkwsw" path="res://globals/menu.gd" id="10_ygokt"]
 [ext_resource type="AudioStream" uid="uid://ihmp5eyi7gmb" path="res://assets/sfx/work/swap.ogg" id="11_lcri1"]
-[ext_resource type="PackedScene" uid="uid://dfv54kvhrr4g7" path="res://scenes/ui/vertical_slider.tscn" id="12_hngle"]
+[ext_resource type="PackedScene" path="res://scenes/ui/vertical_slider.tscn" id="12_hngle"]
 [ext_resource type="AudioStream" uid="uid://s1pso4bpxokg" path="res://assets/sfx/work/woof.ogg" id="12_kyo4h"]
 [ext_resource type="Texture2D" uid="uid://b7r2tlus6gvld" path="res://assets/images/ui/rect/music.png" id="13_v8b32"]
 [ext_resource type="Texture2D" uid="uid://bdf605nufn62d" path="res://assets/images/ui/rect/sfx.png" id="14_v8b32"]
@@ -335,31 +335,26 @@ texture = ExtResource("14_v8b32")
 unique_name_in_owner = true
 stream = ExtResource("8_xofr3")
 volume_db = -30.0
-bus = &"SFX"
 
 [node name="ExplosionSoundEffect" type="AudioStreamPlayer" parent="SoundEffects"]
 unique_name_in_owner = true
 stream = ExtResource("8_l7e3u")
 volume_db = -35.0
-bus = &"SFX"
 
 [node name="LongExplosionSoundEffect" type="AudioStreamPlayer" parent="SoundEffects"]
 unique_name_in_owner = true
 stream = ExtResource("9_672fk")
 volume_db = -35.0
-bus = &"SFX"
 
 [node name="SwapSoundEffect" type="AudioStreamPlayer" parent="SoundEffects"]
 unique_name_in_owner = true
 stream = ExtResource("11_lcri1")
 volume_db = -35.0
-bus = &"SFX"
 
 [node name="WolfSpawnSoundEffect" type="AudioStreamPlayer" parent="SoundEffects"]
 unique_name_in_owner = true
 stream = ExtResource("12_kyo4h")
 volume_db = -30.0
-bus = &"SFX"
 
 [node name="MusicManager" parent="." instance=ExtResource("15_0xphb")]
 unique_name_in_owner = true

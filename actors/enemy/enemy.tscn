@@ -118,7 +118,6 @@ offset_bottom = 13.0
 unique_name_in_owner = true
 stream = ExtResource("4_ooidh")
 volume_db = -25.0
-bus = &"SFX"
 
 [connection signal="area_entered" from="Area2D" to="." method="_on_area_2d_area_entered"]
 [connection signal="animation_finished" from="AnimatedSprite2D" to="." method="_on_animated_sprite_2d_animation_finished"]
