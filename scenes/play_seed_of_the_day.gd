@@ -10,7 +10,7 @@ var is_username_valid := false :
 		check_disabled()
 
 func _ready() -> void:
-	disabled = true
+	check_disabled()
 	
 func check_disabled():
 	
@@ -21,7 +21,7 @@ func check_disabled():
 
 
 func _on_username_text_changed(new_text: String) -> void:
-	if new_text == "":
+	if new_text  == "":
 		is_username_valid = false
 	else:
 		is_username_valid = true
