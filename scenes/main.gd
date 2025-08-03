@@ -5,4 +5,5 @@ func _ready():
 	GameGlobal.map.generate_grid()
 	GameGlobal.canvas_layer.show()
 	GameGlobal.reset_game()
+	UIManager.close_all()
 	pass
