@@ -3,7 +3,7 @@ class_name MainMenu
 
 @onready var play: Control = %Play
 @export var main_menu_scene: PackedScene
-@onready var play_button: Button = %PlayButton
+@onready var play_button: Button = %PlayCustomSeed
 @onready var request: Node2D = $Request
 @onready var play_seed_of_the_day: Button = %PlaySeedOfTheDay
 
@@ -11,7 +11,7 @@ var seed_of_the_day: String = ""
 @export var tutorial_scene: PackedScene = preload("res://scenes/tuto.tscn")
 @onready var leaderboards: Array[HBoxContainer] = [%Leaderboard, %Leaderboard2, %Leaderboard3, %Leaderboard4, %Leaderboard5]
 
-@onready var hbox_container: VBoxContainer = $HBoxContainer
+@onready var hbox_container: VBoxContainer = %HBoxContainer
 func _ready():
 	UIManager.first_unclosable = true
 	UIManager._stack.clear() # HACK
