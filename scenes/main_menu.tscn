@@ -13,7 +13,7 @@
 [ext_resource type="Texture2D" uid="uid://cncpqu3fcgw0s" path="res://assets/images/ui/rect/seed_input.png" id="11_lgwnu"]
 [ext_resource type="Material" uid="uid://ctsbqcehyf6ux" path="res://actors/action/action.tres" id="11_rcqid"]
 [ext_resource type="PackedScene" uid="uid://g63ms4dlkya7" path="res://scenes/ui/tile_grid_ui.tscn" id="14_1ajci"]
-[ext_resource type="Theme" uid="uid://bp3s6yu5tid51" path="res://resources/theme_blue.tres" id="14_j7ex8"]
+[ext_resource type="Theme" uid="uid://chq080b8fwgik" path="res://resources/theme_blue.tres" id="14_j7ex8"]
 [ext_resource type="Script" uid="uid://17dmnltu11in" path="res://scenes/play_seed_of_the_day.gd" id="16_5pajh"]
 
 [sub_resource type="GDScript" id="GDScript_5pajh"]
