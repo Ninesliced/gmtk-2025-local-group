@@ -15,6 +15,8 @@ func _play_item_take_sound_effect() -> void:
 func _ready() -> void:
 	GameGlobal.player = $"."
 	movement_component.grid_position = Vector2i(grid_position)
+	var spawn_tile : Tile = GameGlobal.map.grid[grid_position.x][grid_position.y]
+	spawn_tile.transform_to_another_type(load("res://actors/tile/spawn_tile.tscn"), false, 2)
 
 
 func _on_hitbox_component_area_entered(area:Area2D):

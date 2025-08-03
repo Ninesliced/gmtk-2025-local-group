@@ -260,6 +260,9 @@ func _process(delta: float) -> void:
 func _on_area_body_exited(body: Node2D) -> void:
 	if not body is Player:
 		return
+		
+	if not is_changeable:
+		return
 #	is_player_inside = false
 #	if !_transform_to_full:
 #		return
