@@ -1,6 +1,8 @@
-[gd_scene load_steps=6 format=3 uid="uid://d2i4w4joysljq"]
+[gd_scene load_steps=8 format=3 uid="uid://d2i4w4joysljq"]
 
 [ext_resource type="Theme" uid="uid://c06a0wpkb3qyr" path="res://resources/theme.tres" id="1_di1ux"]
+[ext_resource type="AudioStream" uid="uid://j04i026t2khn" path="res://assets/sfx/work/ui_hover.ogg" id="2_3xo2w"]
+[ext_resource type="AudioStream" uid="uid://ldsr28don550" path="res://assets/sfx/work/ui_click.ogg" id="3_vgxan"]
 
 [sub_resource type="Animation" id="Animation_3xo2w"]
 length = 0.001
@@ -69,12 +71,16 @@ script/source = "extends AnimationPlayer
 
 func _on_button_focus_entered():
 	play(\"hover\")
-	pass # Replace with function body.
+	%HoverSoundEffect.play()
 
 
 func _on_button_mouse_entered():
 	play(\"hover\")
-	pass # Replace with function body.
+	%HoverSoundEffect.play()
+
+
+func _on_button_pressed() -> void:
+	%ClickSoundEffect.play()
 "
 
 [node name="Button" type="Button"]
@@ -92,5 +98,16 @@ libraries = {
 }
 script = SubResource("GDScript_di1ux")
 
+[node name="HoverSoundEffect" type="AudioStreamPlayer" parent="."]
+unique_name_in_owner = true
+stream = ExtResource("2_3xo2w")
+volume_db = -15.0
+
+[node name="ClickSoundEffect" type="AudioStreamPlayer" parent="."]
+unique_name_in_owner = true
+stream = ExtResource("3_vgxan")
+volume_db = -15.0
+
 [connection signal="focus_entered" from="." to="AnimationPlayer" method="_on_button_focus_entered"]
 [connection signal="mouse_entered" from="." to="AnimationPlayer" method="_on_button_mouse_entered"]
+[connection signal="pressed" from="." to="AnimationPlayer" method="_on_button_pressed"]
