@@ -1,4 +1,4 @@
-[gd_scene load_steps=9 format=3 uid="uid://b7fgpkbuim0vj"]
+[gd_scene load_steps=10 format=3 uid="uid://b7fgpkbuim0vj"]
 
 [ext_resource type="Script" uid="uid://btngkayrce3q0" path="res://actors/map/map.gd" id="1_fvbrk"]
 [ext_resource type="PackedScene" uid="uid://s2om5ju6lrn" path="res://actors/tile/four.tscn" id="3_wofu4"]
@@ -7,10 +7,11 @@
 [ext_resource type="PackedScene" uid="uid://bqtjiyvuyby2g" path="res://actors/tile/t.tscn" id="6_ggbst"]
 [ext_resource type="PackedScene" uid="uid://d2wqej3jpir1g" path="res://actors/tile/line.tscn" id="6_wq4hh"]
 [ext_resource type="PackedScene" uid="uid://5x8ludb4a3gs" path="res://actors/tile/full.tscn" id="7_ggbst"]
-[ext_resource type="PackedScene" uid="uid://mva638opsugy" path="res://actors/tile/spike/line_spike.tscn" id="8_wq4hh"]
+[ext_resource type="PackedScene" uid="uid://1jdfma4sfqko" path="res://actors/tile/spike/four_spike.tscn" id="8_wq4hh"]
+[ext_resource type="PackedScene" uid="uid://c5vt5rh1kln8a" path="res://actors/tile/function_tile.tscn" id="9_2slrh"]
 
 [node name="Map" type="CanvasGroup"]
 material = ExtResource("6_efm3v")
 script = ExtResource("1_fvbrk")
 tiles = Array[PackedScene]([ExtResource("6_wq4hh"), ExtResource("5_ggbst"), ExtResource("3_wofu4"), ExtResource("6_ggbst")])
-tiles_degree_of_freedom = Array[PackedScene]([ExtResource("7_ggbst"), ExtResource("5_ggbst"), ExtResource("6_wq4hh"), ExtResource("6_ggbst"), ExtResource("3_wofu4"), ExtResource("8_wq4hh")])
+tiles_degree_of_freedom = Array[PackedScene]([ExtResource("7_ggbst"), ExtResource("5_ggbst"), ExtResource("6_wq4hh"), ExtResource("6_ggbst"), ExtResource("3_wofu4"), ExtResource("8_wq4hh"), ExtResource("9_2slrh")])

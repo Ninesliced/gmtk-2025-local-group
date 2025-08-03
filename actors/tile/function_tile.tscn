@@ -1,0 +1,36 @@
+[gd_scene load_steps=7 format=3 uid="uid://c5vt5rh1kln8a"]
+
+[ext_resource type="PackedScene" uid="uid://bkuf38ni4q62k" path="res://actors/tile/Tile.tscn" id="1_se004"]
+[ext_resource type="Shader" uid="uid://birv8v71nvo3v" path="res://addons/shaker/components/vfx/shaders/fill_color.gdshader" id="2_ihx0l"]
+[ext_resource type="Script" uid="uid://bygj3qwqr7vkc" path="res://actors/tile/function_tile.gd" id="2_supox"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_supox"]
+resource_local_to_scene = true
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_0ufgl"]
+resource_local_to_scene = true
+shader = ExtResource("2_ihx0l")
+shader_parameter/color = Color(1, 1, 1, 1)
+shader_parameter/force = 0.0
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_3xt58"]
+radius = 13.0
+
+[node name="function_tile" instance=ExtResource("1_se004")]
+script = ExtResource("2_supox")
+function = 0
+
+[node name="3DShader" parent="." index="1"]
+material = SubResource("ShaderMaterial_supox")
+
+[node name="Sprite" parent="3DShader" index="0"]
+material = SubResource("ShaderMaterial_0ufgl")
+
+[node name="Area2D" type="Area2D" parent="." index="7"]
+collision_layer = 0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D" index="0"]
+position = Vector2(16, 16)
+shape = SubResource("CircleShape2D_3xt58")
+
+[connection signal="body_entered" from="Area2D" to="." method="_on_area_2d_body_entered"]
