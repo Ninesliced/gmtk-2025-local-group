@@ -25,7 +25,9 @@ var main_menu_scene: PackedScene = preload("res://scenes/main_menu.tscn")
 	ActionType.DELETE_CURRENT_ACTION,
 	ActionType.DELETE_CURRENT_ACTION,
 	ActionType.VERTICAL_SPIKE,
-	ActionType.SQUARE_SPIKE
+	ActionType.SQUARE_SPIKE,
+	ActionType.VERTICAL_WALL,
+	ActionType.ULTIMATE_MEGA_SUPER_CARROT
 ] : 
 	set(value):
 		action_stacks = value
@@ -67,7 +69,9 @@ enum ActionType {
 	DELETE_CURRENT_ACTION,
 	VERTICAL_SPIKE,
 	TRANSFORM_EMPTY_CURSED,
-	SQUARE_SPIKE
+	SQUARE_SPIKE,
+	VERTICAL_WALL,
+	ULTIMATE_MEGA_SUPER_CARROT
 }
 
 var dict: Dictionary[ActionType, Dictionary] = {
@@ -122,6 +126,7 @@ var dict: Dictionary[ActionType, Dictionary] = {
 	ActionType.TRANSFORM_CROSS: {
 		"name": "Transform Empty",
 		"function": transform_cross,
+		"temporary": true,
 		# "probability": 0,
 		"action_zone": [
 			Vector2i(0, 0),
@@ -185,13 +190,57 @@ var dict: Dictionary[ActionType, Dictionary] = {
 	ActionType.SQUARE_SPIKE: {
 		"name": "SQUARE SPIKE",
 		"function": spawn_square_spikes,
+		"temporary": true,
 		"action_zone": [
 			Vector2i(1, 0),
 			Vector2i(0, 0),
 			Vector2i(1, 1),
 			Vector2i(1, -1),
+		],
+		#remove proba no icon and maybe.discuss?
+		#"probability": 0
+	},
+	ActionType.VERTICAL_WALL: {
+		"name": "VERTICAL WALL",
+		"function": vertical_wall,
+		"temporary": true,
+		"action_zone": [
+			Vector2i(0, 2),
+			Vector2i(0, 1),
+			Vector2i(0, 0),
+			Vector2i(0, -1),
+			Vector2i(0, -2),
 		]
 	},
+	ActionType.ULTIMATE_MEGA_SUPER_CARROT: {
+		"name": "aze",
+		"function": ultimate_transform_empty,
+		"temporary": true,
+		"probability": 0.01,
+		"action_zone": [
+			Vector2i(0, 0), #TKT
+			Vector2i(1, 0),
+			Vector2i(2, 0),
+			Vector2i(3, 0),
+			Vector2i(4, 0),
+			Vector2i(5, 0),
+			Vector2i(6, 0),
+			Vector2i(0, 1),
+			Vector2i(1, 1),
+			Vector2i(2, 1),
+			Vector2i(3, 1),
+			Vector2i(4, 1),
+			Vector2i(5, 1),
+			Vector2i(6, 1),
+			Vector2i(0, -1),
+			Vector2i(1, -1),
+			Vector2i(2, -1),
+			Vector2i(3, -1),
+			Vector2i(4, -1),
+			Vector2i(5, -1),
+			Vector2i(6, -1),
+		]
+	}
 }
 
 
@@ -289,13 +338,19 @@ func transform_empty(tile: Tile) -> Tile:
 	
 	return new_tile
 
+# true ultimate carrot
+func ultimate_transform_empty(tile: Tile) -> void:
+	for i in range(-1, 2):
+		var current_tile: Tile = map.grid[(tile.grid_position.x) % map.grid_size.x][(tile.grid_position.y + i) % map.grid_size.y]
+		transform_empty_cursed(current_tile, 6)	
+
 ## ultimate carrot
-func transform_empty_cursed(tile: Tile) -> void:
+func transform_empty_cursed(tile: Tile, number: int = 4) -> void:
 	var grid_pos = tile.grid_position
 	
 	_play_long_explosion_sound_effect()
 	
-	for i in range(0, 4):
+	for i in range(0, number):
 		var current_tile: Tile = map.grid[(grid_pos.x + i) % map.grid_size.x][grid_pos.y]
 		current_tile.is_changeable = true
 		transform_empty(current_tile)
@@ -373,6 +428,25 @@ func spawn_enemy(tile: Tile) -> void:
 	
 	_play_explosion_sound_effect()
 
+func vertical_wall(tile: Tile) -> void:
+	var corner := load("res://actors/tile/corner.tscn")
+	var line := load("res://actors/tile/line.tscn")
+	
+	for i in range(1,4):
+		var current_tile = map.grid[(tile.grid_position.x)%map.grid_size.x][(tile.grid_position.y+i)%map.grid_size.y]
+		var new_tile = null
+		new_tile = current_tile.transform_to_another_type(line, false, 1)
+		new_tile.tile_bigger.play_full(0.1*i)
+		
+	var current_tile = map.grid[(tile.grid_position.x)%map.grid_size.x][(tile.grid_position.y)%map.grid_size.y]
+	var new_tile = null
+	new_tile = current_tile.transform_to_another_type(corner, false, 0)
+	new_tile.tile_bigger.play_full(0)
+	
+	current_tile = map.grid[(tile.grid_position.x)%map.grid_size.x][(tile.grid_position.y+4)%map.grid_size.y]
+	new_tile = null
+	new_tile = current_tile.transform_to_another_type(corner, false, 2)
+	new_tile.tile_bigger.play_full(0.4)
 
 func spawn_vertical_spikes(tile: Tile) -> void:
 	var spike := load("res://actors/tile/spike/four_spike.tscn")
@@ -394,46 +468,57 @@ func spawn_vertical_spikes(tile: Tile) -> void:
 
 	var current_tile = map.grid[(tile.grid_position.x)%map.grid_size.x][(tile.grid_position.y)%map.grid_size.y]
 	var new_tile = null
-	new_tile = current_tile.transform_to_another_type(full, false)
+	new_tile = current_tile.transform_to_another_type(full, false,0)
 	if new_tile && new_tile.tile_bigger:
 		new_tile.tile_bigger.play_full(0.1)
 		
 	_play_explosion_sound_effect()
 
 func spawn_square_spikes(tile:Tile) -> void:
-	var spike_line := load("res://actors/tile/spike/line_spike.tscn")
+	var spike_four := load("res://actors/tile/spike/four_spike.tscn")
 	var spike_t := load("res://actors/tile/spike/t_spike.tscn")
 	var spike_corner := load("res://actors/tile/spike/corner_spike.tscn")
 	
 	var current_tile = map.grid[(tile.grid_position.x)%map.grid_size.x][(tile.grid_position.y)%map.grid_size.y]
 	var new_tile = null
-	new_tile = current_tile.transform_to_another_type(spike_line, false)
+	new_tile = current_tile.transform_to_another_type(spike_four, false)
 	new_tile.tile_bigger.play_full(0)
 	
-	current_tile = map.grid[(tile.grid_position.x)%map.grid_size.x+1][(tile.grid_position.y)%map.grid_size.y]
+	current_tile = map.grid[(tile.grid_position.x+1)%map.grid_size.x][(tile.grid_position.y)%map.grid_size.y]
 	new_tile = null
 	new_tile = current_tile.transform_to_another_type(spike_t, false, 1)
 	new_tile.tile_bigger.play_full(0.1)
 	
-	current_tile = map.grid[(tile.grid_position.x)%map.grid_size.x+1][(tile.grid_position.y+1)%map.grid_size.y]
+	current_tile = map.grid[(tile.grid_position.x+1)%map.grid_size.x][(tile.grid_position.y+1)%map.grid_size.y]
 	new_tile = null
 	new_tile = current_tile.transform_to_another_type(spike_corner, false, 2)
 	new_tile.tile_bigger.play_full(0.2)
 	
-	current_tile = map.grid[(tile.grid_position.x)%map.grid_size.x+1][(tile.grid_position.y-1)%map.grid_size.y]
+	current_tile = map.grid[(tile.grid_position.x+1)%map.grid_size.x][(tile.grid_position.y-1)%map.grid_size.y]
 	new_tile = null
 	new_tile = current_tile.transform_to_another_type(spike_corner, false, 3)
 	new_tile.tile_bigger.play_full(0.2)
 
 func delete_current_action() -> void:
-	var to_remove_action = GameGlobal.action_stacks.pop_front()
-	var action_ui = GameGlobal.action_ui_stacks.pop_front()
+	var action_enemies : int = action_stacks.count(ActionType.ENEMY)
+	
+	var to_remove_action = null	
+	var action_ui = null
+
+	if action_enemies == 1 and action_stacks[0] == ActionType.ENEMY:
+		to_remove_action = action_stacks.pop_at(1)
+		action_ui = action_ui_stacks.pop_at(1)
+	else:
+		to_remove_action = GameGlobal.action_stacks.pop_front()
+		action_ui = GameGlobal.action_ui_stacks.pop_front()
+	
 	action_ui.queue_free()
 	# if action_stacks.size() == 0:
 	_update_size()
 	on_action_stack_changed.emit()
 	if !hovered_tile:
 		return
+	
 	hovered_tile.on_action(to_remove_action)
 	
 
@@ -476,7 +561,7 @@ func _update_size() -> void:
 func add_action(action: ActionType, action_ui: ActionUI) -> void:
 	action_stacks.append(action)
 	action_ui_stacks.append(action_ui)
-	if GameGlobal.action_stacks.size() > max_action_number:
+	if GameGlobal.action_stacks.size() > max_action_number :
 		delete_current_action()
 	on_action_stack_changed.emit()
 

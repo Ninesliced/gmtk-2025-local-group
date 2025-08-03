@@ -269,7 +269,8 @@ func _on_area_body_exited(body: Node2D) -> void:
 	# tile.tile_rotation = randi() % 4
 	var direction = GameGlobal.player.movement_component.last_inside_direction
 	var tile: Tile = transform_with_1ddl_less(direction, true)
-	
+	if !tile:
+		return
 	tile.tile_bigger.play_full()
 	tile._play_idle_rotation_sound()
 	

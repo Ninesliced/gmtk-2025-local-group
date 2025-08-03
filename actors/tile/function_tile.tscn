@@ -19,6 +19,9 @@ radius = 13.0
 [node name="function_tile" instance=ExtResource("1_se004")]
 script = ExtResource("2_supox")
 function = 0
+is_changeable = false
+is_action_spawnable = false
+lock_rotation = true
 
 [node name="3DShader" parent="." index="1"]
 material = SubResource("ShaderMaterial_supox")
