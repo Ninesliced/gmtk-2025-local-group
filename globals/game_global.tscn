@@ -134,7 +134,7 @@ _data = {
 [node name="GameGlobal" type="Node"]
 process_mode = 3
 script = ExtResource("1_gu6ii")
-action_stacks = Array[int]([9, 3, 2, 7])
+action_stacks = Array[int]([0, 3, 2, 7])
 action_textures = Dictionary[int, Texture2D]({
 0: SubResource("AtlasTexture_gc13h"),
 1: SubResource("AtlasTexture_woeo0"),

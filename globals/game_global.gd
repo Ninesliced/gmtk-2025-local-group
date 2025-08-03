@@ -438,13 +438,13 @@ func spawn_vertical_spikes(tile: Tile) -> void:
 	_play_explosion_sound_effect()
 
 func spawn_square_spikes(tile:Tile) -> void:
-	var spike_line := load("res://actors/tile/spike/line_spike.tscn")
+	var spike_four := load("res://actors/tile/spike/four_spike.tscn")
 	var spike_t := load("res://actors/tile/spike/t_spike.tscn")
 	var spike_corner := load("res://actors/tile/spike/corner_spike.tscn")
 	
 	var current_tile = map.grid[(tile.grid_position.x)%map.grid_size.x][(tile.grid_position.y)%map.grid_size.y]
 	var new_tile = null
-	new_tile = current_tile.transform_to_another_type(spike_line, false)
+	new_tile = current_tile.transform_to_another_type(spike_four, false)
 	new_tile.tile_bigger.play_full(0)
 	
 	current_tile = map.grid[(tile.grid_position.x+1)%map.grid_size.x][(tile.grid_position.y)%map.grid_size.y]
