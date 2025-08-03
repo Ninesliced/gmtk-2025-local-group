@@ -226,9 +226,9 @@ region = Rect2(32, 96, 32, 32)
 
 [node name="TileUi" type="Node2D" node_paths=PackedStringArray("sound_action", "rotation_sound_effect", "idle_rotation_sound_effect")]
 script = ExtResource("1_xx546")
-sound_action = NodePath("RotationSoundEffect")
-rotation_sound_effect = NodePath("RotationSoundEffect")
-idle_rotation_sound_effect = NodePath("RotationSoundEffect")
+sound_action = NodePath("")
+rotation_sound_effect = NodePath("")
+idle_rotation_sound_effect = NodePath("")
 tile_rotation = 1
 
 [node name="Area" type="Area2D" parent="."]
@@ -263,7 +263,7 @@ texture = SubResource("AtlasTexture_sfx3x")
 [node name="ActionHolder" type="Node2D" parent="."]
 unique_name_in_owner = true
 
-[node name="RotationSoundEffect" type="AudioStreamPlayer2D" parent="."]
+[node name="RotationSoundEffect" type="AudioStreamPlayer" parent="."]
 unique_name_in_owner = true
 stream = ExtResource("5_c1brt")
 volume_db = -30.0

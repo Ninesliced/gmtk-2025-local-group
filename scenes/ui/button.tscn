@@ -115,11 +115,13 @@ parent_button = NodePath("..")
 unique_name_in_owner = true
 stream = ExtResource("2_3xo2w")
 volume_db = -15.0
+bus = &"SFX"
 
 [node name="ClickSoundEffect" type="AudioStreamPlayer" parent="."]
 unique_name_in_owner = true
 stream = ExtResource("3_vgxan")
 volume_db = -15.0
+bus = &"SFX"
 
 [connection signal="focus_entered" from="." to="AnimationPlayer" method="_on_button_focus_entered"]
 [connection signal="mouse_entered" from="." to="AnimationPlayer" method="_on_button_mouse_entered"]
