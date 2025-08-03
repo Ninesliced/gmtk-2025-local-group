@@ -2,9 +2,12 @@ extends Node
 
 signal on_action_stack_changed
 signal on_action
+
 var in_menu: bool = false
 var max_action_number = 6
 const ENEMY = preload("res://actors/enemy/enemy.tscn")
+
+var main_menu_scene: PackedScene = preload("res://scenes/main_menu.tscn")
 @onready var canvas_layer: CanvasLayer = %CanvasLayer
 @export var action_stacks : Array[ActionType] = [
 	ActionType.ROTATE_CLOCK,
@@ -42,6 +45,7 @@ var score : int = 0:
 	set(value):
 		score = max(score, value)
 		%Score.text = "Score: " + str(score)
+		$CanvasLayer/GameOver/VBoxContainer2/VBoxContainer/NinePatchRect2/Number.text = str(score)
 
 @export var action_textures : Dictionary[ActionType, Texture2D] = {}
 enum ActionType {
@@ -404,7 +408,10 @@ func nop(_tile: Tile, _event: InputEvent):
 @export var camera: Camera2D = null
 var is_game_have_start: bool = false
 var rng = RandomNumberGenerator.new()
-var rng_seed = str(randi())
+var rng_seed = str(randi()):
+	set(x):
+		rng_seed = x
+		$CanvasLayer/GameOver/VBoxContainer2/VBoxContainer2/NinePatchRect2/Number.text = x
 var leaderboard = null
 
 @export var action_ui_scene: PackedScene = preload("res://scenes/ui/action_ui.tscn")
@@ -475,7 +482,8 @@ func pick_weighted_random_action() -> ActionType:
 
 
 func reset_game() -> void:
-
+	%Score.show()
+	%ActionsContainer.show()
 	score = 0
 	number_of_actions = 0
 
@@ -490,3 +498,27 @@ func reset_game() -> void:
 		actions_ui.append(action_ui)
 		_update_size()
 	GameGlobal.action_ui_stacks = actions_ui
+
+
+
+func end_game() -> void:
+	in_menu = true
+	get_tree().paused = true
+	%AnimationPlayer.play("game_over")
+	
+
+func _on_retry_pressed():
+	%AnimationPlayer.play("RESET")
+	TransitionManager.reload_scene()
+	get_tree().paused = false
+	pass # Replace with function body.
+
+
+func _on_menu_pressed():
+	%AnimationPlayer.play("RESET")
+	TransitionManager.change_scene(GameGlobal.main_menu_scene, "circle_gradient")
+	get_tree().paused = false
+	%ActionsContainer.hide()
+	%Score.hide()
+
+	pass # Replace with function body.

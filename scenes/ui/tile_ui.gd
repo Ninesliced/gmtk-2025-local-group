@@ -128,8 +128,8 @@ func high_visibility_outline() -> void:
 	outline_tween.tween_callback(low_visibility_outline)
 
 func rotate_animated(new_rotation: int) -> void:
-	print(new_rotation)
-	print(%Sprite.rotation, " vs ", PI / 2 * new_rotation)
+	# print(new_rotation)
+	# print(%Sprite.rotation, " vs ", PI / 2 * new_rotation)
 	if abs(%Sprite.rotation - PI / 2 * new_rotation) > PI:
 		if %Sprite.rotation < PI / 2 * new_rotation:
 			%Sprite.rotation += PI * 2

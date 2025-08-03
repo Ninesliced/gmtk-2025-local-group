@@ -42,7 +42,7 @@ tracks/0/keys = {
 "times": PackedFloat32Array(0, 0.0625, 0.1875, 0.25),
 "transitions": PackedFloat32Array(0.574349, 1.6245, 0.5, 1),
 "update": 0,
-"values": [0.0, 0.0872665, -0.0872665, 0.0]
+"values": [0.0, 0.0436332, -0.0436332, 0.0]
 }
 tracks/1/type = "value"
 tracks/1/imported = false
@@ -79,6 +79,8 @@ func _on_button_mouse_entered():
 
 [node name="Button" type="Button"]
 custom_minimum_size = Vector2(128, 0)
+offset_right = 128.0
+offset_bottom = 35.0
 pivot_offset = Vector2(64, 16)
 theme = ExtResource("1_di1ux")
 theme_override_colors/font_color = Color(0, 0, 0, 1)

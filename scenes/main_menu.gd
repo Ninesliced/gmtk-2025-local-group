@@ -5,7 +5,9 @@ class_name MainMenu
 @export var main_menu_scene: PackedScene
 @onready var play_button: Button = %PlayButton
 @onready var request: Node2D = $Request
-@onready var seed_of_the_day: Label = %Seed_of_the_day
+var seed_of_the_day: String = ""
+
+@onready var leaderboards: Array[HBoxContainer] = [%Leaderboard, %Leaderboard2, %Leaderboard3, %Leaderboard4, %Leaderboard5]
 
 @onready var hbox_container: VBoxContainer = $HBoxContainer
 func _ready():
