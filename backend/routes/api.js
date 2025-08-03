@@ -1,7 +1,13 @@
-const express = require('express');
-const router = express.Router();
+// Autorise toutes les origines
+// app.use(cors());
+//
 const db = require('../db');
 const getTodaySeed = require('../seed/dailySeed');
+const express = require('express');
+const cors = require('cors');
+
+const router = express.Router();
+router.use(cors());
 
 // GET /get_seed
 router.get('/get_seed', async (req, res) => {
@@ -81,7 +87,7 @@ router.post('/submit', async (req, res) => {
     if (!pseudo || !score || !seed) return res.status(400).json({ error: 'Missing fields' });
     if (pseudo.length > 9) return res.status(400).json({ error: 'Pseudo too long' });
     if (pseudo.length === 0) return res.status(400).json({ error: 'Pseudo too short' });
-    if (pseudo.score % 10 !== 0) return res.status(400).json({ error: 'Not Valid Score' });
+    if (pseudo.score > 99999999) return res.status(400).json({ error: 'Not Valid Score' });
     if (isPseudoOffensive(pseudo)) return res.status(400).json({ error: 'Offensive pseudo' });
     const normalizedPseudo = maskOffensiveWords(pseudo);
     
