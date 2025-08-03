@@ -5,7 +5,7 @@ func _ready():
 	hide()
 
 func _input(event):
-	if !GameGlobal.is_game_have_start:
+	if !GameGlobal.is_in_game:
 		return
 	if event.is_action_pressed("ui_cancel"):
 		if visible:
