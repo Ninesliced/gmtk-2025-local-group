@@ -1,6 +1,6 @@
 [gd_scene load_steps=8 format=3 uid="uid://cbb8lsgv3vahf"]
 
-[ext_resource type="Script" uid="uid://dv2kscp3qqeg0" path="res://globals/music_manager.gd" id="1_gq8vl"]
+[ext_resource type="Script" path="res://globals/music_manager.gd" id="1_gq8vl"]
 [ext_resource type="AudioStream" uid="uid://svxhibony3lb" path="res://assets/music/work/main_theme.ogg" id="1_qux6j"]
 [ext_resource type="AudioStream" uid="uid://c7c8pgcm72uur" path="res://assets/music/work/main_theme_calfed.ogg" id="2_gq8vl"]
 

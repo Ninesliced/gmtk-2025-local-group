@@ -146,11 +146,13 @@ mc = NodePath("../MovementComponent")
 unique_name_in_owner = true
 stream = ExtResource("11_hiosj")
 volume_db = -20.0
+bus = &"SFX"
 
 [node name="ItemTakeSoundEffect" type="AudioStreamPlayer" parent="."]
 unique_name_in_owner = true
 stream = ExtResource("12_ssdk0")
 volume_db = -20.0
+bus = &"SFX"
 parameters/looping = false
 
 [connection signal="area_entered" from="HitboxComponent" to="." method="_on_hitbox_component_area_entered"]
