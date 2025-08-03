@@ -47,6 +47,7 @@ script = ExtResource("2_tefeu")
 
 [node name="ActionUI" parent="." instance=ExtResource("9_85g3d")]
 self_modulate = Color(1, 1, 1, 0.278431)
+z_index = 21
 mouse_filter = 2
 
 [node name="ActionCurrentComponent2" type="Node" parent="ActionUI"]
