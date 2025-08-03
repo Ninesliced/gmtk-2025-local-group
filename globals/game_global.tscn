@@ -9,6 +9,7 @@
 [ext_resource type="Theme" uid="uid://c06a0wpkb3qyr" path="res://resources/theme.tres" id="6_6cuha"]
 [ext_resource type="PackedScene" path="res://scenes/ui/death_scene.tscn" id="7_opdgg"]
 [ext_resource type="AudioStream" uid="uid://crcfboaukdtof" path="res://assets/sfx/work/explode.ogg" id="8_l7e3u"]
+[ext_resource type="Texture2D" uid="uid://dcsxh4fertxea" path="res://assets/action_holder.png" id="8_q00l3"]
 [ext_resource type="AudioStream" uid="uid://bpdsn3u7k4n8x" path="res://assets/sfx/work/explode_short.ogg" id="8_xofr3"]
 [ext_resource type="AudioStream" uid="uid://ct3kkknswudc0" path="res://assets/sfx/work/explode_long.ogg" id="9_672fk"]
 [ext_resource type="AudioStream" uid="uid://ihmp5eyi7gmb" path="res://assets/sfx/work/swap.ogg" id="11_lcri1"]
@@ -143,6 +144,10 @@ unique_name_in_owner = true
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
 unique_name_in_owner = true
 
+[node name="Sprite2D" type="Sprite2D" parent="CanvasLayer"]
+position = Vector2(58, 12)
+texture = ExtResource("8_q00l3")
+
 [node name="ActionsContainer" parent="CanvasLayer" instance=ExtResource("3_woeo0")]
 unique_name_in_owner = true
 visible = false
@@ -180,9 +185,10 @@ script = SubResource("GDScript_opdgg")
 
 [node name="Score" type="Label" parent="CanvasLayer"]
 unique_name_in_owner = true
-visible = false
-offset_right = 40.0
-offset_bottom = 23.0
+offset_left = 146.0
+offset_top = 1.0
+offset_right = 194.0
+offset_bottom = 24.0
 theme_override_font_sizes/font_size = 8
 text = "Score: 0"
 

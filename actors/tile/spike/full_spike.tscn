@@ -37,7 +37,6 @@ animations = [{
 [node name="Spike" instance=ExtResource("1_rjogy")]
 script = ExtResource("2_6ajxb")
 is_action_spawnable = false
-chance_action_spawn = 0.025
 tileName = "FullSpikeTile"
 
 [node name="3DShader" parent="." index="1"]
