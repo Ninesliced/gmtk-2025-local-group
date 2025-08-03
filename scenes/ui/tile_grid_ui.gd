@@ -27,7 +27,7 @@ func _physics_process(delta: float) -> void:
 	for tile in %CanvasGroup.get_children():
 		if tile is TileUi:
 			tile.position.y += _dist
-			if tile.position.y >= screen_size.y + tile_size.y / 2 - 4 - _dist:
+			if tile.position.y >= screen_size.y + tile_size.y / 2 - 4:
 				var new_tile : TileUi = tile_scene.instantiate()
 				new_tile.position = Vector2(tile.position.x, -tile_size.y)
 				%CanvasGroup.add_child(new_tile)
