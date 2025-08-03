@@ -44,7 +44,7 @@ func _on_get_leaderboard_completed(result, response_code, headers, body):
 	var leaderboards = get_parent().leaderboards
 	for i in range(len(json)):
 		var value = json[i]
-		leaderboards[i].change_data(value["pseudo"], str(value["score"]))
+		leaderboards[i].change_data(value["pseudo"], str(int(value["score"])))
 		
 
 
