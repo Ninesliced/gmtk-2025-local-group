@@ -1,4 +1,4 @@
-[gd_scene load_steps=31 format=3 uid="uid://byxp1bvr3gl84"]
+[gd_scene load_steps=32 format=3 uid="uid://byxp1bvr3gl84"]
 
 [ext_resource type="Script" uid="uid://q581v4j3vmv4" path="res://globals/game_global.gd" id="1_gu6ii"]
 [ext_resource type="Texture2D" uid="uid://dgdfmi7kbpgg6" path="res://assets/images/actions/rotate.png" id="3_gc13h"]
@@ -14,6 +14,7 @@
 [ext_resource type="AudioStream" uid="uid://ct3kkknswudc0" path="res://assets/sfx/work/explode_long.ogg" id="9_672fk"]
 [ext_resource type="AudioStream" uid="uid://ihmp5eyi7gmb" path="res://assets/sfx/work/swap.ogg" id="11_lcri1"]
 [ext_resource type="AudioStream" uid="uid://s1pso4bpxokg" path="res://assets/sfx/work/woof.ogg" id="12_kyo4h"]
+[ext_resource type="PackedScene" uid="uid://cbb8lsgv3vahf" path="res://globals/music_manager.tscn" id="15_0xphb"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_gc13h"]
 atlas = ExtResource("3_gc13h")
@@ -231,6 +232,9 @@ volume_db = -35.0
 unique_name_in_owner = true
 stream = ExtResource("12_kyo4h")
 volume_db = -30.0
+
+[node name="MusicManager" parent="." instance=ExtResource("15_0xphb")]
+unique_name_in_owner = true
 
 [connection signal="pressed" from="CanvasLayer/debug/Button" to="CanvasLayer/debug/Button" method="_on_pressed"]
 [connection signal="pressed" from="CanvasLayer/debug/Noclip" to="CanvasLayer/debug/Noclip" method="_on_pressed"]

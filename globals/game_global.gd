@@ -3,6 +3,8 @@ extends Node
 signal on_action_stack_changed
 signal on_action
 
+@onready var music_manager := %MusicManager
+
 var in_menu: bool = false
 var max_action_number = 6
 const ENEMY = preload("res://actors/enemy/enemy.tscn")
@@ -518,8 +520,7 @@ func _on_retry_pressed():
 	%AnimationPlayer.play("RESET")
 	TransitionManager.reload_scene("circle_gradient", null, 2.5)
 	get_tree().paused = false
-	pass # Replace with function body.
-
+	GameGlobal.music_manager.calfed = true
 
 func _on_menu_pressed():
 	%AnimationPlayer.play("RESET")
@@ -527,5 +528,4 @@ func _on_menu_pressed():
 	get_tree().paused = false
 	%ActionsContainer.hide()
 	%CanvasLayer.hide()
-
-	pass # Replace with function body.
+	GameGlobal.music_manager.calfed = true
