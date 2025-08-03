@@ -15,7 +15,7 @@
 [ext_resource type="Texture2D" uid="uid://dv03djiyk4tok" path="res://assets/images/ui/rect/play.png" id="12_flqon"]
 [ext_resource type="Texture2D" uid="uid://dtyov2htrcqvk" path="res://assets/images/ui/rect/play_pressed.png" id="13_7b55j"]
 [ext_resource type="PackedScene" uid="uid://g63ms4dlkya7" path="res://scenes/ui/tile_grid_ui.tscn" id="14_1ajci"]
-[ext_resource type="Script" uid="uid://17dmnltu11in" path="res://scenes/play_seed_of_the_day.gd" id="16_5pajh"]
+[ext_resource type="Script" path="res://scenes/play_seed_of_the_day.gd" id="16_5pajh"]
 
 [sub_resource type="Shader" id="Shader_7b55j"]
 code = "shader_type canvas_item;

@@ -17,6 +17,7 @@ func _process(_delta: float) -> void:
 	pass
 func set_current_action():
 	if GameGlobal.action_stacks.size() == 0:
+		action_ui.set_texture_rect(null)
 		return
 	action_ui.animation_pop()
 	var texture = GameGlobal.action_textures[GameGlobal.action_stacks[0]]
