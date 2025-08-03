@@ -34,9 +34,6 @@ var outline_tween: Tween            = null
 
 		if is_inside_tree() && get_tree():
 			rotate_animated(new_rotation)
-		else:
-			if %Sprite:
-				%Sprite.rotation = PI / 2 * new_rotation
 
 		tile_rotation = new_rotation % 4
 

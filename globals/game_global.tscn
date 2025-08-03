@@ -139,6 +139,7 @@ action_textures = Dictionary[int, Texture2D]({
 })
 
 [node name="Request" parent="." instance=ExtResource("3_iovrn")]
+unique_name_in_owner = true
 
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
 unique_name_in_owner = true

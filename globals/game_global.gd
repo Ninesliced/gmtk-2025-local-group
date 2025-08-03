@@ -31,7 +31,8 @@ var main_menu_scene: PackedScene = preload("res://scenes/main_menu.tscn")
 
 var action_stack_backup = action_stacks.duplicate()
 var action_ui_stacks : Array[ActionUI] = []
-
+var is_seed_of_the_day: bool = false
+var username: String = "Pseudo"
 var hovered_tile: Tile = null
 
 ## include movement of player
@@ -505,6 +506,8 @@ func end_game() -> void:
 	in_menu = true
 	get_tree().paused = true
 	%AnimationPlayer.play("game_over")
+	if is_seed_of_the_day:
+		%Request.submit(username, score)
 	
 
 func _on_retry_pressed():

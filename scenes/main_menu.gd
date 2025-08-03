@@ -13,6 +13,7 @@ var seed_of_the_day: String = ""
 func _ready():
 	UIManager.first_unclosable = true
 	UIManager.set_ui(hbox_container, play_button)
+	%PlaySeedOfTheDay.disabled
 
 func _on_play_pressed():
 	UIManager.set_ui(play)
@@ -24,6 +25,27 @@ func _on_play_pressed():
 	
 func _on_quit_pressed():
 	get_tree().quit()
+	
+func get_random_seed() -> String:
+	var out = ""
+	var possible_char = "azertyuiopqsdfghjklmwxcvbn1234567890"
+	for i in range(12):
+		out += possible_char[randi()%len(possible_char)]
+	return out
+	
 func _on_play_button_pressed():
+	var inputed_seed = $Play/Container/HBoxContainer/right/panel/VBoxContainer/NinePatchRect/SeedInput.text
+	print("Inputded_seed", inputed_seed)
+	if inputed_seed == "":
+		inputed_seed = get_random_seed()
+	GameGlobal.rng_seed = inputed_seed
+	GameGlobal.is_seed_of_the_day = false
 	TransitionManager.change_scene(main_menu_scene, "circle_gradient", null, 1.0)
-	pass # Replace with function body.
+
+
+func _on_play_seed_of_the_day_pressed() -> void:
+	GameGlobal.is_seed_of_the_day = true
+	GameGlobal.username = $Play/Container/HBoxContainer/right/SeedOfTheDay/VBoxContainer/NinePatchRect2/Username.text
+	if GameGlobal.username == "":
+		GameGlobal.username = "Noob"
+	TransitionManager.change_scene(main_menu_scene, "circle_gradient", null, 1.0)
