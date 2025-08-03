@@ -248,12 +248,15 @@ grow_horizontal = 2
 grow_vertical = 2
 theme_override_font_sizes/font_size = 8
 theme_override_styles/normal = SubResource("StyleBoxEmpty_flqon")
+text = "Pseudo"
 placeholder_text = "Username"
 max_length = 9
 
-[node name="PlayButton2" type="Button" parent="Play/Container/HBoxContainer/right/SeedOfTheDay/VBoxContainer"]
+[node name="PlaySeedOfTheDay" type="Button" parent="Play/Container/HBoxContainer/right/SeedOfTheDay/VBoxContainer"]
+unique_name_in_owner = true
 layout_mode = 2
 theme = SubResource("Theme_lgwnu")
+disabled = true
 text = "Play"
 
 [node name="panel" type="NinePatchRect" parent="Play/Container/HBoxContainer/right"]
@@ -306,7 +309,7 @@ theme_override_styles/normal = SubResource("StyleBoxEmpty_flqon")
 placeholder_text = "The seeds"
 max_length = 12
 
-[node name="PlayButton2" type="Button" parent="Play/Container/HBoxContainer/right/panel/VBoxContainer"]
+[node name="PlayButton" type="Button" parent="Play/Container/HBoxContainer/right/panel/VBoxContainer"]
 layout_mode = 2
 theme = SubResource("Theme_lgwnu")
 text = "Play"
@@ -314,6 +317,6 @@ text = "Play"
 [connection signal="pressed" from="HBoxContainer/PlayButton" to="." method="_on_play_pressed"]
 [connection signal="pressed" from="HBoxContainer/Quit" to="." method="_on_quit_pressed"]
 [connection signal="text_changed" from="Play/Container/HBoxContainer/right/SeedOfTheDay/VBoxContainer/NinePatchRect2/Username" to="Play/Container/HBoxContainer/right/SeedOfTheDay/VBoxContainer/NinePatchRect2/Username" method="_on_text_changed"]
-[connection signal="pressed" from="Play/Container/HBoxContainer/right/SeedOfTheDay/VBoxContainer/PlayButton2" to="." method="_on_play_button_pressed"]
+[connection signal="pressed" from="Play/Container/HBoxContainer/right/SeedOfTheDay/VBoxContainer/PlaySeedOfTheDay" to="." method="_on_play_seed_of_the_day_pressed"]
 [connection signal="text_changed" from="Play/Container/HBoxContainer/right/panel/VBoxContainer/NinePatchRect/SeedInput" to="Play/Container/HBoxContainer/right/panel/VBoxContainer/NinePatchRect/SeedInput" method="_on_text_changed"]
-[connection signal="pressed" from="Play/Container/HBoxContainer/right/panel/VBoxContainer/PlayButton2" to="." method="_on_play_button_pressed"]
+[connection signal="pressed" from="Play/Container/HBoxContainer/right/panel/VBoxContainer/PlayButton" to="." method="_on_play_button_pressed"]

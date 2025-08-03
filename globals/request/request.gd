@@ -32,6 +32,7 @@ func _on_get_seed_completed(result, response_code, headers, body):
 	GameGlobal.rng_seed = json["seed"]
 	if get_parent() is MainMenu:
 		get_parent().seed_of_the_day = json["seed"]
+		%PlaySeedOfTheDay.disabled = false
 
 func _on_get_leaderboard_completed(result, response_code, headers, body):
 	if response_code != 200:
