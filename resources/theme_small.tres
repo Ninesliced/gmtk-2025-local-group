@@ -1,4 +1,4 @@
-[gd_resource type="Theme" load_steps=14 format=3 uid="uid://buuedk6saietw"]
+[gd_resource type="Theme" load_steps=14 format=3 uid="uid://bdsy78iv5pg00"]
 
 [ext_resource type="Texture2D" uid="uid://6p5kfxtb28n4" path="res://assets/images/ui/rect/ninepatch_hover.png" id="1_53pkc"]
 [ext_resource type="Texture2D" uid="uid://dh5ub6glbgkpc" path="res://assets/images/ui/rect/ninepatch.png" id="2_sgjog"]
