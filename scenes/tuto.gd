@@ -12,7 +12,7 @@ func _ready():
 		[0 ,0 ,0 ,0 ,0 ,13,2 ,11,0 ,0 ,0 ,0 ,0 ,0 ,0 ,0 ,0 ,0 ,0 ,0 ,0 ,0 ,0 ,0 ,0 ,0 ,0 ,0 ,0 ,0 ,0 ,0 ,0 ],
 	])
 	
-	print(len(GameGlobal.action_stacks))
+	# print(len(GameGlobal.action_stacks))
 	for i in range(len(GameGlobal.actions_ui)):
 		GameGlobal.actions_ui[i].queue_free()
 		

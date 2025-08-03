@@ -25,7 +25,6 @@ func _input(event):
 						move_direction = Vector2i(-1 if direction.x > 0 else 1, 0)
 					else:
 						move_direction = Vector2i(0, -1 if direction.y > 0 else 1)
-					print(move_direction)
 					GameGlobal.player.get_movement_component().move_player(move_direction)
 			start_touch_pos = Vector2.ZERO
 

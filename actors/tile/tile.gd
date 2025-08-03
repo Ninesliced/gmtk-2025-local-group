@@ -140,8 +140,8 @@ func _on_area_2d_mouse_exited() -> void:
 func _on_area_2d_input_event(viewport: Node, event: InputEvent, shape_idx: int) -> void:
 	if event is InputEventMouseButton:
 		if !event.pressed and event.button_index < 3:
-			print("name: ", name, " grid_position: ", grid_position, " event: ", event)
-			print("tile name:", tileName)
+			# print("name: ", name, " grid_position: ", grid_position, " event: ", event)
+			# print("tile name:", tileName)
 			GameGlobal.act_tile(self, event)
 
 
@@ -301,7 +301,7 @@ func translation_animated(target: Vector2) -> void:
 
 
 func transform_to_another_type(new_tile: PackedScene, play_animation: bool = true, new_tile_rotation: Rotation = tile_rotation) -> Tile:
-	print(new_tile.resource_name)
+	# print(new_tile.resource_name)
 	if not is_changeable:
 		return self
 	if is_player_inside:
