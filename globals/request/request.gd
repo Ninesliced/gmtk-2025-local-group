@@ -1,5 +1,8 @@
 extends Node2D
 
+@export var refresh_button: Button
+
+
 func _ready() -> void:
 	%HTTPRequestGetSeed.request_completed.connect(_on_get_seed_completed)
 	%HTTPRequestGetLeaderboard.request_completed.connect(_on_get_leaderboard_completed)
@@ -20,6 +23,7 @@ func submit(pseudo="Pseudo", score=0):
 	%HTTPRequestSubmit.request("https://laby.arkanyota.com/submit", headers, HTTPClient.METHOD_POST, json)
 
 func get_leaderboard():
+	refresh_button.disabled = true
 	%HTTPRequestGetLeaderboard.request("https://laby.arkanyota.com/leaderboard")
 
 func get_rank(pseudo="Pseudo"):
@@ -46,6 +50,7 @@ func _on_get_leaderboard_completed(result, response_code, headers, body):
 		var value = json[i]
 		leaderboards[i].change_data(value["pseudo"], str(int(value["score"])))
 		
+	refresh_button.disabled = false
 
 
 func _on_get_rank_completed(result, response_code, headers, body):
@@ -57,6 +62,7 @@ func _on_get_rank_completed(result, response_code, headers, body):
 	if response_code != 200:
 		return
 	var json = JSON.parse_string(body.get_string_from_utf8())
+
 
 func _on_submit_completed(result, response_code, headers, body):
 	if response_code != 200:

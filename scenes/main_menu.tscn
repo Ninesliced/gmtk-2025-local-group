@@ -1,4 +1,4 @@
-[gd_scene load_steps=23 format=3 uid="uid://bvbyb8jdqjcei"]
+[gd_scene load_steps=25 format=3 uid="uid://bvbyb8jdqjcei"]
 
 [ext_resource type="Script" uid="uid://tk3v0572hok5" path="res://scenes/main_menu.gd" id="1_bqqt6"]
 [ext_resource type="PackedScene" uid="uid://d2i4w4joysljq" path="res://scenes/ui/button.tscn" id="1_ekxnf"]
@@ -10,6 +10,8 @@
 [ext_resource type="Shader" uid="uid://dhrxdnevtv4vp" path="res://addons/shaker/components/vfx/shaders/outline2.gdshader" id="6_jk1qb"]
 [ext_resource type="Theme" uid="uid://c06a0wpkb3qyr" path="res://resources/theme.tres" id="7_5dd4i"]
 [ext_resource type="PackedScene" uid="uid://bc11r74o1iibq" path="res://scenes/main_menu/play/leaderboard_data_ui.tscn" id="8_flqon"]
+[ext_resource type="Texture2D" uid="uid://d1m076hphup2p" path="res://assets/images/ui/rect/refresh.png" id="10_5pajh"]
+[ext_resource type="Theme" uid="uid://buuedk6saietw" path="res://resources/theme_small.tres" id="10_j7ex8"]
 [ext_resource type="Texture2D" uid="uid://cncpqu3fcgw0s" path="res://assets/images/ui/rect/seed_input.png" id="11_lgwnu"]
 [ext_resource type="Material" uid="uid://ctsbqcehyf6ux" path="res://actors/action/action.tres" id="11_rcqid"]
 [ext_resource type="PackedScene" uid="uid://g63ms4dlkya7" path="res://scenes/ui/tile_grid_ui.tscn" id="14_1ajci"]
@@ -63,7 +65,9 @@ mouse_filter = 2
 script = ExtResource("1_bqqt6")
 main_menu_scene = ExtResource("2_wu84c")
 
-[node name="Request" parent="." instance=ExtResource("3_7b55j")]
+[node name="Request" parent="." node_paths=PackedStringArray("refresh_button") instance=ExtResource("3_7b55j")]
+unique_name_in_owner = true
+refresh_button = NodePath("../Play/Container/HBoxContainer/NinePatchRect/VBoxContainer/Header/RefreshButton")
 
 [node name="TileGridUi" parent="." instance=ExtResource("14_1ajci")]
 
@@ -156,7 +160,7 @@ anchors_preset = -1
 anchor_right = 1.0
 anchor_bottom = 1.0
 offset_left = 3.38
-offset_right = -4.62
+offset_right = -2.0
 offset_bottom = -8.0
 grow_horizontal = 2
 grow_vertical = 2
@@ -173,10 +177,17 @@ theme_override_fonts/font = SubResource("FontVariation_7b55j")
 text = "Scoreboard of the Day"
 horizontal_alignment = 1
 
-[node name="Button" parent="Play/Container/HBoxContainer/NinePatchRect/VBoxContainer/Header" instance=ExtResource("1_ekxnf")]
+[node name="MarginContainer" type="MarginContainer" parent="Play/Container/HBoxContainer/NinePatchRect/VBoxContainer/Header"]
+custom_minimum_size = Vector2(12, 0)
+layout_mode = 2
+
+[node name="RefreshButton" parent="Play/Container/HBoxContainer/NinePatchRect/VBoxContainer/Header" instance=ExtResource("1_ekxnf")]
 custom_minimum_size = Vector2(0, 0)
 layout_mode = 2
+theme = ExtResource("10_j7ex8")
+theme_override_constants/icon_max_width = 0
 text = ""
+icon = ExtResource("10_5pajh")
 
 [node name="Leaderboard" parent="Play/Container/HBoxContainer/NinePatchRect/VBoxContainer" instance=ExtResource("8_flqon")]
 unique_name_in_owner = true
@@ -202,7 +213,7 @@ layout_mode = 2
 layout_mode = 2
 
 [node name="SeedOfTheDay" type="NinePatchRect" parent="Play/Container/HBoxContainer/right"]
-custom_minimum_size = Vector2(0, 48)
+custom_minimum_size = Vector2(0, 85)
 layout_mode = 2
 size_flags_vertical = 3
 size_flags_stretch_ratio = 0.9
@@ -256,7 +267,7 @@ context_menu_enabled = false
 
 [node name="PlaySeedOfTheDay" parent="Play/Container/HBoxContainer/right/SeedOfTheDay/VBoxContainer" instance=ExtResource("1_ekxnf")]
 unique_name_in_owner = true
-custom_minimum_size = Vector2(0, 27)
+custom_minimum_size = Vector2(0, 26)
 layout_mode = 2
 theme = ExtResource("14_j7ex8")
 script = ExtResource("16_5pajh")
@@ -318,14 +329,15 @@ context_menu_enabled = false
 
 [node name="PlayCustomSeed" parent="Play/Container/HBoxContainer/right/panel/VBoxContainer" instance=ExtResource("1_ekxnf")]
 unique_name_in_owner = true
-custom_minimum_size = Vector2(0, 27)
+custom_minimum_size = Vector2(0, 26)
 layout_mode = 2
 theme = ExtResource("14_j7ex8")
 
 [connection signal="pressed" from="HBoxContainer/PlayButton" to="." method="_on_play_pressed"]
 [connection signal="pressed" from="HBoxContainer/TutorialButton" to="." method="_on_tutorial_button_pressed"]
 [connection signal="pressed" from="HBoxContainer/Quit" to="." method="_on_quit_pressed"]
+[connection signal="pressed" from="Play/Container/HBoxContainer/NinePatchRect/VBoxContainer/Header/RefreshButton" to="." method="_on_refresh_button_pressed"]
 [connection signal="text_changed" from="Play/Container/HBoxContainer/right/SeedOfTheDay/VBoxContainer/NinePatchRect2/Username" to="Play/Container/HBoxContainer/right/SeedOfTheDay/VBoxContainer/PlaySeedOfTheDay" method="_on_username_text_changed"]
-[connection signal="pressed" from="Play/Container/HBoxContainer/right/SeedOfTheDay/VBoxContainer/PlaySeedOfTheDay" to="." method="_on_play_seed_of_the_day_pressed"]
+[connection signal="pressed" from="Play/Container/HBoxContainer/right/SeedOfTheDay/VBoxContainer/PlaySeedOfTheDay" to="." method="_on_play_seed_of_the_day_button_pressed"]
 [connection signal="text_changed" from="Play/Container/HBoxContainer/right/panel/VBoxContainer/NinePatchRect/SeedInput" to="Play/Container/HBoxContainer/right/panel/VBoxContainer/NinePatchRect/SeedInput" method="_on_text_changed"]
 [connection signal="pressed" from="Play/Container/HBoxContainer/right/panel/VBoxContainer/PlayCustomSeed" to="." method="_on_play_button_pressed"]
