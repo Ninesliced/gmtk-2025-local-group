@@ -3,6 +3,7 @@ extends Node
 signal on_action_stack_changed
 signal on_action
 var in_menu: bool = false
+var max_action_number = 6
 const ENEMY = preload("res://actors/enemy/enemy.tscn")
 @onready var canvas_layer: CanvasLayer = %CanvasLayer
 @export var action_stacks : Array[ActionType] = [
@@ -41,7 +42,6 @@ var score : int = 0:
 	set(value):
 		score = max(score, value)
 		%Score.text = "Score: " + str(score)
-
 
 @export var action_textures : Dictionary[ActionType, Texture2D] = {}
 enum ActionType {
@@ -175,6 +175,7 @@ var dict: Dictionary[ActionType, Dictionary] = {
 
 
 func _ready():
+	
 	print("test: ", action_stacks)
 
 	# Action UI
@@ -428,6 +429,8 @@ func _update_size() -> void:
 func add_action(action: ActionType, action_ui: ActionUI) -> void:
 	action_stacks.append(action)
 	action_ui_stacks.append(action_ui)
+	if GameGlobal.action_stacks.size() > max_action_number:
+		delete_current_action()
 	on_action_stack_changed.emit()
 
 func new_action_ui(action: ActionType) -> ActionUI:
