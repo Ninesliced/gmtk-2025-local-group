@@ -654,11 +654,11 @@ func go_to_main_menu():
 
 
 func _on_music_volume_slider_value_changed(value: float) -> void:
-	AudioServer.set_bus_volume_linear(1, value / 100.)
+	AudioServer.set_bus_volume_linear(AudioServer.get_bus_index("Music"), value / 100.)
 
 
 func _on_sfx_volume_slider_value_changed(value: float) -> void:
-	AudioServer.set_bus_volume_linear(2, value / 100.)
+	AudioServer.set_bus_volume_linear(AudioServer.get_bus_index("SFX"), value / 100.)
 
 
 func _on_pause_button_pressed(event: InputEvent) -> void:
