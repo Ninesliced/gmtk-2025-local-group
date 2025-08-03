@@ -13,6 +13,7 @@ var seed_of_the_day: String = ""
 
 @onready var hbox_container: VBoxContainer = $HBoxContainer
 func _ready():
+	GameGlobal.is_game_have_start = false
 	UIManager.first_unclosable = true
 	UIManager._stack.clear() # HACK
 	UIManager.set_ui(hbox_container, play_button)
