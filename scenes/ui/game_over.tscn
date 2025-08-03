@@ -63,7 +63,7 @@ offset_top = 102.0
 offset_right = 113.0
 offset_bottom = 124.0
 pivot_offset = Vector2(24, 12)
-text = "retry"
+text = "Retry"
 
 [node name="Menu" parent="." instance=ExtResource("4_b6337")]
 custom_minimum_size = Vector2(48, 0)
