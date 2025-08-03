@@ -13,6 +13,7 @@ var seed_of_the_day: String = ""
 
 @onready var hbox_container: VBoxContainer = %HBoxContainer
 func _ready():
+	GameGlobal.is_game_have_start = false
 	UIManager.first_unclosable = true
 	UIManager._stack.clear() # HACK
 	UIManager.set_ui(hbox_container, play_button)
@@ -41,7 +42,7 @@ func get_random_seed() -> String:
 	return out
 	
 func _on_play_button_pressed():
-	var inputed_seed = %SeedInput.text
+	var inputed_seed = $Play/Container/HBoxContainer/right/panel/VBoxContainer/NinePatchRect/SeedInput.text
 	if inputed_seed == "":
 		inputed_seed = get_random_seed()
 	GameGlobal.is_user_seed = (%SeedInput.text != "")
@@ -49,12 +50,14 @@ func _on_play_button_pressed():
 	GameGlobal.is_seed_of_the_day = false
 	GameGlobal.music_manager.calfed = false
 	GameGlobal.score = 0
+	GameGlobal.is_in_game = true
 	TransitionManager.change_scene(main_menu_scene, "circle_gradient", null, 1.0)
 
 
 func _on_tutorial_button_pressed():
 	GameGlobal.music_manager.calfed = false
 	GameGlobal.is_seed_of_the_day = false
+	GameGlobal.is_in_game = true
 	TransitionManager.change_scene(tutorial_scene, "circle_gradient", null, 1.0)
 
 
