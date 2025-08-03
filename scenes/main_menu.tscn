@@ -7,7 +7,7 @@
 [ext_resource type="Texture2D" uid="uid://3tdc4o7fiqnb" path="res://assets/images/ui/rect/right_panel.png" id="5_8ln24"]
 [ext_resource type="Texture2D" uid="uid://dfrnsnqu87dp6" path="res://assets/images/ui/maby.png" id="5_j7ex8"]
 [ext_resource type="Texture2D" uid="uid://k2pm4cv4l84n" path="res://assets/images/ui/rect/leaderboard_card.png" id="5_rtw2f"]
-[ext_resource type="Shader" path="res://addons/shaker/components/vfx/shaders/outline2.gdshader" id="6_jk1qb"]
+[ext_resource type="Shader" uid="uid://dhrxdnevtv4vp" path="res://addons/shaker/components/vfx/shaders/outline2.gdshader" id="6_jk1qb"]
 [ext_resource type="Theme" uid="uid://c06a0wpkb3qyr" path="res://resources/theme.tres" id="7_5dd4i"]
 [ext_resource type="PackedScene" uid="uid://bc11r74o1iibq" path="res://scenes/main_menu/play/leaderboard_data_ui.tscn" id="8_flqon"]
 [ext_resource type="Texture2D" uid="uid://cqp5q5ic4y032" path="res://assets/images/ui/rect/close.png" id="9_a8gd2"]

@@ -10,7 +10,7 @@
 [ext_resource type="Script" uid="uid://cpvd8mjlsp6tj" path="res://scenes/camera_2d.gd" id="6_bvb2u"]
 [ext_resource type="Texture2D" uid="uid://bl4fg3bh5ms2e" path="res://assets/images/ui/cursor/cursor.png" id="9_drxqf"]
 [ext_resource type="Texture2D" uid="uid://drs8k6ai3lm32" path="res://assets/images/ui/cursor/cursor_click.png" id="10_bur5e"]
-[ext_resource type="Script" path="res://scenes/cursor.gd" id="11_bvb2u"]
+[ext_resource type="Script" uid="uid://bbx1lq83xkdah" path="res://scenes/cursor.gd" id="11_bvb2u"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_y20xe"]
 resource_local_to_scene = true
