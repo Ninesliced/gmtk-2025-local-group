@@ -27,6 +27,7 @@ var main_menu_scene: PackedScene = preload("res://scenes/main_menu.tscn")
 	ActionType.VERTICAL_SPIKE,
 	ActionType.SQUARE_SPIKE,
 	ActionType.VERTICAL_WALL,
+	ActionType.ULTIMATE_MEGA_SUPER_CARROT
 ] : 
 	set(value):
 		action_stacks = value
@@ -69,7 +70,8 @@ enum ActionType {
 	VERTICAL_SPIKE,
 	TRANSFORM_EMPTY_CURSED,
 	SQUARE_SPIKE,
-	VERTICAL_WALL
+	VERTICAL_WALL,
+	ULTIMATE_MEGA_SUPER_CARROT
 }
 
 var dict: Dictionary[ActionType, Dictionary] = {
@@ -210,6 +212,35 @@ var dict: Dictionary[ActionType, Dictionary] = {
 			Vector2i(0, -2),
 		]
 	},
+	ActionType.ULTIMATE_MEGA_SUPER_CARROT: {
+		"name": "aze",
+		"function": ultimate_transform_empty,
+		"temporary": true,
+		"probability": 0.01,
+		"action_zone": [
+			Vector2i(0, 0), #TKT
+			Vector2i(1, 0),
+			Vector2i(2, 0),
+			Vector2i(3, 0),
+			Vector2i(4, 0),
+			Vector2i(5, 0),
+			Vector2i(6, 0),
+			Vector2i(0, 1),
+			Vector2i(1, 1),
+			Vector2i(2, 1),
+			Vector2i(3, 1),
+			Vector2i(4, 1),
+			Vector2i(5, 1),
+			Vector2i(6, 1),
+			Vector2i(0, -1),
+			Vector2i(1, -1),
+			Vector2i(2, -1),
+			Vector2i(3, -1),
+			Vector2i(4, -1),
+			Vector2i(5, -1),
+			Vector2i(6, -1),
+		]
+	}
 }
 
 
@@ -307,13 +338,19 @@ func transform_empty(tile: Tile) -> Tile:
 	
 	return new_tile
 
+# true ultimate carrot
+func ultimate_transform_empty(tile: Tile) -> void:
+	for i in range(-1, 2):
+		var current_tile: Tile = map.grid[(tile.grid_position.x) % map.grid_size.x][(tile.grid_position.y + i) % map.grid_size.y]
+		transform_empty_cursed(current_tile, 6)	
+
 ## ultimate carrot
-func transform_empty_cursed(tile: Tile) -> void:
+func transform_empty_cursed(tile: Tile, number: int = 4) -> void:
 	var grid_pos = tile.grid_position
 	
 	_play_long_explosion_sound_effect()
 	
-	for i in range(0, 4):
+	for i in range(0, number):
 		var current_tile: Tile = map.grid[(grid_pos.x + i) % map.grid_size.x][grid_pos.y]
 		current_tile.is_changeable = true
 		transform_empty(current_tile)
@@ -463,14 +500,25 @@ func spawn_square_spikes(tile:Tile) -> void:
 	new_tile.tile_bigger.play_full(0.2)
 
 func delete_current_action() -> void:
-	var to_remove_action = GameGlobal.action_stacks.pop_front()
-	var action_ui = GameGlobal.action_ui_stacks.pop_front()
+	var action_enemies : int = action_stacks.count(ActionType.ENEMY)
+	
+	var to_remove_action = null	
+	var action_ui = null
+
+	if action_enemies == 1 and action_stacks[0] == ActionType.ENEMY:
+		to_remove_action = action_stacks.pop_at(1)
+		action_ui = action_ui_stacks.pop_at(1)
+	else:
+		to_remove_action = GameGlobal.action_stacks.pop_front()
+		action_ui = GameGlobal.action_ui_stacks.pop_front()
+	
 	action_ui.queue_free()
 	# if action_stacks.size() == 0:
 	_update_size()
 	on_action_stack_changed.emit()
 	if !hovered_tile:
 		return
+	
 	hovered_tile.on_action(to_remove_action)
 	
 
@@ -603,3 +651,11 @@ func go_to_main_menu():
 	%ActionsContainer.hide()
 	%CanvasLayer.hide()
 	GameGlobal.music_manager.calfed = true
+
+
+func _on_music_volume_slider_value_changed(value: float) -> void:
+	AudioServer.set_bus_volume_linear(1, value / 100.)
+
+
+func _on_sfx_volume_slider_value_changed(value: float) -> void:
+	AudioServer.set_bus_volume_linear(2, value / 100.)

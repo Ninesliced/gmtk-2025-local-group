@@ -4,7 +4,7 @@ class_name MainMenu
 @onready var play: Control = %Play
 @export var main_menu_scene: PackedScene
 @onready var play_button: Button = %PlayCustomSeed
-@onready var request: Node2D = $Request
+@onready var request: Node2D = %Request
 @onready var play_seed_of_the_day: Button = %PlaySeedOfTheDay
 
 var seed_of_the_day: String = ""
@@ -73,3 +73,7 @@ func _on_play_seed_of_the_day_button_pressed() -> void:
 
 func _on_refresh_button_pressed() -> void:
 	%Request.get_leaderboard()
+
+
+func _on_close_button_pressed() -> void:
+	UIManager.close_ui()

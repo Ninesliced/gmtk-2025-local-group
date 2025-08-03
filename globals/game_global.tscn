@@ -1,4 +1,4 @@
-[gd_scene load_steps=36 format=3 uid="uid://byxp1bvr3gl84"]
+[gd_scene load_steps=40 format=3 uid="uid://byxp1bvr3gl84"]
 
 [ext_resource type="Script" uid="uid://q581v4j3vmv4" path="res://globals/game_global.gd" id="1_gu6ii"]
 [ext_resource type="Texture2D" uid="uid://dgdfmi7kbpgg6" path="res://assets/images/actions/rotate.png" id="3_gc13h"]
@@ -15,8 +15,11 @@
 [ext_resource type="PackedScene" uid="uid://d2i4w4joysljq" path="res://scenes/ui/button.tscn" id="10_jbxo6"]
 [ext_resource type="Script" uid="uid://dhflbjvlkkwsw" path="res://globals/menu.gd" id="10_ygokt"]
 [ext_resource type="AudioStream" uid="uid://ihmp5eyi7gmb" path="res://assets/sfx/work/swap.ogg" id="11_lcri1"]
+[ext_resource type="PackedScene" path="res://scenes/ui/vertical_slider.tscn" id="12_hngle"]
 [ext_resource type="AudioStream" uid="uid://s1pso4bpxokg" path="res://assets/sfx/work/woof.ogg" id="12_kyo4h"]
-[ext_resource type="PackedScene" path="res://globals/music_manager.tscn" id="15_0xphb"]
+[ext_resource type="Texture2D" uid="uid://b7r2tlus6gvld" path="res://assets/images/ui/rect/music.png" id="13_v8b32"]
+[ext_resource type="Texture2D" uid="uid://bdf605nufn62d" path="res://assets/images/ui/rect/sfx.png" id="14_v8b32"]
+[ext_resource type="PackedScene" uid="uid://cbb8lsgv3vahf" path="res://globals/music_manager.tscn" id="15_0xphb"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_gc13h"]
 atlas = ExtResource("3_gc13h")
@@ -64,11 +67,15 @@ region = Rect2(160, 0, 16, 16)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_0xphb"]
 atlas = ExtResource("3_gc13h")
-region = Rect2(192, 0, 16, 16)
+region = Rect2(208, 0, 16, 16)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_ygokt"]
 atlas = ExtResource("3_gc13h")
 region = Rect2(176, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_hngle"]
+atlas = ExtResource("3_gc13h")
+region = Rect2(192, 0, 16, 16)
 
 [sub_resource type="GDScript" id="GDScript_iovrn"]
 script/source = "extends Button
@@ -134,7 +141,7 @@ _data = {
 [node name="GameGlobal" type="Node"]
 process_mode = 3
 script = ExtResource("1_gu6ii")
-action_stacks = Array[int]([0, 3, 2, 7])
+action_stacks = Array[int]([11, 3, 2, 7])
 action_textures = Dictionary[int, Texture2D]({
 0: SubResource("AtlasTexture_gc13h"),
 1: SubResource("AtlasTexture_woeo0"),
@@ -148,7 +155,8 @@ action_textures = Dictionary[int, Texture2D]({
 9: SubResource("AtlasTexture_lcri1"),
 10: SubResource("AtlasTexture_kyo4h"),
 11: SubResource("AtlasTexture_0xphb"),
-12: SubResource("AtlasTexture_ygokt")
+12: SubResource("AtlasTexture_ygokt"),
+13: SubResource("AtlasTexture_hngle")
 })
 
 [node name="Request" parent="." instance=ExtResource("3_iovrn")]
@@ -243,30 +251,83 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
-color = Color(0.0901961, 0.0392157, 0.270588, 0.298039)
+color = Color(0.0278613, 0.106185, 0.159808, 0.643137)
 
-[node name="VBoxContainer" type="VBoxContainer" parent="CanvasLayer/Menu"]
+[node name="HBoxContainer" type="HBoxContainer" parent="CanvasLayer/Menu"]
 layout_mode = 1
 anchors_preset = 8
 anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-offset_left = -64.0
-offset_top = -24.0
-offset_right = 64.0
-offset_bottom = 24.0
+offset_left = -20.0
+offset_top = -20.0
+offset_right = 20.0
+offset_bottom = 20.0
 grow_horizontal = 2
 grow_vertical = 2
+alignment = 1
 
-[node name="ResumeButton" parent="CanvasLayer/Menu/VBoxContainer" instance=ExtResource("10_jbxo6")]
+[node name="VBoxActionContainer" type="VBoxContainer" parent="CanvasLayer/Menu/HBoxContainer"]
+layout_mode = 2
+alignment = 1
+
+[node name="PausedLabel" type="Label" parent="CanvasLayer/Menu/HBoxContainer/VBoxActionContainer"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 16
+text = "Paused"
+horizontal_alignment = 1
+
+[node name="ResumeButton" parent="CanvasLayer/Menu/HBoxContainer/VBoxActionContainer" instance=ExtResource("10_jbxo6")]
 layout_mode = 2
 text = "Resume
 "
 
-[node name="MainMenuButton" parent="CanvasLayer/Menu/VBoxContainer" instance=ExtResource("10_jbxo6")]
+[node name="MainMenuButton" parent="CanvasLayer/Menu/HBoxContainer/VBoxActionContainer" instance=ExtResource("10_jbxo6")]
 layout_mode = 2
-text = "Main menu"
+text = "Main Menu"
+
+[node name="LeftMarginContainer" type="MarginContainer" parent="CanvasLayer/Menu/HBoxContainer"]
+custom_minimum_size = Vector2(10, 0)
+layout_mode = 2
+
+[node name="MarginContainer" type="MarginContainer" parent="CanvasLayer/Menu/HBoxContainer"]
+custom_minimum_size = Vector2(1, 0)
+layout_mode = 2
+
+[node name="ColorRect" type="ColorRect" parent="CanvasLayer/Menu/HBoxContainer/MarginContainer"]
+layout_mode = 2
+
+[node name="RightMarginContainer" type="MarginContainer" parent="CanvasLayer/Menu/HBoxContainer"]
+custom_minimum_size = Vector2(6, 0)
+layout_mode = 2
+
+[node name="HBoxVolumeContainer" type="HBoxContainer" parent="CanvasLayer/Menu/HBoxContainer"]
+layout_mode = 2
+
+[node name="VBoxMusicVolumeContainer" type="VBoxContainer" parent="CanvasLayer/Menu/HBoxContainer/HBoxVolumeContainer"]
+layout_mode = 2
+
+[node name="MusicVolumeSlider" parent="CanvasLayer/Menu/HBoxContainer/HBoxVolumeContainer/VBoxMusicVolumeContainer" instance=ExtResource("12_hngle")]
+custom_minimum_size = Vector2(0, 100)
+layout_mode = 2
+value = 100.0
+
+[node name="TextureRect" type="TextureRect" parent="CanvasLayer/Menu/HBoxContainer/HBoxVolumeContainer/VBoxMusicVolumeContainer"]
+layout_mode = 2
+texture = ExtResource("13_v8b32")
+
+[node name="VBoxSFXVolumeContainer" type="VBoxContainer" parent="CanvasLayer/Menu/HBoxContainer/HBoxVolumeContainer"]
+layout_mode = 2
+
+[node name="SFXVolumeSlider" parent="CanvasLayer/Menu/HBoxContainer/HBoxVolumeContainer/VBoxSFXVolumeContainer" instance=ExtResource("12_hngle")]
+custom_minimum_size = Vector2(0, 100)
+layout_mode = 2
+value = 100.0
+
+[node name="TextureRect" type="TextureRect" parent="CanvasLayer/Menu/HBoxContainer/HBoxVolumeContainer/VBoxSFXVolumeContainer"]
+layout_mode = 2
+texture = ExtResource("14_v8b32")
 
 [node name="SoundEffects" type="Node" parent="."]
 
@@ -302,8 +363,10 @@ unique_name_in_owner = true
 [connection signal="pressed" from="CanvasLayer/debug/Noclip" to="CanvasLayer/debug/Noclip" method="_on_pressed"]
 [connection signal="pressed" from="CanvasLayer/GameOver/Retry" to="." method="_on_retry_pressed"]
 [connection signal="pressed" from="CanvasLayer/GameOver/Menu" to="." method="_on_menu_pressed"]
-[connection signal="pressed" from="CanvasLayer/Menu/VBoxContainer/ResumeButton" to="CanvasLayer/Menu" method="_on_resume_button_pressed"]
-[connection signal="pressed" from="CanvasLayer/Menu/VBoxContainer/MainMenuButton" to="CanvasLayer/Menu" method="_on_main_menu_button_pressed"]
+[connection signal="pressed" from="CanvasLayer/Menu/HBoxContainer/VBoxActionContainer/ResumeButton" to="CanvasLayer/Menu" method="_on_resume_button_pressed"]
+[connection signal="pressed" from="CanvasLayer/Menu/HBoxContainer/VBoxActionContainer/MainMenuButton" to="CanvasLayer/Menu" method="_on_main_menu_button_pressed"]
+[connection signal="value_changed" from="CanvasLayer/Menu/HBoxContainer/HBoxVolumeContainer/VBoxMusicVolumeContainer/MusicVolumeSlider" to="." method="_on_music_volume_slider_value_changed"]
+[connection signal="value_changed" from="CanvasLayer/Menu/HBoxContainer/HBoxVolumeContainer/VBoxSFXVolumeContainer/SFXVolumeSlider" to="." method="_on_sfx_volume_slider_value_changed"]
 
 [editable path="CanvasLayer/GameOver"]
 [editable path="CanvasLayer/GameOver/VBoxContainer2/VBoxContainer"]
