@@ -1,7 +1,7 @@
 [gd_scene load_steps=3 format=3 uid="uid://g63ms4dlkya7"]
 
 [ext_resource type="Script" uid="uid://bjb7gkho01fcw" path="res://scenes/ui/tile_grid_ui.gd" id="1_kwfqf"]
-[ext_resource type="Material" uid="uid://cm10lunry34ui" path="res://resources/3d_shader.tres" id="2_oqfvw"]
+[ext_resource type="Material" path="res://resources/3d_shader.tres" id="2_oqfvw"]
 
 [node name="TileGridUi" type="Node2D"]
 script = ExtResource("1_kwfqf")
