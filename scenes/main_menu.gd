@@ -66,3 +66,7 @@ func _on_play_seed_of_the_day_button_pressed() -> void:
 	GameGlobal.music_manager.calfed = false
 	GameGlobal.score = 0
 	TransitionManager.change_scene(main_menu_scene, "circle_gradient", null, 1.0)
+
+
+func _on_refresh_button_pressed() -> void:
+	%Request.get_leaderboard()
