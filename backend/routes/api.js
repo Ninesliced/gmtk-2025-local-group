@@ -49,15 +49,30 @@ function collapseSpacedLetters(pseudo) {
 }
 
 function maskOffensiveWords(pseudo) {
-    const normalized = normalizePseudo(pseudo);
-    let masked = normalized;
+    const norm = normalize(pseudo);
 
-    for (const banned of banList) {
-        const regex = new RegExp(banned, "g");
-        masked = masked.replace(regex, "*".repeat(banned.length));
+    for (const bad of banList) {
+        const index = norm.indexOf(bad);
+        if (index !== -1) {
+            // Masquage dans le pseudo original
+            let masked = pseudo.split('');
+            let normIndex = 0;
+
+            for (let i = 0; i < masked.length; i++) {
+                const c = normalize(pseudo[i]);
+                if (/[a-z0-9]/.test(c)) {
+                    if (normIndex >= index && normIndex < index + bad.length) {
+                        masked[i] = '*';
+                    }
+                    normIndex++;
+                }
+            }
+
+            return masked.join('');
+        }
     }
 
-    return masked;
+    return pseudo;
 }
 
 function isPseudoOffensive(pseudo) {
