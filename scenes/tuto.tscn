@@ -1,4 +1,4 @@
-[gd_scene load_steps=10 format=3 uid="uid://ccbddjuw4fas3"]
+[gd_scene load_steps=17 format=3 uid="uid://ccbddjuw4fas3"]
 
 [ext_resource type="PackedScene" uid="uid://bptay3un6robe" path="res://scenes/mobile/touch_control.tscn" id="1_kisrk"]
 [ext_resource type="Script" uid="uid://b5n4nspk7bk7w" path="res://scenes/tuto.gd" id="1_onjet"]
@@ -8,6 +8,9 @@
 [ext_resource type="Texture2D" uid="uid://3inqpne41gwy" path="res://assets/shader_texture_tile.png" id="4_drxqf"]
 [ext_resource type="PackedScene" uid="uid://c5lqig57oxpyb" path="res://actors/player/player.tscn" id="5_bur5e"]
 [ext_resource type="Script" uid="uid://cpvd8mjlsp6tj" path="res://scenes/camera_2d.gd" id="6_bvb2u"]
+[ext_resource type="Texture2D" uid="uid://bl4fg3bh5ms2e" path="res://assets/images/ui/cursor/cursor.png" id="9_drxqf"]
+[ext_resource type="Texture2D" uid="uid://drs8k6ai3lm32" path="res://assets/images/ui/cursor/cursor_click.png" id="10_bur5e"]
+[ext_resource type="Script" uid="uid://bbx1lq83xkdah" path="res://scenes/cursor.gd" id="11_bvb2u"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_y20xe"]
 resource_local_to_scene = true
@@ -16,6 +19,31 @@ shader_parameter/ground_cols = ExtResource("4_drxqf")
 shader_parameter/number_of_ground_cols = 8
 shader_parameter/color_fill = Color(1, 1, 1, 1)
 shader_parameter/force = 0.0
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_bur5e"]
+atlas = ExtResource("9_drxqf")
+region = Rect2(0, 0, 14, 13)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_bvb2u"]
+atlas = ExtResource("10_bur5e")
+region = Rect2(0, 0, 14, 13)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_ser3y"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_bur5e")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_bvb2u")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_bvb2u"]
+size = Vector2(32, 32)
 
 [node name="Tuto" type="Node2D"]
 script = ExtResource("1_onjet")
@@ -41,3 +69,18 @@ collision_mask = 17
 [node name="Camera2D" type="Camera2D" parent="."]
 position = Vector2(112, 80)
 script = ExtResource("6_bvb2u")
+
+[node name="Cursor" type="AnimatedSprite2D" parent="."]
+position = Vector2(343, 96)
+sprite_frames = SubResource("SpriteFrames_ser3y")
+autoplay = "default"
+frame_progress = 0.266095
+script = ExtResource("11_bvb2u")
+
+[node name="Area2D" type="Area2D" parent="Cursor"]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Cursor/Area2D"]
+position = Vector2(-7, -5)
+shape = SubResource("RectangleShape2D_bvb2u")
+
+[connection signal="mouse_entered" from="Cursor/Area2D" to="Cursor" method="_on_area_2d_mouse_entered"]

@@ -69,17 +69,29 @@ _data = {
 script/source = "extends AnimationPlayer
 
 
+@export var parent_button: Button
+
+
 func _on_button_focus_entered():
+	if parent_button.disabled:
+		return
+
 	play(\"hover\")
 	%HoverSoundEffect.play()
 
 
 func _on_button_mouse_entered():
+	if parent_button.disabled:
+		return
+
 	play(\"hover\")
 	%HoverSoundEffect.play()
 
 
 func _on_button_pressed() -> void:
+	if parent_button.disabled:
+		return
+
 	%ClickSoundEffect.play()
 "
 
@@ -92,11 +104,12 @@ theme = ExtResource("1_di1ux")
 theme_override_colors/font_color = Color(0, 0, 0, 1)
 text = "Play"
 
-[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+[node name="AnimationPlayer" type="AnimationPlayer" parent="." node_paths=PackedStringArray("parent_button")]
 libraries = {
 &"": SubResource("AnimationLibrary_3xo2w")
 }
 script = SubResource("GDScript_di1ux")
+parent_button = NodePath("..")
 
 [node name="HoverSoundEffect" type="AudioStreamPlayer" parent="."]
 unique_name_in_owner = true

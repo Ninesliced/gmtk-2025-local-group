@@ -13,7 +13,6 @@ func _ready() -> void:
 	check_disabled()
 	
 func check_disabled():
-	
 	if has_seed_being_received and is_username_valid:
 		disabled = false
 	else:
