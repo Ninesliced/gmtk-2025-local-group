@@ -49,15 +49,15 @@ func _on_play_button_pressed():
 	TransitionManager.change_scene(main_menu_scene, "circle_gradient", null, 1.0)
 
 
-func _on_play_seed_of_the_day_pressed() -> void:
+func _on_tutorial_button_pressed():
+	GameGlobal.music_manager.calfed = false
+	TransitionManager.change_scene(tutorial_scene, "circle_gradient", null, 1.0)
+
+
+func _on_play_seed_of_the_day_button_pressed() -> void:
 	GameGlobal.is_seed_of_the_day = true
 	GameGlobal.username = $Play/Container/HBoxContainer/right/SeedOfTheDay/VBoxContainer/NinePatchRect2/Username.text
 	if GameGlobal.username == "":
 		GameGlobal.username = "Noob"
 	GameGlobal.music_manager.calfed = false
 	TransitionManager.change_scene(main_menu_scene, "circle_gradient", null, 1.0)
-
-
-func _on_tutorial_button_pressed():
-	GameGlobal.music_manager.calfed = false
-	TransitionManager.change_scene(tutorial_scene, "circle_gradient", null, 1.0)
