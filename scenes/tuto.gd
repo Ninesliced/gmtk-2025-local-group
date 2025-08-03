@@ -16,7 +16,7 @@ func _ready():
 	for i in range(len(GameGlobal.actions_ui)):
 		GameGlobal.actions_ui[i].queue_free()
 		
-	GameGlobal.action_stacks=[]
+	GameGlobal.action_stacks.clear()
 	GameGlobal.actions_ui.clear()
 
 	

@@ -107,7 +107,6 @@ main_menu_scene = ExtResource("2_wu84c")
 
 [node name="HBoxContainer" type="VBoxContainer" parent="."]
 unique_name_in_owner = true
-visible = false
 z_index = 50
 layout_mode = 1
 anchors_preset = 8
@@ -128,6 +127,13 @@ unique_name_in_owner = true
 layout_mode = 2
 script = ExtResource("2_ekxnf")
 
+[node name="TutorialButton" parent="HBoxContainer" instance=ExtResource("1_ekxnf")]
+unique_name_in_owner = true
+layout_mode = 2
+text = "Tutorial
+"
+script = ExtResource("2_ekxnf")
+
 [node name="Quit" parent="HBoxContainer" instance=ExtResource("1_ekxnf")]
 layout_mode = 2
 text = "Quit"
@@ -145,6 +151,7 @@ color = Color(0.14, 0.1204, 0.1302, 0.615686)
 
 [node name="Play" type="Control" parent="."]
 unique_name_in_owner = true
+visible = false
 z_index = 100
 layout_mode = 1
 anchors_preset = 15
@@ -341,6 +348,7 @@ theme = SubResource("Theme_lgwnu")
 text = "Play"
 
 [connection signal="pressed" from="HBoxContainer/PlayButton" to="." method="_on_play_pressed"]
+[connection signal="pressed" from="HBoxContainer/TutorialButton" to="." method="_on_tutorial_button_pressed"]
 [connection signal="pressed" from="HBoxContainer/Quit" to="." method="_on_quit_pressed"]
 [connection signal="text_changed" from="Play/Container/HBoxContainer/right/SeedOfTheDay/VBoxContainer/NinePatchRect2/Username" to="Play/Container/HBoxContainer/right/SeedOfTheDay/VBoxContainer/NinePatchRect2/Username" method="_on_text_changed"]
 [connection signal="pressed" from="Play/Container/HBoxContainer/right/SeedOfTheDay/VBoxContainer/PlaySeedOfTheDay" to="." method="_on_play_seed_of_the_day_pressed"]

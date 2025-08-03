@@ -1,6 +1,5 @@
-[gd_scene load_steps=9 format=3 uid="uid://c38wfn8kedxlp"]
+[gd_scene load_steps=7 format=3 uid="uid://c38wfn8kedxlp"]
 
-[ext_resource type="Texture2D" uid="uid://dgdfmi7kbpgg6" path="res://assets/images/actions/rotate.png" id="1_iy4iq"]
 [ext_resource type="Script" uid="uid://bnmj6onvrernc" path="res://scenes/ui/action_ui.gd" id="2_jsuos"]
 [ext_resource type="Shader" uid="uid://birv8v71nvo3v" path="res://addons/shaker/components/vfx/shaders/fill_color.gdshader" id="2_ojgf4"]
 
@@ -71,10 +70,6 @@ shader = ExtResource("2_ojgf4")
 shader_parameter/color = Color(1, 1, 1, 1)
 shader_parameter/force = 0.0
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_yj3ko"]
-atlas = ExtResource("1_iy4iq")
-region = Rect2(0, 0, 16, 16)
-
 [node name="ActionUI" type="Control"]
 layout_mode = 3
 anchors_preset = 0
@@ -105,5 +100,4 @@ offset_right = 8.0
 offset_bottom = 8.0
 grow_horizontal = 2
 grow_vertical = 2
-texture = SubResource("AtlasTexture_yj3ko")
 stretch_mode = 2
