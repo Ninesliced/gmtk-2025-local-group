@@ -31,7 +31,7 @@ mouse_filter = 1
 
 [node name="Map" parent="." instance=ExtResource("2_onjet")]
 material = SubResource("ShaderMaterial_y20xe")
-position = Vector2(0, 10)
+position = Vector2(0, 11)
 grid_size = Vector2i(25, 5)
 
 [node name="Player" parent="." instance=ExtResource("5_bur5e")]

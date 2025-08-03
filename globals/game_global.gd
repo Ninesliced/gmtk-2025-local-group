@@ -293,7 +293,7 @@ func transform_empty_cursed(tile: Tile) -> void:
 
 
 func transform_cross(tile: Tile) -> void:
-	var list_random = [0,0,0,0,1,1,1,2,2]
+	var list_random = [1,1,1,1,1,2,2,2,2]
 	list_random.shuffle()
 
 	for i in range(-1,2):
