@@ -7,6 +7,8 @@ const DRAG_THRESHOLD := 20.0
 func _input(event): 
 	if GameGlobal.in_menu:
 		return
+	if event is InputEventMouseButton and event.position[1] < 21.:
+		return
 	if event is InputEventMouseButton and event.pressed:
 		accept_event()
 	if event is InputEventMouseButton:

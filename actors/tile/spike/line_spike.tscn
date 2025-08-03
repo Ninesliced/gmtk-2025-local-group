@@ -36,6 +36,7 @@ animations = [{
 
 [node name="Spike2" instance=ExtResource("1_a2qbe")]
 script = ExtResource("2_ecmtl")
+outline_min = 0.2
 chance_action_spawn = 0.025
 lock_rotation = false
 tileName = "LineSpikeTile"

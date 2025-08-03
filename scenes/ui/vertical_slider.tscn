@@ -1,0 +1,42 @@
+[gd_scene load_steps=9 format=3 uid="uid://dbuh3kmv3e67e"]
+
+[ext_resource type="Texture2D" uid="uid://cl5s05an77qcs" path="res://assets/images/ui/slider/grab.png" id="1_acxgk"]
+[ext_resource type="Texture2D" uid="uid://dpww6p8y5u3en" path="res://assets/images/ui/slider/slider.png" id="2_acxgk"]
+[ext_resource type="Texture2D" uid="uid://bf67b5j0xm8f" path="res://assets/images/ui/slider/slider_empty.png" id="3_2u0cc"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ea33k"]
+atlas = ExtResource("1_acxgk")
+region = Rect2(0, 0, 10, 9)
+
+[sub_resource type="ViewportTexture" id="ViewportTexture_2u0cc"]
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_ea33k"]
+texture = ExtResource("2_acxgk")
+texture_margin_left = 5.0
+texture_margin_top = 3.0
+texture_margin_right = 5.0
+texture_margin_bottom = 7.0
+region_rect = Rect2(0, 0, 8, 9)
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_acxgk"]
+texture = ExtResource("3_2u0cc")
+texture_margin_left = 5.0
+texture_margin_top = 3.0
+texture_margin_right = 5.0
+texture_margin_bottom = 7.0
+region_rect = Rect2(0, 0, 8, 9)
+
+[sub_resource type="Theme" id="Theme_1area"]
+VSlider/icons/grabber = SubResource("AtlasTexture_ea33k")
+VSlider/icons/grabber_disabled = SubResource("AtlasTexture_ea33k")
+VSlider/icons/grabber_highlight = SubResource("AtlasTexture_ea33k")
+VSlider/icons/tick = SubResource("ViewportTexture_2u0cc")
+VSlider/styles/grabber_area = SubResource("StyleBoxTexture_ea33k")
+VSlider/styles/grabber_area_highlight = SubResource("StyleBoxTexture_ea33k")
+VSlider/styles/slider = SubResource("StyleBoxTexture_acxgk")
+
+[node name="VerticalSlider" type="VSlider"]
+offset_right = 16.0
+offset_bottom = 42.0
+theme = SubResource("Theme_1area")
+step = 5.0

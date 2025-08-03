@@ -1,6 +1,6 @@
 [gd_scene load_steps=8 format=3 uid="uid://cbb8lsgv3vahf"]
 
-[ext_resource type="Script" uid="uid://dv2kscp3qqeg0" path="res://globals/music_manager.gd" id="1_gq8vl"]
+[ext_resource type="Script" path="res://globals/music_manager.gd" id="1_gq8vl"]
 [ext_resource type="AudioStream" uid="uid://svxhibony3lb" path="res://assets/music/work/main_theme.ogg" id="1_qux6j"]
 [ext_resource type="AudioStream" uid="uid://c7c8pgcm72uur" path="res://assets/music/work/main_theme_calfed.ogg" id="2_gq8vl"]
 
@@ -99,12 +99,14 @@ script = ExtResource("1_gq8vl")
 unique_name_in_owner = true
 stream = ExtResource("1_qux6j")
 volume_db = -15.0
+bus = &"Music"
 parameters/looping = true
 
 [node name="CalfedMainMusic" type="AudioStreamPlayer" parent="."]
 unique_name_in_owner = true
 stream = ExtResource("2_gq8vl")
 volume_db = -15.0
+bus = &"Music"
 parameters/looping = true
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
