@@ -17,7 +17,7 @@
 [ext_resource type="PackedScene" uid="uid://d2i4w4joysljq" path="res://scenes/ui/button.tscn" id="10_jbxo6"]
 [ext_resource type="Script" uid="uid://dhflbjvlkkwsw" path="res://globals/menu.gd" id="10_ygokt"]
 [ext_resource type="AudioStream" uid="uid://ihmp5eyi7gmb" path="res://assets/sfx/work/swap.ogg" id="11_lcri1"]
-[ext_resource type="PackedScene" path="res://scenes/ui/vertical_slider.tscn" id="12_hngle"]
+[ext_resource type="PackedScene" uid="uid://dfv54kvhrr4g7" path="res://scenes/ui/vertical_slider.tscn" id="12_hngle"]
 [ext_resource type="AudioStream" uid="uid://s1pso4bpxokg" path="res://assets/sfx/work/woof.ogg" id="12_kyo4h"]
 [ext_resource type="Texture2D" uid="uid://b7r2tlus6gvld" path="res://assets/images/ui/rect/music.png" id="13_v8b32"]
 [ext_resource type="Texture2D" uid="uid://bdf605nufn62d" path="res://assets/images/ui/rect/sfx.png" id="14_v8b32"]
@@ -322,10 +322,13 @@ layout_mode = 2
 
 [node name="VBoxMusicVolumeContainer" type="VBoxContainer" parent="CanvasLayer/Menu/HBoxContainer/HBoxVolumeContainer"]
 layout_mode = 2
+size_flags_vertical = 4
+alignment = 1
 
 [node name="MusicVolumeSlider" parent="CanvasLayer/Menu/HBoxContainer/HBoxVolumeContainer/VBoxMusicVolumeContainer" instance=ExtResource("12_hngle")]
 custom_minimum_size = Vector2(0, 100)
 layout_mode = 2
+size_flags_horizontal = 4
 value = 100.0
 
 [node name="TextureRect" type="TextureRect" parent="CanvasLayer/Menu/HBoxContainer/HBoxVolumeContainer/VBoxMusicVolumeContainer"]
@@ -338,6 +341,7 @@ layout_mode = 2
 [node name="SFXVolumeSlider" parent="CanvasLayer/Menu/HBoxContainer/HBoxVolumeContainer/VBoxSFXVolumeContainer" instance=ExtResource("12_hngle")]
 custom_minimum_size = Vector2(0, 100)
 layout_mode = 2
+size_flags_horizontal = 4
 value = 100.0
 
 [node name="TextureRect" type="TextureRect" parent="CanvasLayer/Menu/HBoxContainer/HBoxVolumeContainer/VBoxSFXVolumeContainer"]
