@@ -109,6 +109,7 @@ main_menu_scene = ExtResource("2_wu84c")
 
 [node name="HBoxContainer" type="VBoxContainer" parent="."]
 unique_name_in_owner = true
+visible = false
 z_index = 50
 layout_mode = 1
 anchors_preset = 8
@@ -145,6 +146,7 @@ layout_mode = 2
 text = "Quit"
 
 [node name="ColorRect" type="ColorRect" parent="."]
+visible = false
 material = SubResource("ShaderMaterial_7b55j")
 layout_mode = 1
 anchors_preset = 15

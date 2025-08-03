@@ -558,6 +558,7 @@ func _on_menu_pressed():
 	go_to_main_menu()
 
 func go_to_main_menu():
+	is_game_have_start = false
 	%AnimationPlayer.play("RESET")
 	TransitionManager.change_scene(GameGlobal.main_menu_scene, "circle_gradient")
 	get_tree().paused = false
