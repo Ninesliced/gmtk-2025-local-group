@@ -115,6 +115,7 @@ unique_name_in_owner = true
 
 [node name="Spike" parent="Map" instance=ExtResource("6_ii521")]
 position = Vector2(32, 0)
+outline_min = 0.2
 
 [node name="Camera2D" type="Camera2D" parent="."]
 position = Vector2(114, 90)

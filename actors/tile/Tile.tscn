@@ -114,7 +114,6 @@ _data = {
 
 [node name="Tile2" type="Node2D" node_paths=PackedStringArray("rotation_sound_effect", "idle_rotation_sound_effect")]
 script = ExtResource("1_4t6fi")
-outline_min = 0.2
 rotation_sound_effect = NodePath("RotationSoundEffect")
 idle_rotation_sound_effect = NodePath("IdleRotationSoundEffect")
 chance_action_spawn = 0.05
