@@ -99,11 +99,13 @@ script = ExtResource("1_gq8vl")
 unique_name_in_owner = true
 stream = ExtResource("1_qux6j")
 volume_db = -15.0
+parameters/looping = true
 
 [node name="CalfedMainMusic" type="AudioStreamPlayer" parent="."]
 unique_name_in_owner = true
 stream = ExtResource("2_gq8vl")
 volume_db = -15.0
+parameters/looping = true
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 unique_name_in_owner = true

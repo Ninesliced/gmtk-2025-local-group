@@ -518,7 +518,6 @@ func _on_retry_pressed():
 	%AnimationPlayer.play("RESET")
 	TransitionManager.reload_scene("circle_gradient", null, 2.5)
 	get_tree().paused = false
-	GameGlobal.music_manager.calfed = true
 
 func _on_menu_pressed():
 	%AnimationPlayer.play("RESET")
