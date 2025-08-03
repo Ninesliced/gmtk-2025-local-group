@@ -1,13 +1,14 @@
-[gd_scene load_steps=30 format=3 uid="uid://bvbyb8jdqjcei"]
+[gd_scene load_steps=29 format=3 uid="uid://bvbyb8jdqjcei"]
 
 [ext_resource type="Script" uid="uid://tk3v0572hok5" path="res://scenes/main_menu.gd" id="1_bqqt6"]
 [ext_resource type="PackedScene" uid="uid://d2i4w4joysljq" path="res://scenes/ui/button.tscn" id="1_ekxnf"]
+[ext_resource type="Script" uid="uid://dhy4wxhaj8mpg" path="res://scenes/ui/button.gd" id="2_ekxnf"]
 [ext_resource type="PackedScene" uid="uid://cqwxuni5qjhvu" path="res://scenes/main.tscn" id="2_wu84c"]
 [ext_resource type="PackedScene" uid="uid://bi3akamp77mgs" path="res://globals/request/request.tscn" id="3_7b55j"]
 [ext_resource type="Texture2D" uid="uid://3tdc4o7fiqnb" path="res://assets/images/ui/rect/right_panel.png" id="5_8ln24"]
 [ext_resource type="Texture2D" uid="uid://dfrnsnqu87dp6" path="res://assets/images/ui/maby.png" id="5_j7ex8"]
 [ext_resource type="Texture2D" uid="uid://k2pm4cv4l84n" path="res://assets/images/ui/rect/leaderboard_card.png" id="5_rtw2f"]
-[ext_resource type="Shader" uid="uid://dhrxdnevtv4vp" path="res://addons/shaker/components/vfx/shaders/outline2.gdshader" id="6_jk1qb"]
+[ext_resource type="Shader" path="res://addons/shaker/components/vfx/shaders/outline2.gdshader" id="6_jk1qb"]
 [ext_resource type="Theme" uid="uid://c06a0wpkb3qyr" path="res://resources/theme.tres" id="7_5dd4i"]
 [ext_resource type="PackedScene" uid="uid://bc11r74o1iibq" path="res://scenes/main_menu/play/leaderboard_data_ui.tscn" id="8_flqon"]
 [ext_resource type="Texture2D" uid="uid://cncpqu3fcgw0s" path="res://assets/images/ui/rect/seed_input.png" id="11_lgwnu"]
@@ -15,16 +16,7 @@
 [ext_resource type="Texture2D" uid="uid://dv03djiyk4tok" path="res://assets/images/ui/rect/play.png" id="12_flqon"]
 [ext_resource type="Texture2D" uid="uid://dtyov2htrcqvk" path="res://assets/images/ui/rect/play_pressed.png" id="13_7b55j"]
 [ext_resource type="PackedScene" uid="uid://g63ms4dlkya7" path="res://scenes/ui/tile_grid_ui.tscn" id="14_1ajci"]
-[ext_resource type="Theme" uid="uid://bp3s6yu5tid51" path="res://resources/theme_blue.tres" id="14_j7ex8"]
 [ext_resource type="Script" uid="uid://17dmnltu11in" path="res://scenes/play_seed_of_the_day.gd" id="16_5pajh"]
-
-[sub_resource type="GDScript" id="GDScript_5pajh"]
-script/source = "extends Button
-
-
-func _on_username_text_changed(new_text: String) -> void:
-	pass # Replace with function body.
-"
 
 [sub_resource type="Shader" id="Shader_7b55j"]
 code = "shader_type canvas_item;
@@ -139,13 +131,14 @@ texture = ExtResource("5_j7ex8")
 [node name="PlayButton" parent="HBoxContainer" instance=ExtResource("1_ekxnf")]
 unique_name_in_owner = true
 layout_mode = 2
+script = ExtResource("2_ekxnf")
 
 [node name="TutorialButton" parent="HBoxContainer" instance=ExtResource("1_ekxnf")]
 unique_name_in_owner = true
 layout_mode = 2
 text = "Tutorial
 "
-script = SubResource("GDScript_5pajh")
+script = ExtResource("2_ekxnf")
 
 [node name="Quit" parent="HBoxContainer" instance=ExtResource("1_ekxnf")]
 layout_mode = 2
@@ -164,6 +157,7 @@ color = Color(0.14, 0.1204, 0.1302, 0.615686)
 
 [node name="Play" type="Control" parent="."]
 unique_name_in_owner = true
+visible = false
 z_index = 100
 layout_mode = 1
 anchors_preset = 15
@@ -297,11 +291,12 @@ placeholder_text = "Username"
 max_length = 9
 context_menu_enabled = false
 
-[node name="PlaySeedOfTheDay" parent="Play/Container/HBoxContainer/right/SeedOfTheDay/VBoxContainer" instance=ExtResource("1_ekxnf")]
+[node name="PlaySeedOfTheDay" type="Button" parent="Play/Container/HBoxContainer/right/SeedOfTheDay/VBoxContainer"]
 unique_name_in_owner = true
-custom_minimum_size = Vector2(0, 27)
 layout_mode = 2
-theme = ExtResource("14_j7ex8")
+theme = SubResource("Theme_lgwnu")
+disabled = true
+text = "Play"
 script = ExtResource("16_5pajh")
 
 [node name="panel" type="NinePatchRect" parent="Play/Container/HBoxContainer/right"]
@@ -366,6 +361,7 @@ text = "Play"
 [connection signal="pressed" from="HBoxContainer/TutorialButton" to="." method="_on_tutorial_button_pressed"]
 [connection signal="pressed" from="HBoxContainer/Quit" to="." method="_on_quit_pressed"]
 [connection signal="text_changed" from="Play/Container/HBoxContainer/right/SeedOfTheDay/VBoxContainer/NinePatchRect2/Username" to="." method="_on_username_text_changed"]
-[connection signal="pressed" from="Play/Container/HBoxContainer/right/SeedOfTheDay/VBoxContainer/PlaySeedOfTheDay" to="." method="_on_play_seed_of_the_day_button_pressed"]
+[connection signal="text_changed" from="Play/Container/HBoxContainer/right/SeedOfTheDay/VBoxContainer/NinePatchRect2/Username" to="Play/Container/HBoxContainer/right/SeedOfTheDay/VBoxContainer/PlaySeedOfTheDay" method="_on_username_text_changed"]
+[connection signal="pressed" from="Play/Container/HBoxContainer/right/SeedOfTheDay/VBoxContainer/PlaySeedOfTheDay" to="." method="_on_play_seed_of_the_day_pressed"]
 [connection signal="text_changed" from="Play/Container/HBoxContainer/right/panel/VBoxContainer/NinePatchRect/SeedInput" to="Play/Container/HBoxContainer/right/panel/VBoxContainer/NinePatchRect/SeedInput" method="_on_text_changed"]
 [connection signal="pressed" from="Play/Container/HBoxContainer/right/panel/VBoxContainer/PlayButton" to="." method="_on_play_button_pressed"]

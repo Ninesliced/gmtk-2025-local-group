@@ -7,9 +7,9 @@ func _ready() -> void:
 	%HTTPRequestSubmit.request_completed.connect(_on_submit_completed)
 
 func get_seed():
-	%HTTPRequestGetSeed.request("http://laby.arkanyota.com/get_seed")
+	%HTTPRequestGetSeed.request("https://laby.arkanyota.com/get_seed")
 
-func submit(pseudo="Pseudo", score=1000):
+func submit(pseudo="Pseudo", score=0):
 	var data_to_send = {
 		"pseudo": pseudo,
 		"score": score,
@@ -17,13 +17,13 @@ func submit(pseudo="Pseudo", score=1000):
 	}
 	var json = JSON.stringify(data_to_send)
 	var headers = ["Content-Type: application/json"]
-	%HTTPRequestSubmit.request("http://laby.arkanyota.com/submit", headers, HTTPClient.METHOD_POST, json)
+	%HTTPRequestSubmit.request("https://laby.arkanyota.com/submit", headers, HTTPClient.METHOD_POST, json)
 
 func get_leaderboard():
-	%HTTPRequestGetLeaderboard.request("http://laby.arkanyota.com/leaderboard")
+	%HTTPRequestGetLeaderboard.request("https://laby.arkanyota.com/leaderboard")
 
 func get_rank(pseudo="Pseudo"):
-	%HTTPRequestGetLeaderboard.request("http://laby.arkanyota.com/rank/"+pseudo)
+	%HTTPRequestGetLeaderboard.request("https://laby.arkanyota.com/rank/"+pseudo)
 
 func _on_get_seed_completed(result, response_code, headers, body):
 	if response_code != 200:

@@ -17,6 +17,8 @@ func _ready():
 	UIManager._stack.clear() # HACK
 	UIManager.set_ui(hbox_container, play_button)
 	%Username.text = GameGlobal.username
+	if GameGlobal.username != "":
+		play_seed_of_the_day.is_username_valid = true
 	if !GameGlobal.is_seed_of_the_day and GameGlobal.is_user_seed:
 		%SeedInput.text = GameGlobal.rng_seed
 		
@@ -46,11 +48,13 @@ func _on_play_button_pressed():
 	GameGlobal.rng_seed = inputed_seed
 	GameGlobal.is_seed_of_the_day = false
 	GameGlobal.music_manager.calfed = false
+	GameGlobal.score = 0
 	TransitionManager.change_scene(main_menu_scene, "circle_gradient", null, 1.0)
 
 
 func _on_tutorial_button_pressed():
 	GameGlobal.music_manager.calfed = false
+	GameGlobal.is_seed_of_the_day = false
 	TransitionManager.change_scene(tutorial_scene, "circle_gradient", null, 1.0)
 
 
@@ -60,4 +64,5 @@ func _on_play_seed_of_the_day_button_pressed() -> void:
 	if GameGlobal.username == "":
 		GameGlobal.username = "Noob"
 	GameGlobal.music_manager.calfed = false
+	GameGlobal.score = 0
 	TransitionManager.change_scene(main_menu_scene, "circle_gradient", null, 1.0)

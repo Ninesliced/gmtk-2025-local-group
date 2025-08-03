@@ -22,6 +22,7 @@ func _on_hitbox_component_area_entered(area:Area2D):
 
 
 func kill_player() -> void:
+	await get_tree().create_timer(0.2).timeout
 	GameGlobal.is_game_have_start = false
 	GameGlobal.end_game()
 	# TransitionManager.reload_scene("square_gradient")
