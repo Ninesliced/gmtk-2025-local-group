@@ -62,6 +62,10 @@ region = Rect2(144, 0, 16, 16)
 atlas = ExtResource("3_gc13h")
 region = Rect2(160, 0, 16, 16)
 
+[sub_resource type="AtlasTexture" id="AtlasTexture_0xphb"]
+atlas = ExtResource("3_gc13h")
+region = Rect2(138, 0, 16, 16)
+
 [sub_resource type="GDScript" id="GDScript_iovrn"]
 script/source = "extends Button
 
@@ -138,7 +142,8 @@ action_textures = Dictionary[int, Texture2D]({
 7: SubResource("AtlasTexture_672fk"),
 8: SubResource("AtlasTexture_xofr3"),
 9: SubResource("AtlasTexture_lcri1"),
-10: SubResource("AtlasTexture_kyo4h")
+10: SubResource("AtlasTexture_kyo4h"),
+11: SubResource("AtlasTexture_0xphb")
 })
 
 [node name="Request" parent="." instance=ExtResource("3_iovrn")]
