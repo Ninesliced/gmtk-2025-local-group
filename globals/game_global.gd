@@ -216,7 +216,7 @@ var dict: Dictionary[ActionType, Dictionary] = {
 		"name": "aze",
 		"function": ultimate_transform_empty,
 		"temporary": true,
-		"probability": 0.1,
+		"probability": 0.01,
 		"action_zone": [
 			Vector2i(0, 0), #TKT
 			Vector2i(1, 0),
