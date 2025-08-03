@@ -515,7 +515,7 @@ func end_game() -> void:
 
 func _on_retry_pressed():
 	%AnimationPlayer.play("RESET")
-	TransitionManager.reload_scene()
+	TransitionManager.reload_scene("circle_gradient", null, 2.5)
 	get_tree().paused = false
 	pass # Replace with function body.
 
