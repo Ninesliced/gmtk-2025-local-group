@@ -1,4 +1,4 @@
-[gd_scene load_steps=21 format=3 uid="uid://c5lqig57oxpyb"]
+[gd_scene load_steps=25 format=3 uid="uid://c5lqig57oxpyb"]
 
 [ext_resource type="Script" uid="uid://7i2kh250crxr" path="res://actors/player/player.gd" id="1_nvxhs"]
 [ext_resource type="Texture2D" uid="uid://dhb2r2w2v4525" path="res://assets/player.png" id="2_ilk7j"]
@@ -7,14 +7,31 @@
 [ext_resource type="Script" uid="uid://chq08evtmxyos" path="res://actors/player/hitbox_component.gd" id="4_lsqbn"]
 [ext_resource type="Script" uid="uid://26l6scy4ngx6" path="res://actors/player/player_animation.gd" id="5_15y17"]
 [ext_resource type="Texture2D" uid="uid://kgyumya58wt5" path="res://assets/images/player/player_horizontal-Sheet.png" id="6_hiosj"]
-[ext_resource type="PackedScene" uid="uid://c38wfn8kedxlp" path="res://scenes/ui/action_ui.tscn" id="8_a744p"]
-[ext_resource type="Script" uid="uid://bdcm77c68c11f" path="res://actors/player/action_current_component.gd" id="9_388e2"]
 [ext_resource type="PackedScene" uid="uid://b3oy1hgm6m7u8" path="res://actors/player/debug/player_debug.tscn" id="10_lsln6"]
 [ext_resource type="AudioStream" uid="uid://o3dk3yuuufpr" path="res://assets/sfx/work/walk.ogg" id="11_hiosj"]
 [ext_resource type="AudioStream" uid="uid://b03vg13som2qc" path="res://assets/sfx/work/action.ogg" id="12_ssdk0"]
+[ext_resource type="Texture2D" uid="uid://otfimujs2jxc" path="res://assets/images/player/particle.png" id="13_7aotg"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_lsqbn"]
 radius = 4.0
+
+[sub_resource type="Curve" id="Curve_ssdk0"]
+_data = [Vector2(0, 0), 0.0, 0.0, 0, 0, Vector2(0.163818, 0.772327), 0.00817334, 0.00817334, 0, 0, Vector2(0.74359, 0), 0.0, 0.0, 0, 0]
+point_count = 3
+
+[sub_resource type="Gradient" id="Gradient_7aotg"]
+interpolation_mode = 1
+offsets = PackedFloat32Array(0, 0.774691)
+colors = PackedColorArray(0.705882, 0.639216, 0.556863, 1, 0.278431, 0.231373, 0.262745, 1)
+
+[sub_resource type="GDScript" id="GDScript_7aotg"]
+script/source = "extends CPUParticles2D
+
+
+func _on_movement_component_on_move(direction):
+	emitting = true
+	pass # Replace with function body.
+"
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_ax26v"]
 atlas = ExtResource("2_ilk7j")
@@ -85,6 +102,22 @@ randomTileMax = 2
 position = Vector2(-0.5, 0.5)
 shape = SubResource("CircleShape2D_lsqbn")
 
+[node name="WalkParticle" type="CPUParticles2D" parent="."]
+position = Vector2(0, 3)
+emitting = false
+amount = 2
+texture = ExtResource("13_7aotg")
+one_shot = true
+speed_scale = 2.0
+explosiveness = 0.45
+randomness = 0.4
+emission_shape = 3
+emission_rect_extents = Vector2(2, 2)
+gravity = Vector2(0, -30)
+scale_amount_curve = SubResource("Curve_ssdk0")
+color_ramp = SubResource("Gradient_7aotg")
+script = SubResource("GDScript_7aotg")
+
 [node name="HitboxComponent" type="Area2D" parent="."]
 collision_layer = 0
 collision_mask = 4
@@ -104,16 +137,6 @@ script = ExtResource("5_15y17")
 unique_name_in_owner = true
 script = ExtResource("3_ax26v")
 walk_sound_effect = NodePath("../WalkSoundEffect")
-
-[node name="ActionUI" parent="." instance=ExtResource("8_a744p")]
-modulate = Color(1, 1, 1, 0.690196)
-offset_left = -8.0
-offset_top = -24.0
-offset_right = 8.0
-offset_bottom = -8.0
-
-[node name="ActionCurrentComponent" type="Node" parent="ActionUI"]
-script = ExtResource("9_388e2")
 
 [node name="Debug" parent="." node_paths=PackedStringArray("mc") instance=ExtResource("10_lsln6")]
 position = Vector2(20, -20)
@@ -135,3 +158,4 @@ parameters/looping = false
 [connection signal="editor_state_changed" from="MovementComponent" to="." method="_on_movement_component_editor_state_changed"]
 [connection signal="on_idle" from="MovementComponent" to="PlayerAnimation" method="_on_movement_component_on_idle"]
 [connection signal="on_move" from="MovementComponent" to="PlayerAnimation" method="_on_movement_component_on_move"]
+[connection signal="on_move" from="MovementComponent" to="WalkParticle" method="_on_movement_component_on_move"]

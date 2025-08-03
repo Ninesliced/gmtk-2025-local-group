@@ -1,13 +1,15 @@
-[gd_scene load_steps=10 format=3 uid="uid://cqwxuni5qjhvu"]
+[gd_scene load_steps=12 format=3 uid="uid://cqwxuni5qjhvu"]
 
 [ext_resource type="PackedScene" uid="uid://b7fgpkbuim0vj" path="res://actors/map/Map.tscn" id="1_tbgi4"]
 [ext_resource type="Script" uid="uid://cut4le3576dye" path="res://scenes/main.gd" id="1_tefeu"]
 [ext_resource type="Script" uid="uid://cpvd8mjlsp6tj" path="res://scenes/camera_2d.gd" id="2_tefeu"]
 [ext_resource type="PackedScene" uid="uid://bptay3un6robe" path="res://scenes/mobile/touch_control.tscn" id="2_tipki"]
+[ext_resource type="Script" uid="uid://bdcm77c68c11f" path="res://actors/player/action_current_component.gd" id="3_choun"]
 [ext_resource type="PackedScene" uid="uid://v6wht25gui7" path="res://scenes/border/border.tscn" id="3_o6xl0"]
 [ext_resource type="Shader" uid="uid://jkmh5ksc1ejd" path="res://actors/tile/tile3D.gdshader" id="3_tipki"]
 [ext_resource type="Texture2D" uid="uid://3inqpne41gwy" path="res://assets/shader_texture_tile.png" id="4_85g3d"]
 [ext_resource type="PackedScene" uid="uid://c5lqig57oxpyb" path="res://actors/player/player.tscn" id="4_tipki"]
+[ext_resource type="PackedScene" uid="uid://c38wfn8kedxlp" path="res://scenes/ui/action_ui.tscn" id="9_85g3d"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_o6xl0"]
 resource_local_to_scene = true
@@ -42,3 +44,11 @@ speed_increase_per_min = 1.0
 [node name="Camera2D" type="Camera2D" parent="."]
 position = Vector2(112, 80)
 script = ExtResource("2_tefeu")
+
+[node name="ActionUI" parent="." instance=ExtResource("9_85g3d")]
+self_modulate = Color(1, 1, 1, 0.278431)
+z_index = 21
+mouse_filter = 2
+
+[node name="ActionCurrentComponent2" type="Node" parent="ActionUI"]
+script = ExtResource("3_choun")

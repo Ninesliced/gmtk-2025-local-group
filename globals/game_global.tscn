@@ -13,10 +13,10 @@
 [ext_resource type="AudioStream" uid="uid://bpdsn3u7k4n8x" path="res://assets/sfx/work/explode_short.ogg" id="8_xofr3"]
 [ext_resource type="AudioStream" uid="uid://ct3kkknswudc0" path="res://assets/sfx/work/explode_long.ogg" id="9_672fk"]
 [ext_resource type="PackedScene" uid="uid://d2i4w4joysljq" path="res://scenes/ui/button.tscn" id="10_jbxo6"]
-[ext_resource type="Script" path="res://globals/menu.gd" id="10_ygokt"]
+[ext_resource type="Script" uid="uid://dhflbjvlkkwsw" path="res://globals/menu.gd" id="10_ygokt"]
 [ext_resource type="AudioStream" uid="uid://ihmp5eyi7gmb" path="res://assets/sfx/work/swap.ogg" id="11_lcri1"]
 [ext_resource type="AudioStream" uid="uid://s1pso4bpxokg" path="res://assets/sfx/work/woof.ogg" id="12_kyo4h"]
-[ext_resource type="PackedScene" path="res://globals/music_manager.tscn" id="15_0xphb"]
+[ext_resource type="PackedScene" uid="uid://cbb8lsgv3vahf" path="res://globals/music_manager.tscn" id="15_0xphb"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_gc13h"]
 atlas = ExtResource("3_gc13h")

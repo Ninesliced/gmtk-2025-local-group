@@ -13,6 +13,9 @@ config_version=5
 config/name="Labyth"
 run/main_scene="uid://bvbyb8jdqjcei"
 config/features=PackedStringArray("4.4", "Forward Plus")
+boot_splash/bg_color=Color(0.952941, 1, 0.917647, 1)
+boot_splash/fullsize=false
+boot_splash/image="uid://bgpme05cjeir0"
 config/icon="res://icon.svg"
 
 [autoload]
