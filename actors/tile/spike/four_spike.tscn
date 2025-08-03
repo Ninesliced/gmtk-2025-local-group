@@ -1,6 +1,6 @@
 [gd_scene load_steps=9 format=3 uid="uid://1jdfma4sfqko"]
 
-[ext_resource type="PackedScene" uid="uid://lch1hj6crvy8" path="res://actors/tile/spike.tscn" id="1_jbjxv"]
+[ext_resource type="PackedScene" uid="uid://lch1hj6crvy8" path="res://actors/tile/spike/spike.tscn" id="1_jbjxv"]
 [ext_resource type="Shader" uid="uid://jkmh5ksc1ejd" path="res://actors/tile/tile3D.gdshader" id="2_lkx4v"]
 [ext_resource type="Shader" uid="uid://birv8v71nvo3v" path="res://addons/shaker/components/vfx/shaders/fill_color.gdshader" id="3_2eui3"]
 [ext_resource type="Texture2D" uid="uid://pl8capar1rck" path="res://assets/tilesheet_seasons.png" id="4_e2kij"]
@@ -34,7 +34,6 @@ animations = [{
 }]
 
 [node name="Spike2" instance=ExtResource("1_jbjxv")]
-chance_action_spawn = 0.025
 tileName = "FourSpikeTile"
 
 [node name="3DShader" parent="." index="1"]
@@ -43,12 +42,9 @@ material = SubResource("ShaderMaterial_tst6t")
 [node name="Sprite" parent="3DShader" index="0"]
 material = SubResource("ShaderMaterial_0qa0e")
 sprite_frames = SubResource("SpriteFrames_7g0ve")
-animation = &"default"
 
 [node name="RotationSoundEffect" parent="." index="6"]
 volume_db = -30.0
-bus = &"Master"
 
 [node name="IdleRotationSoundEffect" parent="." index="7"]
 volume_db = -35.0
-bus = &"Master"
